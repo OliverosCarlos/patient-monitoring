@@ -1,0 +1,70 @@
+<div class="col-12 m-0">
+  <div class="row m-0">
+    <div class="col-3 column">
+      <h2>Familiar</h2>
+      <div *ngFor="let item of area1">
+        <div class="row">
+          <div class="col-8">{{item.name}}</div>
+          <div class="col-4">{{item.level}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 column">
+      <h2>Escolar</h2>
+      <div *ngFor="let item of area2">
+        <div class="row">
+          <div class="col-8">{{item.name}}</div>
+          <div class="col-4">{{item.level}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 column">
+      <h2>Laboral</h2>
+      <div *ngFor="let item of area3">
+        <div class="row">
+          <div class="col-8">{{item.name}}</div>
+          <div class="col-4">{{item.level}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 column">
+      <h2>Social</h2>
+      <div *ngFor="let item of area4">
+        <div class="row">
+          <div class="col-8">{{item.name}}</div>
+          <div class="col-4">{{item.level}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-3">
+      <div class="col-1 m-auto">
+        <button id="net-1" mat-mini-fab color="accent" aria-label="Agregar área familiar" (click)="addAreaSupport(1)">
+          <mat-icon>library_add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="col-1 m-auto">
+        <button id="net-2" mat-mini-fab color="accent" aria-label="Agregar área escolar" (click)="addAreaSupport(2)">
+          <mat-icon>library_add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="col-1 m-auto">
+        <button id="net-3" mat-mini-fab color="accent" aria-label="Agregar área laboral" (click)="addAreaSupport(3)">
+          <mat-icon>library_add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="col-1 m-auto">
+        <button id="net-4" mat-mini-fab color="accent" aria-label="Agregar área social" (click)="addAreaSupport(4)">
+          <mat-icon>library_add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

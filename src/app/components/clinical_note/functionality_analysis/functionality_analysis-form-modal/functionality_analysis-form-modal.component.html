@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <!-- *ngIf="modalConfig" -->
+  <!-- <h3 class="modal-title">{{modalConfig.title}}</h3> -->
+  <h3 class="modal-title">Titulo</h3>
+  <button type="button" class="close" style="cursor:pointer;" (click)="onClose()" aria-hidden="true">×</button>
+</div>
+<!-- *ngIf="modalConfig" -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-6">
+      <app-functionality_analysis-list-view></app-functionality_analysis-list-view>
+    </div>
+    <div class="col-6">
+      <app-functionality_analysis-form-view></app-functionality_analysis-form-view>
+    </div>
+  </div>
+</div>

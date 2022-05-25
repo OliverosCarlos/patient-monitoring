@@ -1,0 +1,72 @@
+<div class="p-2">
+  <mat-card>
+    <div class="row">
+      <div class="col-4">
+        <button mat-stroked-button color="primary" >Editar</button>
+      </div>
+      <div class="col-4">
+        <button mat-button [matMenuTriggerFor]="options">Opciones</button>
+        <mat-menu #options="matMenu" yPosition="above">
+          <button mat-menu-item>Eliminar</button>
+          <button mat-menu-item>Exportar</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-card>
+  <br>
+  <mat-card class="example-card">
+    <mat-card-title>Paciente</mat-card-title>
+    <mat-card-subtitle>Formulario</mat-card-subtitle>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-8">
+          <div class="row">
+            <div class="col-12">
+              <div class="cntr-title-info">
+                <span class="title-info">Nombre :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{patient.first_name}} {{patient.last_name1}} {{patient.last_name2}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="cntr-title-info">
+                <span class="title-info">Edad :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{patient.age}}</span>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="cntr-title-info">
+                <span class="title-info">Número de telefono :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{patient.phone_number}}</span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="cntr-title-info">
+                <span class="title-info">Correo :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{patient.email}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <img [src]="'./assets/media/'+patient.image" alt="" class="img-thumbnail imagePreview">
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

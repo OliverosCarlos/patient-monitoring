@@ -1,0 +1,39 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+
+    <div class="col-md-10">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'hobbies_interest'" class="control-label">Hobbies e interéses<span class="text-danger">*</span> </label>
+        <ng-select
+        [items]="hobbies_interest_list"
+        [multiple]="true"
+        bindLabel="name"
+        [selectableGroup]="true"
+        [selectableGroupAsModel]="false"
+        [closeOnSelect]="false"
+        bindValue="id"
+        formControlName="hobbies_interest"
+        >
+        <!-- <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.name | uppercase}}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.name}}
+        </ng-template> -->
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'notes'" class="control-label">Notas <span class="text-danger">*</span> </label>
+        <angular-editor [placeholder]="'Enter text here...'" formControlName="notes"></angular-editor>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+    </div>
+
+  </div>
+</form>

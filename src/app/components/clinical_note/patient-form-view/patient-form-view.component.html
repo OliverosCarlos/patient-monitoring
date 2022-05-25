@@ -1,0 +1,71 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+
+    <div class="col-12">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="activity_type_id" class="control-label">Paciente <span class="text-danger">*</span>
+            </label>
+            <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="patientList"
+              placeholder="SELECCIONE UNA OPCIÓN" bindLabel="first_name" bindValue="id" [clearable]="false"
+              formControlName="patient" (change)="setPatient($event)">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row px-3">
+        <div class="col-8">
+          <div class="row">
+            <div class="col-12">
+              <div class="cntr-title-info">
+                <span class="title-info">Nombre :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{current_patient.first_name}} {{current_patient.last_name1}}
+                  {{current_patient.last_name2}}</span>
+              </div>
+            </div>
+    
+            <div class="col-6">
+              <div class="cntr-title-info">
+                <span class="title-info">Edad :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{current_patient.age}}</span>
+              </div>
+            </div>
+    
+            <div class="col-6">
+              <div class="cntr-title-info">
+                <span class="title-info">Telefono :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{current_patient.phone_number}}</span>
+              </div>
+            </div>
+    
+            <div class="col-12">
+              <div class="cntr-title-info">
+                <span class="title-info">Correo :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{current_patient.email}}</span>
+              </div>
+            </div>     
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="img-container">
+            <img [src]="'./assets/media/'+current_patient.image" alt="" class="img-thumbnail imagePreview">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,110 @@
+<div class="p-2">
+  <mat-card>
+    <form [formGroup]="formGroup">
+      <div class="row">
+        <div class="col-8">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group" formGroupName="psychologist_data">
+                <label [attr.for]="nameForm+'first_name'" class="control-label">Nombres <span class="text-danger">*</span>
+                </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'first_name'"
+                  formControlName="first_name" style="text-transform: uppercase;" (keyup)="changeToUppercase('first_name')">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group" formGroupName="psychologist_data">
+                <label [attr.for]="nameForm+'last_name1'" class="control-label">Apellido Paterno<span
+                    class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name1'"
+                  formControlName="last_name1" style="text-transform: uppercase;" (keyup)="changeToUppercase('last_name1')">
+              </div>
+            </div>
+    
+            <div class="col-6">
+              <div class="form-group" formGroupName="psychologist_data">
+                <label [attr.for]="nameForm+'last_name2'" class="control-label">Apellido Materno<span
+                    class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name2'"
+                  formControlName="last_name2" style="text-transform: uppercase;" (keyup)="changeToUppercase('last_name2')">
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="form-group" formGroupName="psychologist_data">
+                <label [attr.for]="nameForm+'age'" class="control-label">Edad <span class="text-danger">*</span> </label>
+                <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'age'" formControlName="age">
+              </div>
+            </div>
+
+            <div class="col-8">
+              <div class="form-group" formGroupName="psychologist_data">
+                <label [attr.for]="nameForm+'phone_number'" class="control-label">Número de telefono<span
+                    class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'phone_number'"
+                  formControlName="phone_number" style="text-transform: uppercase;"
+                  (keyup)="changeToUppercase('phone_number')">
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group" formGroupName="psychologist_data">
+                <label [attr.for]="nameForm+'email'" class="control-label">Correo<span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'email'" formControlName="email"
+                  style="text-transform: uppercase;" (keyup)="changeToUppercase('email')">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group" formGroupName="psychologist_files">
+            <label class="control-label">Foto<span class="text-danger">*</span></label>
+            <input-file fileAccept="*" placeholder="Selecciona o arrastra un archivo" formControlName="photo" >
+            </input-file>
+            <br>
+            <!-- <validator-alert [control]="pfForm.controls.photo"></validator-alert> -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-6">
+          <div class="form-group" formGroupName="psychologist_data">
+            <label [attr.for]="nameForm+'university'" class="control-label">Universidad<span
+                class="text-danger">*</span> </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'university'"
+              formControlName="university" style="text-transform: uppercase;" (keyup)="changeToUppercase('university')">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group" formGroupName="psychologist_data">
+            <label [attr.for]="nameForm+'studies'" class="control-label">Grado de estudios<span
+                class="text-danger">*</span> </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'studies'" formControlName="studies"
+              style="text-transform: uppercase;" (keyup)="changeToUppercase('studies')">
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group" formGroupName="psychologist_data">
+            <label [attr.for]="nameForm+'profile'" class="control-label">Perfil<span class="text-danger">*</span>
+            </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'profile'" formControlName="profile"
+              style="text-transform: uppercase;" (keyup)="changeToUppercase('profile')">
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+        </div>
+
+        <button mat-stroked-button color="primary" (click)="save()">Crear</button>
+
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,32 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+
+    <div class="col-md-10">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'shared_space'" class="control-label">Espacio compartidooooooooooooooooooooooooooo <span class="text-danger">*</span> </label>
+        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'shared_space'" formControlName="shared_space"
+          style="text-transform: uppercase;" (keyup)="changeToUppercase('shared_space')">
+      </div>
+    </div>
+
+    <div class="col-md-10">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'realtionship'" class="control-label">Relacióoooooooooooooooooooon<span class="text-danger">*</span> </label>
+        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'realtionship'" formControlName="realtionship"
+          style="text-transform: uppercase;" (keyup)="changeToUppercase('realtionship')">
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'number'" class="control-label">numero <span class="text-danger">*</span> </label>
+        <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'number'" formControlName="number">
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <span class="text-danger">* </span> <label for=""> Campos obligatorioooooooooooooooooooooooooooooooooooos</label>
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col">
+    <mat-card>
+      <mat-card-title-group>
+        <mat-icon>assignment</mat-icon>
+        <mat-card-title>Tareas</mat-card-title>
+        <mat-card-subtitle>Listado</mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col">
+    <mat-card>
+      <mat-card-title-group [routerLink]="['/psychotherapy/template-configuration/form']">
+        <mat-icon>list_alt</mat-icon>
+        <mat-card-title>Plantillas</mat-card-title>
+        <mat-card-subtitle>Configuración</mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-content>
+        <div *ngFor="let task_template of task_template_list">
+          <a [routerLink]="['/psychotherapy/template-configuration/form']" [queryParams]="{task_template_id:task_template.id}" >{{task_template.name}}</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col">
+    <mat-card>
+      <mat-card-title-group>
+        <mat-icon>list_alt</mat-icon>
+        <mat-card-title>Plantillas</mat-card-title>
+        <mat-card-subtitle>Configuración</mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

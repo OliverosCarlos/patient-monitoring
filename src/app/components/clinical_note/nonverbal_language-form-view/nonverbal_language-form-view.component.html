@@ -1,0 +1,42 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input"  type="checkbox" value="" [attr.id]="nameForm+'time'" formControlName="time" checked>
+        <label class="form-check-label" [attr.for]="nameForm+'time'">
+          Tiempo <span class="text-danger">*</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input"  type="checkbox" value="" [attr.id]="nameForm+'person'" formControlName="person" checked>
+        <label class="form-check-label" [attr.for]="nameForm+'person'">
+          Persona <span class="text-danger">*</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check">
+        <input class="form-check-input"  type="checkbox" value="" [attr.id]="nameForm+'space'" formControlName="space" checked>
+        <label class="form-check-label" [attr.for]="nameForm+'space'">
+          Espacio <span class="text-danger">*</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'notes'" class="control-label">Espacio <span class="text-danger">*</span> </label>
+        <angular-editor [placeholder]="'Enter text here...'" formControlName="notes"></angular-editor>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+    </div>
+  </div>
+
+</form>

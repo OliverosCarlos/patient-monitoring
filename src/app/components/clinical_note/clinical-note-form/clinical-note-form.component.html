@@ -1,0 +1,86 @@
+<div class="p-2">
+    <form [formGroup]="mainFormGroup">
+        <mat-card>
+            <mat-stepper orientation="vertical">
+                <mat-step>
+                    <ng-template matStepLabel>Asignación de paciente</ng-template>
+                    <ng-template matStepContent>
+                        <app-patient-form-view></app-patient-form-view>
+                        <button mat-button matStepperNext (click)="tst()">Next</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Motivo de consulta</ng-template>
+                    <ng-template matStepContent>
+                        <app-reason_consultation-form-view></app-reason_consultation-form-view>
+                        <button mat-button matStepperNext>Next</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Análisis de funcionalidad</ng-template>
+                    <ng-template matStepContent>
+                        <app-functionality_analysis-list-view></app-functionality_analysis-list-view>
+                        <!-- <app-functionality_analysis-form-view></app-functionality_analysis-form-view> -->
+                        <button (click)="open()">show</button>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Lenguaje no verbal</ng-template>
+                    <ng-template matStepContent>
+                        <app-nonverbal_language-form-view></app-nonverbal_language-form-view>
+                        <button mat-button matStepperNext>Next</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Hobbies e intereses</ng-template>
+                    <ng-template matStepContent>
+                        <app-hobbies_interests-form-view></app-hobbies_interests-form-view>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Área escolar</ng-template>
+                    <ng-template matStepContent>
+                        <app-support_network-list-view></app-support_network-list-view>
+                        <button mat-button matStepperPrevious>Back</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Características personales</ng-template>
+                    <ng-template matStepContent>
+                        <app-personal_characteristics-form-view></app-personal_characteristics-form-view>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Objetivos de la terapia</ng-template>
+                    <ng-template matStepContent>
+                        <app-therapy_objectives-form-view></app-therapy_objectives-form-view>
+                        <button mat-button matStepperNext>Next</button>
+                    </ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Abordaje</ng-template>
+                    <ng-template matStepContent>
+                        <app-approach-form-view></app-approach-form-view>
+                        <button mat-button matStepperNext>Next</button>
+                    </ng-template>
+                </mat-step>
+            </mat-stepper>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-info pull-left"
+                    (click)="save()" [disabled]="!mainFormGroup.valid">Guardar</button> 
+                </div>
+                <div class="col">
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+                    (click)="onClose()">Cancelar</button>
+                </div>
+            </div>
+        </mat-card>
+    </form>
+</div>

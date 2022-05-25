@@ -1,0 +1,75 @@
+<div class="p-2">
+  <mat-card class="example-card">
+    <mat-card-title>Psicólogas</mat-card-title>
+    <mat-card-subtitle>Listado</mat-card-subtitle>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-8">
+          <div class="row">
+            <div class="col-12">
+              <div class="cntr-title-info">
+                <span class="title-info">Nombre :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{psychologist.first_name}} {{psychologist.last_name1}} {{psychologist.last_name2}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="cntr-title-info">
+                <span class="title-info">Edad :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{psychologist.age}}</span>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="cntr-title-info">
+                <span class="title-info">Número de telefono :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{psychologist.phone_number}}</span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="cntr-title-info">
+                <span class="title-info">Correo :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{psychologist.email}}</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="cntr-title-info">
+                <span class="title-info">Universidad :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{psychologist.university}}</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="cntr-title-info">
+                <span class="title-info">Grado de estudios :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{psychologist.studies}}</span>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="cntr-title-info">
+                <span class="title-info">Perfil :</span>
+              </div>
+              <div class="cntr-data-info">
+                <span class="data-info">{{psychologist.profile}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <img [src]="'./assets/media/'+psychologist.image" alt="" class="img-thumbnail imagePreview">
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

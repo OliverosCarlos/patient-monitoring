@@ -1,0 +1,50 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'emotion'" class="control-label">Emoción <span class="text-danger">*</span>
+        </label>
+        <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" 
+          [items]="emotions_list" 
+          placeholder="SELECCIONE UNA OPCIÓN"
+          bindLabel="name" 
+          bindValue="id" 
+          [clearable]="false" 
+          (change)="onChange($event)">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'conduct'" class="control-label">Conducta<span class="text-danger">*</span>
+        </label>
+        <textarea #firstInput type="text" class="form-control" id="conduct" formControlName="conduct"
+          style="text-transform: uppercase;" (keyup)="changeToUppercase('conduct')"></textarea>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'functionality'" class="control-label">Funcionalidad <span
+            class="text-danger">*</span> </label>
+        <textarea #firstInput type="text" class="form-control" id="functionality" formControlName="functionality"
+          style="text-transform: uppercase;" (keyup)="changeToUppercase('functionality')"></textarea>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-info pull-left"
+      (click)="save()">Guardar</button>
+    <!-- [disabled]="!areasTypeForm.valid" -->
+    <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+      (click)="onClose()">Cancelar</button>
+  </div>
+</form>

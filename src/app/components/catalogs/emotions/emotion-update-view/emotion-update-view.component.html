@@ -1,0 +1,65 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'code'" class="control-label">Código <span class="text-danger">*</span> </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'code'" formControlName="code"
+              style="text-transform: uppercase;" (keyup)="changeToUppercase('code')">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'name'" class="control-label">Nombre<span class="text-danger">*</span> </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'name'" formControlName="name"
+              style="text-transform: uppercase;" (keyup)="changeToUppercase('name')">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'description'" class="control-label">Descripción<span
+                class="text-danger">*</span> </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'description'"
+              formControlName="description" style="text-transform: uppercase;"
+              (keyup)="changeToUppercase('description')">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'color'" class="control-label">Seleccionar un color<span
+                class="text-danger">*</span> </label>
+            <color-circle (onChangeComplete)="handleChangeComplete($event)"></color-circle>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'preview'" class="control-label">Vista previa<span class="text-danger">*</span>
+            </label>
+            <mat-chip-list aria-label="Fish selection">
+              <mat-chip [ngStyle]="{'background-color': true ? chip.color : 'white'}" class="mat-elevation-z3">
+                {{chip.name}}</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+    </div>
+  </div>
+</form>

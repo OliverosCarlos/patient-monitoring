@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{modalConfigParent.title}}</h3>
+  <button type="button" class="close" style="cursor:pointer;" (click)="onClose()" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <!-- name field -->
+      <div class="col-8">
+        <div class="form-group">
+          <label [attr.for]="nameForm+'name'" class="control-label">Nombre <span class="text-danger">*</span> </label>
+          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'name'" formControlName="name"
+            style="text-transform: uppercase;" (keyup)="changeToUppercase('name')">
+        </div>
+      </div>
+      <div class="col-4">
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+          formControlName="level">
+          <mat-radio-button class="example-radio-button" *ngFor="let level of levels" [value]="level">
+            {{level}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-info pull-left"
+    (click)="save()">Agregar</button>
+  <!-- [disabled]="!areasTypeForm.valid" -->
+  <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+    (click)="onClose()">Cancelar</button>
+</div>

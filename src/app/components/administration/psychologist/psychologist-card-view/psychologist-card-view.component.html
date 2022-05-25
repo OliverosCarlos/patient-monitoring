@@ -1,0 +1,74 @@
+<div class="p-2">
+  <mat-card>
+    <div class="row">
+      <div class="col-4">
+        <button mat-stroked-button color="primary" [routerLink]="['/administration/form']">Crear</button>
+      </div>
+      <div class="col-4">
+        <button mat-button [matMenuTriggerFor]="options">Opciones</button>
+        <mat-menu #options="matMenu" yPosition="above">
+          <button mat-menu-item (click)="deletePsychologists()">Eliminar</button>
+          <button mat-menu-item>Exportar</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+      </div>
+      <div class="col-4">
+        <div class="row">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar"
+              aria-label="Recipient's username with two button addons">
+            <button class="btn btn-outline-secondary" type="button">
+              <mat-icon mat-list-icon>search</mat-icon>
+            </button>
+            <button class="btn btn-outline-secondary" type="button">
+              <mat-icon mat-list-icon>contacts</mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+          <mat-button-toggle [routerLink]="['/administration/table']">
+            <mat-icon>view_list</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle [routerLink]="['/administration/card']">
+            <mat-icon>view_module</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+  </mat-card>
+  <br>
+  <mat-card class="example-card">
+    <mat-card-title>Psicólogas</mat-card-title>
+    <mat-card-subtitle>Listado cards</mat-card-subtitle>
+    <div class="row m-1">
+      <div *ngFor="let psychologist of psychologist_list; index as i;" class="container-custom-card col-4">
+        <div class="body-custom-card mat-elevation-z8" (click)="viewPsychologist(psychologist.id)">
+          <div class="row m-0 col-12 pt-2">
+            <div class="col-6">
+              <p>{{psychologist.first_name}} {{psychologist.last_name1}} {{psychologist.last_name2}}</p>
+              <p>{{psychologist.age}}</p>
+              <p>{{psychologist.email}}</p>
+              <p>{{psychologist.phone_number}}</p>
+              <p>Universidad</p>
+              <p>{{psychologist.university}}</p>
+              <p>Grado de estudios</p>
+              <p>{{psychologist.studies}}</p>
+              <p>Perfil</p>
+              <p>{{psychologist.profile}}</p>
+            </div>
+            <div class="col-6">
+              <div class="img-container col-12">
+                <img [src]="'./assets/media/'+psychologist.image" alt="" class="img-thumbnail imagePreview">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
