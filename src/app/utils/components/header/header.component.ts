@@ -43,6 +43,12 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   showCancel = false;
   searchFlag = false;
 
+  //view options
+  showMultipleViewOption = false;
+  showSingleOptions = false;
+  showTableView = false;
+  showCardView = false;
+
   formReady = false;
 
   //vars
@@ -50,6 +56,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   current_type = ''
 
   ads: AdItem[] = [];
+
+  optionFunctions: any[] = [];
 
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
@@ -103,6 +111,10 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   update(){ this.headerService.sendOutAction({action:'update'}); }
   cancel(){ this.headerService.sendOutAction({action:'cancel'}); }
 
+  //Change View Action
+  changeToTableView(){ this.headerService.sendOutAction({action:'view', type:'table'}) }
+  changeToCardView(){ this.headerService.sendOutAction({action:'view', type:'card'}) }
+
   delete(){
     this.headerService.sendOutAction({action: 'delete', type: 'list'});
   }
@@ -124,8 +136,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showUpdate = false;
         this.showCancel = true;
         this.searchFlag = false;
-        console.log('prrote from here');
-        
+        this.showMultipleViewOption = false;
+        this.showSingleOptions = false;
         break;
       case 'edit':
         this.showCreate = false;
@@ -134,6 +146,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showUpdate = true; this.disabledUpdate = true;
         this.showCancel = true;
         this.searchFlag = false;
+        this.showMultipleViewOption = false;
+        this.showSingleOptions = false;
         break;
       case 'list':
         this.showCreate = true;
@@ -143,6 +157,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showCancel = false;
         this.searchFlag = true;
         this.mainRoute = model.components.filter(x=>x.type=='form')[0].route;
+        this.showMultipleViewOption = model.multipleView;
+        this.showSingleOptions = false;
         break;
       case 'show':
         this.searchFlag = false;
@@ -151,10 +167,32 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showEdit = true;
         this.showUpdate = false;
         this.showCancel = false;
+        this.showMultipleViewOption = false;
+        this.showSingleOptions = model.options.length > 0? true: false;
+        this.setupOptions(model)
         break;
       default:
         break;
     }
+  }
+
+  config(){
+    this.headerService.sendOutAction({action: 'config', type: 'assignment'});
+  }
+  
+  setupOptions(model: Model){
+    this.optionFunctions = [];
+    model.options?.forEach(option => {
+      this.optionFunctions.push(
+        {
+          fun:(obj:any)=>{
+            this.headerService.sendOutAction({action: obj.action, type: obj.type});
+          },
+          icon: option.icon,
+          data: {action:'option', type: option.name}
+        }
+      )
+    });
   }
 
   loadComponent(adItem: Cmp) {

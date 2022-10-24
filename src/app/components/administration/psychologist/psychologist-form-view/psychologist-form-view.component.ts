@@ -1,15 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
+import { ADMINISTRATION } from 'src/app/utils/setup/routes.enum';
 
-import { PsychologistService } from 'src/app/services/administration/psychologist.service';
-// import { CrudService } from 'src/app/providers/api/crud.service';
-// import { Handler } from 'src/app/utils/handler';
-// import swal from 'sweetalert2';
-// import { Utils } from 'src/app/utils/utils';
-// import { Router } from '@angular/router';
-// import { PATH_REQUEST } from 'src/app/utils/enums/pathRequest.enum';
-// import { SessionService, AddressesService, StepperFisherProducerFormService } from 'src/app/providers/providers.index';
+//SERVICES
+import { BackendService } from 'src/app/services/backend.service';
+import { HeaderService } from 'src/app/services/header.service';
+import { UtilService } from 'src/app/services/util.service';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -27,27 +25,19 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   loading = false;
   zip_codes: any;
   neighborhoods = [];
-  // suscribeAddressService: Subscription;
+
   formData: FormData = new FormData();
-  // @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-  //   if (event.keyCode === 27) {
-  //     event.stopImmediatePropagation();
-  //     this.onClose();
-  //   }
-  // }
+
+  $headerAction!: Subscription;
 
   constructor(
-    private psychologistService: PsychologistService,
+    private backendService: BackendService,
+    private headerService : HeaderService,
+    private utilService : UtilService,
     private route: ActivatedRoute,
+    private router : Router,
     private _formBuilder: FormBuilder,
-    // private handler: Handler,
-    // public modalRef: BsModalRef,
-    // private httpService: CrudService,
-    // private router: Router,
-    // private sessionService: SessionService,
-    // private addressService: AddressesService,
-    private fb: FormBuilder,
-    // private stepperFisherProducerForm: StepperFisherProducerFormService
+    private fb: FormBuilder
   ) {
     this.setFocus();
     this.formGroup = this.fb.group({
@@ -66,26 +56,28 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
         profile: new FormControl(null, [Validators.required, Validators.maxLength(250)])
       }),
     });
-    // this.router.events.subscribe((val) => {
-    //   this.modalRef.hide();
-    // });
   }
+
   ngAfterViewInit(): void {
-    // this.suscribeAddressService = this.stepperFisherProducerForm.getAddressUpdate().subscribe(address => {
-    //   this.formGroup.reset();
-    //   this.paForm.street.setValue(address.data.street);
-    //   this.paForm.int_number.setValue(address.data.int_number);
-    //   this.paForm.ext_number.setValue(address.data.ext_number);
-    //   this.paForm.between1.setValue(address.data.between1);
-    //   this.paForm.between2.setValue(address.data.between2);
-    //   this.paForm.references.setValue(address.data.references);
-    //   this.paForm.zipcode.setValue(address.data.zipcode);
-    //   this.paForm.neighborhood.setValue(address.data.neighborhood);
-    //   if (address.data.zipcode) { this.searchByZipCode(); }
-    // });
+    this.$headerAction = this.headerService.getOutAction().subscribe(data => {
+      switch (data.action) {
+        case 'save':
+          this.save();
+          break;
+
+        case 'cancel':
+          this.cancel();
+          break;
+
+        default:
+          break;
+      }
+    });
   }
 
   ngOnInit() {
+    this.headerService.setHeader({name:'psychologist', type:'form'});
+    this.utilService.set({name:'psychologist', type:'form'});
     this.formGroup.statusChanges
       .pipe(
         filter(() => this.formGroup.valid))
@@ -95,11 +87,6 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
       .pipe(
         filter(() => this.formGroup.invalid))
       .subscribe(() => this.onFormInvalid());
-
-    // if(this.route.snapshot.paramMap.get('patient_id')){
-    //   this.isUpdating = true;
-    //   this.getPatientById(this.route.snapshot.paramMap.get('patient_id'));
-    // }
   }
 
   get pForm() { return this.formGroup.get('psychologist_data') as FormGroup }
@@ -123,7 +110,7 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   save(){
     this.formData.append('psychologist_files', this.formGroup.value.psychologist_files.photo[0].file);
     this.formData.append('psychologist_data', JSON.stringify(this.formGroup.value.psychologist_data));
-    this.psychologistService.addPsychologist(this.formData).subscribe({
+    this.backendService.createWithFile(ADMINISTRATION.PSYCHOLOGIST_CREATE ,this.formData).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -143,24 +130,8 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
     }
   }
 
-  // cleanFormGroup() {
-  //   this.formGroup.get('neighborhood').reset();
-  //   this.formGroup.get('locality').reset();
-  //   this.formGroup.get('municipality').reset();
-  //   this.formGroup.get('state').reset();
-  //   this.neighborhoods = [];
-  // }
-
-  // digitOnly(ev: any) {
-  //   // wont allow e + -  .
-  //   return (
-  //     ev.keyCode !== 69 &&
-  //     ev.keyCode !== 187 &&
-  //     ev.keyCode !== 189 &&
-  //     ev.keyCode !== 190
-  //   );
-  // }
-
-
+  cancel(){
+    this.router.navigate(['main','administration','psychologist','table']);
+  }
 
 }

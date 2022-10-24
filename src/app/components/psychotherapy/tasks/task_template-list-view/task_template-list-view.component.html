@@ -1,0 +1,14 @@
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="activity_type_id" class="control-label">Plantillas <span class="text-danger">*</span>
+        </label>
+        <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="task_template_list"
+          placeholder="SELECCIONE UNA OPCIÓN" bindLabel="name" bindValue="id" [clearable]="false"
+          formControlName="task_template" >
+        </ng-select>
+      </div>
+    </div>
+  </div>
+</form>

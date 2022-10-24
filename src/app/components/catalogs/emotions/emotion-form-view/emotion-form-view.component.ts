@@ -1,14 +1,15 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
-
-//SERVICES
-import { EmotionsService } from 'src/app/services/catalogs/emotions.service';
-import { HeaderService } from 'src/app/services/header.service';
-import { UtilService } from 'src/app/services/util.service';
-
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
+
+//SERVICES
+import { BackendService } from 'src/app/services/backend.service';
+import { HeaderService } from 'src/app/services/header.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-emotion-form-view',
@@ -29,7 +30,7 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
   $headerAction!: Subscription;
 
   constructor(
-    private emotionsService: EmotionsService,
+    private backendService: BackendService,
     private router : Router,
     private route: ActivatedRoute,
     private headerService : HeaderService,
@@ -118,15 +119,15 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   save(){
-    this.emotionsService.addEmotion(this.formGroup.value).subscribe({
+    this.backendService.create(CATALOGS.EMOTIONS, this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['catalogs','emotions','table'])
+      complete: () => this.router.navigate(['../','main','catalogs','emotions','table'])
     })
   }
 
   cancel(){
-    this.router.navigate(['catalogs','emotions','table']);
+    this.router.navigate(['../','main','catalogs','emotions','table']);
   }
 
   handleChangeComplete($event:any){

@@ -5,6 +5,8 @@ export interface Model{
     singular_name: string;
     plural_name: string;
     components: VWComponent[];
+    multipleView: boolean;
+    options : any[]
 }
 
 export interface Cmp{

@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ADMINISTRATION } from 'src/app/utils/setup/routes.enum';
 
-import { PsychologistService } from 'src/app/services/administration/psychologist.service';
+//SERVICES
+import { HeaderService } from 'src/app/services/header.service';
+import { UtilService } from 'src/app/services/util.service';
+import { BackendService } from 'src/app/services/backend.service';
 
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
@@ -11,23 +16,45 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './psychologist-list-view.component.html',
   styleUrls: ['./psychologist-list-view.component.scss']
 })
-export class PsychologistListViewComponent implements OnInit {
+export class PsychologistListViewComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['select','first_name','last_name1','last_name2','age','email','phone_number','university','studies','profile'];
   dataSource = new MatTableDataSource<Psychologist>([]);
   selection = new SelectionModel<Psychologist>(true, []);
 
+  $headerAction!: Subscription;
+
   constructor(
-    private psychologistService : PsychologistService,
+    private headerService : HeaderService,
+    private utilService : UtilService,
+    private backendService : BackendService,
     private router : Router
     ) { }
 
   ngOnInit(): void {
     this.getAllPsychologist();
+    this.headerService.setHeader({name:'psychologist', type:'list'});
+    this.utilService.set({name:'psychologist', type:'list'});
+  }
+
+  ngAfterViewInit(): void {
+    this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
+      switch (data.action) {
+        case 'delete':
+          this.deletePsychologists();
+          break;
+
+        case 'view':
+          this.router.navigate(['main','administration', 'psychologist', data.type]);
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   getAllPsychologist(){
-    this.psychologistService.getPsychologistsList().subscribe({
+    this.backendService.getAll(ADMINISTRATION.PSYCHOLOGIST).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -35,15 +62,11 @@ export class PsychologistListViewComponent implements OnInit {
   }
 
   deletePsychologists(){
-    this.psychologistService.deletePsychologists(this.selection.selected.map(function(psychologists){return psychologists.id})).subscribe({
+    this.backendService.delete(ADMINISTRATION.PSYCHOLOGIST,this.selection.selected.map(function(psychologists){return psychologists.id})).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
       complete: () => this.getAllPsychologist()
     });
-  }
-
-  viewPatent(patient:Psychologist){
-    // this.router.navigate(['patients','form',patient.id]);
   }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -71,16 +94,8 @@ export class PsychologistListViewComponent implements OnInit {
       return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id}`;
     }
 
-    tst(){
-      this.psychologistService.getTst().subscribe({
-        next: (v) => { console.log(v) },
-        error: (e) => console.error(e),
-        complete: () => console.info('complete')
-      });
-    }
-
     viewPsychologist(psychologist: Psychologist){
-      this.router.navigate(['administration', 'form', psychologist.id]);
+      this.router.navigate(['main', 'administration', 'psychologist', 'form', psychologist.id]);
     }
 }
 

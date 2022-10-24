@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { SymptomService } from 'src/app/services/catalogs/symptom.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
 import { Subscription } from 'rxjs';
@@ -34,7 +35,7 @@ export class ReasonConsultationFormViewComponent implements OnInit, OnDestroy, A
   // }
 
   constructor(
-    private symptomService: SymptomService,
+    private backendService: BackendService,
     private route: ActivatedRoute,
     private utilService: UtilService,
     private fb: FormBuilder,
@@ -92,7 +93,7 @@ export class ReasonConsultationFormViewComponent implements OnInit, OnDestroy, A
   }
 
   getAllSymptom(){
-    this.symptomService.getSymptomList().subscribe({
+    this.backendService.getAll(CATALOGS.SYMPTOMS).subscribe({
       next: (v) => { this.symptom_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

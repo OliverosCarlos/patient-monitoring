@@ -1,47 +1,4 @@
 <div class="p-2">
-  <mat-card>
-    <div class="row">
-      <div class="col-4">
-        <button mat-stroked-button color="primary" [routerLink]="['/administration/form']">Crear</button>
-      </div>
-      <div class="col-4">
-        <button mat-button [matMenuTriggerFor]="options">Opciones</button>
-        <mat-menu #options="matMenu" yPosition="above">
-          <button mat-menu-item (click)="deletePsychologists()">Eliminar</button>
-          <button mat-menu-item>Exportar</button>
-        </mat-menu>
-
-        <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
-        <mat-menu #belowMenu="matMenu" yPosition="below">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
-        </mat-menu>
-      </div>
-      <div class="col-4">
-        <div class="row">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar"
-              aria-label="Recipient's username with two button addons">
-            <button class="btn btn-outline-secondary" type="button">
-              <mat-icon mat-list-icon>search</mat-icon>
-            </button>
-            <button class="btn btn-outline-secondary" type="button">
-              <mat-icon mat-list-icon>contacts</mat-icon>
-            </button>
-          </div>
-        </div>
-        <mat-button-toggle-group #group="matButtonToggleGroup">
-          <mat-button-toggle [routerLink]="['/administration/table']">
-            <mat-icon>view_list</mat-icon>
-          </mat-button-toggle>
-          <mat-button-toggle [routerLink]="['/administration/card']">
-            <mat-icon>view_module</mat-icon>
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-    </div>
-  </mat-card>
-  <br>
   <mat-card class="example-card">
     <mat-card-title>Psicólogas</mat-card-title>
     <mat-card-subtitle>Listado cards</mat-card-subtitle>

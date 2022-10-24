@@ -1,0 +1,41 @@
+<div class="c_login">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="c_img">
+        <img src="assets/login.jpg" alt="" srcset="">
+      </div>
+    </div>
+    <div class="col-12 m-0 p-0">
+      <div class="form_login">
+        <form [formGroup]="formGroup">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="username" class="control-label">
+                  <h1>Usuario </h1><span class="text-danger">*</span>
+                </label>
+                <input #firstInput type="text" class="form-control" id="username" formControlName="username">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="password" class="control-label">
+                  <h1>Contraseña</h1> <span class="text-danger">*</span>
+                </label>
+                <input #firstInput type="text" class="form-control" id="password" formControlName="password">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3 p-3">
+            <button mat-raised-button color="accent" (click)="login()" [disabled]="!formGroup.valid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>

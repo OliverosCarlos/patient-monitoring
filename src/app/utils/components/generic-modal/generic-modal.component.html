@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{modalConfig.title}}</h3>
+  <button type="button" class="close" style="cursor:pointer;" (click)="onClose()" aria-hidden="true">×</button>
+</div>
+<!-- *ngIf="modalConfig" -->
+<div class="modal-body">
+  <app-task_template-list-view></app-task_template-list-view>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-info pull-left"
+  [disabled]="!modalConfig.btn_save" (click)="save()">Guardar</button>
+    <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+    [disabled]="!modalConfig.btn_cancel" (click)="onClose()">Cancelar</button>
+</div>

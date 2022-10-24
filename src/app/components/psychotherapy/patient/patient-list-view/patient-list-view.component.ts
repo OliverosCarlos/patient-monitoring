@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PatientService } from 'src/app/services/patient.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
+import { Subscription } from 'rxjs';
 
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
@@ -8,20 +9,23 @@ import {MatTableDataSource} from '@angular/material/table';
 //SERVICES
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-patient-list-view',
   templateUrl: './patient-list-view.component.html',
   styleUrls: ['./patient-list-view.component.scss']
 })
-export class PatientListViewComponent implements OnInit {
+export class PatientListViewComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['select', 'first_name', 'last_name1', 'last_name2' , 'age', 'email', 'phone_number'];
   dataSource = new MatTableDataSource<Patient>([]);
   selection = new SelectionModel<Patient>(true, []);
 
+  $headerAction!: Subscription;
+
   constructor(
-    private patientService : PatientService,
+    private backendService : BackendService,
     private router : Router,
     private headerService : HeaderService,
     private utilService : UtilService
@@ -33,8 +37,24 @@ export class PatientListViewComponent implements OnInit {
     this.utilService.set({name:'patient', type:'list'});
   }
 
+  ngAfterViewInit(): void {
+    this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
+      switch (data.action) {
+        case 'delete':
+          this.deletePatients();
+          break;
+        case 'view':
+          this.router.navigate(['main','psychotherapy', 'patients', data.type]);
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
+
   getAllPatients(){
-    this.patientService.getPatientsList().subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENT).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -42,7 +62,7 @@ export class PatientListViewComponent implements OnInit {
   }
 
   deletePatients(){
-    this.patientService.deletePatients(this.selection.selected.map(function(patient){return patient.id})).subscribe({
+    this.backendService.delete(PSYCHOTHERAPY.PATIENT, this.selection.selected.map(function(patient){return patient.id})).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
       complete: () => this.getAllPatients()
@@ -50,10 +70,7 @@ export class PatientListViewComponent implements OnInit {
   }
 
   viewPatent(patient:Patient){
-    this.router.navigate(['psychotherapy','patients','form',patient.id]);
-
-// Navigate without updating the URL, overriding the default behavior
-// router.navigate(['team', 33, 'user', 11], {relativeTo: route, skipLocationChange: true});
+    this.router.navigate(['main','psychotherapy','patients','form',patient.id]);
   }
 
     /** Whether the number of selected elements matches the total number of rows. */

@@ -1,37 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
+
+import { LoginComponent } from 'src/app/components/public/login/login.component';
+
 const routes: Routes = [
   { 
-    path: 'tasks', 
-    loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule),
+    path: '', 
+    loadChildren: () => import('./modules/public/public.module').then(m => m.PublicModule),
     data: { breadcrumb: 'Tareas' } 
-  }, 
-  { 
-    path: 'patients', 
-    loadChildren: () => import('./patients/patients.module').then(m => m.PatientsModule),
-    data: { breadcrumb: 'Pacientes' }  
   },
   { 
-    path: 'psychotherapy',
-    loadChildren: () => import('./modules/psychotherapy/psychotherapy.module').then(m => m.PsychotherapyModule),
-    data: { breadcrumb: 'psicoterapia' }  
+    path: 'main', 
+    loadChildren: () => import('./modules/main/main.module').then(m => m.MainModule),
+    data: { breadcrumb: 'main',
+    canActivate: [CanActivateLogged]
+  } 
   },
-  { 
-    path: 'clinical-notes',
-    loadChildren: () => import('./modules/clinical_notes/clinical_note.module').then(m => m.ClinicalNoteModule),
-    data: { breadcrumb: 'psicoterapia' }  
-  },
-  { 
-    path: 'administration',
-    loadChildren: () => import('./modules/administration/administration.module').then(m => m.AdministrationModule),
-    data: { breadcrumb: 'administración' }  
-  },
-  { 
-    path: 'catalogs',
-    loadChildren: () => import('./modules/catalogs/catalogs.module').then(m => m.CatalogsModule),
-    data: { breadcrumb: 'catálogos' }  
-  }
 ];
 
 @NgModule({

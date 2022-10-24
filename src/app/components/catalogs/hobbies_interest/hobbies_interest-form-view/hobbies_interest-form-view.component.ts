@@ -4,10 +4,11 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
 import { HeaderService } from 'src/app/services/header.service';
-import { HobbiesInterestService } from 'src/app/services/catalogs/hobbies_interest.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class Hobbies_InterestFormViewComponent implements OnInit, OnDestroy, Aft
   $headerAction!: Subscription;
 
   constructor(
-    private hobbiesInterestService: HobbiesInterestService,
+    private backendService: BackendService,
     private router : Router,
     private route: ActivatedRoute,
     private headerService : HeaderService,
@@ -96,7 +97,7 @@ export class Hobbies_InterestFormViewComponent implements OnInit, OnDestroy, Aft
   }
 
   save(){
-    this.hobbiesInterestService.addHobbiesInterest(this.formGroup.value).subscribe({
+    this.backendService.create(CATALOGS.HOBBIES_INTEREST ,this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => this.router.navigate(['catalogs','hobbies-interest','table'])

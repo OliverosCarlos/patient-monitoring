@@ -11,17 +11,30 @@ export const MODELS: Model[] = [
       name: 'model',
       singular_name: 'Modelo',
       plural_name:'Modelos',
-      components:[]
+      components:[],
+      multipleView: false,
+      options:[]
     },
     {
       name: 'patient',
       singular_name: 'Paciente',
       plural_name:'Pacientes',
       components:[
-        new VWComponent('/psychotherapy/patients/form','form',{}),
-        new VWComponent('/psychotherapy/patients/table','list',{}),
-        new VWComponent('/psychotherapy/patients/form/:patient_id','show',{}),
-        new VWComponent('/psychotherapy/patients/update/:patient_id','update',{})
+        new VWComponent('psychotherapy/patients/form','form',{}),
+        new VWComponent('psychotherapy/patients/table','list',{}),
+        new VWComponent('psychotherapy/patients/form/:patient_id','show',{}),
+        new VWComponent('psychotherapy/patients/update/:patient_id','update',{})
+      ],
+      multipleView: true,
+      options:[
+        {
+          name: 'clinical_note',
+          icon: 'local_hospital'
+        },
+        {
+          name: 'tracking',
+          icon:'track_changes'
+        },
       ]
     },
     {
@@ -29,64 +42,89 @@ export const MODELS: Model[] = [
       singular_name: 'Nota clínica',
       plural_name:'Notas clínicas',
       components:[
-        new VWComponent('/psychotherapy/clinical-notes/form','form',{}),
-        new VWComponent('/psychotherapy/clinical-notes/table','list',{}),
-        new VWComponent('/psychotherapy/clinical-notes/form/:clinical-note_id','show',{}),
-        new VWComponent('/psychotherapy/clinical-notes/update/:clinical-note_id','update',{})
-      ]
+        new VWComponent('psychotherapy/clinical-notes/form','form',{}),
+        new VWComponent('psychotherapy/clinical-notes/table','list',{}),
+        new VWComponent('psychotherapy/clinical-notes/form/:clinical-note_id','show',{}),
+        new VWComponent('psychotherapy/clinical-notes/update/:clinical-note_id','update',{})
+      ],
+      multipleView: false,
+      options:[]
     },
     {
-      name: 'track',
+      name: 'tracking',
       singular_name: 'Seguimiento',
       plural_name:'Seguimientos',
       components:[
-        new VWComponent('/psychotherapy/tracking/form','form',{}),
-        new VWComponent('/psychotherapy/tracking/table','list',{}),
-        new VWComponent('/psychotherapy/tracking/form/:track_id','show',{}),
-        new VWComponent('/psychotherapy/tracking/update/:track_id','update',{})
-      ]
+        new VWComponent('psychotherapy/tracking/form','form',{}),
+        new VWComponent('psychotherapy/tracking/table','list',{}),
+        new VWComponent('psychotherapy/tracking/form/:track_id','show',{}),
+        new VWComponent('psychotherapy/tracking/update/:track_id','update',{})
+      ],
+      multipleView: false,
+      options:[]
     },
     {
       name: 'task',
       singular_name: 'Tarea',
       plural_name:'Tareas',
       components:[
-        new VWComponent('/psychotherapy/task/form','dashboard',{}),
-        new VWComponent('/psychotherapy/task/form','form',{}),
-        new VWComponent('/psychotherapy/task/table','list',{}),
-        new VWComponent('/psychotherapy/task/form/:track_id','show',{}),
-        new VWComponent('/psychotherapy/task/update/:track_id','update',{})
-      ]
+        new VWComponent('psychotherapy/task/form','dashboard',{}),
+        new VWComponent('psychotherapy/task/form','form',{}),
+        new VWComponent('psychotherapy/task/table','list',{}),
+        new VWComponent('psychotherapy/task/form/:track_id','show',{}),
+        new VWComponent('psychotherapy/task/update/:track_id','update',{})
+      ],
+      multipleView: false,
+      options:[]
     },
     {
       name: 'emotion',
       singular_name: 'Emoción',
       plural_name:'Emociones',
       components:[
-        new VWComponent('/catalogs/emotions/form','form',{}),
-        new VWComponent('/catalogs/emotions/table','list',{}),
-        new VWComponent('/catalogs/emotions/form/:emotion_id','show',{}),
-        new VWComponent('/catalogs/emotions/update/:emotion_id','update',{})
-      ]
+        new VWComponent('catalogs/emotions/form','form',{}),
+        new VWComponent('catalogs/emotions/table','list',{}),
+        new VWComponent('catalogs/emotions/form/:emotion_id','show',{}),
+        new VWComponent('catalogs/emotions/update/:emotion_id','update',{})
+      ],
+      multipleView: false,
+      options:[]
     },
     {
       name: 'symptom',
       singular_name: 'Sintoma',
       plural_name:'Sintomas',
       components:[
-        new VWComponent('/catalogs/symptom/form','form',{}),
-        new VWComponent('/catalogs/symptom/table','list',{})
-      ]
+        new VWComponent('catalogs/symptom/form','form',{}),
+        new VWComponent('catalogs/symptom/table','list',{})
+      ],
+      multipleView: false,
+      options:[]
     },
     {
       name: 'hobbies_interest',
       singular_name: 'Hobbies e interéses',
       plural_name:'Hobbies e interéses',
       components:[
-        new VWComponent('/catalogs/hobbies-interest/form','form',{}),
-        new VWComponent('/catalogs/hobbies-interest/table','list',{}),
-        new VWComponent('/catalogs/hobbies-interest/form/:hobbies-interest_id','show',{}),
-        new VWComponent('/catalogs/hobbies-interest/update/:hobbies-interest_id','update',{})
-      ]
+        new VWComponent('catalogs/hobbies-interest/form','form',{}),
+        new VWComponent('catalogs/hobbies-interest/table','list',{}),
+        new VWComponent('catalogs/hobbies-interest/form/:hobbies-interest_id','show',{}),
+        new VWComponent('catalogs/hobbies-interest/update/:hobbies-interest_id','update',{})
+      ],
+      multipleView: false,
+      options:[]
+    },
+    {
+      name: 'psychologist',
+      singular_name: 'Psicóloga',
+      plural_name:'Psicólogas',
+      components:[
+        new VWComponent('administration/psychologist/form','form',{}),
+        new VWComponent('administration/psychologist/table','list',{}),
+        new VWComponent('administration/psychologist/form/:psychologist_id','show',{}),
+        new VWComponent('administration/psychologist/update/:psychologist_id','update',{})
+      ],
+      multipleView: true,
+      options:[]
     },
   ];

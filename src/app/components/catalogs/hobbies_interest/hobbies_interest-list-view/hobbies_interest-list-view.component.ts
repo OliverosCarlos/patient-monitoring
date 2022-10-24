@@ -2,16 +2,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICE
 import { HeaderService } from 'src/app/services/header.service';
-import { HobbiesInterestService } from 'src/app/services/catalogs/hobbies_interest.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
 //MODELS
 import { Hobbies_Interest } from 'src/app/models/hobbies_interest.model';
-
-
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -31,7 +30,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   constructor(
     private router : Router,
     private headerService : HeaderService,
-    private hobbiesInterestService : HobbiesInterestService,
+    private backendService : BackendService,
     private utilService: UtilService
     ) {}
 
@@ -55,7 +54,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   }
 
   getAll(){
-   this.hobbiesInterestService.getHobbiesInterestsList().subscribe({
+   this.backendService.getAll(CATALOGS.HOBBIES_INTEREST).subscribe({
      next: (v) => { this.dataSource.data = v },
      error: (e) => console.error(e),
      complete: () => console.info('complete')
@@ -63,7 +62,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   }
 
   deleteHobbies_Interest(){
-    this.hobbiesInterestService.deleteHobbiesInterests(this.selection.selected.map(function(hobbies_interest_data){return hobbies_interest_data.id})).subscribe({
+    this.backendService.delete(CATALOGS.HOBBIES_INTEREST ,this.selection.selected.map(function(hobbies_interest_data){return hobbies_interest_data.id})).subscribe({
      next: (v) => { console.log(v) },
      error: (e) => console.error(e),
      complete: () => this.getAll()
@@ -71,7 +70,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   }
 
   show(hobbies_interest_data:Hobbies_Interest){
-    this.router.navigate(['catalogs','hobbies-interest','form',hobbies_interest_data.id]);
+    this.router.navigate(['main','catalogs','hobbies-interest','form',hobbies_interest_data.id]);
   }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -100,7 +99,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
     }
 
     delete(){
-      this.hobbiesInterestService.deleteHobbiesInterests(this.selection.selected.map(function(hobbies_interest){return hobbies_interest.id})).subscribe({
+      this.backendService.delete(CATALOGS.HOBBIES_INTEREST ,this.selection.selected.map(function(hobbies_interest){return hobbies_interest.id})).subscribe({
         next: (v) => { console.log(v) },
         error: (e) => console.error(e),
         complete: () => this.getAll()

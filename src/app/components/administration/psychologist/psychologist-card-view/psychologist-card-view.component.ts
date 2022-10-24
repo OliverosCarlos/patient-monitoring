@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ADMINISTRATION } from 'src/app/utils/setup/routes.enum';
+import { Subscription } from 'rxjs';
 
-import { PsychologistService } from 'src/app/services/administration/psychologist.service';
+//SERVICES
+import { HeaderService } from 'src/app/services/header.service';
+import { UtilService } from 'src/app/services/util.service';
+import { BackendService } from 'src/app/services/backend.service';
 
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,15 +16,20 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './psychologist-card-view.component.html',
   styleUrls: ['./psychologist-card-view.component.scss']
 })
-export class PsychologistCardViewComponent implements OnInit {
+export class PsychologistCardViewComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['select', 'first_name', 'last_name1', 'last_name2', 'age', 'email', 'phone_number', 'university', 'studies', 'profile'];
   dataSource = new MatTableDataSource<Psychologist>([]);
   selection = new SelectionModel<Psychologist>(true, []);
 
   psychologist_list = [{ id: '', first_name: '', last_name1: '', last_name2: '', age: '', email: '', phone_number: '', university: '', studies: '', profile: '', image: 'female-placeholder.jpg' }];
+
+  $headerAction!: Subscription;
+
   constructor(
-    private psychologistService: PsychologistService,
+    private headerService : HeaderService,
+    private utilService : UtilService,
+    private BackendService: BackendService,
     private router: Router
   ) { }
 
@@ -27,8 +37,21 @@ export class PsychologistCardViewComponent implements OnInit {
     this.getAllPsychologist();
   }
 
+  ngAfterViewInit(): void {
+    this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
+      switch (data.action) {
+        case 'delete':
+          this.deletePsychologists();
+          break;
+      
+        default:
+          break;
+      }
+    });
+  }
+
   getAllPsychologist() {
-    this.psychologistService.getPsychologistsList().subscribe({
+    this.BackendService.getAll(ADMINISTRATION.PSYCHOLOGIST).subscribe({
       next: (v) => { this.psychologist_list = v },
       error: (e) => console.error(e),
       complete: () => console.info(this.psychologist_list)
@@ -36,7 +59,7 @@ export class PsychologistCardViewComponent implements OnInit {
   }
 
   deletePsychologists() {
-    this.psychologistService.deletePsychologists(this.selection.selected.map(function (psychologists) { return psychologists.id })).subscribe({
+    this.BackendService.delete(ADMINISTRATION.PSYCHOLOGIST ,this.selection.selected.map(function (psychologists) { return psychologists.id })).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
       complete: () => this.getAllPsychologist()

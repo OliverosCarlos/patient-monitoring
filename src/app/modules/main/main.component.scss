@@ -1,0 +1,46 @@
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-events {
+width: 300px;
+height: 200px;
+overflow: auto;
+border: 1px solid #555;
+}
+
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+justify-content: space-between;
+align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+margin-left: 8px;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+app-breadcrumb {
+display: inline-block;
+}
+
+
+.side-nave-header{
+  padding: 5px;
+  background-color: #B799BF;
+}

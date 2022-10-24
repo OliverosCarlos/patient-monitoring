@@ -1,10 +1,10 @@
 <div class="row">
-  <!-- <div class="col-6">
+  <div class="col-6">
     <div class="cntr-title-info">
       <span class="title-info">Código :</span>
     </div>
     <div class="cntr-data-info">
-      <span class="data-info">{{emotion.code}}</span>
+      <span class="data-info">{{task_template.code}}</span>
     </div>
   </div>
   <div class="col-6">
@@ -12,7 +12,7 @@
       <span class="title-info">Nombre :</span>
     </div>
     <div class="cntr-data-info">
-      <span class="data-info">{{emotion.name}}</span>
+      <span class="data-info">{{task_template.name}}</span>
     </div>
   </div>
   <div class="col-6">
@@ -20,19 +20,20 @@
       <span class="title-info">Descripción :</span>
     </div>
     <div class="cntr-data-info">
-      <span class="data-info">{{emotion.description}}</span>
+      <span class="data-info">{{task_template.description}}</span>
     </div>
   </div>
   <div class="col-6">
     <div class="cntr-title-info">
-      <span class="title-info">Vista previa :</span>
+      <span class="title-info">Emociones :</span>
     </div>
     <div class="cntr-data-info">
-      <mat-chip-list aria-label="Fish selection">
-        <mat-chip [ngStyle]="{'background-color': true ? emotion.color : 'white'}" class="mat-elevation-z3">
-          {{emotion.name}}</mat-chip>
-      </mat-chip-list>
+      <div *ngFor="let template of task_template.task_template_configuration">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip style="background-color: rgb(255, 0, 255);" class="mat-elevation-z3">
+            {{template.emotion_name}}</mat-chip>
+        </mat-chip-list>
+      </div>
     </div>
-  </div> -->
-  <p>prron</p>
+  </div>
 </div>

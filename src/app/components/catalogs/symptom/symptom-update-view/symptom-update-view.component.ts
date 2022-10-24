@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { SymptomService } from 'src/app/services/catalogs/symptom.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -29,7 +30,7 @@ export class SymptomUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   constructor(
     private headerService: HeaderService,
     private utilService: UtilService,
-    private symptomService: SymptomService,
+    private backendService: BackendService,
     private router : Router,
     private route: ActivatedRoute,
     private fb: FormBuilder
@@ -107,17 +108,17 @@ export class SymptomUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   update(){
-    this.symptomService.updateSymptom(this.formGroup.value).subscribe({
+    this.backendService.update(CATALOGS.SYMPTOMS, this.route.snapshot.paramMap.get('symptom_id'), this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['catalogs','symptom','table'])
+      complete: () => this.router.navigate(['main','catalogs','symptom','table'])
     })
   }
 
   getSymptomById(id:any){
     if(id){
-      this.symptomService.getSymptomById(id).subscribe({
-        next: (v) => { this.setSymptom(v[0]) },
+      this.backendService.getOneById(CATALOGS.SYMPTOMS, id).subscribe({
+        next: (v) => { this.setSymptom(v) },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });
@@ -134,7 +135,7 @@ export class SymptomUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   cancel(){
-    this.router.navigate(['catalogs','symptom','form',this.route.snapshot.paramMap.get('symptom_id')]);
+    this.router.navigate(['main','catalogs','symptom','form',this.route.snapshot.paramMap.get('symptom_id')]);
   }
 
   handleChangeComplete($event:any){

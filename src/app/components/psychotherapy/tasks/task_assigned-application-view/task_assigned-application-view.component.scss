@@ -1,0 +1,13 @@
+.example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .mat-radio-group {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }

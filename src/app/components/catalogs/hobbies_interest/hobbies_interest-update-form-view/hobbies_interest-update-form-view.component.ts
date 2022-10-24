@@ -2,10 +2,11 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
 import { HeaderService } from 'src/app/services/header.service';
-import { HobbiesInterestService } from 'src/app/services/catalogs/hobbies_interest.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
 import { Subscription } from 'rxjs';
@@ -27,7 +28,7 @@ export class Hobbies_InterestUpdateFormViewComponent implements OnInit, OnDestro
 
   constructor(
     private headerService: HeaderService,
-    private hobbiesInterestService: HobbiesInterestService,
+    private backendService: BackendService,
     private utilService: UtilService,
     private router : Router,
     private route: ActivatedRoute,
@@ -104,17 +105,17 @@ export class Hobbies_InterestUpdateFormViewComponent implements OnInit, OnDestro
   }
 
   update(){
-    this.hobbiesInterestService.updateHobbiesInterest(this.formGroup.value).subscribe({
+    this.backendService.update(CATALOGS.HOBBIES_INTEREST , this.route.snapshot.paramMap.get('hobbies-interest_id'),this.formGroup.value).subscribe({
      next: (v) => { console.log(v); },
      error: (e) => console.error(e),
-     complete: () => this.router.navigate(['catalogs','hobbies-interest','table'])
+     complete: () => this.router.navigate(['main' ,'catalogs' ,'hobbies-interest' ,'table'])
     })
   }
 
   getHobbies_InterestById(id:any){
     if(id){
-     this.hobbiesInterestService.getHobbiesInterestById(id).subscribe({
-       next: (v) => { this.setHobbies_Interest(v[0]) },
+     this.backendService.getOneById(CATALOGS.HOBBIES_INTEREST ,id).subscribe({
+       next: (v) => { this.setHobbies_Interest(v) },
        error: (e) => console.error(e),
        complete: () => console.info('complete')
      });
@@ -128,7 +129,7 @@ export class Hobbies_InterestUpdateFormViewComponent implements OnInit, OnDestro
   }
 
   cancel(){
-    this.router.navigate(['catalogs','hobbies-interest','form',this.route.snapshot.paramMap.get('hobbies-interest_id')]);
+    this.router.navigate(['main','catalogs','hobbies-interest','form',this.route.snapshot.paramMap.get('hobbies-interest_id')]);
   }
 }
     

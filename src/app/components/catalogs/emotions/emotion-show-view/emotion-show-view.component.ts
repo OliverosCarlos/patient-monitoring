@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { EmotionsService } from 'src/app/services/catalogs/emotions.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -30,7 +31,7 @@ export class EmotionShowViewComponent implements OnInit, OnDestroy, AfterViewIni
   $headerAction!: Subscription;
 
   constructor(
-    private emotionsService: EmotionsService,
+    private backendService: BackendService,
     private route: ActivatedRoute,
     private router : Router,
     private headerService : HeaderService,
@@ -68,8 +69,8 @@ export class EmotionShowViewComponent implements OnInit, OnDestroy, AfterViewIni
 
   getEmotionById(id:any){
     if(id){
-      this.emotionsService.getEmotionById(id).subscribe({
-        next: (v) => { this.emotion = v[0] },
+      this.backendService.getOneById(CATALOGS.EMOTIONS,id).subscribe({
+        next: (v) => { this.emotion = v },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });
@@ -77,7 +78,7 @@ export class EmotionShowViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   edit(){
-    this.router.navigate(['catalogs','emotions','update',this.route.snapshot.paramMap.get('emotion_id')]);
+    this.router.navigate(['main','catalogs','emotions','update',this.route.snapshot.paramMap.get('emotion_id')]);
   }
 
 }

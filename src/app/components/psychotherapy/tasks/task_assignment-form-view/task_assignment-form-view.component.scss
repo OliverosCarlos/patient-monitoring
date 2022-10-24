@@ -1,0 +1,18 @@
+.example-container {
+    height: 400px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.task-completed{
+    color: greenyellow;
+}
+.task-pending{
+    color: deepskyblue;
+}
+.task-unassigned{
+    color: steelblue;
+}

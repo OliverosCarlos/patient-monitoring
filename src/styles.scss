@@ -2,8 +2,10 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 @import "~@ng-select/ng-select/themes/default.theme.css";
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -12,8 +14,11 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$patient-monitoring-primary: mat.define-palette(mat.$indigo-palette);
-$patient-monitoring-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$patient-monitoring-primary: mat.define-palette(mat.$purple-palette, 200);
+
+
+$patient-monitoring-accent: mat.define-palette(mat.$light-green-palette , A200, A400, A700);
 
 // The warn palette is optional (defaults to red).
 $patient-monitoring-warn: mat.define-palette(mat.$red-palette);
@@ -32,6 +37,7 @@ $patient-monitoring-theme: mat.define-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($patient-monitoring-theme);
+// @include angular-material-theme($patient-monitoring-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -57,3 +63,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: rgba(220, 220, 220, 0.493);
   left: 500px;
 }
+
+
+@mixin sororas-sidenav(){
+  .mat-sidenav{
+    background-color: #f1a6df29;
+    
+    .mat-expansion-panel{
+      background-color: #B799BF;
+    }
+
+  }
+
+  .mat-sidenav-content{
+    background-color: #f1a6df29;
+  }
+}
+
+@include sororas-sidenav();

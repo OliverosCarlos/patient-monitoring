@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { EmotionsService } from 'src/app/services/catalogs/emotions.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -29,7 +30,7 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   $headerAction!: Subscription;
 
   constructor(
-    private emotionsService: EmotionsService,
+    private backendService: BackendService,
     private utilService: UtilService,
     private router : Router,
     private route: ActivatedRoute,
@@ -110,17 +111,17 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   update(){
-    this.emotionsService.updateEmotion(this.formGroup.value).subscribe({
+    this.backendService.update(CATALOGS.EMOTIONS, this.route.snapshot.paramMap.get('emotion_id'), this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['catalogs','emotions','table'])
+      complete: () => this.router.navigate(['main', 'catalogs', 'emotions', 'table'])
     });
   }
 
   getEmotionById(id:any){
     if(id){
-      this.emotionsService.getEmotionById(id).subscribe({
-        next: (v) => { this.setEmotion(v[0]) },
+      this.backendService.getOneById(CATALOGS.EMOTIONS, id).subscribe({
+        next: (v) => { this.setEmotion(v) },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });

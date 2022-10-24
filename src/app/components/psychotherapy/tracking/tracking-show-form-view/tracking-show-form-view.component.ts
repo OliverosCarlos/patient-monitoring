@@ -2,9 +2,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { HobbiesInterestService } from 'src/app/services/catalogs/hobbies_interest.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -19,14 +20,19 @@ import { filter } from 'rxjs/operators';
 export class TrackingShowFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   record = {
-    id: '', 
-    code: '', name: '', 
+    id: '',
+    session_approach: '',
+    clinical_progress: '',
+    session_objective: '',
+    state_of_mind: '',
+    conducts_and_non_verbal_languages: '',
+    observations: ''
   };
 
   $headerAction!: Subscription;
 
   constructor(
-    private hobbiesInterestService: HobbiesInterestService,
+    private backendService: BackendService,
     private headerService: HeaderService,
     private utilService: UtilService,
     private route: ActivatedRoute,
@@ -49,20 +55,22 @@ export class TrackingShowFormViewComponent implements OnInit, OnDestroy, AfterVi
       }
     });
 
-    this.utilService.set({name:'hobbies_interest', type:'show'});
+    this.utilService.set({name:'tracking', type:'show'});
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'hobbies_interest',type:'show'});
-    if(this.route.snapshot.paramMap.get('hobbies-interest_id')){
-      this.getHobbies_InterestById(this.route.snapshot.paramMap.get('hobbies-interest_id'));
+    this.headerService.setHeader({name:'tracking',type:'show'});
+    console.log('here prron');
+    
+    if(this.route.snapshot.paramMap.get('tracking_id')){
+      this.trackingById(this.route.snapshot.paramMap.get('tracking_id'));
     }
   }
 
-  getHobbies_InterestById(id:any){
+  trackingById(id:any){
     if(id){
-     this.hobbiesInterestService.getHobbiesInterestById(id).subscribe({
-       next: (v) => { this.record = v[0] },
+     this.backendService.getOneById(PSYCHOTHERAPY.TRACKING_BY_ID,id).subscribe({
+       next: (v) => { this.record = v},
        error: (e) => console.error(e),
        complete: () => console.info('complete')
      });

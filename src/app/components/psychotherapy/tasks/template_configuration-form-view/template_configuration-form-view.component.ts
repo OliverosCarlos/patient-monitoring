@@ -1,10 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
 import { TaskService } from 'src/app/services/psychotherapy/task.service';
-import { EmotionsService } from 'src/app/services/catalogs/emotions.service'
+import { BackendService } from 'src/app/services/backend.service'
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -31,7 +32,7 @@ export class TemplateConfigurationFormViewComponent implements OnInit, OnDestroy
 
   constructor(
     private taskService: TaskService,
-    private emotionsService: EmotionsService,
+    private backendService: BackendService,
     private router : Router,
     private route: ActivatedRoute,
     private headerService : HeaderService,
@@ -102,7 +103,7 @@ export class TemplateConfigurationFormViewComponent implements OnInit, OnDestroy
   }
 
   getAllSymptom(){
-    this.emotionsService.getEmotionsList().subscribe({
+    this.backendService.getAll(CATALOGS.EMOTIONS).subscribe({
       next: (v) => { this.emotion_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

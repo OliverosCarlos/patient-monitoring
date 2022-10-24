@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CATALOGS } from 'src/app/utils/setup/routes.enum'; 
 
 //SERVICES
-import { SymptomService } from 'src/app/services/catalogs/symptom.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -25,7 +26,7 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
   $headerAction!: Subscription;
 
   constructor(
-    private symptomService : SymptomService,
+    private backendService : BackendService,
     private router : Router,
     private headerService: HeaderService,
     private utilService: UtilService
@@ -55,7 +56,7 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   getAllSymptom(){
-    this.symptomService.getSymptomList().subscribe({
+    this.backendService.getAll(CATALOGS.SYMPTOMS).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -63,7 +64,7 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   delete(){
-    this.symptomService.deleteSymptom(this.selection.selected.map(function(symptom){return symptom.id})).subscribe({
+    this.backendService.delete(CATALOGS.SYMPTOMS ,this.selection.selected.map(function(symptom){return symptom.id})).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
       complete: () => this.getAllSymptom()
@@ -71,7 +72,7 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   viewSymptom(symptom:Symptom){
-    this.router.navigate(['catalogs','symptom','form',symptom.id]);
+    this.router.navigate(['main','catalogs','symptom','form',symptom.id]);
   }
 
     /** Whether the number of selected elements matches the total number of rows. */

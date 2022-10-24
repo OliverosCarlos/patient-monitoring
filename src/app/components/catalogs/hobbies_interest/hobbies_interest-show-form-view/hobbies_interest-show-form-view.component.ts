@@ -2,9 +2,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { HobbiesInterestService } from 'src/app/services/catalogs/hobbies_interest.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -26,7 +27,7 @@ export class Hobbies_InterestShowFormViewComponent implements OnInit, OnDestroy,
   $headerAction!: Subscription;
 
   constructor(
-    private hobbiesInterestService: HobbiesInterestService,
+    private backendService: BackendService,
     private headerService: HeaderService,
     private utilService: UtilService,
     private route: ActivatedRoute,
@@ -61,8 +62,8 @@ export class Hobbies_InterestShowFormViewComponent implements OnInit, OnDestroy,
 
   getHobbies_InterestById(id:any){
     if(id){
-     this.hobbiesInterestService.getHobbiesInterestById(id).subscribe({
-       next: (v) => { this.record = v[0] },
+     this.backendService.getOneById(CATALOGS.HOBBIES_INTEREST ,id).subscribe({
+       next: (v) => { this.record = v},
        error: (e) => console.error(e),
        complete: () => console.info('complete')
      });
@@ -70,7 +71,7 @@ export class Hobbies_InterestShowFormViewComponent implements OnInit, OnDestroy,
   }
 
   edit(){
-    this.router.navigate(['catalogs','hobbies-interest','update',this.route.snapshot.paramMap.get('hobbies-interest_id')]);
+    this.router.navigate(['main','catalogs','hobbies-interest','update',this.route.snapshot.paramMap.get('hobbies-interest_id')]);
   }
 
 }

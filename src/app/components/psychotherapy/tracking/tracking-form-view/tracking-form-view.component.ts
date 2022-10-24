@@ -4,10 +4,11 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
-import { HobbiesInterestService } from 'src/app/services/catalogs/hobbies_interest.service';
 import { UtilService } from 'src/app/services/util.service';
 
 @Component({
@@ -24,8 +25,10 @@ export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewIn
 
   $headerAction!: Subscription;
 
+  patientList = [];
+
   constructor(
-    private hobbiesInterestService: HobbiesInterestService,
+    private backendService: BackendService,
     private router : Router,
     private route: ActivatedRoute,
     private headerService : HeaderService,
@@ -64,6 +67,7 @@ export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewIn
   ngOnInit() {
     this.headerService.setHeader({name:'track',type:'form'});
     this.utilService.set({name:'track', type:'form'});
+    this.getAllPatients();
     this.formGroup.statusChanges
       .pipe(
         filter(() => this.formGroup.valid))
@@ -87,6 +91,14 @@ export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewIn
     this.headerService.sendInAction({action:'form', type: 'not-ready'});
   }
 
+  getAllPatients(){
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENT).subscribe({
+      next: (v) => { this.patientList = v },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    });
+  }
+
   private setFocus() {
     setTimeout(() => this.firstInput.nativeElement !== undefined ? this.firstInput.nativeElement.focus() : '');
   }
@@ -101,15 +113,15 @@ export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   save(){
-    this.hobbiesInterestService.addHobbiesInterest(this.formGroup.value).subscribe({
+    this.backendService.create(PSYCHOTHERAPY.TRACKING, this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['psychotherapy','tracking','table'])
+      complete: () => this.router.navigate(['../','main','psychotherapy','tracking','table'])
     })
   }
 
   cancel(){
-    this.router.navigate(['psychotherapy','tracking','table']);
+    this.router.navigate(['../','main','psychotherapy','tracking','table']);
   }
 
 }

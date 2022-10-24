@@ -2,72 +2,74 @@
 <form [formGroup]="formGroup">
   <div class="row">
     <!-- patient field -->
-    <div class="col-md-12">
+    <div class="col-md-4 mt-3">
       <div class="form-group">
-        <label [attr.for]="nameForm+'patient'" class="control-label">Paciente <span class="text-danger">*</span> </label>
-        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'patient'" formControlName="patient"
-          style="text-transform: uppercase;" (keyup)="changeToUppercase('patient')">
-      </div>
-    </div>
-    <!-- session_approach field -->
-    <div class="col-md-12">
-      <div class="form-group">
-        <label [attr.for]="nameForm+'session_approach'" class="control-label">Descripción y abordaje de la sesión <span class="text-danger">*</span>
+        <label for="activity_type_id" class="control-label">Paciente <span class="text-danger">*</span>
         </label>
-        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'session_approach'"
-          formControlName="session_approach" style="text-transform: uppercase;"
-          (keyup)="changeToUppercase('session_approach')">
+        <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="patientList" placeholder="SELECCIONE UNA OPCIÓN"
+          bindLabel="first_name" bindValue="id" [clearable]="false" formControlName="patient">
+        </ng-select>
       </div>
     </div>
-    <!-- clinical_progress field -->
-    <div class="col-md-12">
-      <div class="form-group">
-        <label [attr.for]="nameForm+'clinical_progress'" class="control-label">Avances clínicos notados <span class="text-danger">*</span>
-        </label>
-        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'clinical_progress'"
-          formControlName="clinical_progress" style="text-transform: uppercase;"
-          (keyup)="changeToUppercase('clinical_progress')">
-      </div>
-    </div>
+
     <!-- session_objective field -->
-    <div class="col-md-12">
+    <div class="col-md-8 mt-3">
       <div class="form-group">
-        <label [attr.for]="nameForm+'session_objective'" class="control-label">Objetivo de la sesión <span class="text-danger">*</span>
+        <label [attr.for]="nameForm+'session_objective'" class="control-label">Objetivo de la sesión <span
+            class="text-danger">*</span>
         </label>
-        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'session_objective'"
+        <input type="text" class="form-control" [attr.id]="nameForm+'session_objective'"
           formControlName="session_objective" style="text-transform: uppercase;"
           (keyup)="changeToUppercase('session_objective')">
       </div>
     </div>
-    <!-- state_of_mind field -->
-    <div class="col-md-12">
+
+    <!-- session_approach field -->
+    <div class="col-md-12 mt-3">
       <div class="form-group">
-        <label [attr.for]="nameForm+'state_of_mind'" class="control-label">Estado anímico durante la sesión <span class="text-danger">*</span>
+        <label [attr.for]="nameForm+'session_approach'" class="control-label">Descripción y abordaje de la sesión <span
+            class="text-danger">*</span>
         </label>
-        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'state_of_mind'"
-          formControlName="state_of_mind" style="text-transform: uppercase;"
-          (keyup)="changeToUppercase('state_of_mind')">
+        <input type="text" class="form-control" [attr.id]="nameForm+'session_approach'"
+          formControlName="session_approach" style="text-transform: uppercase;"
+          (keyup)="changeToUppercase('session_approach')">
+      </div>
+    </div>
+
+    <!-- clinical_progress field -->
+    <div class="col-md-6 mt-3">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'clinical_progress'" class="control-label">Avances clínicos notados <span class="text-danger">*</span> </label>
+        <textarea class="form-control" formControlName="clinical_progress" [attr.id]="nameForm+'clinical_progress'" rows="3"
+        (keyup)="changeToUppercase('clinical_progress')" style="text-transform: uppercase;"></textarea>
+      </div>
+    </div>
+
+    <!-- state_of_mind field -->
+    <div class="col-md-6 mt-3">
+      <div class="form-group">
+        <label [attr.for]="nameForm+'state_of_mind'" class="control-label">Estado anímico durante la sesión <span class="text-danger">*</span> </label>
+        <textarea class="form-control" formControlName="state_of_mind" [attr.id]="nameForm+'state_of_mind'" rows="3"
+        (keyup)="changeToUppercase('state_of_mind')" style="text-transform: uppercase;"></textarea>
       </div>
     </div>
     <!-- conducts_and_non_verbal_languages field -->
-    <div class="col-md-12">
+    <div class="col-md-6 mt-3">
       <div class="form-group">
-        <label [attr.for]="nameForm+'conducts_and_non_verbal_languages'" class="control-label">Conductas y lenguaje no verbal <span
-            class="text-danger">*</span> </label>
-        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'conducts_and_non_verbal_languages'"
-          formControlName="conducts_and_non_verbal_languages" style="text-transform: uppercase;"
-          (keyup)="changeToUppercase('conducts_and_non_verbal_languages')">
+        <label [attr.for]="nameForm+'conducts_and_non_verbal_languages'" class="control-label">Conductas y lenguaje no verbal <span class="text-danger">*</span> </label>
+        <textarea class="form-control" formControlName="conducts_and_non_verbal_languages" [attr.id]="nameForm+'conducts_and_non_verbal_languages'" rows="3"
+        (keyup)="changeToUppercase('conducts_and_non_verbal_languages')" style="text-transform: uppercase;"></textarea>
       </div>
     </div>
     <!-- observations field -->
-    <div class="col-md-12">
+    <div class="col-md-6 mt-3">
       <div class="form-group">
-        <label [attr.for]="nameForm+'observations'" class="control-label">ObservacionesS <span class="text-danger">*</span>
-        </label>
-        <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'observations'"
-          formControlName="observations" style="text-transform: uppercase;" (keyup)="changeToUppercase('observations')">
+        <label [attr.for]="nameForm+'observations'" class="control-label">Observaciones <span class="text-danger">*</span> </label>
+        <textarea class="form-control" formControlName="observations" [attr.id]="nameForm+'observations'" rows="3"
+        (keyup)="changeToUppercase('observations')" style="text-transform: uppercase;"></textarea>
       </div>
     </div>
+
   </div>
   <br>
   <div class="row">

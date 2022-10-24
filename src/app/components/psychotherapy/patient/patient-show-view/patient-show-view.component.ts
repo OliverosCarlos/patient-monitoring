@@ -1,10 +1,15 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 
-import { PatientService } from 'src/app/services/patient.service';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
+
+//SERVICES
+import { BackendService } from 'src/app/services/backend.service';
+import { HeaderService } from 'src/app/services/header.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-patient-show-view',
@@ -25,22 +30,43 @@ export class PatientShowViewComponent implements OnInit, OnDestroy, AfterViewIni
   };
 
 
+  $headerAction!: Subscription;
+
   constructor(
-    private patientService: PatientService,
+    private backendService: BackendService,
+    private router : Router,
     private route: ActivatedRoute,
+    private headerService : HeaderService,
+    private utilService: UtilService
   ) {}
 
   ngAfterViewInit(): void {
+    this.$headerAction = this.headerService.getOutAction().subscribe(data => {
+      if(data.action == 'option'){
+        switch (data.type) {
+          case 'tracking':
+            this.tracking();
+            break;
+          case 'clinical_note':
+            this.clinical_note();
+            break;
+          default:
+            break;
+        }
+      }
+    });
   }
 
   ngOnInit() {
+    this.headerService.setHeader({name:'patient',type:'show'});
+    this.utilService.set({name:'patient', type:'show'});
     if(this.route.snapshot.paramMap.get('patient_id')){
       this.getPatientById(this.route.snapshot.paramMap.get('patient_id'));
     }
   }
   
   ngOnDestroy() {
-    // this.suscribeAddressService.unsubscribe();
+    this.$headerAction.unsubscribe();
   }
 
   onFormInvalid() {
@@ -49,11 +75,25 @@ export class PatientShowViewComponent implements OnInit, OnDestroy, AfterViewIni
 
   getPatientById(id:any){
     if(id){
-      this.patientService.getPatientById(id).subscribe({
-        next: (v) => { this.patient = v[0] },
+      this.backendService.getOneById(PSYCHOTHERAPY.PATIENT_BY_ID ,id).subscribe({
+        next: (v) => { this.patient = v },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });
+    }
+  }
+
+  tracking(){
+    if(this.route.snapshot.paramMap.get('patient_id')){
+      this.router.navigate(['../','main','psychotherapy','tracking','table','by_patient',this.route.snapshot.paramMap.get('patient_id')]);
+      this.getPatientById(this.route.snapshot.paramMap.get('patient_id'));
+    }
+  }
+
+  clinical_note(){
+    if(this.route.snapshot.paramMap.get('patient_id')){
+      this.router.navigate(['../','main','psychotherapy','clinical-notes','form',this.route.snapshot.paramMap.get('patient_id')]);
+      this.getPatientById(this.route.snapshot.paramMap.get('patient_id'));
     }
   }
 

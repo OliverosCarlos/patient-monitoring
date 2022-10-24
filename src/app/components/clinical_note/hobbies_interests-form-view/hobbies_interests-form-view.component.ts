@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { HobbiesInterestService } from 'src/app/services/catalogs/hobbies_interest.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
 import { Subscription } from 'rxjs';
@@ -36,7 +37,7 @@ export class HobbiesInterestsFormViewComponent implements OnInit, OnDestroy, Aft
   // }
 
   constructor(
-    private hobbiesInterestService: HobbiesInterestService,
+    private backendService: BackendService,
     private route: ActivatedRoute,
     private utilService: UtilService,
     // private handler: Handler,
@@ -94,7 +95,7 @@ export class HobbiesInterestsFormViewComponent implements OnInit, OnDestroy, Aft
   }
 
   getAllHobbiesInterest(){
-    this.hobbiesInterestService.getHobbiesInterestsList().subscribe({
+    this.backendService.getAll(CATALOGS.HOBBIES_INTEREST).subscribe({
       next: (v) => { this.hobbies_interest_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

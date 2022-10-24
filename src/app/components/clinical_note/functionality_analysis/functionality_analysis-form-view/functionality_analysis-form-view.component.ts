@@ -1,16 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
-import { EmotionsService } from 'src/app/services/catalogs/emotions.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { Functionality_analysisService } from 'src/app/services/clinical_note/functionality_analysis.service';
-// import { CrudService } from 'src/app/providers/api/crud.service';
-// import { Handler } from 'src/app/utils/handler';
-// import swal from 'sweetalert2';
-// import { Utils } from 'src/app/utils/utils';
-// import { Router } from '@angular/router';
-// import { PATH_REQUEST } from 'src/app/utils/enums/pathRequest.enum';
-// import { SessionService, AddressesService, StepperFisherProducerFormService } from 'src/app/providers/providers.index';
+
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -39,16 +35,9 @@ export class FunctionalityAnalysisFormViewComponent implements OnInit, OnDestroy
 
   constructor(
     private route: ActivatedRoute,
-    private emotionsService: EmotionsService,
+    private backendService: BackendService,
     private functionality_analysisService: Functionality_analysisService,
-    // private handler: Handler,
-    // public modalRef: BsModalRef,
-    // private httpService: CrudService,
-    // private router: Router,
-    // private sessionService: SessionService,
-    // private addressService: AddressesService,
     private fb: FormBuilder,
-    // private stepperFisherProducerForm: StepperFisherProducerFormService
   ) {
     this.formGroup = this.fb.group({
       emotion: new FormControl(null, [Validators.required]),
@@ -125,7 +114,7 @@ export class FunctionalityAnalysisFormViewComponent implements OnInit, OnDestroy
   }
 
   getAllEmotions(){
-    this.emotionsService.getEmotionsList().subscribe({
+    this.backendService.getAll(CATALOGS.EMOTIONS).subscribe({
       next: (v) => { this.emotions_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

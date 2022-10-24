@@ -2,9 +2,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { Clinical_notesService } from 'src/app/services/clinical_note/clinical_note.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 import {MatAccordion} from '@angular/material/expansion';
@@ -51,7 +52,7 @@ export class ClinicalNoteShowFormViewComponent implements OnInit, OnDestroy, Aft
   @ViewChild(MatAccordion) accordion!: MatAccordion;
 
   constructor(
-    private clinical_notesService: Clinical_notesService,
+    private backendService: BackendService,
     private headerService: HeaderService,
     private utilService: UtilService,
     private route: ActivatedRoute,
@@ -86,8 +87,8 @@ export class ClinicalNoteShowFormViewComponent implements OnInit, OnDestroy, Aft
 
   clinical_noteById(id:any){
     if(id){
-     this.clinical_notesService.getClinical_noteById(id).subscribe({
-       next: (v) => { this.record = v[0];console.log(v);this.setAreas(v[0]); },
+     this.backendService.getOneById(PSYCHOTHERAPY.PATIENT_BY_ID,id).subscribe({
+       next: (v) => { this.record = v;console.log(v);this.setAreas(v); },
        error: (e) => console.error(e),
        complete: () => console.info('complete')
      });

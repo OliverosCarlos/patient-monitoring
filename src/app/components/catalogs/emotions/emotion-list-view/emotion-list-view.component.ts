@@ -1,15 +1,15 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { Subscription } from 'rxjs';
 
+import { CATALOGS} from 'src/app/utils/setup/routes.enum';
+
 //services
-import { EmotionsService } from 'src/app/services/catalogs/emotions.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
 //models
-
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -27,7 +27,7 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   $headerAction!: Subscription;
 
   constructor(
-    private emotionsService : EmotionsService,
+    private backendService : BackendService,
     private router : Router,
     private headerService : HeaderService,
     private utilService: UtilService
@@ -57,7 +57,7 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   getAllEmotions(){
-    this.emotionsService.getEmotionsList().subscribe({
+    this.backendService.getAll(CATALOGS.EMOTIONS).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -65,7 +65,7 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   deletePsychologists(){
-    this.emotionsService.deleteEmotions(this.selection.selected.map(function(emotion){return emotion.id})).subscribe({
+    this.backendService.delete(CATALOGS.EMOTIONS,this.selection.selected.map(function(emotion){return emotion.id})).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
       complete: () => this.getAllEmotions()
@@ -73,7 +73,7 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   viewEmotion(emotion:Emotion){
-    this.router.navigate(['catalogs','emotions','form',emotion.id]);
+    this.router.navigate(['main','catalogs','emotions','form',emotion.id]);
   }
 
     /** Whether the number of selected elements matches the total number of rows. */

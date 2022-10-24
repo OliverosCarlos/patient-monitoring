@@ -20,12 +20,12 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class TaskTemplateShowViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  emotion = { 
+  task_template = { 
     id: '', 
     code: '',
     name: '',
     description: '',
-    color: ''
+    task_template_configuration: [{emotion_name:''}]
   };
 
   $headerAction!: Subscription;
@@ -71,8 +71,7 @@ export class TaskTemplateShowViewComponent implements OnInit, OnDestroy, AfterVi
   getTaskTemplateById(id:any){
     if(id){
       this.taskService.getTaskTemplateById(id).subscribe({
-        // next: (v) => { this.emotion = v[0] },
-        next: (v) => { console.log(v[0]) },
+        next: (v) => {  this.task_template = v[0]; },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });

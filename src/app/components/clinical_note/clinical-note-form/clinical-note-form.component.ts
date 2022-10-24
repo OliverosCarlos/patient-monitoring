@@ -3,9 +3,10 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { PatientService } from 'src/app/services/patient.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 import { Clinical_notesService } from 'src/app/services/clinical_note/clinical_note.service';
 
@@ -39,7 +40,7 @@ export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private patientService : PatientService,
+    private backendService : BackendService,
     private modalService: NgbModal,
     private utilService : UtilService,
     private clinical_notesService: Clinical_notesService
@@ -129,7 +130,7 @@ export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
   }
 
   getAllPatients(){
-    this.patientService.getPatientsList().subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENT).subscribe({
       next: (v) => { this.patientList = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -144,7 +145,6 @@ export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
     let modal_setup: NgbModalOptions = {
       ariaLabelledBy: 'modal-basic-title',
       windowClass: 'modal-xxl',
-      
     }
 
     this.modalService.open(FunctionalityAnalysisFormModalComponent, modal_setup
@@ -176,7 +176,7 @@ export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
   }
 
   save(){
-    this.clinical_notesService.addClinical_note(this.mainFormGroup.value).subscribe({
+    this.backendService.create(PSYCHOTHERAPY.CLINICAL_NOTES_CREATE ,this.mainFormGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => console.log('clinical note added')

@@ -33,3 +33,4 @@ package-lock.json
 .vscode
 # public report files
 public/comp*.txt
+.angular/cache/

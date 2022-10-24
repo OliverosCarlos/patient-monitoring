@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { PatientService } from 'src/app/services/patient.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
 import { Subscription } from 'rxjs';
@@ -29,7 +30,7 @@ export class PatientFormViewComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private patientService: PatientService,
+    private backendService: BackendService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private utilService: UtilService
@@ -56,7 +57,7 @@ export class PatientFormViewComponent implements OnInit, AfterViewInit {
   }
 
   getAllPatients(){
-    this.patientService.getPatientsList().subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENT).subscribe({
       next: (v) => { this.patientList = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

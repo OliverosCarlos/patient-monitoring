@@ -1,0 +1,36 @@
+<mat-sidenav-container class="example-container" *ngIf="shouldRun">
+
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
+      (closed)="events.push('close!')">
+      <app-side_menu></app-side_menu>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+  
+      <mat-card>
+        <div class="row">
+          <div class="col-1">
+            <button mat-mini-fab color="primary" (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+          <div class="col-11">
+            <mat-icon>home</mat-icon>
+            <app-breadcrumb></app-breadcrumb>
+          </div>
+        </div>
+      </mat-card>
+    
+      <app-header></app-header>
+      <mat-card class="example-card m-2">
+        <mat-card-title>{{platformTitle}}</mat-card-title>
+        <mat-card-subtitle>{{platformSubtitle}}</mat-card-subtitle>
+        <mat-card-content>
+          <router-outlet></router-outlet>
+        </mat-card-content>
+      </mat-card>
+      
+      
+    </mat-sidenav-content>
+  
+  </mat-sidenav-container>

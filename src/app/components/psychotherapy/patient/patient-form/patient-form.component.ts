@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { PatientService } from 'src/app/services/patient.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -29,7 +30,7 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
   $headerAction!: Subscription;
 
   constructor(
-    private patientService: PatientService,
+    private backendService: BackendService,
     private route: ActivatedRoute,
     private router : Router,
     private fb: FormBuilder,
@@ -127,7 +128,7 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
 
   getPatientById(id:any){
     if(id){
-      this.patientService.getPatientById(id).subscribe({
+      this.backendService.getOneById(PSYCHOTHERAPY.PATIENT ,id).subscribe({
         next: (v) => { this.setPatient(v[0]) },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
@@ -146,8 +147,8 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
   save(){
     this.formData.append('patient_files', this.patientForm.value.patient_files.photo[0].file);
     this.formData.append('patient_data', JSON.stringify(this.patientForm.value.patient_data));
-    this.patientService.addPatient(this.formData).subscribe({
-      next: (v) => { this.router.navigate(['psychotherapy','patients','table']); },
+    this.backendService.createWithFile(PSYCHOTHERAPY.PATIENT_CREATE ,this.formData).subscribe({
+      next: (v) => { this.router.navigate(['main','psychotherapy','patients','table']); },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
     })
@@ -163,6 +164,6 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
   }
 
   cancel(){
-    this.router.navigate(['psychotherapy','patients','table']);
+    this.router.navigate(['main','psychotherapy','patients','table']);
   }
 }

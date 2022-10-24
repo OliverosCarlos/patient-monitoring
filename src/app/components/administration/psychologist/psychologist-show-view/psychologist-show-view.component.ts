@@ -1,15 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ADMINISTRATION } from 'src/app/utils/setup/routes.enum';
 
-import { PsychologistService } from 'src/app/services/administration/psychologist.service';
-// import { CrudService } from 'src/app/providers/api/crud.service';
-// import { Handler } from 'src/app/utils/handler';
-// import swal from 'sweetalert2';
-// import { Utils } from 'src/app/utils/utils';
-// import { Router } from '@angular/router';
-// import { PATH_REQUEST } from 'src/app/utils/enums/pathRequest.enum';
-// import { SessionService, AddressesService, StepperFisherProducerFormService } from 'src/app/providers/providers.index';
+import { BackendService } from 'src/app/services/backend.service';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -36,7 +31,7 @@ export class PsychologistShowViewComponent implements OnInit, OnDestroy, AfterVi
 
 
   constructor(
-    private psychologistService: PsychologistService,
+    private backendService: BackendService,
     private route: ActivatedRoute,
   ) {}
 
@@ -59,7 +54,7 @@ export class PsychologistShowViewComponent implements OnInit, OnDestroy, AfterVi
 
   getPsychologistById(id:any){
     if(id){
-      this.psychologistService.getPsychologistById(id).subscribe({
+      this.backendService.getOneById(ADMINISTRATION.PSYCHOLOGIST,id).subscribe({
         next: (v) => { this.psychologist = v[0] },
         error: (e) => console.error(e),
         complete: () => console.info('complete')

@@ -14,6 +14,7 @@ import { MODELS } from 'src/app/utils/setup/model.setup';
 export class UtilService {
 
     private platformComponent = new Subject<Platform>();
+    private perfil = new Subject<any>();
 
     //COMPONETS
     private  networkAreas = new Subject<any>();
@@ -48,6 +49,14 @@ export class UtilService {
 
     public get(): Observable<Platform> {
         return this.platformComponent.asObservable();
+    }
+
+    public setPerfil(data: any){
+        this.perfil.next(data);
+    }
+
+    public getPerfil(): Observable<any>{
+        return this.perfil.asObservable();
     }
 
     public setNetworkArea(data: any){

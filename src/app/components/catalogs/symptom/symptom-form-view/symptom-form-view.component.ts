@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
-import { SymptomService } from 'src/app/services/catalogs/symptom.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -27,7 +28,7 @@ export class SymptomFormViewComponent implements OnInit, OnDestroy, AfterViewIni
   $headerAction!: Subscription;
 
   constructor(
-    private symptomService: SymptomService,
+    private backendService: BackendService,
     private router : Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -107,7 +108,7 @@ export class SymptomFormViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   save(){
-    this.symptomService.addSymptom(this.formGroup.value).subscribe({
+    this.backendService.create(CATALOGS.SYMPTOMS ,this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => this.router.navigate(['catalogs','symptom','table'])
