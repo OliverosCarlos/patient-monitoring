@@ -17,8 +17,8 @@ import { MODELS } from 'src/app/utils/setup/model.setup';
 
 export class SecurityService {
 
-    readonly APIUrl = "http://127.0.0.1:8000";
-    readonly PhotoUrl = "http://127.0.0.1:8000/media/";
+    readonly APIUrl = "http://143.244.213.215";
+    readonly PhotoUrl = "http://143.244.213.215/media/";
     
     constructor(
         private http:HttpClient,

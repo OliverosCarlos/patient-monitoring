@@ -80,7 +80,8 @@
               "browserTarget": "patient-monitoring:build:production"
             },
             "development": {
-              "browserTarget": "patient-monitoring:build:development"
+              "browserTarget": "patient-monitoring:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

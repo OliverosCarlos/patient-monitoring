@@ -7,8 +7,8 @@ import {HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class BackendService {
 
-  readonly APIUrl = "http://127.0.0.1:8000";
-  readonly APIMediaUrl = "http://127.0.0.1:8000/media/";
+  readonly APIUrl = "http://143.244.213.215";
+  readonly APIMediaUrl = "http://143.244.213.215/media/";
 
   tokenHttpOptions = {
     headers: new HttpHeaders({

@@ -7,8 +7,8 @@ import {Observable, Subscription} from 'rxjs';
   providedIn: 'root'
 })
 export class SymptomService {
-readonly APIUrl = "http://127.0.0.1:8000";
-readonly PhotoUrl = "http://127.0.0.1:8000/media/";
+readonly APIUrl = "http://143.244.213.215:8000";
+readonly PhotoUrl = "http://143.244.213.215:8000/media/";
 
   constructor(private http:HttpClient) { }
 
