@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import { HeaderComponent } from './header.component';
 
 import { MaterialAllModule } from 'src/material.module'
+import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/advance_search.module';
 
 @NgModule({
 
@@ -26,7 +27,8 @@ import { MaterialAllModule } from 'src/material.module'
     CommonModule,
     MaterialAllModule,
     ColorCircleModule,
-    RouterModule
+    RouterModule,
+    AdvanceSearchModule
   ],
 
   exports: [

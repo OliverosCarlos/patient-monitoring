@@ -1,38 +1,18 @@
-#First step
-FROM ubuntu:latest as build-step
+#Primera Etapa
+FROM node:14-alpine3.16 as build-step
 
-LABEL maintainer="oliveros.carlos.ro@gmail.com"
+RUN mkdir -p /app
 
-#env vars
-ARG NODE_VER
-ENV NODE_VERSION=$NODE_VER
-ARG PROJECT_PATH=/home/app
+WORKDIR /app
 
-RUN apt update && yes y | apt upgrade
-RUN apt install \
-make \
-sudo \
-nano \
-wget -y
+COPY package.json /app
 
-############################################NodeJS#####################################################
-RUN echo installing node version: ${NODE_VER}
-RUN wget https://nodejs.org/dist/v${NODE_VER}/node-v${NODE_VER}-linux-x64.tar.gz
-RUN tar --strip-components 1 -xzf node-v* -C /usr/local
-RUN node --version
+RUN npm install
 
-RUN mkdir $PROJECT_PATH
-#Copy all project to Path Automation Directory
-COPY . $PROJECT_PATH
+COPY . /app
 
-#INSTALL NODE PROJECT DEPENDENCIES
-RUN npm install --prefix ${PROJECT_PATH} && npm install -g @angular/cli@13.0.4
+RUN npm run build --prod
 
-WORKDIR $PROJECT_PATH
-
-RUN ng build
-
-#Second step
+#Segunda Etapa
 FROM nginx:1.23.3-alpine
-
-COPY --from=build-step /home/app/dist/patient-monitoring /usr/share/nginx/html
+COPY --from=build-step /app/dist/patient-monitoring /usr/share/nginx/html

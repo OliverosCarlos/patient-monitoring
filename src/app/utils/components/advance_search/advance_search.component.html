@@ -1,0 +1,21 @@
+<div id="main_container" class="as_c">
+  <div id="advance_input" (dblclick)="displayOptions()">
+    <div class="i_i" *ngFor="let option of data_options">
+      <span class="i_i_name">{{option.key}}: </span>
+      <span class="i_i_val" [id]="option.key" (click)="optionActivated(option.key)" *ngIf="option.show">{{option.value}}</span>
+      <input type="text" name="" [id]="'input-'+option.key" [value]="option.value" [size]="option.value.length"
+        (keyup.enter)="inputSetVal($event)" *ngIf="!option.show">
+    </div>
+  </div>
+
+  <!-- <mat-button-toggle (click)="action()">
+    <mat-icon>view_module</mat-icon>
+  </mat-button-toggle> -->
+</div>
+<div class="so_c" *ngIf="show_options">
+  <ul class="opt_list">
+    <li *ngFor="let option of options">
+      <p>{{option}}</p>
+    </li>
+  </ul>
+</div>

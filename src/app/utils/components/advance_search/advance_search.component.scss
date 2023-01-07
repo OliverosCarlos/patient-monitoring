@@ -1,0 +1,74 @@
+.as_c{
+    // width: 300px;
+    #advance_input{
+        background-color: white;
+        border-radius: 8px;
+        border: solid 5px rgba(42, 178, 241, 0.212);
+        height: 46px;
+        //input_item
+        .i_i{
+            display: inline-block;
+            padding: 5px;
+            .i_i_name{
+                padding: 3px;
+                color: grey;
+            }
+
+            .i_i_val{
+                padding: 3px;
+                background-color: gainsboro;
+                border-radius: 3px;
+            }
+
+            .i_i_val:active{
+                background-color: white;
+                border: solid 1px gainsboro;
+            }
+        }
+    }
+}
+
+.so_c{
+    width: 300px;
+    background-color: ghostwhite;
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+    bottom: 1px;
+    left: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    p, ul {
+        padding: 0;
+        margin: 0;
+    }
+    
+    ul{
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+
+        li{
+            margin: 0px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 5px;
+        }
+
+        li:hover{
+            margin: 0px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 5px;
+            background-color: whitesmoke;
+        }
+
+        li:active{
+            margin: 0px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: 5px;
+            background-color: gainsboro;
+        }
+    }
+}

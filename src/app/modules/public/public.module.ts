@@ -15,6 +15,8 @@ import { HeaderModule } from 'src/app/utils/components/header/header.module';
 import { BreadcrumModule } from 'src/app/utils/components/breadcrumb/breadcrumb.module';
 
 import { LoginComponent } from 'src/app/components/public/login/login.component';
+import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/advance_search.module';
+
 const config: InputFileConfig = {
   fileAccept: '*',
   fileLimit: 1
@@ -36,7 +38,8 @@ const config: InputFileConfig = {
     ColorCircleModule,
     SideMenuModule,
     HeaderModule,
-    BreadcrumModule
+    BreadcrumModule,
+    AdvanceSearchModule
   ],
   providers: []
 })

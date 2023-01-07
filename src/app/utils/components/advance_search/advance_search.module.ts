@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ColorCircleModule } from 'ngx-color/circle';
+import {RouterModule} from '@angular/router';
 
-import { LoginComponent } from './login.component';
+import { MaterialAllModule } from 'src/material.module'
+import { AdvanceSearchComponent } from './advance_search.component';
 
 
 @NgModule({
 
   declarations: [
-    LoginComponent,
+    AdvanceSearchComponent,
   ],
 
   entryComponents: [
@@ -22,12 +24,14 @@ import { LoginComponent } from './login.component';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    ColorCircleModule
+    ColorCircleModule,
+    RouterModule,
+    MaterialAllModule
   ],
 
   exports: [
-    LoginComponent
+    AdvanceSearchComponent
   ]
 })
 
-export class BehaviorFormViewModule { }
+export class AdvanceSearchModule { }

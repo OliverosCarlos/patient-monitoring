@@ -23,7 +23,8 @@
     <div class="col-4" *ngIf="searchFlag">
       <div class="row">
         <div class="col-8">
-          <div class="input-group">
+          <app-advance-search></app-advance-search>
+          <!-- <div class="input-group">
             <input type="text" class="form-control" placeholder="Buscar"
               aria-label="Recipient's username with two button addons">
             <button class="btn btn-outline-secondary" type="button">
@@ -32,7 +33,7 @@
             <button class="btn btn-outline-secondary" type="button">
               <mat-icon mat-list-icon>contacts</mat-icon>
             </button>
-          </div>
+          </div> -->
         </div>
         <div class="col-4">
           <mat-button-toggle-group #group="matButtonToggleGroup" *ngIf="showMultipleViewOption">

@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders } from '@angular/common/http';
 
+//SETUP
+import { environment } from 'src/environments/environment'
+
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  readonly APIUrl = "http://143.244.213.215";
-  readonly APIMediaUrl = "http://143.244.213.215/media/";
+  readonly APIUrl = environment.backend_url;
+  readonly PhotoUrl = environment.backend_url+"/media/";
 
   tokenHttpOptions = {
+    params: {},
     headers: new HttpHeaders({
         'Content-Type': 'application/json' ,
         'Authorization': 'Token ' + localStorage.getItem('token')
@@ -27,6 +31,7 @@ export class BackendService {
 
 
   getAll(path: string):Observable<any>{
+    this.tokenHttpOptions.params = {name__contains:'A'};
     return this.http.get(`${this.APIUrl}${path}`,  this.tokenHttpOptions);
   }
   

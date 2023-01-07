@@ -9,6 +9,7 @@ import { BackendService } from 'src/app/services/backend.service';
 //models
 import { Platform } from 'src/app/models/platform.model'; 
 //SETUPS
+import { environment } from 'src/environments/environment'
 import { MODELS } from 'src/app/utils/setup/model.setup';
 
 @Injectable({
@@ -16,9 +17,9 @@ import { MODELS } from 'src/app/utils/setup/model.setup';
 })
 
 export class SecurityService {
-
-    readonly APIUrl = "http://143.244.213.215";
-    readonly PhotoUrl = "http://143.244.213.215/media/";
+    
+    readonly APIUrl = environment.backend_url;
+    readonly PhotoUrl = environment.backend_url+"/media/";
     
     constructor(
         private http:HttpClient,
@@ -54,6 +55,7 @@ export class SecurityService {
                     localStorage.setItem('expiry', data.expiry)
                     localStorage.setItem('logged', 'true')
                     this.backendService.tokenHttpOptions = {
+                        params: {},
                         headers: new HttpHeaders({
                             'Content-Type': 'application/json' ,
                             'Authorization': 'Token ' + localStorage.getItem('token')
