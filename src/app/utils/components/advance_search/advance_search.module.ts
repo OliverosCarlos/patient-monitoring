@@ -6,12 +6,13 @@ import {RouterModule} from '@angular/router';
 
 import { MaterialAllModule } from 'src/material.module'
 import { AdvanceSearchComponent } from './advance_search.component';
-
+import { AutoFocus } from './autofocus.directive';
 
 @NgModule({
 
   declarations: [
     AdvanceSearchComponent,
+    AutoFocus
   ],
 
   entryComponents: [

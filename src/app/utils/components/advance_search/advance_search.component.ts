@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { AutoFocus } from './autofocus.directive';
 
 //MODELS 
 import { AdvanceSearch } from 'src/app/models/advance_search.model';
@@ -18,15 +19,19 @@ import { filter } from 'rxjs/operators';
 })
 export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('searchOptions')
-  searchOptions!: ElementRef;
+  @ViewChild('searchContainer')
+  searchContainer!: ElementRef;
 
-  options = ['name','code']
-  data_options!: AdvanceSearch[];
-
+  options = ['name','code','date']
+  aux_options = []
+  data_options: AdvanceSearch[] = [];
+  aux_data_options: AdvanceSearch[] = [];
+  edit_mode = false;
+  // {'key':'name', 'value': 'carlos', 'show': true}
   show_options = false;
 
-  constructor() { }
+  constructor() {
+   }
 
   ngAfterViewInit(): void {
   }
@@ -50,6 +55,10 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
     ));
   }
 
+  setAuxVal(event: any){
+    
+  }
+
   inputSetVal(event: any){
     let id = event.target.id.split('-')[1]
 
@@ -62,10 +71,36 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
         {'key':opt.key, 'value': opt.value, 'show': true}
         ) );
     }
+    this.edit_mode = false;
   }
 
   displayOptions(){
-    this.show_options = !this.show_options; 
+    if(!this.edit_mode){
+      this.aux_data_options.push({'key':this.options[0], 'value': '', 'show': false});
+      this.data_options.push({'key':this.options[0], 'value': '', 'show': false});
+      this.show_options = !this.show_options;
+      this.edit_mode = true;
+    }
   }
 
+  mouseEnter(option:string){
+    this.data_options[this.data_options.length-1].key = option;
+  }
+  
+  mouseLeave(){
+    if(!this.edit_mode){
+      this.data_options =  JSON.parse(JSON.stringify(this.aux_data_options));
+    }
+  }
+
+  setOption(option: string){
+    this.data_options[this.data_options.length-1].key = option;
+    this.aux_data_options[this.data_options.length-1].key = option;
+    this.show_options = !this.show_options;
+    this.options = this.options.filter(opt=>opt!=option)
+  }
+
+  onFocus(){
+    this.show_options = false;
+  }
 }
