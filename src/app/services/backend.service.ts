@@ -30,8 +30,13 @@ export class BackendService {
   constructor(private http:HttpClient) { }
 
 
-  getAll(path: string):Observable<any>{
-    this.tokenHttpOptions.params = {name__contains:'A'};
+  getAll(path: string, data_search: any):Observable<any>{
+    console.log('back serv DATA SEARCH');
+    
+    
+    
+    this.tokenHttpOptions.params = data_search;
+    console.log(this.tokenHttpOptions);
     return this.http.get(`${this.APIUrl}${path}`,  this.tokenHttpOptions);
   }
   

@@ -100,12 +100,12 @@ export class Hobbies_InterestFormViewComponent implements OnInit, OnDestroy, Aft
     this.backendService.create(CATALOGS.HOBBIES_INTEREST ,this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['catalogs','hobbies-interest','table'])
+      complete: () => this.router.navigate(['../','main','catalogs','hobbies-interest','table'])
     })
   }
 
   cancel(){
-    this.router.navigate(['catalogs','hobbies-interest','table']);
+    this.router.navigate(['../','main','catalogs','hobbies-interest','table']);
   }
 
 }

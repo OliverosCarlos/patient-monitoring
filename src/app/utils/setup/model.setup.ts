@@ -26,16 +26,7 @@ export const MODELS: Model[] = [
         new VWComponent('psychotherapy/patients/update/:patient_id','update',{})
       ],
       multipleView: true,
-      options:[
-        {
-          name: 'clinical_note',
-          icon: 'local_hospital'
-        },
-        {
-          name: 'tracking',
-          icon:'track_changes'
-        },
-      ]
+      options:[ 'first_name', 'last_name1', 'last_name2', 'email' ]
     },
     {
       name: 'clinical_notes',
@@ -88,7 +79,7 @@ export const MODELS: Model[] = [
         new VWComponent('catalogs/emotions/update/:emotion_id','update',{})
       ],
       multipleView: false,
-      options:[]
+      options:['name','code','description']
     },
     {
       name: 'symptom',
@@ -99,7 +90,7 @@ export const MODELS: Model[] = [
         new VWComponent('catalogs/symptom/table','list',{})
       ],
       multipleView: false,
-      options:[]
+      options:['name','code']
     },
     {
       name: 'hobbies_interest',
@@ -112,7 +103,7 @@ export const MODELS: Model[] = [
         new VWComponent('catalogs/hobbies-interest/update/:hobbies-interest_id','update',{})
       ],
       multipleView: false,
-      options:[]
+      options:['name','code']
     },
     {
       name: 'psychologist',

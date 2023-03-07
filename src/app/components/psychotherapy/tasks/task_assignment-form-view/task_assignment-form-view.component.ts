@@ -71,7 +71,7 @@ export class TaskAssignmentFormViewComponent implements OnInit, AfterViewInit, O
   }
 
   getAllPatients(){
-    this.backendService.getAll(PSYCHOTHERAPY.PATIENTS_TASKS_ASSIGNED).subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENTS_TASKS_ASSIGNED,{}).subscribe({
       next: (v) => { this.dataSource.data = v; console.log(v);
        },
       error: (e) => console.error(e),

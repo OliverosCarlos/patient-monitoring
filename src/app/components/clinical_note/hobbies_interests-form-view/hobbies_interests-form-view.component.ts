@@ -95,7 +95,7 @@ export class HobbiesInterestsFormViewComponent implements OnInit, OnDestroy, Aft
   }
 
   getAllHobbiesInterest(){
-    this.backendService.getAll(CATALOGS.HOBBIES_INTEREST).subscribe({
+    this.backendService.getAll(CATALOGS.HOBBIES_INTEREST, {}).subscribe({
       next: (v) => { this.hobbies_interest_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

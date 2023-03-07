@@ -1,74 +1,180 @@
+.advance_Search{
+    float: right;
+    width: 100%;
+}
+
 .as_c{
-    // width: 300px;
+    position: relative;
+    width: 100%;
     #advance_input{
+        width: 100%;       
+        position: absolute;
+        top: 0;
+        left: 0;
         background-color: white;
-        border-radius: 8px;
-        border: solid 5px rgba(42, 178, 241, 0.212);
-        height: 46px;
-        //input_item
+        border-radius: 8px 0px 0px 8px;
+        height: 40px;
         .i_i{
             display: inline-block;
             padding: 5px;
             .i_i_name{
                 padding: 3px;
                 color: grey;
+                font-size: 12px;
             }
 
             .i_i_val{
                 padding: 3px;
                 background-color: gainsboro;
                 border-radius: 3px;
+                font-size: 12px;
             }
 
             .i_i_val:active{
                 background-color: white;
                 border: solid 1px gainsboro;
             }
+
+            input{
+                font-size: 12px;
+            }
+        }
+
+        .i_i a.boxclose {
+            visibility: hidden;
+        }
+        .i_i:hover a.boxclose  {
+            visibility: visible;
+        }
+
+        .container_value{
+            float: right;
+
+            a.boxclose{
+                float: right;
+                margin-top:-10px;
+                margin-right: -6px;
+                cursor:pointer;
+                color: rgba(255, 0, 0);
+                border: 1px solid rgba(255, 0, 0);
+                border-radius: 40px;
+                background: #fff;
+                font-size: 12px;
+                font-weight: bold;
+                display: inline-block;
+                line-height: 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-top: 7px;
+                padding-bottom: 9px;
+                text-decoration: none;
+            }
+            
+            .boxclose:before {
+                content: "\00d7";
+            }
+
+            .boxclose:hover{
+                background-color: rgba(255, 0, 0);
+                color: #fff;
+            }
+
+            .boxclose:active{
+                background-color: rgb(233, 0, 0);
+                color: #fff;
+            }
+        }
+    }
+
+    .ai_active{
+        border: solid 5px rgba(42, 178, 241, 0.212);
+    }
+    .ai_inactive{
+        border: solid 1px gainsboro;
+        padding: 5px;
+    }
+
+    .so_c{
+        width: 100%;           
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: ghostwhite;
+        padding: 5px;
+        border-radius: 5px;
+        z-index: 9;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-top: 46px;
+        p, ul {
+            padding: 0;
+            margin: 0;
+        }
+        
+        ul{
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+    
+            li{
+                margin: 0px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                padding-left: 5px;
+            }
+    
+            li:hover{
+                margin: 0px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                padding-left: 5px;
+                background-color: whitesmoke;
+            }
+    
+            li:active{
+                margin: 0px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                padding-left: 5px;
+                background-color: gainsboro;
+            }
         }
     }
 }
 
-.so_c{
-    width: 300px;
-    background-color: ghostwhite;
+
+.header-options{
+    margin-left: 5px;
+    margin-right: 5px;
     padding: 5px;
-    border-radius: 5px;
-    position: relative;
-    bottom: 1px;
-    left: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    border-radius: 3px;
+}
 
-    p, ul {
-        padding: 0;
-        margin: 0;
+.button-row{
+    display: table-cell;
+
+    mat-icon{
+        font-size: 14;
     }
-    
-    ul{
-        list-style-type: none;
-        margin: 0px;
-        padding: 0px;
 
-        li{
-            margin: 0px;
-            padding-top: 2px;
-            padding-bottom: 2px;
-            padding-left: 5px;
-        }
+    button{
+        background-color: white;
+        border: none;
+        height: 100%;
+        padding: 5px 5px 5px 5px;
+        border: solid 1px gainsboro;
+    }
 
-        li:hover{
-            margin: 0px;
-            padding-top: 2px;
-            padding-bottom: 2px;
-            padding-left: 5px;
-            background-color: whitesmoke;
-        }
+    button:hover{
+        background-color: #e9ecef;
+    }
 
-        li:active{
-            margin: 0px;
-            padding-top: 2px;
-            padding-bottom: 2px;
-            padding-left: 5px;
-            background-color: gainsboro;
-        }
+    button:active{
+        background-color: #ced4da;
+    }
+
+    .btn_filter{
+        border-radius: 0px 8px 8px 0px;
+        margin-right: 5px;
     }
 }

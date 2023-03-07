@@ -5,3 +5,28 @@
     background-color: white;
     border-radius: 3px;
 }
+
+.button-row{
+    display: table-cell;
+
+    button{
+        background-color: white;
+        border: none;
+        height: 100%;
+        padding: 9px 9px 5px 9px;
+        border: solid 1px gainsboro;
+    }
+
+    button:hover{
+        background-color: #e9ecef;
+    }
+
+    button:active{
+        background-color: #ced4da;
+    }
+
+    .btn_filter{
+        border-radius: 0px 8px 8px 0px;
+        margin-right: 5px;
+    }
+}

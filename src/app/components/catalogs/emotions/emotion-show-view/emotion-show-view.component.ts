@@ -40,7 +40,7 @@ export class EmotionShowViewComponent implements OnInit, OnDestroy, AfterViewIni
 
   ngOnInit() {
     this.headerService.setHeader({name:'emotion',type:'show'});
-    this.utilService.set({name:'symptom', type:'show'});
+    this.utilService.set({name:'emotion', type:'show'});
     if(this.route.snapshot.paramMap.get('emotion_id')){
       this.getEmotionById(this.route.snapshot.paramMap.get('emotion_id'));
     }

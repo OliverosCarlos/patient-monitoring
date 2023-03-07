@@ -16,6 +16,10 @@ export class HeaderService {
     private inAction = new Subject<EventComponent>();
     private outAction = new Subject<EventComponent>();
 
+    //Advance search
+    private dataSearch = new Subject<any>();
+    private setupSearch = new Subject<any>();
+
     constructor(private http: HttpClient) { }
 
     public setHeader(data: any) {
@@ -41,4 +45,21 @@ export class HeaderService {
     public getOutAction(): Observable<EventComponent> {
         return this.outAction.asObservable();
     }
+
+    public setDataSearch(dataSearch: any) {
+        this.dataSearch.next(dataSearch);
+    }
+
+    public getDataSearch(): Observable<any> {
+        return this.dataSearch.asObservable();
+    }
+
+    public setSetupSearch(setupSearch: any) {
+        this.setupSearch.next(setupSearch);
+    }
+
+    public getSetupSearch(): Observable<any> {
+        return this.setupSearch.asObservable();
+    }
+    
 }

@@ -51,7 +51,7 @@ export class PsychologistCardViewComponent implements OnInit, AfterViewInit {
   }
 
   getAllPsychologist() {
-    this.BackendService.getAll(ADMINISTRATION.PSYCHOLOGIST).subscribe({
+    this.BackendService.getAll(ADMINISTRATION.PSYCHOLOGIST,{}).subscribe({
       next: (v) => { this.psychologist_list = v },
       error: (e) => console.error(e),
       complete: () => console.info(this.psychologist_list)

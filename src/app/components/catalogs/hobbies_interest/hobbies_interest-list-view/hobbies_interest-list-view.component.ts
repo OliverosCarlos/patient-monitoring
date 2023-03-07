@@ -26,6 +26,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   selection = new SelectionModel<Hobbies_Interest>(true, []);
 
   $headerAction!: Subscription;
+  $advanceSearch!: Subscription;
 
   constructor(
     private router : Router,
@@ -45,16 +46,20 @@ export class Hobbies_InterestListViewComponent implements OnInit {
           break;
       }
     });
+    this.$advanceSearch! = this.headerService.getDataSearch().subscribe(data => {
+      this.getAll(data)
+    });
   }
 
   ngOnInit(): void {
-    this.getAll();
+    this.getAll({});
     this.headerService.setHeader({name:'hobbies_interest',type:'list'});
     this.utilService.set({name:'hobbies_interest', type:'list'});
+    this.headerService.setSetupSearch({name:'hobbies_interest'})
   }
 
-  getAll(){
-   this.backendService.getAll(CATALOGS.HOBBIES_INTEREST).subscribe({
+  getAll(data_search:any){
+   this.backendService.getAll(CATALOGS.HOBBIES_INTEREST,data_search).subscribe({
      next: (v) => { this.dataSource.data = v },
      error: (e) => console.error(e),
      complete: () => console.info('complete')
@@ -65,7 +70,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
     this.backendService.delete(CATALOGS.HOBBIES_INTEREST ,this.selection.selected.map(function(hobbies_interest_data){return hobbies_interest_data.id})).subscribe({
      next: (v) => { console.log(v) },
      error: (e) => console.error(e),
-     complete: () => this.getAll()
+     complete: () => this.getAll({})
     });
   }
 
@@ -102,7 +107,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
       this.backendService.delete(CATALOGS.HOBBIES_INTEREST ,this.selection.selected.map(function(hobbies_interest){return hobbies_interest.id})).subscribe({
         next: (v) => { console.log(v) },
         error: (e) => console.error(e),
-        complete: () => this.getAll()
+        complete: () => this.getAll({})
       });
     }
 

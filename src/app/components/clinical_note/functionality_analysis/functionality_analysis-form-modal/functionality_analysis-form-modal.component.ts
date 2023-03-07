@@ -109,7 +109,7 @@ export class FunctionalityAnalysisFormModalComponent implements OnInit, OnDestro
   }
 
   getAllEmotions(){
-    this.backendService.getAll(CATALOGS.EMOTIONS).subscribe({
+    this.backendService.getAll(CATALOGS.EMOTIONS,{}).subscribe({
       next: (v) => { this.emotions_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

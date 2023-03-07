@@ -25,6 +25,8 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   selection = new SelectionModel<Emotion>(true, []);
 
   $headerAction!: Subscription;
+  $advanceSearch!: Subscription;
+
 
   constructor(
     private backendService : BackendService,
@@ -44,20 +46,25 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
           break;
       }
     });
+    this.$advanceSearch! = this.headerService.getDataSearch().subscribe(data => {
+      this.getAllEmotions(data)
+    });
   }
 
   ngOnInit(): void {
-    this.getAllEmotions();
+    this.getAllEmotions({});
     this.headerService.setHeader({name:'emotion',type:'list'});
     this.utilService.set({name:'emotion', type:'list'});
+    this.headerService.setSetupSearch({name:'emotion'})
   }
 
   ngOnDestroy():void{
     this.$headerAction!.unsubscribe();
+    this.$advanceSearch!.unsubscribe();
   }
 
-  getAllEmotions(){
-    this.backendService.getAll(CATALOGS.EMOTIONS).subscribe({
+  getAllEmotions(data_search:any){
+    this.backendService.getAll(CATALOGS.EMOTIONS, data_search).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -68,7 +75,7 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
     this.backendService.delete(CATALOGS.EMOTIONS,this.selection.selected.map(function(emotion){return emotion.id})).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
-      complete: () => this.getAllEmotions()
+      complete: () => this.getAllEmotions({})
     });
   }
 

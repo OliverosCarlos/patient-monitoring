@@ -62,7 +62,7 @@ export class TrackingListViewComponent implements OnInit {
   }
 
   getAll(){
-    this.backendService.getAll(PSYCHOTHERAPY.TRACKING).subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.TRACKING,{}).subscribe({
      next: (v) => { this.dataSource.data = v; console.log(v);
       },
      error: (e) => console.error(e),

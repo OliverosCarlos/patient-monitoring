@@ -24,6 +24,7 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
   selection = new SelectionModel<Symptom>(true, []);
 
   $headerAction!: Subscription;
+  $advanceSearch!: Subscription;
 
   constructor(
     private backendService : BackendService,
@@ -33,9 +34,10 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
     ) { }
 
   ngOnInit(): void {
-    this.getAllSymptom();
+    this.getAll({});
     this.headerService.setHeader({name:'symptom',type:'list'});
     this.utilService.set({name:'symptom', type:'list'});
+    this.headerService.setSetupSearch({name:'symptom'});
   }
 
   ngAfterViewInit(): void {
@@ -49,14 +51,17 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
           break;
       }
     });
+    this.$advanceSearch! = this.headerService.getDataSearch().subscribe(data => {
+      this.getAll(data)
+    });
   }
 
   ngOnDestroy() {
     this.$headerAction.unsubscribe();
   }
 
-  getAllSymptom(){
-    this.backendService.getAll(CATALOGS.SYMPTOMS).subscribe({
+  getAll(data_search:any){
+    this.backendService.getAll(CATALOGS.SYMPTOMS, data_search).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -67,7 +72,7 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
     this.backendService.delete(CATALOGS.SYMPTOMS ,this.selection.selected.map(function(symptom){return symptom.id})).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
-      complete: () => this.getAllSymptom()
+      complete: () => this.getAll({})
     });
   }
 

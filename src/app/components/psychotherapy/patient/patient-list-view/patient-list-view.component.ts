@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 import { Subscription } from 'rxjs';
@@ -16,13 +16,14 @@ import { BackendService } from 'src/app/services/backend.service';
   templateUrl: './patient-list-view.component.html',
   styleUrls: ['./patient-list-view.component.scss']
 })
-export class PatientListViewComponent implements OnInit, AfterViewInit {
+export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayedColumns = ['select', 'first_name', 'last_name1', 'last_name2' , 'age', 'email', 'phone_number'];
   dataSource = new MatTableDataSource<Patient>([]);
   selection = new SelectionModel<Patient>(true, []);
 
   $headerAction!: Subscription;
+  $advanceSearch!: Subscription;
 
   constructor(
     private backendService : BackendService,
@@ -32,9 +33,10 @@ export class PatientListViewComponent implements OnInit, AfterViewInit {
     ) { }
 
   ngOnInit(): void {
-    this.getAllPatients();
+    this.getAll({});
     this.headerService.setHeader({name:'patient', type:'list'});
     this.utilService.set({name:'patient', type:'list'});
+    this.headerService.setSetupSearch({name:'patient'});
   }
 
   ngAfterViewInit(): void {
@@ -50,11 +52,18 @@ export class PatientListViewComponent implements OnInit, AfterViewInit {
           break;
       }
     });
+    this.$advanceSearch! = this.headerService.getDataSearch().subscribe(data => {
+      this.getAll(data)
+    });
   }
 
+  ngOnDestroy() {
+    this.$headerAction.unsubscribe();
+    this.$advanceSearch.unsubscribe();
+  }
 
-  getAllPatients(){
-    this.backendService.getAll(PSYCHOTHERAPY.PATIENT).subscribe({
+  getAll(data_search:any){
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENT,data_search).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -65,7 +74,7 @@ export class PatientListViewComponent implements OnInit, AfterViewInit {
     this.backendService.delete(PSYCHOTHERAPY.PATIENT, this.selection.selected.map(function(patient){return patient.id})).subscribe({
       next: (v) => { console.log(v) },
       error: (e) => console.error(e),
-      complete: () => this.getAllPatients()
+      complete: () => this.getAll({})
     });
   }
 

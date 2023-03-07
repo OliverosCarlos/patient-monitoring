@@ -30,7 +30,7 @@ import { TaskDashboardViewComponent } from 'src/app/components/psychotherapy/tas
 import { TaskAssignedListViewComponent } from 'src/app/components/psychotherapy/tasks/task_assigned-list-view/task_assigned-list-view.component';
 import { TemplateConfigurationFormViewComponent } from 'src/app/components/psychotherapy/tasks/template_configuration-form-view/template_configuration-form-view.component';
 import { TaskTemplateShowViewComponent } from 'src/app/components/psychotherapy/tasks/task_template-show-view/task_template-show-view.component';
-import { TaskTemplateListViewModule } from 'src/app/components/psychotherapy/tasks/task_template-list-view/task_template-list-view.module';
+// import { TaskTemplateListViewModule } from 'src/app/components/psychotherapy/tasks/task_template-list-view/task_template-list-view.module';
 import { GenericModalModule } from 'src/app/utils/components/generic-modal/generic-modal.module';
 import { TaskAssignmentFormViewComponent } from 'src/app/components/psychotherapy/tasks/task_assignment-form-view/task_assignment-form-view.component';
 import { TaskAssignedApplicationViewComponent } from 'src/app/components/psychotherapy/tasks/task_assigned-application-view/task_assigned-application-view.component';
@@ -54,6 +54,10 @@ import { FunctionalityAnalysisListViewModule } from 'src/app/components/clinical
 import { SupportNetworkListViewModule } from 'src/app/components/clinical_note/support_network/support_network-list-view/support_network-list-view.module';
 
 import { SupportNetworkFormModalModule } from 'src/app/components/clinical_note/support_network/support_network-form-modal/support_network-form-modal.module';
+
+import { PatientAssignedListViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/patient_assigned-list-view/patient_assigned-list-view.module';
+import { PatientsToAssignListViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/patients_to_assign-list-view/patients_to_assign-list-view.module';
+import { TaskTemplateListViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/task_template-list-view/task_template-list-view.module';
 
 const config: InputFileConfig = {
   fileAccept: '*',
@@ -109,7 +113,10 @@ const config: InputFileConfig = {
     FunctionalityAnalysisFormModalModule,
     SupportNetworkListViewModule,
     SupportNetworkFormModalModule,
-
+    PatientAssignedListViewModule,
+    PatientsToAssignListViewModule,
+    TaskTemplateListViewModule,
+    
     GenericModalModule
   ],
   providers: []

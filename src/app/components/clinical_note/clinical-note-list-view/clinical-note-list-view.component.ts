@@ -71,7 +71,7 @@ export class Clinical_NoteListViewComponent implements OnInit {
   // }
 
   getAll(){
-   this.backendService.getAll(PSYCHOTHERAPY.CLINICAL_NOTES).subscribe({
+   this.backendService.getAll(PSYCHOTHERAPY.CLINICAL_NOTES,{}).subscribe({
      next: (v) => { this.buildDataTable(v) },
      error: (e) => console.error(e),
      complete: () => console.info('complete')

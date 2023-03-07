@@ -1,13 +1,13 @@
 <div class="header-options mat-elevation-z3">
   <div class="row">
-    <div class="col-4">
+    <div class="col-3 my-auto">
       <button mat-raised-button color="accent" [routerLink]="[mainRoute]" *ngIf="showCreate" [disabled]="disabledCreate">Crear</button>
       <button mat-raised-button color="primary" (click)="save()" *ngIf="showSave" [disabled]="disabledSave">Guardar</button>
       <button mat-raised-button color="primary" (click)="update()" *ngIf="showUpdate" [disabled]="disabledUpdate">Actualizar</button>
       <button mat-raised-button color="primary" (click)="edit()" *ngIf="showEdit" [disabled]="disabledEdit">Editar</button>
       <button mat-raised-button color="warn" (click)="cancel()" *ngIf="showCancel">Cancelar</button>
     </div>
-    <div class="col-4">
+    <div class="col-3 my-auto">
       <button mat-button [matMenuTriggerFor]="options">Opciones</button>
       <mat-menu #options="matMenu" yPosition="above">
         <button mat-menu-item (click)="delete()">Eliminar</button>
@@ -20,30 +20,28 @@
         <button mat-menu-item>Item 2</button>
       </mat-menu>
     </div>
-    <div class="col-4" *ngIf="searchFlag">
+    <div class="col-6" *ngIf="searchFlag">
       <div class="row">
-        <div class="col-8">
-          <app-advance-search></app-advance-search>
-          <!-- <div class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar"
-              aria-label="Recipient's username with two button addons">
-            <button class="btn btn-outline-secondary" type="button">
-              <mat-icon mat-list-icon>search</mat-icon>
-            </button>
-            <button class="btn btn-outline-secondary" type="button">
-              <mat-icon mat-list-icon>contacts</mat-icon>
-            </button>
-          </div> -->
+        <div class="col-8 m-0 p-0">
+          <div class="advance_Search">
+            <app-advance-search></app-advance-search>
+          </div>
         </div>
-        <div class="col-4">
-          <mat-button-toggle-group #group="matButtonToggleGroup" *ngIf="showMultipleViewOption">
-            <mat-button-toggle (click)="changeToTableView()">
+        <div class="col-4 m-0 p-0">
+          <div class="button-row">
+            <button class="btn_search">
+              <mat-icon>search</mat-icon>
+            </button>
+            <button class="btn_filter">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+            <button (click)="changeToTableView()" *ngIf="showMultipleViewOption">
               <mat-icon>view_list</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle (click)="changeToCardView()">
+            </button>
+            <button (click)="changeToCardView()" *ngIf="showMultipleViewOption">
               <mat-icon>view_module</mat-icon>
-            </mat-button-toggle>
-          </mat-button-toggle-group>
+            </button>
+          </div>
         </div>
       </div>
     </div>

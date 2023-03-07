@@ -1,0 +1,98 @@
+.header-section{
+  h2{
+    color: gray;
+  }
+}
+
+.assigned-c{
+  border: solid 2px gainsboro;
+  padding: 0px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.966);
+  .opt{
+    text-align: center;
+  }
+
+  .a-card-c{
+    
+    float: left;
+    width: 33%;
+    padding: 5px;
+  
+    .a-card{
+      border-radius: 3px;
+      border: solid 1px gainsboro;
+      border-top: solid 3px chartreuse;
+      padding: 5px;
+
+      .a-card-h{
+        border-bottom: solid 1px gainsboro;
+
+        .img-container {
+          img {
+            width: 100%;
+            border-radius: 100px;
+          }
+        }
+
+        .h-title{
+          font-size: 14px;
+        }
+
+        .h-menu{
+          padding: 3px;
+          .icon-c{
+            padding-top: 5px;
+            float: right;
+            text-align: center;
+            border-radius: 5px;
+            mat-icon{
+              margin: 0px !important;
+              padding: 0px !important;
+              font-size: 16px;
+            }
+          }
+
+          .icon-c:hover{
+            background-color: whitesmoke;
+          }
+        }
+
+      }
+    }
+  }
+
+  .a-card-c:hover{
+    padding: 2px;
+  }
+}
+
+.assigned-c:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media only screen and (max-width: 1000px) {
+  .a-card-c{
+    
+    float: left;
+    width: 50%;
+    padding: 5px;
+  
+    .a-card{
+      border-radius: 3px;
+      border: solid 1px gainsboro;
+      padding: 5px;
+
+      .img-container {
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    
+    }
+  }
+}
+

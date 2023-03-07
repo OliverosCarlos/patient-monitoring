@@ -93,7 +93,7 @@ export class ReasonConsultationFormViewComponent implements OnInit, OnDestroy, A
   }
 
   getAllSymptom(){
-    this.backendService.getAll(CATALOGS.SYMPTOMS).subscribe({
+    this.backendService.getAll(CATALOGS.SYMPTOMS,{}).subscribe({
       next: (v) => { this.symptom_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

@@ -96,22 +96,20 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   }
 
   onFormValid() {
-    const sendDataParent = {
-      formGroup: this.formGroup.value,
-      zip_codes: this.zip_codes
-    };
-    // this.stepperFisherProducerForm.setAddress(sendDataParent, true);
+    this.headerService.sendInAction({action:'form', type: 'ready'});
   }
 
   onFormInvalid() {
-    // this.stepperFisherProducerForm.setAddress(null, false);
+    this.headerService.sendInAction({action:'form', type: 'not-ready'});
   }
 
   save(){
     this.formData.append('psychologist_files', this.formGroup.value.psychologist_files.photo[0].file);
     this.formData.append('psychologist_data', JSON.stringify(this.formGroup.value.psychologist_data));
     this.backendService.createWithFile(ADMINISTRATION.PSYCHOLOGIST_CREATE ,this.formData).subscribe({
-      next: (v) => { console.log(v); },
+      next: (v) => { 
+        this.router.navigate(['main','administration','psychologist','table']); 
+      },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
     })

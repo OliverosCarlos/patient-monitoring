@@ -12,7 +12,7 @@ export enum PSYCHOTHERAPY {
     CLINICAL_NOTES_CREATE = '/psychotherapy/clinical_notes/create/',
     CLINICAL_NOTES_BY_ID = '/psychotherapy/clinical_notes/by_id/',
     PATIENTS_TASKS_ASSIGNED = '/psychotherapy/patients_tasks_assigned',
-    PATIENTS_TASKS_ASSIGNED_BY_PATIENT = '/psychotherapy/patients_tasks_assigned/by_patient',
+    PATIENTS_TASKS_ASSIGNED_BY_PATIENT = '/psychotherapy/patients_tasks_assigned/by_patient/',
     TRACKING = '/psychotherapy/tracking/',
     TRACKING_BY_ID = '/psychotherapy/tracking/by_id/',
     TRACKING_BY_PATIENT = '/psychotherapy/tracking/by_patient/'

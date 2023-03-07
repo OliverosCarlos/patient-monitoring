@@ -57,7 +57,7 @@ export class PatientFormViewComponent implements OnInit, AfterViewInit {
   }
 
   getAllPatients(){
-    this.backendService.getAll(PSYCHOTHERAPY.PATIENT).subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENT,{}).subscribe({
       next: (v) => { this.patientList = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

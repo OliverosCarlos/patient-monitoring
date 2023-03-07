@@ -103,7 +103,7 @@ export class TemplateConfigurationFormViewComponent implements OnInit, OnDestroy
   }
 
   getAllSymptom(){
-    this.backendService.getAll(CATALOGS.EMOTIONS).subscribe({
+    this.backendService.getAll(CATALOGS.EMOTIONS,{}).subscribe({
       next: (v) => { this.emotion_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

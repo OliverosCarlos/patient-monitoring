@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     private utilService : UtilService
   ) {
     this.formGroup = this.fb.group({
-      username: new FormControl('magali', [Validators.required, Validators.maxLength(250)]),
-      password: new FormControl('qwer.1234', [Validators.required, Validators.maxLength(250)])
+      username: new FormControl('MAGALI_N_MADERA', [Validators.required, Validators.maxLength(250)]),
+      password: new FormControl('MAGALI.2023', [Validators.required, Validators.maxLength(250)])
     });
   }
 
