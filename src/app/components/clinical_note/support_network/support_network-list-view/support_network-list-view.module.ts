@@ -14,28 +14,20 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-
-  declarations: [
-    SupportNetworkListViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    InputFileModule.forRoot(config),
-    MaterialAllModule
-  ],
-
-  exports: [
-    SupportNetworkListViewComponent
-  ]
+    declarations: [
+        SupportNetworkListViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        InputFileModule.forRoot(config),
+        MaterialAllModule
+    ],
+    exports: [
+        SupportNetworkListViewComponent
+    ]
 })
 
 export class SupportNetworkListViewModule {}       

@@ -9,29 +9,21 @@ import { SideMenuComponent } from './side_menu.component';
 import { MaterialAllModule } from 'src/material.module'
 
 @NgModule({
-
-  declarations: [
-    SideMenuComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    MaterialAllModule,
-    ColorCircleModule,
-    RouterModule
-  ],
-
-  exports: [
-    SideMenuComponent
-  ]
+    declarations: [
+        SideMenuComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        MaterialAllModule,
+        ColorCircleModule,
+        RouterModule
+    ],
+    exports: [
+        SideMenuComponent
+    ]
 })
 
 export class SideMenuModule { }

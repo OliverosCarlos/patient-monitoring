@@ -7,27 +7,19 @@ import { TherapyObjectivesFormViewComponent } from './therapy_objectives-form-vi
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
-
-  declarations: [
-    TherapyObjectivesFormViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    AngularEditorModule
-  ],
-
-  exports: [
-    TherapyObjectivesFormViewComponent
-  ]
+    declarations: [
+        TherapyObjectivesFormViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        AngularEditorModule
+    ],
+    exports: [
+        TherapyObjectivesFormViewComponent
+    ]
 })
 
 export class TherapyObjectivesFormViewModule { }

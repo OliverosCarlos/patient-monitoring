@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 
 import { EmotionsService } from 'src/app/services/catalogs/emotions.service';
@@ -20,7 +20,7 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
 export class SupportNetworkFormModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
   loading = false;
@@ -40,14 +40,14 @@ export class SupportNetworkFormModalComponent implements OnInit, OnDestroy, Afte
     private route: ActivatedRoute,
     private emotionsService: EmotionsService,
     private functionality_analysisService: Functionality_analysisService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private modalService: NgbModal,
     private utilService: UtilService
   ) {
     this.setFocus();
     this.formGroup = this.fb.group({
-      name: new FormControl(null, [Validators.required]),
-      level: new FormControl(null, [Validators.required])
+      name: new UntypedFormControl(null, [Validators.required]),
+      level: new UntypedFormControl(null, [Validators.required])
     });
 
   }

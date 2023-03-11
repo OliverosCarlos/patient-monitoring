@@ -9,30 +9,22 @@ import { AdvanceSearchComponent } from './advance_search.component';
 import { AutoFocus } from './autofocus.directive';
 
 @NgModule({
-
-  declarations: [
-    AdvanceSearchComponent,
-    AutoFocus
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    ColorCircleModule,
-    RouterModule,
-    MaterialAllModule
-  ],
-
-  exports: [
-    AdvanceSearchComponent
-  ]
+    declarations: [
+        AdvanceSearchComponent,
+        AutoFocus
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        ColorCircleModule,
+        RouterModule,
+        MaterialAllModule
+    ],
+    exports: [
+        AdvanceSearchComponent
+    ]
 })
 
 export class AdvanceSearchModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
@@ -17,7 +17,7 @@ import { filter } from 'rxjs/operators';
 export class FunctionalityAnalysisFormModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
   loading = false;
@@ -36,12 +36,12 @@ export class FunctionalityAnalysisFormModalComponent implements OnInit, OnDestro
     private route: ActivatedRoute,
     private backendService: BackendService,
     private functionality_analysisService: Functionality_analysisService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) {
     this.formGroup = this.fb.group({
-      emotion: new FormControl(null, [Validators.required]),
-      conduct: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      functionality: new FormControl(null, [Validators.required, Validators.maxLength(250)])
+      emotion: new UntypedFormControl(null, [Validators.required]),
+      conduct: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      functionality: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)])
     });
   }
   ngAfterViewInit(): void {

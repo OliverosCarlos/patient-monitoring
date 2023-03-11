@@ -7,28 +7,20 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-
-  declarations: [
-    ReasonConsultationFormViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    NgSelectModule,
-    AngularEditorModule
-  ],
-
-  exports: [
-    ReasonConsultationFormViewComponent
-  ]
+    declarations: [
+        ReasonConsultationFormViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        NgSelectModule,
+        AngularEditorModule
+    ],
+    exports: [
+        ReasonConsultationFormViewComponent
+    ]
 })
 
 export class ReasonConsultationFormViewModule { }

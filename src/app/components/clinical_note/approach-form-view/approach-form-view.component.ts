@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 
 //SERVICES
@@ -17,7 +17,7 @@ import { filter } from 'rxjs/operators';
 export class ApproachFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
   loading = false;
@@ -28,10 +28,10 @@ export class ApproachFormViewComponent implements OnInit, OnDestroy, AfterViewIn
     private patientService: PatientService,
     private route: ActivatedRoute,
     private utilService: UtilService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.formGroup = this.fb.group({
-      notes: new FormControl(null, [Validators.required])
+      notes: new UntypedFormControl(null, [Validators.required])
     });
 
   }

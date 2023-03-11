@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
@@ -18,7 +18,7 @@ import { filter } from 'rxjs/operators';
 export class PatientFormViewComponent implements OnInit, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
@@ -32,11 +32,11 @@ export class PatientFormViewComponent implements OnInit, AfterViewInit {
   constructor(
     private backendService: BackendService,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private utilService: UtilService
   ) {
     this.formGroup = this.fb.group({
-      patient: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+      patient: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
     });
   }
   

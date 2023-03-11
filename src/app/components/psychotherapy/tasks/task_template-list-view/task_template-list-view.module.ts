@@ -7,27 +7,19 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TaskTemplateListViewComponent } from './task_template-list-view.component';
 
 @NgModule({
-
-  declarations: [
-    TaskTemplateListViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    NgSelectModule
-  ],
-
-  exports: [
-    TaskTemplateListViewComponent
-  ]
+    declarations: [
+        TaskTemplateListViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        NgSelectModule
+    ],
+    exports: [
+        TaskTemplateListViewComponent
+    ]
 })
 
 export class TaskTemplateListViewModule { }

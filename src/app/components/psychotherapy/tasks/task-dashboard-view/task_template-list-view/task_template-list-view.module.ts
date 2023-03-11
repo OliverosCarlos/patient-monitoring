@@ -14,28 +14,20 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-
-  declarations: [
-    TaskTemplateListViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    InputFileModule.forRoot(config),
-    MaterialAllModule
-  ],
-
-  exports: [
-    TaskTemplateListViewComponent
-  ]
+    declarations: [
+        TaskTemplateListViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        InputFileModule.forRoot(config),
+        MaterialAllModule
+    ],
+    exports: [
+        TaskTemplateListViewComponent
+    ]
 })
 
 export class TaskTemplateListViewModule {}       

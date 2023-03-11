@@ -7,27 +7,19 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FunctionalityAnalysisFormViewComponent } from './functionality_analysis-form-view.component';
 
 @NgModule({
-
-  declarations: [
-    FunctionalityAnalysisFormViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    NgSelectModule
-  ],
-
-  exports: [
-    FunctionalityAnalysisFormViewComponent
-  ]
+    declarations: [
+        FunctionalityAnalysisFormViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        NgSelectModule
+    ],
+    exports: [
+        FunctionalityAnalysisFormViewComponent
+    ]
 })
 
 export class FunctionalityAnalysisFormViewModule { }

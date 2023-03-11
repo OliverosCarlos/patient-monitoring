@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
@@ -18,7 +18,7 @@ import { filter } from 'rxjs/operators';
 export class ReasonConsultationFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
   loading = false;
@@ -38,12 +38,12 @@ export class ReasonConsultationFormViewComponent implements OnInit, OnDestroy, A
     private backendService: BackendService,
     private route: ActivatedRoute,
     private utilService: UtilService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     // private stepperFisherProducerForm: StepperFisherProducerFormService
   ) {
     this.formGroup = this.fb.group({
-      symptoms: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      notes: new FormControl(null, [])
+      symptoms: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      notes: new UntypedFormControl(null, [])
     });
   }
   ngAfterViewInit(): void {

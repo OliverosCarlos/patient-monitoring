@@ -13,28 +13,20 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-
-  declarations: [
-    FunctionalityAnalysisListViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    InputFileModule.forRoot(config),
-    MaterialAllModule
-  ],
-
-  exports: [
-    FunctionalityAnalysisListViewComponent
-  ]
+    declarations: [
+        FunctionalityAnalysisListViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        InputFileModule.forRoot(config),
+        MaterialAllModule
+    ],
+    exports: [
+        FunctionalityAnalysisListViewComponent
+    ]
 })
 
 export class FunctionalityAnalysisListViewModule { }

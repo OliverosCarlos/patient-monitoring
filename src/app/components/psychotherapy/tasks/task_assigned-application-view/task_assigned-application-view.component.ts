@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormArray, UntypedFormGroup, FormControl, Validators } from '@angular/forms';
 
 //SERVICES
 import { TaskService } from 'src/app/services/psychotherapy/task.service';
@@ -15,14 +15,14 @@ import { filter } from 'rxjs/operators';
 export class TaskAssignedApplicationViewComponent implements OnInit {
 
   assignedTaskList = [{'na':''}]
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
 
   disabledSend = true;
 
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    public fb: FormBuilder
+    public fb: UntypedFormBuilder
   ) {
     if(this.route.snapshot.paramMap.get('task_template_id')){
       this.getTaskTemplateById(this.route.snapshot.paramMap.get('task_template_id'));
@@ -36,7 +36,7 @@ export class TaskAssignedApplicationViewComponent implements OnInit {
     })
   }
 
-  setupForm(data:any, fb: FormBuilder){
+  setupForm(data:any, fb: UntypedFormBuilder){
     this.formGroup = this.fb.group({
       patient: this.fb.control(1, [Validators.required]),
       emotions: this.fb.array(
@@ -62,7 +62,7 @@ export class TaskAssignedApplicationViewComponent implements OnInit {
   }
 
   get emotions() {
-    return this.formGroup.get('emotions') as FormArray;
+    return this.formGroup.get('emotions') as UntypedFormArray;
   }
 
   getItemForm(item:any){

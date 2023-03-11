@@ -5,27 +5,19 @@ import {MatRadioModule} from '@angular/material/radio';
 import { SupportNetworkFormModalComponent } from './support_network-form-modal.component';
 
 @NgModule({
-
-  declarations: [
-    SupportNetworkFormModalComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    MatRadioModule
-  ],
-
-  exports: [
-    SupportNetworkFormModalComponent
-  ]
+    declarations: [
+        SupportNetworkFormModalComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        MatRadioModule
+    ],
+    exports: [
+        SupportNetworkFormModalComponent
+    ]
 })
 
 export class SupportNetworkFormModalModule { }

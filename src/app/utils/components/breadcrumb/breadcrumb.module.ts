@@ -9,29 +9,21 @@ import { BreadcrumbComponent } from './breadcrumb.component';
 import { MaterialAllModule } from 'src/material.module'
 
 @NgModule({
-
-  declarations: [
-    BreadcrumbComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    MaterialAllModule,
-    ColorCircleModule,
-    RouterModule
-  ],
-
-  exports: [
-    BreadcrumbComponent
-  ]
+    declarations: [
+        BreadcrumbComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        MaterialAllModule,
+        ColorCircleModule,
+        RouterModule
+    ],
+    exports: [
+        BreadcrumbComponent
+    ]
 })
 
 export class BreadcrumModule { }

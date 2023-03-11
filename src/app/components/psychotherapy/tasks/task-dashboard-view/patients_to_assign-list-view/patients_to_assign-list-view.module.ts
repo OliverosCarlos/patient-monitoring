@@ -16,29 +16,21 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-
-  declarations: [
-    PatientsToAssignListViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    InputFileModule.forRoot(config),
-    MaterialAllModule,
-    AdvanceSearchModule
-  ],
-
-  exports: [
-    PatientsToAssignListViewComponent
-  ]
+    declarations: [
+        PatientsToAssignListViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        InputFileModule.forRoot(config),
+        MaterialAllModule,
+        AdvanceSearchModule
+    ],
+    exports: [
+        PatientsToAssignListViewComponent
+    ]
 })
 
 export class PatientsToAssignListViewModule {}       

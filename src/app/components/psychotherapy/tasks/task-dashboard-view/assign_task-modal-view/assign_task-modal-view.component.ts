@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
@@ -19,17 +19,17 @@ export class AssignTaskModalViewComponent implements OnInit {
 
   task_template_list = []
 
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
 
   $headerAction!: Subscription;
 
   constructor(
     private taskService: TaskService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private eventService: EventService
   ) { 
     this.formGroup = this.fb.group({
-      task_template: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+      task_template: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
     });
   }
 

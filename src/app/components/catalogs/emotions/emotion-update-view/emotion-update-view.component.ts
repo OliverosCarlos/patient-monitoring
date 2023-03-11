@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
@@ -21,7 +21,7 @@ import { filter } from 'rxjs/operators';
 export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
@@ -35,15 +35,15 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
     private router : Router,
     private route: ActivatedRoute,
     private headerService : HeaderService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.setFocus();
     this.formGroup = this.fb.group({
-      id: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      code: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      name: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      description: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      color: new FormControl(null, [Validators.required, Validators.maxLength(10)])
+      id: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      code: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      name: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      description: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      color: new UntypedFormControl(null, [Validators.required, Validators.maxLength(10)])
 
     });
   }

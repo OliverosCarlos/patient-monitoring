@@ -7,27 +7,19 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NonverbalLanguageFormViewComponent } from './nonverbal_language-form-view.component';
 
 @NgModule({
-
-  declarations: [
-    NonverbalLanguageFormViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    AngularEditorModule
-  ],
-
-  exports: [
-    NonverbalLanguageFormViewComponent
-  ]
+    declarations: [
+        NonverbalLanguageFormViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        AngularEditorModule
+    ],
+    exports: [
+        NonverbalLanguageFormViewComponent
+    ]
 })
 
 export class NonVerbalLanguageFormViewModule { }

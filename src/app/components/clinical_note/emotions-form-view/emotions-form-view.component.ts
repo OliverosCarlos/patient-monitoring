@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 
 //services
@@ -17,7 +17,7 @@ import { filter } from 'rxjs/operators';
 export class EmotionsFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
   loading = false;
@@ -38,14 +38,14 @@ export class EmotionsFormViewComponent implements OnInit, OnDestroy, AfterViewIn
     private patientService: PatientService,
     private route: ActivatedRoute,
     private utilService: UtilService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     // private stepperFisherProducerForm: StepperFisherProducerFormService
   ) {
     this.setFocus();
     this.formGroup = this.fb.group({
-      shared_space: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      relationship: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      number: new FormControl(null, [])
+      shared_space: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      relationship: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      number: new UntypedFormControl(null, [])
     });
     // this.router.events.subscribe((val) => {
     //   this.modalRef.hide();

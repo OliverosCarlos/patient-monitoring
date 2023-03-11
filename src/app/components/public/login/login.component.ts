@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SEC } from 'src/app/utils/setup/routes.enum';
@@ -16,18 +16,18 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router : Router,
     private securityService: SecurityService,
     private backendService : BackendService,
     private utilService : UtilService
   ) {
     this.formGroup = this.fb.group({
-      username: new FormControl('MAGALI_N_MADERA', [Validators.required, Validators.maxLength(250)]),
-      password: new FormControl('MAGALI.2023', [Validators.required, Validators.maxLength(250)])
+      username: new UntypedFormControl('MAGALI_N_MADERA', [Validators.required, Validators.maxLength(250)]),
+      password: new UntypedFormControl('MAGALI.2023', [Validators.required, Validators.maxLength(250)])
     });
   }
 

@@ -6,27 +6,19 @@ import { ApproachFormViewComponent } from './approach-form-view.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
-
-  declarations: [
-    ApproachFormViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    AngularEditorModule
-  ],
-
-  exports: [
-    ApproachFormViewComponent
-  ]
+    declarations: [
+        ApproachFormViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        AngularEditorModule
+    ],
+    exports: [
+        ApproachFormViewComponent
+    ]
 })
 
 export class ApproachFormViewModule { }

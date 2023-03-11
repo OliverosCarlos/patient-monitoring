@@ -6,27 +6,19 @@ import { PersonalCharacteristicsFormViewComponent } from './personal_characteris
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
-
-  declarations: [
-    PersonalCharacteristicsFormViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    AngularEditorModule
-  ],
-
-  exports: [
-    PersonalCharacteristicsFormViewComponent
-  ]
+    declarations: [
+        PersonalCharacteristicsFormViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        AngularEditorModule
+    ],
+    exports: [
+        PersonalCharacteristicsFormViewComponent
+    ]
 })
 
 export class PersonalCharacteristicsFormViewModule { }

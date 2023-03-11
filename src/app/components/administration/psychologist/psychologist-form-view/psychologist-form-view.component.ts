@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { ADMINISTRATION } from 'src/app/utils/setup/routes.enum';
 
@@ -19,7 +19,7 @@ import { filter } from 'rxjs/operators';
 export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
   loading = false;
@@ -36,24 +36,24 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
     private utilService : UtilService,
     private route: ActivatedRoute,
     private router : Router,
-    private _formBuilder: FormBuilder,
-    private fb: FormBuilder
+    private _formBuilder: UntypedFormBuilder,
+    private fb: UntypedFormBuilder
   ) {
     this.setFocus();
     this.formGroup = this.fb.group({
       psychologist_files: this._formBuilder.group({
-        photo: new FormControl(null, [Validators.required])
+        photo: new UntypedFormControl(null, [Validators.required])
       }),
       psychologist_data: this._formBuilder.group({
-        first_name: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        last_name1: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        last_name2: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        age: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        email: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        phone_number: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        university: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        studies: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-        profile: new FormControl(null, [Validators.required, Validators.maxLength(250)])
+        first_name: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        last_name1: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        last_name2: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        age: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        email: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        phone_number: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        university: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        studies: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+        profile: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)])
       }),
     });
   }
@@ -89,7 +89,7 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
       .subscribe(() => this.onFormInvalid());
   }
 
-  get pForm() { return this.formGroup.get('psychologist_data') as FormGroup }
+  get pForm() { return this.formGroup.get('psychologist_data') as UntypedFormGroup }
   
   ngOnDestroy() {
     // this.suscribeAddressService.unsubscribe();

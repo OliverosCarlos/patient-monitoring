@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -19,7 +19,7 @@ import { UtilService } from 'src/app/services/util.service';
 export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
@@ -35,15 +35,15 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
     private route: ActivatedRoute,
     private headerService : HeaderService,
     private utilService : UtilService, 
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     // private stepperFisherProducerForm: StepperFisherProducerFormService
   ) {
     this.setFocus();
     this.formGroup = this.fb.group({
-      code: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      name: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      description: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      color: new FormControl(null, [Validators.required, Validators.maxLength(10)]),
+      code: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      name: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      description: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      color: new UntypedFormControl(null, [Validators.required, Validators.maxLength(10)]),
     });
     // this.router.events.subscribe((val) => {
     //   this.modalRef.hide();

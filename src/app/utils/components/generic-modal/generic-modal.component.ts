@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -39,7 +39,7 @@ export class GenericModalComponent implements OnInit, OnDestroy, AfterViewInit {
     private route: ActivatedRoute,
     private emotionsService: EmotionsService,
     private functionality_analysisService: Functionality_analysisService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private genericModalService: GenericModalService,
     private modal: NgbActiveModal,
     private eventsService: EventService,

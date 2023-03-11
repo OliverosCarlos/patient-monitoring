@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +20,7 @@ import { FunctionalityAnalysisFormModalComponent } from 'src/app/components/clin
 })
 export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
 
-  mainFormGroup!: FormGroup;
+  mainFormGroup!: UntypedFormGroup;
 
   suscribeHeaderService!: Subscription;
   $patient_cn_form!: Subscription;
@@ -39,7 +39,7 @@ export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
   closeResult = '';
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private backendService : BackendService,
     private modalService: NgbModal,
     private utilService : UtilService,
@@ -47,31 +47,31 @@ export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
   ) {
     this.mainFormGroup = this._formBuilder.group({
       formGroupPatient: this._formBuilder.group({
-        patient_data: new FormControl(null, [])
+        patient_data: new UntypedFormControl(null, [])
       }),
       formGroupReasonConsultation: this._formBuilder.group({
-        reasonConsultation_data: new FormControl(null, [])
+        reasonConsultation_data: new UntypedFormControl(null, [])
       }),
       formGroupFunctionalityAnalysis: this._formBuilder.group({
-        functionalityAnalysis_data: new FormControl(null, [])
+        functionalityAnalysis_data: new UntypedFormControl(null, [])
       }),
       formGroupNonverbalLanguage: this._formBuilder.group({
-        nonverbalLanguage_data: new FormControl(null, [])
+        nonverbalLanguage_data: new UntypedFormControl(null, [])
       }),
       formGroupHobbiesInterest: this._formBuilder.group({
-        hobbiesInterest_data: new FormControl(null, [])
+        hobbiesInterest_data: new UntypedFormControl(null, [])
       }),
       formGroupSupportNetwork: this._formBuilder.group({
-        supportNetwork_data: new FormControl(null, [])
+        supportNetwork_data: new UntypedFormControl(null, [])
       }),
       formGroupPersonalCharacteristics: this._formBuilder.group({
-        personalCharacteristics_data: new FormControl(null, [])
+        personalCharacteristics_data: new UntypedFormControl(null, [])
       }),
       formGroupTherapyObjectives: this._formBuilder.group({
-        therapyObjectives_data: new FormControl(null, [])
+        therapyObjectives_data: new UntypedFormControl(null, [])
       }),
       formGroupApproach: this._formBuilder.group({
-        approach_data: new FormControl(null, [])
+        approach_data: new UntypedFormControl(null, [])
       })
     });
    }
@@ -106,15 +106,15 @@ export class ClinicalNoteFormComponent implements OnInit, AfterViewInit {
     })
   }
   
-  get patientForm() { return this.mainFormGroup.get('formGroupPatient') as FormGroup }
-  get reasonConsultationForm() { return this.mainFormGroup.get('formGroupReasonConsultation') as FormGroup }
-  get functionalityAnalysisForm() { return this.mainFormGroup.get('formGroupFunctionalityAnalysis') as FormGroup }
-  get nonverbalLanguageForm() { return this.mainFormGroup.get('formGroupNonverbalLanguage') as FormGroup }
-  get hobbiesInterestForm() { return this.mainFormGroup.get('formGroupHobbiesInterest') as FormGroup }
-  get supportNetworkForm() { return this.mainFormGroup.get('formGroupSupportNetwork') as FormGroup }
-  get personalCharacteristicsForm() { return this.mainFormGroup.get('formGroupPersonalCharacteristics') as FormGroup }
-  get therapyObjectivesForm() { return this.mainFormGroup.get('formGroupTherapyObjectives') as FormGroup }
-  get approachForm() { return this.mainFormGroup.get('formGroupApproach') as FormGroup }
+  get patientForm() { return this.mainFormGroup.get('formGroupPatient') as UntypedFormGroup }
+  get reasonConsultationForm() { return this.mainFormGroup.get('formGroupReasonConsultation') as UntypedFormGroup }
+  get functionalityAnalysisForm() { return this.mainFormGroup.get('formGroupFunctionalityAnalysis') as UntypedFormGroup }
+  get nonverbalLanguageForm() { return this.mainFormGroup.get('formGroupNonverbalLanguage') as UntypedFormGroup }
+  get hobbiesInterestForm() { return this.mainFormGroup.get('formGroupHobbiesInterest') as UntypedFormGroup }
+  get supportNetworkForm() { return this.mainFormGroup.get('formGroupSupportNetwork') as UntypedFormGroup }
+  get personalCharacteristicsForm() { return this.mainFormGroup.get('formGroupPersonalCharacteristics') as UntypedFormGroup }
+  get therapyObjectivesForm() { return this.mainFormGroup.get('formGroupTherapyObjectives') as UntypedFormGroup }
+  get approachForm() { return this.mainFormGroup.get('formGroupApproach') as UntypedFormGroup }
 
   ngOnInit(): void {
     this.mainFormGroup.statusChanges

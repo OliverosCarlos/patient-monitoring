@@ -9,29 +9,21 @@ import { FunctionalityAnalysisListViewModule } from 'src/app/components/clinical
 import { FunctionalityAnalysisFormViewModule } from 'src/app/components/clinical_note/functionality_analysis/functionality_analysis-form-view/functionality_analysis-form-view.module';
 
 @NgModule({
-
-  declarations: [
-    FunctionalityAnalysisFormModalComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    NgSelectModule,
-    FunctionalityAnalysisListViewModule,
-    FunctionalityAnalysisFormViewModule
-  ],
-
-  exports: [
-    FunctionalityAnalysisFormModalComponent
-  ]
+    declarations: [
+        FunctionalityAnalysisFormModalComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        NgSelectModule,
+        FunctionalityAnalysisListViewModule,
+        FunctionalityAnalysisFormViewModule
+    ],
+    exports: [
+        FunctionalityAnalysisFormModalComponent
+    ]
 })
 
 export class FunctionalityAnalysisFormModalModule { }

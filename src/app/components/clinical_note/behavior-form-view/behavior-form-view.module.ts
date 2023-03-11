@@ -5,26 +5,18 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BehaviorFormViewComponent } from './behavior-form-view.component';
 
 @NgModule({
-
-  declarations: [
-    BehaviorFormViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-  ],
-
-  exports: [
-    BehaviorFormViewComponent
-  ]
+    declarations: [
+        BehaviorFormViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+    ],
+    exports: [
+        BehaviorFormViewComponent
+    ]
 })
 
 export class BehaviorFormViewModule { }

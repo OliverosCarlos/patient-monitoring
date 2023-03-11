@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'; 
 
 import { PatientService } from 'src/app/services/patient.service';
@@ -10,7 +10,7 @@ import { PatientService } from 'src/app/services/patient.service';
   styleUrls: ['./patient-form.component.scss']
 })
 export class PatientFormComponent implements OnInit {
-  patientForm!: FormGroup;
+  patientForm!: UntypedFormGroup;
   patient_id = 0;
 
   isUpdating = false;
@@ -19,10 +19,10 @@ export class PatientFormComponent implements OnInit {
     private patientService: PatientService,
     private route: ActivatedRoute
     ) {
-    this.patientForm = new FormGroup({
-      first_name: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      last_name: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-      age: new FormControl(null, [Validators.required]) 
+    this.patientForm = new UntypedFormGroup({
+      first_name: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      last_name: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+      age: new UntypedFormControl(null, [Validators.required]) 
     })
   }
 

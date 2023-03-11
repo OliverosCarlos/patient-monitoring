@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, UntypedFormControl, UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
@@ -21,7 +21,7 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
   @Input() nameForm: String = '';
 
   
-  patientForm!: FormGroup;
+  patientForm!: UntypedFormGroup;
   formData: FormData = new FormData();
   patient_id = 0;
 
@@ -33,22 +33,22 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
     private backendService: BackendService,
     private route: ActivatedRoute,
     private router : Router,
-    private fb: FormBuilder,
-    private _formBuilder: FormBuilder,
+    private fb: UntypedFormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private headerService : HeaderService,
     private utilService : UtilService
     ) {
       this.patientForm = this.fb.group({
         patient_files: this._formBuilder.group({
-          photo: new FormControl(null, [Validators.required])
+          photo: new UntypedFormControl(null, [Validators.required])
         }),
         patient_data: this._formBuilder.group({
-          first_name: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-          last_name1: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-          last_name2: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-          age: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-          email: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-          phone_number: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          first_name: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+          last_name1: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+          last_name2: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+          age: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+          email: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
+          phone_number: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
         })
       });
   }
@@ -89,7 +89,7 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
     .subscribe(() => this.onFormInvalid());
   }
 
-  get pForm() { return this.patientForm.get('patient_data') as FormGroup }
+  get pForm() { return this.patientForm.get('patient_data') as UntypedFormGroup }
   get PForm(){ return this.patientForm.controls; }
 
   // formValid() {

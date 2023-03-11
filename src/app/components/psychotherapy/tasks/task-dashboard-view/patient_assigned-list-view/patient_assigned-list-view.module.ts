@@ -12,32 +12,24 @@ import { PatientAssignedListViewComponent } from './patient_assigned-list-view.c
 import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/advance_search.module';
 
 @NgModule({
-
-  declarations: [
-    PatientAssignedListViewComponent,
-  ],
-
-  entryComponents: [
-  ],
-
-  providers: [
-  ],
-
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    NgSelectModule,
-    RouterModule,
-    MatSliderModule,
-    MatIconModule,
-    AdvanceSearchModule,
-    MaterialAllModule
-  ],
-
-  exports: [
-    PatientAssignedListViewComponent
-  ]
+    declarations: [
+        PatientAssignedListViewComponent,
+    ],
+    providers: [],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        NgSelectModule,
+        RouterModule,
+        MatSliderModule,
+        MatIconModule,
+        AdvanceSearchModule,
+        MaterialAllModule
+    ],
+    exports: [
+        PatientAssignedListViewComponent
+    ]
 })
 
 export class PatientAssignedListViewModule { }
