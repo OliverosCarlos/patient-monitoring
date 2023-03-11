@@ -58,6 +58,7 @@ import { SupportNetworkFormModalModule } from 'src/app/components/clinical_note/
 import { PatientAssignedListViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/patient_assigned-list-view/patient_assigned-list-view.module';
 import { PatientsToAssignListViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/patients_to_assign-list-view/patients_to_assign-list-view.module';
 import { TaskTemplateListViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/task_template-list-view/task_template-list-view.module';
+import { AssignTaskModalViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/assign_task-modal-view/assign_task-modal-view.module';
 
 const config: InputFileConfig = {
   fileAccept: '*',
@@ -116,6 +117,7 @@ const config: InputFileConfig = {
     PatientAssignedListViewModule,
     PatientsToAssignListViewModule,
     TaskTemplateListViewModule,
+    AssignTaskModalViewModule,
     
     GenericModalModule
   ],

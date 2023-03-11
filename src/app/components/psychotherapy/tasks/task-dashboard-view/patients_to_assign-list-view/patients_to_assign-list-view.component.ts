@@ -2,6 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+
+import  { AssignTaskModalViewComponent } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/assign_task-modal-view/assign_task-modal-view.component';
+
 import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICE
@@ -31,7 +35,8 @@ export class PatientsToAssignListViewComponent implements OnInit {
     private router : Router,
     private headerService : HeaderService,
     private backendService : BackendService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    public dialog: MatDialog
     ) {}
 
   ngAfterViewInit(): void {
@@ -53,6 +58,20 @@ export class PatientsToAssignListViewComponent implements OnInit {
   // show(hobbies_interest_data:Hobbies_Interest){
   //   this.router.navigate(['main','catalogs','hobbies-interest','form',hobbies_interest_data.id]);
   // }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(
+      AssignTaskModalViewComponent,
+      {
+        height: '50%',
+        width: '600px',
+      }
+      );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
 }
     
