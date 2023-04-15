@@ -1,8 +1,4 @@
 <div class="row">
-    <button mat-stroked-button color="primary" [disabled]="disabledSend" (click)="send()">Enviar</button>
-</div>
-<br>
-<div class="row">
     <form [formGroup]="formGroup">
         <div formArrayName="emotions">
             <div *ngFor="let emotion of emotions.controls; let i=index" [formGroupName]="i">
@@ -11,7 +7,7 @@
                         <label >{{emotion.value.emotion_name}}</label>
                     </div>
                     <div class="col-10">
-                        <mat-radio-group aria-label="Select an option" formControlName="level">
+                        <mat-radio-group aria-label="Select an option" formControlName="value">
                             <mat-radio-button value="1">nivel 1</mat-radio-button>
                             <mat-radio-button value="2">nivel 2</mat-radio-button>
                             <mat-radio-button value="3">nivel 3</mat-radio-button>

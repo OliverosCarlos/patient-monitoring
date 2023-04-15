@@ -48,8 +48,7 @@ readonly PhotoUrl = "http://127.0.0.1:8000/media/";
   }
 
   assignTask(form:any){
-    let data = {patient:11,task_template:form.task_template}
-    console.log(data);
+    let data = {patient:form.patient,task_template:form.task_template}
     return this.http.post(this.APIUrl + '/task_assign/',data);
   }
 

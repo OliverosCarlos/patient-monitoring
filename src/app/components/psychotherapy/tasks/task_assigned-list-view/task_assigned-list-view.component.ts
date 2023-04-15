@@ -19,7 +19,7 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class TaskAssignedListViewComponent implements OnInit {
 
-  displayedColumns = ['select' , 'code' , 'name'  ];
+  displayedColumns = ['task_template_name' ];
   dataSource = new MatTableDataSource<any>([]);
   selection = new SelectionModel<any>(true, []);
 
@@ -47,17 +47,22 @@ export class TaskAssignedListViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
-    this.headerService.setHeader({name:'hobbies_interest',type:'list'});
-    this.utilService.set({name:'hobbies_interest', type:'list'});
+    this.headerService.setHeader({name:'task',type:'list'});
+    this.utilService.set({name:'task', type:'list'});
   }
 
   getAll(){
-   this.backendService.getOneById(PSYCHOTHERAPY.PATIENTS_TASKS_ASSIGNED_BY_PATIENT, '11').subscribe({
-     next: (v) => { this.dataSource.data = v; console.log(v);
-      },
-     error: (e) => console.error(e),
-     complete: () => console.info('complete')
-   });
+    if(localStorage.getItem('usr')){
+      this.backendService.getOneById(
+        PSYCHOTHERAPY.PATIENTS_TASKS_ASSIGNED_BY_PATIENT, 
+        JSON.parse(localStorage.getItem('patient')+'').id
+        ).subscribe({
+        next: (v) => { this.dataSource.data = v; console.log(v);
+         },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
+    }
   }
 
   deleteHobbies_Interest(){
@@ -68,8 +73,8 @@ export class TaskAssignedListViewComponent implements OnInit {
     });
   }
 
-  show(hobbies_interest_data:any){
-    this.router.navigate(['main','catalogs','hobbies-interest','form',hobbies_interest_data.id]);
+  show(patient_task: any){
+    this.router.navigate(['main','psychotherapy','task','application','form',patient_task.id,'task_template',patient_task.task_template]);
   }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -103,5 +108,6 @@ export class TaskAssignedListViewComponent implements OnInit {
       //   error: (e) => console.error(e),
       //   complete: () => this.getAll()
       // });
+      
     }
 }

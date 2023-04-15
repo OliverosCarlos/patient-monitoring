@@ -151,8 +151,7 @@
 }
 
 .button-row{
-    display: table-cell;
-
+    
     mat-icon{
         font-size: 14;
     }
@@ -175,6 +174,5 @@
 
     .btn_filter{
         border-radius: 0px 8px 8px 0px;
-        margin-right: 5px;
     }
 }

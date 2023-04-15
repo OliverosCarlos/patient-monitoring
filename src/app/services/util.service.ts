@@ -28,23 +28,24 @@ export class UtilService {
     private  personal_characteristics_clinical_note = new Subject<any>();
     private  therapy_objectives_clinical_note = new Subject<any>();
     private  approach_clinical_note = new Subject<any>();
-
+    //TASK DASHBOARD
+    private  task_dashboard = new Subject<any>();
 
 
     constructor() { }
 
     public set(data: any) {
-        setTimeout(()=>{
-            this.platformComponent.next(
-                MODELS.filter(m=>m.name == data.name)
-                .map(x=>(
-                    { 
-                        'title':x.plural_name,
-                        'subtitle':x.components.filter(c=>c.type==data.type)[0].type
-                    }
-                ))[0]
-            )
-        },0);
+        this.platformComponent.next(
+            MODELS.filter(m=>m.name == data.name)
+            .map(x=>(
+                { 
+                    'title':x.plural_name,
+                    'subtitle':x.components.filter(c=>c.view_type==data.type)[0].view_type,
+                    'content_type':x.components.filter(c=>c.view_type==data.type)[0].content_type
+                    
+                }
+            ))[0]
+        )
     }
 
     public get(): Observable<Platform> {
@@ -139,4 +140,14 @@ export class UtilService {
     public getApproachClinicalNote(){
         return this.approach_clinical_note.asObservable();
     }
+
+    //TASK DASHBOARD
+    public setPatientTaskAssigned(task_dashboard: any){
+        this.task_dashboard.next(task_dashboard);
+    }
+
+    public getPatientTaskAssigned(){
+        return this.task_dashboard.asObservable();
+    }
+    
 }

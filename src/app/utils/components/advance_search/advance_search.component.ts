@@ -40,12 +40,8 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
     private headerService : HeaderService,  ) {
    }
 
-  ngAfterViewInit(): void {
+  ngOnInit() {
     this.$advanceSearch! = this.headerService.getSetupSearch().subscribe(data => {
-      console.log('FIELDS TO SEARCH');
-      
-      console.log(data);
-      
       this.options = MODELS.filter(x=>x.name==data.name)[0].options;
       this.data_options = [];
       this.edit_mode = false;
@@ -54,9 +50,10 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
     });
   }
 
-  ngOnInit() {
-
+  ngAfterViewInit(): void {
   }
+
+
 
   ngOnDestroy() {
     this.$advanceSearch!.unsubscribe();

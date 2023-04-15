@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialAllModule } from 'src/material.module'
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
@@ -15,6 +16,7 @@ import { MainComponent } from './main.component';
 import { SideMenuModule } from 'src/app/utils/components/side_menu/side_menu.module';
 import { HeaderModule } from 'src/app/utils/components/header/header.module';
 import { BreadcrumModule } from 'src/app/utils/components/breadcrumb/breadcrumb.module';
+import { PerfilMenuModule } from 'src/app/utils/components/perfil_menu/perfil_menu.module';
 
 const config: InputFileConfig = {
   fileAccept: '*',
@@ -31,6 +33,7 @@ const config: InputFileConfig = {
     MaterialAllModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     InputFileModule.forRoot(config),
     ColorCircleModule,
     MatNativeDateModule,
@@ -38,7 +41,8 @@ const config: InputFileConfig = {
     NgbModule,
     SideMenuModule,
     HeaderModule,
-    BreadcrumModule
+    BreadcrumModule,
+    PerfilMenuModule
   ],
   providers: []
 })

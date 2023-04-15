@@ -1,4 +1,4 @@
-import { Type } from '@angular/core';
+import { TemplateRef, Type } from '@angular/core';
 
 export interface Model{
     name:string;
@@ -16,5 +16,5 @@ export interface Cmp{
 }
 
 export class VWComponent {
-    constructor(public route: string, public type: string, public data: any) {}
+    constructor(public route: string, public view_type: string, public content_type: string, public data: any) {}
   }

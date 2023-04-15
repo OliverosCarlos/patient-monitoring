@@ -15,7 +15,8 @@ export enum PSYCHOTHERAPY {
     PATIENTS_TASKS_ASSIGNED_BY_PATIENT = '/psychotherapy/patients_tasks_assigned/by_patient/',
     TRACKING = '/psychotherapy/tracking/',
     TRACKING_BY_ID = '/psychotherapy/tracking/by_id/',
-    TRACKING_BY_PATIENT = '/psychotherapy/tracking/by_patient/'
+    TRACKING_BY_PATIENT = '/psychotherapy/tracking/by_patient/',
+    TASK_APPLICATION = '/psychotherapy/task_application/'
 }
 
 export enum ADMINISTRATION {

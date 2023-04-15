@@ -1,33 +1,21 @@
-<mat-sidenav-container class="example-container" *ngIf="shouldRun">
-
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')"
-    color="primary">
+<div class="sidenav-container">
+  <div class="sidenav" [@navAnimation]="currentState">
+    <button mat-icon-button color="accent" (click)="changeNavState()">
+      <!-- sidenav-content -->
+      <mat-icon>apps</mat-icon>
+    </button>
     <app-side_menu></app-side_menu>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-
-    <div class="row side-nave-header m-0 p-0">
-      <div class="col-1">
-        <button mat-icon-button color="accent" (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-      </div>
-      <div class="col-9">
-        <mat-icon>home</mat-icon>
-        <app-breadcrumb></app-breadcrumb>
-      </div>
-      <div class="col-1">
-        <p>{{username}}</p>
-      </div>
-      <div class="col-1">
-        <button mat-icon-button color="warn" aria-label="Cerrar sesión" (click)="logout()">
-          <mat-icon>open_in_new</mat-icon>
-        </button>
+  </div>
+  <div class="sidenav-content" [@navContentAnimation]="currentState">
+    <div class="row side-nave-header m-0 p-0 mat-elevation-z2">
+        <app-breadcrumb class="col-10"></app-breadcrumb>
+      <div class="col-2">
+        <app-perfil_menu></app-perfil_menu>
       </div>
     </div>
 
-    <!-- <app-header></app-header>
+    <app-header></app-header>
+
     <mat-card class="example-card m-2">
       <mat-card-title>{{platformTitle}}</mat-card-title>
       <mat-card-subtitle>{{platformSubtitle}}</mat-card-subtitle>
@@ -36,12 +24,6 @@
           <router-outlet></router-outlet>
         </div>
       </mat-card-content>
-    </mat-card> -->
-
-    <router-outlet></router-outlet>
-
-
-
-  </mat-sidenav-content>
-
-</mat-sidenav-container>
+    </mat-card>
+  </div>
+</div>

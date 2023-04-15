@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     private adService: AdService
     ) {}
 
-  ngAfterViewInit(): void {
+  ngOnInit() {
     this.suscribeHeaderService = this.headerService.getHeader().subscribe(data => {
       this.startSetup(MODELS.filter(x=>x.name==data.name)[0], data.type);
     });
@@ -75,10 +75,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  ngOnInit() {
-    
-  }
-  
+  ngAfterViewInit(): void {}
+
   ngOnDestroy() {
   }
 
@@ -156,7 +154,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showUpdate = false;
         this.showCancel = false;
         this.searchFlag = true;
-        this.mainRoute = model.components.filter(x=>x.type=='form')[0].route;
+        this.mainRoute = model.components.filter(x=>x.view_type=='form')[0].route;
         this.showMultipleViewOption = model.multipleView;
         this.showSingleOptions = false;
         break;

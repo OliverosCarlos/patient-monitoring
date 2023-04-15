@@ -1,5 +1,5 @@
 <div class="row advance_Search m-0 p-0">
-  <div class="col-8 m-0 p-0">
+  <div class="col-9 p-0">
       <div id="main_container" class="as_c" #searchContainer>
         <div id="advance_input" (click)="displayOptions($event)" [ngClass]="edit_mode ? 'ai_active' : 'ai_inactive'">
           <div class="i_i" *ngFor="let option of data_options">
@@ -22,19 +22,13 @@
         </div>
       </div>
   </div>
-  <div class="col-4 m-0 p-0">
-    <div class="button-row">
-      <button class="btn_search">
+  <div class="col-3">
+    <div class="button-row row">
+      <button class="btn_search col-6">
         <mat-icon>search</mat-icon>
       </button>
-      <button class="btn_filter">
+      <button class="btn_filter col-6">
         <mat-icon>filter_list</mat-icon>
-      </button>
-      <button (click)="changeToTableView()" *ngIf="showMultipleViewOption">
-        <mat-icon>view_list</mat-icon>
-      </button>
-      <button (click)="changeToCardView()" *ngIf="showMultipleViewOption">
-        <mat-icon>view_module</mat-icon>
       </button>
     </div>
   </div>

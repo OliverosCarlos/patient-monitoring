@@ -1,3 +1,8 @@
+.container-section{
+  border-radius: 8px;
+  background-color: white;
+}
+
 .header-section{
   h2{
     color: gray;
@@ -5,9 +10,8 @@
 }
 
 .assigned-c{
-  border: solid 2px gainsboro;
+  // border: solid 2px gainsboro;
   padding: 0px;
-  border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.966);
   .opt{
     text-align: center;
@@ -16,7 +20,6 @@
   .a-card-c{
     
     float: left;
-    width: 33%;
     padding: 5px;
   
     .a-card{
@@ -72,27 +75,3 @@
   display: table;
   clear: both;
 }
-
-@media only screen and (max-width: 1000px) {
-  .a-card-c{
-    
-    float: left;
-    width: 50%;
-    padding: 5px;
-  
-    .a-card{
-      border-radius: 3px;
-      border: solid 1px gainsboro;
-      padding: 5px;
-
-      .img-container {
-        img {
-          width: 50px;
-          height: 50px;
-        }
-      }
-    
-    }
-  }
-}
-

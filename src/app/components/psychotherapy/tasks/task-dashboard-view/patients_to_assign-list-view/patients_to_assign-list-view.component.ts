@@ -2,14 +2,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 
-import  { AssignTaskModalViewComponent } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/assign_task-modal-view/assign_task-modal-view.component';
+import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
+//COMPONENTS
+import  { AssignTaskModalViewComponent } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/assign_task-modal-view/assign_task-modal-view.component';
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
+
 //SERVICE
-import { HeaderService } from 'src/app/services/header.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -32,11 +35,10 @@ export class PatientsToAssignListViewComponent implements OnInit {
   $advanceSearch!: Subscription;
 
   constructor(
-    private router : Router,
-    private headerService : HeaderService,
     private backendService : BackendService,
-    private utilService: UtilService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService,
+    private utilService: UtilService
     ) {}
 
   ngAfterViewInit(): void {
@@ -48,10 +50,13 @@ export class PatientsToAssignListViewComponent implements OnInit {
   }
 
   getAll(){
-   this.backendService.getAll(PSYCHOTHERAPY.PATIENT,{}).subscribe({
-     next: (v) => { this.dataSource.data = v },
-     error: (e) => console.error(e),
-     complete: () => console.info('complete')
+    this.spinner.show('loading-patients-to-assign')
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENTS_TASKS_ASSIGNED,{}).subscribe({
+      next: (v) => { 
+        this.dataSource.data = v.filter((patient: { tasks: any[]; }) => patient.tasks.length == 0) 
+      },
+      error: (e) => console.error(e),
+      complete: () => this.spinner.hide('loading-patients-to-assign')
    });
   }
 
@@ -59,18 +64,23 @@ export class PatientsToAssignListViewComponent implements OnInit {
   //   this.router.navigate(['main','catalogs','hobbies-interest','form',hobbies_interest_data.id]);
   // }
 
-  openDialog() {
+  openDialog(patient: any) {
     const dialogRef = this.dialog.open(
-      AssignTaskModalViewComponent,
-      {
-        height: '50%',
-        width: '600px',
+      AssignTaskModalViewComponent,{
+        data: {id: patient.id},
+        width: "25%",
+        enterAnimationDuration: "300ms",
+        exitAnimationDuration: "100ms",
+        maxHeight: "100%"
       }
-      );
+    );
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.getAll();
+      this.utilService.setPatientTaskAssigned({status: 200});
     });
+
   }
 
 }

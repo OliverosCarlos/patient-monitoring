@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialAllModule } from 'src/material.module'
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
@@ -33,7 +34,8 @@ import { TaskTemplateShowViewComponent } from 'src/app/components/psychotherapy/
 // import { TaskTemplateListViewModule } from 'src/app/components/psychotherapy/tasks/task_template-list-view/task_template-list-view.module';
 import { GenericModalModule } from 'src/app/utils/components/generic-modal/generic-modal.module';
 import { TaskAssignmentFormViewComponent } from 'src/app/components/psychotherapy/tasks/task_assignment-form-view/task_assignment-form-view.component';
-import { TaskAssignedApplicationViewComponent } from 'src/app/components/psychotherapy/tasks/task_assigned-application-view/task_assigned-application-view.component';
+import { TaskAssignedApplicationFormViewComponent } from 'src/app/components/psychotherapy/tasks/task_assigned-application/task_assigned_application-form-view/task_assigned_application-form-view.component';
+import { TaskAssignedApplicationShowViewComponent } from 'src/app/components/psychotherapy/tasks/task_assigned-application/task_assigned_application-show-view/task_assigned_application-show-view.component';
 
 import { PatientFormViewModule } from 'src/app/components/clinical_note/patient-form-view/patient-form-view.module'
 import { ReasonConsultationFormViewModule } from 'src/app/components/clinical_note/reason_consultation-form-view/reason_consultation-form-view.module';
@@ -60,6 +62,8 @@ import { PatientsToAssignListViewModule } from 'src/app/components/psychotherapy
 import { TaskTemplateListViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/task_template-list-view/task_template-list-view.module';
 import { AssignTaskModalViewModule } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/assign_task-modal-view/assign_task-modal-view.module';
 
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
+
 const config: InputFileConfig = {
   fileAccept: '*',
   fileLimit: 1
@@ -84,7 +88,9 @@ const config: InputFileConfig = {
     TaskTemplateShowViewComponent,
     TaskAssignmentFormViewComponent,
     TaskAssignedListViewComponent,
-    TaskAssignedApplicationViewComponent
+    TaskAssignedApplicationFormViewComponent,
+    TaskAssignedApplicationShowViewComponent,
+    GenericSnackbarComponent
   ],
   imports: [
     CommonModule,
@@ -92,6 +98,7 @@ const config: InputFileConfig = {
     MaterialAllModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     InputFileModule.forRoot(config),
     NgSelectModule,
     NgbModule,

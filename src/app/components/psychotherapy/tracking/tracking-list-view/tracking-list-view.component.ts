@@ -15,17 +15,26 @@ import { Hobbies_Interest } from 'src/app/models/hobbies_interest.model';
 
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-tracking-list-view',
   templateUrl: './tracking-list-view.component.html',
-  styleUrls: ['./tracking-list-view.component.scss']
+  styleUrls: ['./tracking-list-view.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class TrackingListViewComponent implements OnInit {
 
-  displayedColumns = ['select' , 'session_objective' , 'name'  ];
-  dataSource = new MatTableDataSource<Hobbies_Interest>([]);
-  selection = new SelectionModel<Hobbies_Interest>(true, []);
+  generalColumns = ['patient_name'];
+  secundaryColumns = ['session_objective', 'session_approach', 'created_at'];
+  expandedElement: any | null;
+  dataSource = new MatTableDataSource<any>([]);
 
   $headerAction!: Subscription;
 
@@ -63,7 +72,8 @@ export class TrackingListViewComponent implements OnInit {
 
   getAll(){
     this.backendService.getAll(PSYCHOTHERAPY.TRACKING,{}).subscribe({
-     next: (v) => { this.dataSource.data = v; console.log(v);
+     next: (v) => { this.dataSource.data = v;
+      this.group_by(['patient']);
       },
      error: (e) => console.error(e),
      complete: () => console.info('complete')
@@ -72,57 +82,52 @@ export class TrackingListViewComponent implements OnInit {
 
   getByPatient(patient_id:any){
     this.backendService.getOneById(PSYCHOTHERAPY.TRACKING_BY_PATIENT, patient_id).subscribe({
-      next: (v) => { this.dataSource.data = v; console.log(v);
+      next: (v) => { this.dataSource.data = v;
        },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
     });
   }
 
-  deleteHobbies_Interest(){
-    // this.hobbiesInterestService.deleteHobbiesInterests(this.selection.selected.map(function(hobbies_interest_data){return hobbies_interest_data.id})).subscribe({
-    //  next: (v) => { console.log(v) },
-    //  error: (e) => console.error(e),
-    //  complete: () => this.getAll()
-    // });
-  }
-
   show(track:any){
     this.router.navigate(['main','psychotherapy','tracking','form',track.id]);
   }
 
-    /** Whether the number of selected elements matches the total number of rows. */
-    isAllSelected() {
-      const numSelected = this.selection.selected.length;
-      const numRows = this.dataSource.data.length;
-      return numSelected === numRows;
-    }
-  
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
-    masterToggle() {
-      if (this.isAllSelected()) {
-        this.selection.clear();
-        return;
-      }
-  
-      this.selection.select(...this.dataSource.data);
-    }
-  
-    /** The label for the checkbox on the passed row */
-    checkboxLabel(row?: Hobbies_Interest): string {
-      if (!row) {
-        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-      }
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id}`;
-    }
+  delete(){
+    // this.hobbiesInterestService.deleteHobbiesInterests(this.selection.selected.map(function(hobbies_interest){return hobbies_interest.id})).subscribe({
+    //   next: (v) => { console.log(v) },
+    //   error: (e) => console.error(e),
+    //   complete: () => this.getAll()
+    // });
+  }
 
-    delete(){
-      // this.hobbiesInterestService.deleteHobbiesInterests(this.selection.selected.map(function(hobbies_interest){return hobbies_interest.id})).subscribe({
-      //   next: (v) => { console.log(v) },
-      //   error: (e) => console.error(e),
-      //   complete: () => this.getAll()
-      // });
-    }
+  group_by(options:any[]){
+
+    let grouped_list: any[] = []
+
+    this.dataSource.data.forEach(opt => {
+      if ( grouped_list.find( (item) => {return item.patient_name == opt.patient_name}) == undefined) {
+        grouped_list.push({
+          'patient_name': opt.patient_name,
+          'children': [opt]
+        });
+      }else{
+        grouped_list.map(item => 
+          {
+            if(item.patient_name == opt.patient_name){
+              item.children.push(opt);
+              return item;
+            }else{
+              return item;
+            }
+          }  
+        )
+      }
+    });
+
+    this.dataSource.data = grouped_list;
+
+  }
 
 }
     

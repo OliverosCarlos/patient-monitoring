@@ -3,13 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+import { TemplateConfigurationFormViewComponent } from '../../template_configuration-form-view/template_configuration-form-view.component'; 
 
 //SERVICE
 import { TaskService } from 'src/app/services/psychotherapy/task.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
-
 //MODELS
 import { Patient } from 'src/app/models/patient.model';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -30,6 +33,8 @@ export class TaskTemplateListViewComponent implements OnInit {
 
   constructor(
     private router : Router,
+    public dialog: MatDialog,
+    private spinner: NgxSpinnerService,
     private headerService : HeaderService,
     private backendService : BackendService,
     private utilService: UtilService,
@@ -45,11 +50,12 @@ export class TaskTemplateListViewComponent implements OnInit {
   }
 
   getAll(){
-   this.backendService.getAll(PSYCHOTHERAPY.PATIENT,{}).subscribe({
-     next: (v) => { this.dataSource.data = v },
-     error: (e) => console.error(e),
-     complete: () => console.info('complete')
-   });
+    this.spinner.show('loading-tasks')
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENT,{}).subscribe({
+      next: (v) => { this.dataSource.data = v },
+      error: (e) => console.error(e),
+      complete: () => this.spinner.hide('loading-tasks')
+    });
   }
 
   getAllTaskTemplates(){
@@ -57,6 +63,22 @@ export class TaskTemplateListViewComponent implements OnInit {
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(
+      TemplateConfigurationFormViewComponent,{
+        width: "50%",
+        enterAnimationDuration: "300ms",
+        exitAnimationDuration: "100ms",
+        maxHeight: "100%"
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.getAllTaskTemplates();
     });
   }
 

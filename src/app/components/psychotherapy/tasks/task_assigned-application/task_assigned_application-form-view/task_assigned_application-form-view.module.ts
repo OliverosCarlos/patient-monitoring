@@ -5,12 +5,12 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSliderModule } from '@angular/material/slider'
 
-import { TaskAssignedApplicationViewComponent } from './task_assigned-application-view.component';
+import { TaskAssignedApplicationFormViewComponent } from './task_assigned_application-form-view.component';
 
 @NgModule({
 
   declarations: [
-    TaskAssignedApplicationViewComponent,
+    TaskAssignedApplicationFormViewComponent,
   ],
 
   entryComponents: [
@@ -29,7 +29,7 @@ import { TaskAssignedApplicationViewComponent } from './task_assigned-applicatio
   ],
 
   exports: [
-    TaskAssignedApplicationViewComponent
+    TaskAssignedApplicationFormViewComponent
   ]
 })
 

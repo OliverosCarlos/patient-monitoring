@@ -21,23 +21,30 @@ import { Hobbies_InterestUpdateFormViewComponent } from 'src/app/components/cata
 import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
 
 const routes: Routes = [
-  { path: '', component: CatalogsComponent, data: { breadcrumb: 'Catálogos' },
+  { path: 'emotions', data: { breadcrumb: 'Emociones' },
     children:[
-      { path: 'emotions/table', component: EmotionListViewComponent, data: { breadcrumb: 'Emociones' }, canActivate: [CanActivateLogged] },
-      { path: 'emotions/form', component: EmotionFormViewComponent, data: { breadcrumb: 'Nuevo' }  },
-      { path: 'emotions/form/:emotion_id', component: EmotionShowViewComponent, data: { breadcrumb: 'View' }  },
-      { path: 'emotions/update/:emotion_id', component: EmotionUpdateViewComponent, data: { breadcrumb: 'Actualizar' }  },
-      { path: 'symptom/table', component: SymptomListViewComponent, data: { breadcrumb: 'Síntomas' }  },
-      { path: 'symptom/form', component: SymptomFormViewComponent, data: { breadcrumb: 'Nuevo' }  },
-      { path: 'symptom/form/:symptom_id', component: SymptomShowViewComponent, data: { breadcrumb: 'View' }  },
-      { path: 'symptom/update/:symptom_id', component: SymptomUpdateViewComponent, data: { breadcrumb: 'Actualizar' }  },
-      { path: 'hobbies-interest/table', component: Hobbies_InterestListViewComponent, data: { breadcrumb: 'Hobbies e intereses' }  },
-      { path: 'hobbies-interest/form', component: Hobbies_InterestFormViewComponent, data: { breadcrumb: 'Nuevo' }  },
-      { path: 'hobbies-interest/form/:hobbies-interest_id', component: Hobbies_InterestShowFormViewComponent, data: { breadcrumb: 'View' }  },
-      { path: 'hobbies-interest/update/:hobbies-interest_id', component: Hobbies_InterestUpdateFormViewComponent, data: { breadcrumb: 'Actualizar' }  },
+      { path: '', component: EmotionListViewComponent, data: { breadcrumb: 'Lista' }, canActivate: [CanActivateLogged] },
+      { path: 'form', component: EmotionFormViewComponent, data: { breadcrumb: 'Creación' }, canActivate: [CanActivateLogged]},
+      { path: 'form/:emotion_id', component: EmotionShowViewComponent, data: { breadcrumb: "Visualizar" } },
+      { path: 'update/:emotion_id', component: EmotionUpdateViewComponent, data: { breadcrumb: 'Actualizar' }  }
+    ],
+  },
+  { path: 'symptom', data: { breadcrumb: 'Síntomas' },
+    children: [
+      { path: '', component: SymptomListViewComponent, data: { breadcrumb: 'Lista' }  },
+      { path: 'form', component: SymptomFormViewComponent, data: { breadcrumb: 'Creación' }  },
+      { path: 'form/:symptom_id', component: SymptomShowViewComponent, data: { breadcrumb: 'Visualizar' }  },
+      { path: 'update/:symptom_id', component: SymptomUpdateViewComponent, data: { breadcrumb: 'Actualizar' }  }
     ]
   },
-
+  { path: 'hobbies-interest', data: { breadcrumb: 'Hobbies e Intereses' },
+    children: [
+      { path: '', component: Hobbies_InterestListViewComponent, data: { breadcrumb: 'Lista' }  },
+      { path: 'form', component: Hobbies_InterestFormViewComponent, data: { breadcrumb: 'Creación' }  },
+      { path: 'form/:hobbies-interest_id', component: Hobbies_InterestShowFormViewComponent, data: { breadcrumb: 'Visualizar' }  },
+      { path: 'update/:hobbies-interest_id', component: Hobbies_InterestUpdateFormViewComponent, data: { breadcrumb: 'Actualizar' }  },
+    ]
+  }
 ];
 
 @NgModule({

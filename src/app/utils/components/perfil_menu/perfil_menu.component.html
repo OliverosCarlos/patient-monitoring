@@ -1,0 +1,49 @@
+<div class="perfil_menu">
+  <div class="perfil-container">
+    <div class="perfil-option my-auto">
+      <div class="row" (click)="display()">
+        <div class="col-2">
+          <div class="img-s">
+            <img src="./assets/media/4.jpg" alt="">
+          </div>
+        </div>
+        <div class="col-10 my-auto">
+          <span>Carlos Moisés</span>
+        </div>
+      </div>
+    </div>
+    <div class="perfil-menu mat-elevation-z5 p-0" [@perfilMenu]="currentState" *ngIf="showPerfilMenu">
+      <div class="perfil-image col-12 p-2">
+        <div class="img-m mx-auto">
+          <img src="./assets/media/4.jpg" alt="" class="mat-elevation-z3">
+        </div>
+      </div>
+      <div class="perfil-content p-2">
+        <p>Carlos Moisés Ruvalcaba Oliveros</p>
+        <p>carlosoliveros@gmail.com</p>
+      </div>
+      <div class="perfil-options col-12">
+        <div class="perfil-item row m-0">
+          <div class="col-3">
+            <mat-icon>group</mat-icon>
+          </div>
+          <div class="col-9">
+            <span>Pacientes</span>
+          </div>
+        </div>
+        <div class="perfil-item row m-0">
+          <div class="col-3">
+            <mat-icon>settings</mat-icon>
+          </div>
+          <div class="col-9">
+            <span>Configuracion</span>
+          </div>          
+        </div>
+      </div>
+      <!-- (click)="logout()" -->
+      <button mat-icon-button color="warn" aria-label="Cerrar sesión" >
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,7 @@ border: 1px solid #555;
 }
 
 .example-action-buttons {
+  
   padding-bottom: 20px;
 }
 
@@ -41,6 +42,26 @@ display: inline-block;
 
 
 .side-nave-header{
-  padding: 5px;
-  background-color: #B799BF;
+  // padding: 5px;
+  background-color: white;
+}
+
+.sidenav-container{
+  width: 100%;
+  height: 100%;
+  
+  .sidenav{
+    float: left;
+    width: 4%;
+    height: 100%;
+    background-color: #B799BF;
+  }
+
+  .sidenav-content{
+    background-color: rgba(240, 238, 238, 0.938);
+    float: left;
+    width: 96%;
+    height: 100%;
+  }
+
 }

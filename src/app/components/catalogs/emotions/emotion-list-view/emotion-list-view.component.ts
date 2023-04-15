@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { CATALOGS} from 'src/app/utils/setup/routes.enum';
 
@@ -31,6 +32,7 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   constructor(
     private backendService : BackendService,
     private router : Router,
+    private spinner: NgxSpinnerService,
     private headerService : HeaderService,
     private utilService: UtilService
     ) { }
@@ -64,10 +66,11 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   getAllEmotions(data_search:any){
+    this.spinner.show('loading')
     this.backendService.getAll(CATALOGS.EMOTIONS, data_search).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
-      complete: () => console.info('complete')
+      complete: () => this.spinner.hide('loading')
     });
   }
 

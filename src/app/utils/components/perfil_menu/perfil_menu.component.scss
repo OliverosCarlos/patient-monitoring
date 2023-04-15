@@ -1,0 +1,76 @@
+.perfil_menu{
+    float: right;
+    width: 100%;
+}
+
+.perfil-container{
+    width: 100%;
+    position: relative;
+  
+    .perfil-option{
+      width: 100%;
+      padding: 3px;
+      padding-left: 10px;   
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 5px;
+    }
+
+    .perfil-option:hover{
+        background-color: #eecbf83b;
+        cursor: pointer;
+    }
+    .perfil-option:active{
+      background-color: #eecbf863;
+    }
+
+    .perfil-menu{
+      width: 100%;           
+      position: absolute;
+      padding: 0px;
+      top: 0;
+      left: 0;
+      background: white;
+      padding: 8px;
+      border-radius: 5px;
+      z-index: 9;
+      margin-top: 45px;
+      .perfil-content{
+        width: 100%;
+        border-bottom: solid 1px gainsboro;
+      }
+      .perfil-options{
+        border-bottom: solid 1px gainsboro;
+        .perfil-item{
+          align-content: center;
+          padding: 8px 5px;
+        }
+        .perfil-item:hover{
+          background-color: #eecbf83b;
+          cursor: pointer;
+        }
+        .perfil-item:active{
+          background-color: #eecbf863;
+        }
+      }
+      button{
+        float: right;
+      }
+    }
+
+    .img-s {
+        width: 30px;
+        img {
+          width: 100%;
+          border-radius: 100px;
+        }
+    }
+    .img-m {
+      width: 100px;
+      img {
+        width: 100%;
+        border-radius: 100px;
+      }
+  }
+}

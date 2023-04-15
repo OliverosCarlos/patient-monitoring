@@ -1,22 +1,20 @@
-<h1>Asignar Tarea</h1>
-<app-advance-search></app-advance-search>
-<div>
+<h2 mat-dialog-title>Asignar Tarea</h2>
+<mat-dialog-content>
   <form [formGroup]="formGroup">
     <div class="row">
       <div class="col-12">
         <div class="form-group">
-          <label for="activity_type_id" class="control-label">Plantillas <span class="text-danger">*</span>
-          </label>
+          <label for="activity_type_id" class="control-label">Tareas</label>
           <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="task_template_list"
             placeholder="SELECCIONE UNA OPCIÓN" bindLabel="name" bindValue="id" [clearable]="false"
-            formControlName="task_template" >
+            formControlName="task_template">
           </ng-select>
         </div>
       </div>
     </div>
   </form>
-</div>
-<div class="modal-footer">
-  <button>Cancel</button>
-  <button>Install</button>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="assignTask()" [disabled]="!formGroup.valid">Asignar</button>
+  <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
 </div>

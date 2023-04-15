@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Subscription } from 'rxjs';
 import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 //SERVICES
 import { HeaderService } from 'src/app/services/header.service';
@@ -20,45 +21,44 @@ import { Patient } from 'src/app/models/patient.model';
 })
 export class PatientAssignedListViewComponent implements OnInit {
 
-  $headerAction!: Subscription;
+  $utilService!: Subscription;
 
-  patients_assigned : Patient[] = [];
+  patients_assigned : any[] = [];
 
   constructor(
     private router : Router,
+    private spinner: NgxSpinnerService,
     private headerService : HeaderService,
     private backendService : BackendService,
     private utilService: UtilService
     ) {}
 
   ngAfterViewInit(): void {
-    // this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
-    //   switch (data.action) {
-    //     case 'delete':
-    //       this.delete();
-    //       break;
-      
-    //     default:
-    //       break;
-    //   }
-    // });
+    this.$utilService! = this.utilService.getPatientTaskAssigned().subscribe(data => {
+      if(data.status == 200){
+        this.getAll();
+      }
+    });
     this.headerService.setSetupSearch({name:'patient'});
   }
 
   ngOnInit(): void {
     this.getAll();
-    // this.headerService.setHeader({name:'hobbies_interest',type:'list'});
-    // this.utilService.set({name:'hobbies_interest', type:'list'});
-    this.headerService.setSetupSearch({name:'patient'});
   }
 
   getAll(){
-   this.backendService.getAll(PSYCHOTHERAPY.PATIENT, {}).subscribe({
-     next: (v) => { this.patients_assigned = v; console.log(this.patients_assigned);
+    this.spinner.show('loading-patients-assigned')
+    this.backendService.getAll(PSYCHOTHERAPY.PATIENTS_TASKS_ASSIGNED, {}).subscribe({
+      next: (v) => {
+        this.patients_assigned = v.filter((patient: { tasks: any[]; }) => patient.tasks.length > 0);
       },
-     error: (e) => console.error(e),
-     complete: () => console.info('complete')
-   });
+      error: (e) => console.error(e),
+      complete: () => this.spinner.hide('loading-patients-assigned')
+    });
+  }
+
+  reviewTask(patient: any){
+    this.router.navigate(['main','psychotherapy','task','application','show',patient.tasks[0].id]);
   }
 
 }

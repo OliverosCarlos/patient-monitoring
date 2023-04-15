@@ -33,7 +33,7 @@ const routes: Routes = [
       { 
         path: 'catalogs',
         loadChildren: () => import('./catalogs/catalogs.module').then(m => m.CatalogsModule),
-        data: { breadcrumb: 'catálogos' }  
+        data: { breadcrumb: 'Catálogos' }  
       }
     ]
   }

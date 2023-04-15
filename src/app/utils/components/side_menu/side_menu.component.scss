@@ -1,42 +1,10 @@
-.example-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-  
-.example-events {
-  width: 300px;
-  height: 200px;
-  overflow: auto;
-  border: 1px solid #555;
+.mat-expansion-panel-header{
+  padding-left: 10px;
+  padding-right: 0px;
 }
 
-.example-action-buttons {
-    padding-bottom: 20px;
-}
-
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
-
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
-}
-
-.mat-form-field + .mat-form-field {
-    margin-left: 8px;
-}
-
-app-breadcrumb {
-  display: inline-block;
+.mat-expansion-panel{
+  background-color: #B799BF;
 }
 
 .mat-expansion-panel-header-title{
@@ -44,9 +12,30 @@ app-breadcrumb {
 }
 
 .mat-expansion-panel-header-description{
-  color: #f1a6df29;
+  color: white;
+  
 }
 
 .mat-icon{
   color: white;
+}
+
+.mat-list{
+  padding: 0px;
+}
+
+.mat-list-item{
+  border: solid 1px black;
+  span{
+    padding: 0px;
+  }
+}
+
+.mat-list-item-content{
+  padding: 0px;
+  
+}
+
+.mat-expansion-panel-body{
+  border: solid 1px black !important;
 }

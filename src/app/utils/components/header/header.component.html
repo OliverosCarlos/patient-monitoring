@@ -1,6 +1,6 @@
-<div class="header-options mat-elevation-z3">
-  <div class="row">
-    <div class="col-3 my-auto">
+<div class="header-options mat-elevation-z2 mt-2">
+  <div class="row m-0">
+    <div class="col-2 my-auto">
       <button mat-raised-button color="accent" [routerLink]="[mainRoute]" *ngIf="showCreate" [disabled]="disabledCreate">Crear</button>
       <button mat-raised-button color="primary" (click)="save()" *ngIf="showSave" [disabled]="disabledSave">Guardar</button>
       <button mat-raised-button color="primary" (click)="update()" *ngIf="showUpdate" [disabled]="disabledUpdate">Actualizar</button>
@@ -20,7 +20,7 @@
         <button mat-menu-item>Item 2</button>
       </mat-menu>
     </div>
-    <div class="col-6" *ngIf="searchFlag">
+    <div class="col-7" *ngIf="searchFlag">
       <div class="row">
         <div class="col-8 m-0 p-0">
           <div class="advance_Search">
@@ -29,12 +29,6 @@
         </div>
         <div class="col-4 m-0 p-0">
           <div class="button-row">
-            <button class="btn_search">
-              <mat-icon>search</mat-icon>
-            </button>
-            <button class="btn_filter">
-              <mat-icon>filter_list</mat-icon>
-            </button>
             <button (click)="changeToTableView()" *ngIf="showMultipleViewOption">
               <mat-icon>view_list</mat-icon>
             </button>
@@ -44,13 +38,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-4" *ngIf="showSingleOptions">
-      <mat-button-toggle-group #group="matButtonToggleGroup" *ngFor="let option of optionFunctions">
-        <mat-button-toggle (click)="option.fun(option.data)">
-          <mat-icon>{{option.icon}}</mat-icon>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
     </div>
   </div>
 </div>

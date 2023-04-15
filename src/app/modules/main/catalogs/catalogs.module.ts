@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialAllModule } from 'src/material.module'
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
@@ -53,6 +54,7 @@ const config: InputFileConfig = {
     MaterialAllModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     InputFileModule.forRoot(config),
     ColorCircleModule,
   ],

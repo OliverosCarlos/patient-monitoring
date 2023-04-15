@@ -1,8 +1,9 @@
-import { ViewChild, OnInit } from '@angular/core';
+import { ViewChild, OnInit, TemplateRef, AfterViewInit, Input} from '@angular/core';
 import { Component } from '@angular/core';
 import {MatAccordion} from '@angular/material/expansion';
 import { Subscription } from 'rxjs';
 import { ChildrenOutletContexts, Router } from '@angular/router';
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 import { UtilService } from 'src/app/services/util.service';
 import { SecurityService } from 'src/app/services/security.service';
@@ -13,13 +14,25 @@ import { slideInAnimation } from 'src/app/utils/animations/routeAnimation';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   animations: [
-    slideInAnimation
+    trigger('navAnimation', [
+      state('expand', style({width:"20%"})),
+      state('contract', style({width:"4%"})),
+      transition('expand=>contract', [animate('0.3s ease-in')]),
+      transition('contract=>expand', [animate('0.3s ease-in')])
+    ]),
+    trigger('navContentAnimation', [
+      state('expand', style({width:"80%"})),
+      state('contract', style({width:"96%"})),
+      transition('expand=>contract', [animate('0.3s ease-in')]),
+      transition('contract=>expand', [animate('0.3s ease-in')])
+    ])
   ]
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, AfterViewInit {
   title = 'patient-monitoring';
   events: string[] = [];
   opened: boolean = false;
+  auxCurrentState : boolean = false;
 
   $platformService!: Subscription;
   $perfilService!: Subscription;
@@ -27,6 +40,12 @@ export class MainComponent implements OnInit {
   username = '';
   platformTitle = '';
   platformSubtitle = '';
+
+  @ViewChild('dashboard_content') dashboard_content!: TemplateRef<any>;
+  @ViewChild('card_content') card_content!: TemplateRef<any>;
+  @Input() currentState: String = "";
+
+  content_type : TemplateRef<any> | undefined;
 
   constructor(
     private utilService : UtilService,
@@ -37,14 +56,27 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.$platformService = this.utilService.get().subscribe(data => {
+      switch (data.content_type) {
+        case 'dashboard_content':
+          this.content_type = this.dashboard_content;
+          break;
+        case 'card_content':
+          this.content_type = this.card_content;
+          break;
+        default:
+          this.content_type = this.dashboard_content;
+          break;
+      }
+      
       this.platformTitle = data.title;
       this.platformSubtitle = data.subtitle;
     });
-
     this.$perfilService = this.utilService.getPerfil().subscribe(username => {
       this.username = username;
     });
   }
+
+  ngAfterViewInit(): void {}
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
@@ -62,4 +94,13 @@ export class MainComponent implements OnInit {
   shouldRun = true;
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
+
+  changeNavState(){
+    this.auxCurrentState = !this.auxCurrentState;
+    if(this.auxCurrentState){
+      this.currentState = "expand";
+    }else{
+      this.currentState = "contract";
+    }
+  }
 }

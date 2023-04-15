@@ -1,18 +1,17 @@
 <mat-accordion class="example-headers-align" multi>
 
-  <mat-expansion-panel *ngFor="let menu of menu_list">
+  <mat-expansion-panel *ngFor="let menu of menu_list" hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{menu.name}}
+        <mat-icon>{{menu.icon}}</mat-icon>
       </mat-panel-title>
       <mat-panel-description>
-        <mat-icon>{{menu.icon}}</mat-icon>
+        {{menu.name}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-list *ngFor="let section of menu.sections">
-      <div mat-subheader>{{section.name}}</div>
-      <mat-list-item *ngFor="let submenu of section.submenus" 
-        [routerLink]="[submenu.route]" (click)="changeComponent(submenu.model,'list')">
+      <mat-list-item *ngFor="let submenu of section.submenus" [routerLink]="[submenu.route]"
+        (click)="changeComponent(submenu.model,'list')">
         <mat-icon mat-list-icon>{{submenu.icon}}</mat-icon>
         <div mat-line>{{submenu.name}}</div>
         <div mat-line>{{submenu.description}}</div>

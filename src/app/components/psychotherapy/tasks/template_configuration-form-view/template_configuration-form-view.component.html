@@ -1,54 +1,60 @@
-<form [formGroup]="formGroup">
-  <div class="row">
-
+<h2 mat-dialog-title>Crear Tarea</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
     <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label [attr.for]="nameForm+'name'" class="control-label">Nombre<span
-              class="text-danger">*</span> </label>
-          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'name'"
-            formControlName="name" style="text-transform: uppercase;"
-            (keyup)="changeToUppercase('name')">
+  
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'name'" class="control-label">Nombre<span
+                class="text-danger">*</span> </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'name'"
+              formControlName="name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'code'" class="control-label">Código<span
+                class="text-danger">*</span> </label>
+            <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'code'"
+              formControlName="code">
+          </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label [attr.for]="nameForm+'code'" class="control-label">Código<span
-              class="text-danger">*</span> </label>
-          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'code'"
-            formControlName="code" style="text-transform: uppercase;"
-            (keyup)="changeToUppercase('code')">
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label [attr.for]="nameForm+'description'" class="control-label">Descripción <span class="text-danger">*</span> </label>
+            <angular-editor [placeholder]="'Enter text here...'" formControlName="description"></angular-editor>
+          </div>
         </div>
       </div>
-    </div>
-    <br>
-    <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <label [attr.for]="nameForm+'description'" class="control-label">Descripción <span class="text-danger">*</span> </label>
-          <angular-editor [placeholder]="'Enter text here...'" formControlName="description"></angular-editor>
+          <label [attr.for]="nameForm+'emotions'" class="control-label">Emociones<span class="text-danger">*</span> </label>
+          <ng-select
+          [items]="emotion_list"
+          [multiple]="true"
+          bindLabel="name"
+          [selectableGroup]="true"
+          [selectableGroupAsModel]="false"
+          [closeOnSelect]="false"
+          bindValue="id"
+          formControlName="emotions">
+          </ng-select>
         </div>
       </div>
-    </div>
-    <div class="col-md-12">
-      <div class="form-group">
-        <label [attr.for]="nameForm+'emotions'" class="control-label">Emociones<span class="text-danger">*</span> </label>
-        <ng-select
-        [items]="emotion_list"
-        [multiple]="true"
-        bindLabel="name"
-        [selectableGroup]="true"
-        [selectableGroupAsModel]="false"
-        [closeOnSelect]="false"
-        bindValue="id"
-        formControlName="emotions">
-        </ng-select>
+  
+      <div class="col-md-12">
+        <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
       </div>
+  
     </div>
+  </form>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="!formGroup.valid">Asignar</button>
+  <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+</div>
 
-    <div class="col-md-12">
-      <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
-    </div>
-
-  </div>
-</form>

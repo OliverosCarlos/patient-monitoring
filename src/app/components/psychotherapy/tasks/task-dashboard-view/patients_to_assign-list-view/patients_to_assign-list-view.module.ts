@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialAllModule } from 'src/material.module' //we need more accurate imports from this library
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
@@ -24,6 +25,7 @@ const config: InputFileConfig = {
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
+        NgxSpinnerModule,
         InputFileModule.forRoot(config),
         MaterialAllModule,
         AdvanceSearchModule

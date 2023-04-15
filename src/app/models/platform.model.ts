@@ -2,5 +2,6 @@
 export interface Platform {
  title: string;
  subtitle: string;
+ content_type: any;
   }
         

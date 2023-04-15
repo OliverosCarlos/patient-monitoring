@@ -115,29 +115,4 @@ export class SideMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   //   }
   // }
 
-  // setCreating(cmp:Cmp){
-  //   this.labelMainButton = 'Guardar';
-  // }
-
-  // setUpdating(cmp:Cmp){
-  //   this.labelMainButton = 'Cancelar';
-  // }
-
-  // setListing(cmp:Cmp){
-  //   this.labelMainButton = 'Crear';
-  //   this.searchFlag = true;
-  //   this.mainRoute = '/catalogs/emotions/form';
-  // }
-
-  // setShowing(cmp:Cmp){
-  //   this.labelMainButton = 'Editar';
-  //   this.searchFlag = false;
-  // }
-
-  // transition(){
-
-  // }
-
-  // [routerLink]="[mainRoute]"
-
 }

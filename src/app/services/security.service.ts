@@ -64,8 +64,11 @@ export class SecurityService {
                     return this.backendService.getOneById(SEC.USER_BY_USERNAME, val.username)
                     .pipe(
                         mergeMap(
-                         (user: any) => {
-                             localStorage.setItem('usr',JSON.stringify(user));
+                         (info: any) => {
+                            console.log(info);
+                            
+                            localStorage.setItem('usr',JSON.stringify(info.user));
+                            localStorage.setItem('patient',JSON.stringify(info.patient));
                              return of({status:200, data:{}})
                          }
                         )

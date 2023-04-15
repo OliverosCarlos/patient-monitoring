@@ -1,5 +1,15 @@
-<ul>
-  <li *ngFor="let breadcrumb of (breadcrumbs$ | async)">
-    <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
-  </li>
-</ul>
+<div class="row p-0 m-0">
+  <div class="col-1 my-auto">
+    <button mat-icon-button color="accent">
+      <mat-icon>home</mat-icon>
+    </button>
+  </div>
+  <div class="col-10 my-auto">
+    <ul>
+      <li *ngFor="let breadcrumb of (breadcrumbs$ | async)">
+        <a [routerLink]="breadcrumb.url" *ngIf="breadcrumb.isLink">{{ breadcrumb.label }}</a>
+        <span *ngIf="!breadcrumb.isLink">{{ breadcrumb.label }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

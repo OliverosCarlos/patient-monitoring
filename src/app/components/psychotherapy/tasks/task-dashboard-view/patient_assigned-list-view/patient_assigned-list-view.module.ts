@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule} from '@angular/router';
 import { MaterialAllModule } from 'src/material.module' //we need more accurate imports from this library
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -20,6 +21,7 @@ import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/adv
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
+        NgxSpinnerModule,
         NgSelectModule,
         RouterModule,
         MatSliderModule,
