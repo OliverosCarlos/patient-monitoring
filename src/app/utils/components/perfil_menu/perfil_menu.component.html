@@ -4,7 +4,7 @@
       <div class="row" (click)="display()">
         <div class="col-2">
           <div class="img-s">
-            <img src="./assets/media/4.jpg" alt="">
+            <img src="./assets/media/1648319362250.jpeg" alt="">
           </div>
         </div>
         <div class="col-10 my-auto">
@@ -15,7 +15,7 @@
     <div class="perfil-menu mat-elevation-z5 p-0" [@perfilMenu]="currentState" *ngIf="showPerfilMenu">
       <div class="perfil-image col-12 p-2">
         <div class="img-m mx-auto">
-          <img src="./assets/media/4.jpg" alt="" class="mat-elevation-z3">
+          <img src="./assets/media/1648319362250.jpeg" alt="" class="mat-elevation-z3">
         </div>
       </div>
       <div class="perfil-content p-2">
@@ -40,8 +40,7 @@
           </div>          
         </div>
       </div>
-      <!-- (click)="logout()" -->
-      <button mat-icon-button color="warn" aria-label="Cerrar sesión" >
+      <button mat-icon-button color="warn" aria-label="Cerrar sesión" (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
       </button>
     </div>
