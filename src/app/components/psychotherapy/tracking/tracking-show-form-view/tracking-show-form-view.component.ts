@@ -19,8 +19,10 @@ import { filter } from 'rxjs/operators';
 })
 export class TrackingShowFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @Input() note: any;
+
   record = {
-    id: '',
+    id: 0,
     session_approach: '',
     clinical_progress: '',
     session_objective: '',
@@ -28,6 +30,8 @@ export class TrackingShowFormViewComponent implements OnInit, OnDestroy, AfterVi
     conducts_and_non_verbal_languages: '',
     observations: ''
   };
+
+  isModal = false
 
   $headerAction!: Subscription;
 
@@ -40,37 +44,42 @@ export class TrackingShowFormViewComponent implements OnInit, OnDestroy, AfterVi
   ) {}
 
   ngOnDestroy(): void {
-    this.$headerAction.unsubscribe();
+    if(!this.isModal){
+      this.$headerAction.unsubscribe();
+    }
   }
 
   ngAfterViewInit(): void {
-    this.$headerAction = this.headerService.getOutAction().subscribe(data => {
-      switch (data.action) {
-        case 'edit':
-          this.edit();
-          break;
-      
-        default:
-          break;
-      }
-    });
+    if(!this.isModal){
+      this.$headerAction = this.headerService.getOutAction().subscribe(data => {
+        switch (data.action) {
+          case 'edit':
+            this.edit();
+            break;
+        
+          default:
+            break;
+        }
+      });
+  
+      this.utilService.set({name:'tracking', type:'show'});
+    }
 
-    this.utilService.set({name:'tracking', type:'show'});
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'tracking',type:'show'});
-    console.log('here prron');
-    
     if(this.route.snapshot.paramMap.get('tracking_id')){
       this.trackingById(this.route.snapshot.paramMap.get('tracking_id'));
+      this.headerService.setHeader({name:'tracking',type:'show'});
+    }else{
+      this.isModal = true
     }
   }
 
   trackingById(id:any){
     if(id){
      this.backendService.getOneById(PSYCHOTHERAPY.TRACKING_BY_ID,id).subscribe({
-       next: (v) => { this.record = v},
+       next: (v) => { this.note = v},
        error: (e) => console.error(e),
        complete: () => console.info('complete')
      });

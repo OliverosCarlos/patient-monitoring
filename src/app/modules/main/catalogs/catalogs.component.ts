@@ -10,6 +10,8 @@ export class CatalogsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("LOADED HERRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEEEE");
+    
   }
 
 }

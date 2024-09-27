@@ -18,7 +18,6 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
   formGroup: UntypedFormGroup;
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
@@ -35,7 +34,6 @@ export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewIn
     private fb: UntypedFormBuilder,
     private utilService: UtilService
   ) {
-    this.setFocus();
     this.formGroup = this.fb.group({
       patient:  new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
       session_approach:  new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -65,8 +63,8 @@ export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'track',type:'form'});
-    this.utilService.set({name:'track', type:'form'});
+    // this.headerService.setHeader({name:'track',type:'form'});
+    // this.utilService.set({name:'track', type:'form'});
     this.getAllPatients();
     this.formGroup.statusChanges
       .pipe(
@@ -97,10 +95,6 @@ export class TrackingFormViewComponent implements OnInit, OnDestroy, AfterViewIn
       error: (e) => console.error(e),
       complete: () => console.info('complete')
     });
-  }
-
-  private setFocus() {
-    setTimeout(() => this.firstInput.nativeElement !== undefined ? this.firstInput.nativeElement.focus() : '');
   }
 
   changeToUppercase(formName:string) {

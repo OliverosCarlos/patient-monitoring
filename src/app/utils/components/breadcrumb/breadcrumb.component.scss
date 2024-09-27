@@ -11,6 +11,7 @@ ul {
       }
   
       &:before {
+        color: white;
         content: "/";
         margin: 0 6px;
       }
@@ -18,6 +19,11 @@ ul {
       &:first-child:before {
         content: "";
         margin: 0;
+      }
+      
+      a{
+        color: white;
+        &:hover{color: ghostwhite;}
       }
     }
   }

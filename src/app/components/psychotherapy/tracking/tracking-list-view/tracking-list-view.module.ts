@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MaterialAllModule } from 'src/material.module' //we need more accurate imports from this library
-import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+//import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 
 import { TrackingListViewComponent } from './tracking-list-view.component';
 
-const config: InputFileConfig = {
-  fileAccept: '*',
-  fileLimit: 1
-};
+//const config: InputFileConfig = {
+//  fileAccept: '*',
+//  fileLimit: 1
+//};
 
 @NgModule({
 
@@ -29,7 +29,7 @@ const config: InputFileConfig = {
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    InputFileModule.forRoot(config),
+    //InputFileModule.forRoot(config),
     MaterialAllModule
   ],
 

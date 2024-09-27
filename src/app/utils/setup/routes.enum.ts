@@ -1,3 +1,9 @@
+export enum NEUROPSYCHO {
+    MEDICAL_HISTORY = '/neuro-psycho/medical-history/',
+    MEDICAL_HISTORY_EXPORT = '/neuro-psycho/medical-history/export/',
+    MEDICAL_HISTORY_REPORT = '/neuro-psycho/medical-history-report/',
+}
+
 export enum CATALOGS {
     EMOTIONS = '/catalogs/emotions/',
     SYMPTOMS = '/catalogs/symptoms/',

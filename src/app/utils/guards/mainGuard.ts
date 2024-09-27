@@ -14,8 +14,6 @@ export class CanActivateLogged implements CanActivate {
         ) { }
 
     canActivate() {
-        console.log('CAN ACTIVATE');
-        
         // If the user is not logged in we'll send them back to the home page
         if (!this.securityService.isLogged()) {
             console.log('No estás logueado');

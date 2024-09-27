@@ -8,7 +8,7 @@ import { AdComponent } from 'src/app/utils/components/ad.component';
 import { AdService } from 'src/app/services/ad.service';
 
 //MODELS 
-import { Cmp, Model } from 'src/app/models/vw-model.model';
+import { Cmp, Model, AbstractButton } from 'src/app/models/vw-model.model';
 import { EventComponent } from 'src/app/models/event_component.model';
 
 //SETUPS
@@ -58,6 +58,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   ads: AdItem[] = [];
 
   optionFunctions: any[] = [];
+  menuOptionsList: any[] = [''];
+  activities: any[] = [];
 
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
@@ -68,7 +70,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.suscribeHeaderService = this.headerService.getHeader().subscribe(data => {
-      this.startSetup(MODELS.filter(x=>x.name==data.name)[0], data.type);
+      this.startSetup(data.model, data.type);
     });
     this.suscribeHeaderAction = this.headerService.getInAction().subscribe(data => {
       this.startAction(data);
@@ -77,8 +79,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {}
 
-  ngOnDestroy() {
-  }
+  ngOnDestroy() {}
 
   startAction(event:EventComponent){
     switch (event.action) {
@@ -115,6 +116,10 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   delete(){
     this.headerService.sendOutAction({action: 'delete', type: 'list'});
+  }
+
+  export(){
+    this.headerService.sendOutAction({action: 'exportPDF', type: 'list'});
   }
 
   updateOptionBar(){
@@ -166,8 +171,9 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showUpdate = false;
         this.showCancel = false;
         this.showMultipleViewOption = false;
-        this.showSingleOptions = model.options.length > 0? true: false;
-        this.setupOptions(model)
+        this.showSingleOptions = model.options? true: false;
+        this.setupMenuOptions(model)
+        this.setupActivities(model.activities)
         break;
       default:
         break;
@@ -178,31 +184,32 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     this.headerService.sendOutAction({action: 'config', type: 'assignment'});
   }
   
-  setupOptions(model: Model){
-    this.optionFunctions = [];
-    model.options?.forEach(option => {
-      this.optionFunctions.push(
-        {
-          fun:(obj:any)=>{
-            this.headerService.sendOutAction({action: obj.action, type: obj.type});
-          },
-          icon: option.icon,
-          data: {action:'option', type: option.name}
-        }
-      )
+  setupMenuOptions(model: Model){
+    this.menuOptionsList = [];
+    model.options?.forEach((option:string) => {
+      this.menuOptionsList.push({menuOptionName: option, action: 'handle_'+option.toLowerCase().split(' ').join('_')})
     });
   }
 
-  loadComponent(adItem: Cmp) {
-    // const viewContainerRef = this.adHost.viewContainerRef;
-    // viewContainerRef.clear();
-
-    // const componentRef = viewContainerRef.createComponent<AdComponent>(adItem.component);
-    // componentRef.instance.data = adItem.data;
+  execute(action: string){
+    this.headerService.sendOutAction({action});
   }
 
-  transition(){
-
+  setupActivities(activities: AbstractButton[] | undefined){
+    if(activities){
+      this.activities = []
+      activities.forEach((activity:AbstractButton) => {
+        this.activities.push(
+          {
+            name: activity.display_name,
+            action: 'handle_'+activity.name,
+            icon: activity.icon,
+            tooltip: activity.tooltip,
+            disabled: activity.disabled
+          }
+        )
+      })
+    }
   }
 
 }

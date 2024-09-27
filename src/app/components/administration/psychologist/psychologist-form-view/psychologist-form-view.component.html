@@ -62,10 +62,19 @@
         <div class="col-4">
           <div class="form-group" formGroupName="psychologist_files">
             <label class="control-label">Foto<span class="text-danger">*</span></label>
-            <input-file fileAccept="*" placeholder="Selecciona o arrastra un archivo" formControlName="photo" >
-            </input-file>
-            <br>
-            <!-- <validator-alert [control]="pfForm.controls.photo"></validator-alert> -->
+            <div class="uploader-wrapper">
+              <input type="file" class="file-input" fileAccept="*" (change)="onFileSelected($event)" #fileUpload
+                formControlName="photo">
+            
+              <div class="file-upload">
+            
+                {{fileName || "No file uploaded yet."}}
+            
+                <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,540 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class="section-title">PACIENTE</h2>
+  </div>
+</div>
+<div class="row m-0 pl-2">
+  <div class="col-6">
+    <div class="cntr-form">
+      <div class="form-title"><span>Nombre :</span></div>
+      <div class="form-value"><span>{{data.patient?.first_name}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Apellido Paterno :</span></div>
+      <div class="form-value"><span>{{data.patient?.last_name1}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Apellido Materno :</span></div>
+      <div class="form-value"><span>{{data.patient?.last_name2}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Edad :</span></div>
+      <div class="form-value"><span>{{data.patient?.age}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Sexo :</span></div>
+      <div class="form-value"><span>{{data.patient?.gender}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Domicilio :</span></div>
+      <div class="form-value"><span>{{data.patient?.address}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Fecha de Nacimiento :</span></div>
+      <div class="form-value"><span>{{data.patient?.date_of_birth}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Lugar de Nacimiento :</span></div>
+      <div class="form-value"><span>{{data.patient?.birthplace}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Lugar de Residencia :</span></div>
+      <div class="form-value"><span>{{data.patient?.residence_location}}</span></div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="cntr-form">
+      <div class="form-title"><span>Diagnóstico Médico :</span></div>
+      <div class="form-value"><span>{{data.medical_diagnosis}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Fuente de Información :</span></div>
+      <div class="form-value"><span>{{data.source_information}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Motivo de Consulta :</span></div>
+      <div class="form-value"><span>{{data.reason_consultation}}</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="row m-0 p-0">
+  <div class="col-12 mt-3">
+    <mat-tab-group color="primary">
+      <mat-tab label="DATOS PARENTALES">
+        <div class="row m-0 p-0">
+          
+          <div class="col-12 mt-3">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="section-title">MADRE</h2>
+              </div>
+            </div>
+            <div class="row section">
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Nombre :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.name}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Edad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.age}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Escolaridad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.education}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Ocupación :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.ocupation}}</span></div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tóxicomanias :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.parental_data?.mother?.addictions ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.parental_data?.mother?.addictions ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="cntr-form">
+                  <div class="form-title"><span>Fuma :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.parental_data?.mother?.smoke_user ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.parental_data?.mother?.smoke_user ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Cantidad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.smoke_quantity}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tiempo :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.smoke_time}}</span></div>
+                </div>
+
+                <br>
+
+                <div class="cntr-form">
+                  <div class="form-title"><span>Toma :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.parental_data?.mother?.alcohol_user ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.parental_data?.mother?.alcohol_user ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Cantidad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.alcohol_quantity}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tiempo :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.mother?.alcohol_time}}</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h2 class="section-title">PADRE</h2>
+              </div>
+            </div>
+            <div class="row section">
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Nombre :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.name}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Edad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.age}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Escolaridad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.education}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Ocupación :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.ocupation}}</span></div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tóxicomanias :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.parental_data?.father?.addictions ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.parental_data?.father?.addictions ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="cntr-form">
+                  <div class="form-title"><span>Fuma :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.parental_data?.father?.smoke_user ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.parental_data?.father?.smoke_user ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Cantidad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.smoke_quantity}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tiempo :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.smoke_time}}</span></div>
+                </div>
+
+                <br>
+
+                <div class="cntr-form">
+                  <div class="form-title"><span>Toma :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.parental_data?.father?.alcohol_user ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.parental_data?.father?.alcohol_user ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Cantidad :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.alcohol_quantity}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tiempo :</span></div>
+                  <div class="form-value"><span>{{data.parental_data?.father?.alcohol_time}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="CONCEPCIÓN, EMBARAZO Y NACIMIENTO">
+        <div class="row m-0 p-0">
+          <div class="col-12 mt-3">
+            <div class="row">
+
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Embarazo planeado :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.prenatal_history?.planned_pregnancy ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.prenatal_history?.planned_pregnancy ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Embarazo deseado :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.prenatal_history?.desired_pregnancy ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.prenatal_history?.desired_pregnancy ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Situación :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.reason_pregnancy}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tiempo de gestación :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.gestation_time}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Control Prenatal :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.prenatal_history?.prenatal_control ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.prenatal_history?.prenatal_control ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Complicaciones durante el embarazo :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.prenatal_history?.pregnancy_complications ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.prenatal_history?.pregnancy_complications ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tipo de complicacion :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.pregnancy_complications_type}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Causas :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.pregnancy_complications_cause}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Medicamentos durante el embarazo :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.medications}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tipo de parto :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.childbirth_type}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Lugar de parto :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.childbirth_location}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Atendido por :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.childbirth_support}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Forceps :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.prenatal_history?.forceps ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.prenatal_history?.forceps ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Duración durante el parto :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.childbirth_duration}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Anestesia utilizada :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.anesthesia_type}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Duración durante el parto :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.childbirth_duration}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Complicaciones durante el parto :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.childbirth_complications}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Peso del babé :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.baby_weight}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Medida del bebé :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.baby_size}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Prematuro :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.prenatal_history?.premature ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.prenatal_history?.premature ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Edad corregida :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.corrected_age}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Tiempo de encubación :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.incubation_time}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Apgar :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.apgar}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Llanto inmediato al nacer :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.prenatal_history?.cry ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.prenatal_history?.cry ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Características anormales (cianosis, ictericia, malformaciones, etc. ) :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.anomalies}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Otros datos :</span></div>
+                  <div class="form-value"><span>{{data.prenatal_history?.notes}}</span></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="ANTECEDENTES HEREDO-FAMILIARES">
+        <div class="row m-0 p-0">
+          <div class="col-12 mt-3">
+            <div class="row">
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Diabetes :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.hereditaryFamily_history?.diabetes ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.hereditaryFamily_history?.diabetes ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Quién :</span></div>
+                  <div class="form-value"><span>{{data.hereditaryFamily_history?.diabetes_who}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Hipertensión :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.hereditaryFamily_history?.hypertension ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.hereditaryFamily_history?.hypertension ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Quién :</span></div>
+                  <div class="form-value"><span>{{data.hereditaryFamily_history?.hypertension_who}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Cáncer :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.hereditaryFamily_history?.cancer ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.hereditaryFamily_history?.cancer ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Quién :</span></div>
+                  <div class="form-value"><span>{{data.hereditaryFamily_history?.cancer_who}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Alcoholismo :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.hereditaryFamily_history?.alcoholism ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.hereditaryFamily_history?.alcoholism ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Quién :</span></div>
+                  <div class="form-value"><span>{{data.hereditaryFamily_history?.alcoholism_who}}</span></div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Enfermedades mentales :</span></div>
+                  <div class="form-value">
+                    <mat-chip-list>
+                      <mat-chip [ngStyle]="{ 'background-color': data.hereditaryFamily_history?.mental_illnesses ? 'dodgerblue' : 'lightgray'}" class="mat-elevation-z3">
+                        {{ data.hereditaryFamily_history?.mental_illnesses ? "SI" : "NO" }}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Quién :</span></div>
+                  <div class="form-value"><span>{{data.hereditaryFamily_history?.mental_illnesses_who}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Otros :</span></div>
+                  <div class="form-value"><span>{{data.hereditaryFamily_history?.mental_illnesses_other}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Algún miembro de la familia que haya presentado un padecimiento similar :</span></div>
+                  <div class="form-value"><span>{{data.hereditaryFamily_history?.mental_illnesses_another_family}}</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="ANTECEDENTES PERSONALES PATOLÓGICOS">
+        <div class="row m-0 p-0">
+          <div class="col-12 mt-3">
+            <div class="row">
+
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Alergias :</span></div>
+                  <div class="form-value"><span>{{data.personal_pathologic_antecedents?.allergies}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Actualmente el niño(a) presenta algún problema físico :</span></div>
+                  <div class="form-value"><span>{{data.personal_pathologic_antecedents?.child_physical_problems}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Ha sufrido TCE :</span></div>
+                  <div class="form-value"><span>{{data.personal_pathologic_antecedents?.TCE}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Hubo PC :</span></div>
+                  <div class="form-value"><span>{{data.personal_pathologic_antecedents?.PC}}</span></div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Hospitalizaciones previas :</span></div>
+                  <div class="form-value"><span>{{data.personal_pathologic_antecedents?.hospitalizations}}</span></div>
+                </div>
+                <div class="cntr-form">
+                  <div class="form-title"><span>Medicamentos que toma actualmente :</span></div>
+                  <div class="form-value"><span>{{data.personal_pathologic_antecedents?.current_medications}}</span></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="FACTORES DE RIESGO NEUROLÓGICO">
+        <div class="row m-0 p-0">
+          <div class="col-12 mt-3">
+            <div class="row">
+              <div class="col-12">
+                <div class="cntr-form">
+                  <div class="form-title"><span>Factores :</span></div>
+                  <div class="form-value"><span>{{data.personal_pathologic_antecedents?.neurological_risk_factors}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

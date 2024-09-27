@@ -1,19 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
-//MODELS 
-import { AdvanceSearch } from 'src/app/models/advance_search.model';
-//SETUPS
-import { MODELS } from 'src/app/utils/setup/model.setup';
 //SERVICES
-import { HeaderService } from 'src/app/services/header.service';
-
-
-
+import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
   selector: 'app-perfil_menu',
@@ -39,15 +29,57 @@ export class PerfilMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   showPerfilMenu : boolean = false;
   @Input() currentState: String = "";
 
-  constructor() {}
+  profile = {
+    user: {
+      first_name : "",
+      last_name : "",
+      email : ""
+    },
+    psychologist:{
+      image : ""
+    }
+
+
+  }
+
+  constructor(
+    private securityService: SecurityService,
+    private router : Router,
+  ) {}
 
   ngOnInit() {
+    this.profile = JSON.parse(localStorage.getItem('profile')!);
   }
 
   ngAfterViewInit(): void {
   }
 
   ngOnDestroy() {
+  }
+
+  logout(){
+    this.securityService.logout().subscribe({
+      next: (v) => { 
+        
+       
+        
+        this.router.navigate(['login']);
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    }
+      // result => {
+      //   console.log("LOGOUT ===================>");
+      //   console.log(result);
+        
+      //   if(result.status == 200){
+      //     this.router.navigate(['login']);
+      //   }else{
+      //     console.log("ERROR!");
+          
+      //   }
+      // }
+    )
   }
 
   display(){

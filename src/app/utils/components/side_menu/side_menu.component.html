@@ -1,22 +1,12 @@
-<mat-accordion class="example-headers-align" multi>
-
-  <mat-expansion-panel *ngFor="let menu of menu_list" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>{{menu.icon}}</mat-icon>
-      </mat-panel-title>
-      <mat-panel-description>
-        {{menu.name}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-list *ngFor="let section of menu.sections">
-      <mat-list-item *ngFor="let submenu of section.submenus" [routerLink]="[submenu.route]"
-        (click)="changeComponent(submenu.model,'list')">
-        <mat-icon mat-list-icon>{{submenu.icon}}</mat-icon>
-        <div mat-line>{{submenu.name}}</div>
-        <div mat-line>{{submenu.description}}</div>
-      </mat-list-item>
-    </mat-list>
-  </mat-expansion-panel>
-
-</mat-accordion>
+<mat-list *ngFor="let menu of menu_list">
+  <!-- <div mat-subheader>{{menu.name}}</div> -->
+  <div *ngFor="let section of menu.sections">
+    <mat-list-item *ngFor="let submenu of section.submenus" [routerLink]="[submenu.route]"
+    (click)="changeComponent(submenu.model,'list')">
+    <mat-icon mat-list-icon>{{submenu.icon}}</mat-icon>
+    <div mat-line>{{submenu.name}}</div>
+    <div mat-line>{{submenu.description}}</div>
+  </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+</mat-list>

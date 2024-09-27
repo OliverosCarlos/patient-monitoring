@@ -15,6 +15,7 @@ import { TrackingFormViewComponent } from 'src/app/components/psychotherapy/trac
 import { TrackingListViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-list-view/tracking-list-view.component';
 import { TrackingShowFormViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-show-form-view/tracking-show-form-view.component';
 import { TrackingUpdateFormViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-update-form-view/tracking-update-form-view.component';
+import { TrackingFormDashboardViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-form-dashboard-view/tracking-form-dashboard-view.component';
 
 import { TaskDashboardViewComponent } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/task-dashboard-view.component';
 import { TemplateConfigurationFormViewComponent } from 'src/app/components/psychotherapy/tasks/template_configuration-form-view/template_configuration-form-view.component';
@@ -25,7 +26,9 @@ import { TaskAssignedApplicationShowViewComponent } from 'src/app/components/psy
 import { TaskAssignedListViewComponent } from 'src/app/components/psychotherapy/tasks/task_assigned-list-view/task_assigned-list-view.component';
 
 const routes: Routes = [
-  { path: 'patients', component: PatientListViewComponent, data: { breadcrumb: 'Dashboard' }  },
+  { path: '', component: PsychotherapyComponent, data: { breadcrumb: 'Dashboard' }  },
+
+  { path: 'patients', component: PatientListViewComponent, data: { breadcrumb: 'Pacientes' }  },
   { path: 'patients/table', component: PatientListViewComponent, data: { breadcrumb: 'Pacientes' }  },
   { path: 'patients/card', component: PatientCardViewComponent, data: { breadcrumb: 'Pacientes' }  },
   { path: 'patients/form', component: PatientFormComponent, data: { breadcrumb: 'Nuevo' }  },
@@ -40,6 +43,7 @@ const routes: Routes = [
   { path: 'tracking/form', component: TrackingFormViewComponent , data: { breadcrumb: 'Nuevo' }  },
   { path: 'tracking/form/:tracking_id', component: TrackingShowFormViewComponent, data: { breadcrumb: 'Nuevo' }  },
   { path: 'tracking/update/:tracking_id', component: TrackingUpdateFormViewComponent, data: { breadcrumb: 'Seguimiento' }  },
+  { path: 'tracking/form/dashboard/:patient_id', component: TrackingFormDashboardViewComponent, data: { breadcrumb: 'Nota Clinica' }  },
 
   { path: 'task/dashboard', component: TaskDashboardViewComponent, data: { breadcrumb: 'Tareas' }, title: 'Tareas - Dashboard' },
   { path: 'template-configuration/form', component: TemplateConfigurationFormViewComponent, data: { breadcrumb: 'Plantilla' }  },

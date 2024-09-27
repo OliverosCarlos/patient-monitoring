@@ -1,0 +1,46 @@
+.menu-box{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: dodgerblue;
+  height: 100%;
+}
+
+li {
+  float: left;
+  margin-right: 2px;
+  padding: 0px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+
+  span {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 16px;
+    text-decoration: none;
+    background-color: rgb(38, 135, 233);
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(75, 164, 254);
+      
+    }
+
+    &:active {
+      cursor: pointer;
+      background-color: rgb(30, 133, 235);
+    }
+  }
+}

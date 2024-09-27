@@ -87,7 +87,7 @@ export class SymptomFormViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
   
   cancel(){
-    this.router.navigate(['../','main','catalogs','symptom','table']);
+    this.router.navigate(['../','main','catalogs','symptom']);
   }
 
   onFormInvalid() {
@@ -111,7 +111,7 @@ export class SymptomFormViewComponent implements OnInit, OnDestroy, AfterViewIni
     this.backendService.create(CATALOGS.SYMPTOMS ,this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['../','main','catalogs','symptom','table'])
+      complete: () => this.router.navigate(['../','main','catalogs','symptom'])
     })
   }
 

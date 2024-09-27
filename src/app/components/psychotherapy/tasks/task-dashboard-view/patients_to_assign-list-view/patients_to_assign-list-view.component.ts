@@ -17,7 +17,7 @@ import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
 //MODELS
-import { Patient } from 'src/app/models/patient.model';
+import { Patient } from 'src/app/models/psychotherapy.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 

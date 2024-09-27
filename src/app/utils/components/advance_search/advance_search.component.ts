@@ -24,12 +24,12 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChild('searchContainer')
   searchContainer!: ElementRef;
 
-  options : any = []
-  aux_options = []
-  data_options: AdvanceSearch[] = [];
-  aux_data_options: AdvanceSearch[] = [];
+  searchAttributes : any = []
+  aux_searchAttributes = []
+  data_searchAttributes: AdvanceSearch[] = [];
+  aux_data_searchAttributes: AdvanceSearch[] = [];
   edit_mode = false;
-  show_options = false;
+  show_searchAttributes = false;
   dataToSearch = new Map<string, string>()
 
   showMultipleViewOption = false;
@@ -41,16 +41,24 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
    }
 
   ngOnInit() {
-    this.$advanceSearch! = this.headerService.getSetupSearch().subscribe(data => {
-      this.options = MODELS.filter(x=>x.name==data.name)[0].options;
-      this.data_options = [];
-      this.edit_mode = false;
-      this.show_options = false;
-      this.dataToSearch.clear();
-    });
+    console.log("SEARCH");
+
   }
 
   ngAfterViewInit(): void {
+    this.$advanceSearch! = this.headerService.getSetupSearch().subscribe(data => {
+      console.log("SEARCH");
+      
+      console.log(data);
+      
+      this.searchAttributes = MODELS.filter(x=>x.name==data.name)[0].searchAttributes;
+      console.log(this.searchAttributes);
+      
+      this.data_searchAttributes = [];
+      this.edit_mode = false;
+      this.show_searchAttributes = false;
+      this.dataToSearch.clear();
+    });
   }
 
 
@@ -63,9 +71,9 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
     alert('HELLO')
   }
 
-  optionActivated(e:any,id:string){
+  attributeActivated(e:any,id:string){
     e.stopPropagation();
-    this.data_options = this.data_options.map(opt => (
+    this.data_searchAttributes = this.data_searchAttributes.map(opt => (
       opt.key == id ?
       {'key':opt.key, 'value': opt.value, 'show': false} :
       {'key':opt.key, 'value': opt.value, 'show': true}
@@ -75,52 +83,52 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
   inputSetVal(event: any){
     let id = event.target.id.split('-')[1]
     if(event.target.value == ''){
-      this.data_options = this.data_options.filter( opt => opt.key != id);
+      this.data_searchAttributes = this.data_searchAttributes.filter( opt => opt.key != id);
     }else{
-      this.data_options = this.data_options.map(opt => (
+      this.data_searchAttributes = this.data_searchAttributes.map(opt => (
         opt.key == id ? 
         {'key':id, 'value': event.target.value, 'show': true} :
         {'key':opt.key, 'value': opt.value, 'show': true}
         ) );
     }
     this.edit_mode = false;
-    this.data_options.forEach(opt => {
+    this.data_searchAttributes.forEach(opt => {
       this.dataToSearch.set(opt.key+'__contains',opt.value)
     });
     this.headerService.setDataSearch(Object.fromEntries(this.dataToSearch));
   }
 
 
-  displayOptions(e:any){
+  displaySearchAttributes(e:any){
     e.stopPropagation();
     if(!this.edit_mode){
-      this.aux_data_options.push({'key':this.options[0], 'value': '', 'show': false});
-      this.data_options.push({'key':this.options[0], 'value': '', 'show': false});
-      this.show_options = !this.show_options;
+      this.aux_data_searchAttributes.push({'key':this.searchAttributes[0], 'value': '', 'show': false});
+      this.data_searchAttributes.push({'key':this.searchAttributes[0], 'value': '', 'show': false});
+      this.show_searchAttributes = !this.show_searchAttributes;
       this.edit_mode = true;
     }
   }
 
   //Change last option to current mouse position
   mouseEnter(option:string){
-    this.data_options[this.data_options.length-1].key = option;
+    this.data_searchAttributes[this.data_searchAttributes.length-1].key = option;
   }
   
   mouseLeave(){
     if(!this.edit_mode){
-      this.data_options =  JSON.parse(JSON.stringify(this.aux_data_options));
+      this.data_searchAttributes =  JSON.parse(JSON.stringify(this.aux_data_searchAttributes));
     }
   }
 
-  setOption(option: string){
-    this.data_options[this.data_options.length-1].key = option;
-    this.aux_data_options[this.data_options.length-1].key = option;
-    this.show_options = !this.show_options;
-    this.options = this.options.filter((opt: string)=>opt!=option)    
+  setAttributes(option: string){
+    this.data_searchAttributes[this.data_searchAttributes.length-1].key = option;
+    this.aux_data_searchAttributes[this.data_searchAttributes.length-1].key = option;
+    this.show_searchAttributes = !this.show_searchAttributes;
+    this.searchAttributes = this.searchAttributes.filter((opt: string)=>opt!=option)    
   }
 
   onFocus(){
-    this.show_options = false;
+    this.show_searchAttributes = false;
   }
 
   stopProp(e:any){
@@ -129,8 +137,8 @@ export class AdvanceSearchComponent implements OnInit, OnDestroy, AfterViewInit 
 
   deleteOption(e:any, key:any){
     e.stopPropagation();
-    this.data_options = this.data_options.filter(opt => opt.key != key)    
-    this.options.push(key)
+    this.data_searchAttributes = this.data_searchAttributes.filter(opt => opt.key != key)    
+    this.searchAttributes.push(key)
     this.dataToSearch.delete(key+'__contains')
     this.headerService.setDataSearch(Object.fromEntries(this.dataToSearch));
   }

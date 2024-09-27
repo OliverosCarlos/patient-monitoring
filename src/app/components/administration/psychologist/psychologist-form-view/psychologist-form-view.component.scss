@@ -1,0 +1,16 @@
+:host {
+    display: block;
+  }
+  .uploader-wrapper {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .file-input {
+    display: none;
+  }

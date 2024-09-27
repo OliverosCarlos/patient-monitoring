@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialAllModule } from 'src/material.module'
-import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+//import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 import { ColorCircleModule } from 'ngx-color/circle';
 
 import { CatalogsRoutingModule } from './catalogs-routing.module';
@@ -27,10 +27,10 @@ import { Hobbies_InterestUpdateFormViewComponent } from 'src/app/components/cata
 
 import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
 
-const config: InputFileConfig = {
-  fileAccept: '*',
-  fileLimit: 1
-};
+//const config: InputFileConfig = {
+//  fileAccept: '*',
+//  fileLimit: 1
+//};
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ const config: InputFileConfig = {
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    InputFileModule.forRoot(config),
+    //InputFileModule.forRoot(config),
     ColorCircleModule,
   ],
   providers: [

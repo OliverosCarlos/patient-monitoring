@@ -1,0 +1,64 @@
+#patient-list-container{ grid-area: c1; }
+#track-list-container{ grid-area: c2; }
+#track-form-container{ grid-area: c3;}
+
+.dashboard-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr; 
+  grid-template-areas: 
+      "c1 c1 c2 c2 c2 c2"
+      "c3 c3 c3 c3 c3 c3"
+      "c3 c3 c3 c3 c3 c3";
+  gap: 10px; 
+
+}
+
+.body-section{
+    border-radius: 8px;
+    background-color: white;
+}
+  
+.title-section{
+  h2{
+    color: gray;
+  }
+}
+
+.patient-list-body{
+  :hover{
+    background-color: whitesmoke;
+    cursor: pointer;
+  }
+  
+}
+
+.mat-row:hover .mat-cell {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.patient-list-card-c{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: solid 1px gainsboro;
+
+  .user-info-c{
+    display: flexbox;
+
+    .user-info-text{
+      width: 100%;
+      display: inline-block;
+    }
+
+  }
+
+  .img-container {
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 100%;
+    }
+  }
+
+}

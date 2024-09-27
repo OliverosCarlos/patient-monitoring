@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+import { FilePickerModule } from  '@sleiss/ngx-awesome-uploader';
 
 import { PsychologistFormViewComponent } from './psychologist-form-view.component';
 
-const config: InputFileConfig = {
-  fileAccept: '*',
-  fileLimit: 1
-};
 
 @NgModule({
 
@@ -27,7 +22,7 @@ const config: InputFileConfig = {
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    InputFileModule.forRoot(config),
+    FilePickerModule
   ],
 
   exports: [

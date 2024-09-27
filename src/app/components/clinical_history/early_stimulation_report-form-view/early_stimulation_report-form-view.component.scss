@@ -1,0 +1,42 @@
+@import 'ckeditor5/ckeditor5';
+
+.label-form{
+    margin-top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cntr-angular-editor{
+    padding: 10px;
+}
+
+.custom-form-group{
+    padding: 10px 20px;
+}
+
+.custom-form-group:hover{
+    border-radius: 5px;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    padding: 10px 19px;
+}
+
+.custom-form-group:hover > .label-form{
+    color: dodgerblue;
+}
+
+.cntr-form{
+    display: flex;
+    justify-content: space-between;
+    .form-title{
+        width: 45%;
+        padding-block: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-right: solid 3px gainsboro;
+    }
+
+    .form-value{
+        width: 50%;
+        padding-block: 5px;
+    }
+}

@@ -1,0 +1,59 @@
+<div class="dashboard-container m-2">
+    <div id="patient-container">
+        <div class="title-section row mx-1">
+            <h2>Paciente</h2>
+        </div>
+        <div class="body-section row mx-1 p-2 mat-elevation-z5">
+            <div class="col-12">
+                <app-patient-card-item [patientData]="patient" ></app-patient-card-item>
+            </div>
+        </div>
+    </div>
+
+    <div id="track-list-container">
+        <div class="title-section row mx-1">
+            <h2>Notas Clinicas</h2>
+        </div>
+        <div class="body-section row m-0 mat-elevation-z5">
+            <div class="col-12">
+                <div class="row header-section pt-2">
+                    <!-- <app-advance-search></app-advance-search> -->
+                </div>
+                <div class="row m-0 p-2">
+                    <table mat-table [dataSource]="trackList">
+
+                        <!-- session_objective Column -->
+                        <ng-container matColumnDef="session_objective">
+                            <th mat-header-cell *matHeaderCellDef> Objetivo </th>
+                            <td mat-cell *matCellDef="let child"> {{ child.session_objective }} </td>
+                        </ng-container>
+
+                        <!-- session_approach Column -->
+                        <ng-container matColumnDef="session_approach">
+                            <th mat-header-cell *matHeaderCellDef> Abordaje </th>
+                            <td mat-cell *matCellDef="let child"> {{ child.session_approach }} </td>
+                        </ng-container>
+
+                        <!-- created_at Column -->
+                        <ng-container matColumnDef="created_at">
+                            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                            <td mat-cell *matCellDef="let child"> {{ child.created_at }} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showNote(row)">
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="track-form-container">
+        <div class="title-section row mx-1">
+            <h2>Nota clinica</h2>
+        </div>
+        <div class="body-section row mx-1 mat-elevation-z5">
+            <app-tracking-form-view></app-tracking-form-view>
+        </div>
+    </div>
+</div>

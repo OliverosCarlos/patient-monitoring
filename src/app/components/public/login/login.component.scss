@@ -1,16 +1,14 @@
 .c_login{
-    background-color: rgb(241, 166, 223);
+    background-color: #FAFAFA;
     height: 100%;
     padding-top: 30px;
 
-    border: solid 1px black;
     .c_img{
         margin: auto;
         width: 20%;
         padding-bottom: 10px;
 
         img{
-            border-radius: 90%;
             width: 100%;
             height: 100%;
         }
@@ -21,8 +19,11 @@
         width: 30%;
         height: 100%;
 
-        h1{
-            font-family: "Sofia", sans-serif;
+        .title-info{
+            font-size: large;
+            font-weight: bold;
+            margin-inline: 10px;
         }
     }
+
 }

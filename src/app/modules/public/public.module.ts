@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialAllModule } from 'src/material.module'
 import { NgSelectModule } from '@ng-select/ng-select';
-import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+//import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 import { ColorCircleModule } from 'ngx-color/circle';
 
 import { PublicRoutingModule } from './public-routing.module';
@@ -17,10 +17,10 @@ import { BreadcrumModule } from 'src/app/utils/components/breadcrumb/breadcrumb.
 import { LoginComponent } from 'src/app/components/public/login/login.component';
 import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/advance_search.module';
 
-const config: InputFileConfig = {
-  fileAccept: '*',
-  fileLimit: 1
-};
+//const config: InputFileConfig = {
+//  fileAccept: '*',
+//  fileLimit: 1
+//};
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ const config: InputFileConfig = {
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    InputFileModule.forRoot(config),
+    //InputFileModule.forRoot(config),
     ColorCircleModule,
     SideMenuModule,
     HeaderModule,

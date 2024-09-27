@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
-import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component'; 
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
 //SERVICES
 import { TaskService } from 'src/app/services/psychotherapy/task.service';

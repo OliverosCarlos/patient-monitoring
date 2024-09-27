@@ -1,0 +1,690 @@
+<form [formGroup]="formGroup">
+  <mat-card>
+    <mat-stepper orientation="vertical">
+      <mat-step>
+        <ng-template matStepLabel>PACIENTE</ng-template>
+        <ng-template matStepContent>
+          <div class="row" formGroupName="patient">
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'first_name'" class="control-label">Nombre <span
+                    class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'first_name'"
+                  formControlName="first_name">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'last_name1'" class="control-label">Apellido Paterno <span
+                    class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name1'"
+                  formControlName="last_name1">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'last_name2'" class="control-label">Apellido Materno <span
+                    class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name2'"
+                  formControlName="last_name2">
+              </div>
+            </div>
+
+            <div class="col-8">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'address'" class="control-label">Domicilio <span
+                    class="text-danger">*</span>
+                </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'address'"
+                  formControlName="address">
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'age'" class="control-label">Edad <span class="text-danger">*</span>
+                </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="age">
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'gender'" class="control-label">Sexo <span class="text-danger">*</span>
+                </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'gender'"
+                  formControlName="gender">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'birthplace'" class="control-label">Lugar de Nacimiento <span
+                    class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'birthplace'"
+                  formControlName="birthplace">
+              </div>
+            </div>
+            <div class="col-4">
+              <label [attr.for]="nameForm+'birthplace'" class="control-label">Fecha de Nacimiento <span
+                  class="text-danger">*</span> </label>
+              <div class="input-group">
+                <input formControlName="date_of_birth" class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                  ngbDatepicker #d="ngbDatepicker" />
+                <button class="btn btn-outline-secondary bi bi-calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'residence_location'" class="control-label">Lugar de Residencia <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'residence_location'" formControlName="residence_location">
+              </div>
+            </div>
+          </div>
+          <div class="row" formGroupName="medical_history">
+            <div class="col-8">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'medical_diagnosis'" class="control-label">Diagnóstico médico <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'medical_diagnosis'" formControlName="medical_diagnosis">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'source_information'" class="control-label">Fuente de información <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'source_information'" formControlName="source_information">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'reason_consultation'" class="control-label">Motivo de consulta <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'reason_consultation'" formControlName="reason_consultation">
+              </div>
+            </div>
+          </div>
+          <button mat-button matStepperNext>Next</button>
+        </ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>DATOS PARENTALES</ng-template>
+        <ng-template matStepContent>
+          <div class="row" formGroupName="parental_data">
+            <div class="col-12">
+              <!-- MOTHER -->
+              <div class="row">
+                <h1>MADRE</h1>
+              </div>
+              <div class="row" formGroupName="mother">
+                <div class="col-10">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'name'" class="control-label">Nombre <span
+                        class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'name'"
+                      formControlName="name">
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'age'" class="control-label">Edad <span
+                        class="text-danger">*</span></label>
+                    <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'age'"
+                      formControlName="age">
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'education'" class="control-label">Escolaridad <span
+                        class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'education'"
+                      formControlName="education">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'ocupation'" class="control-label">Ocupación <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'ocupation'" formControlName="ocupation">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'addictions'" class="control-label">Toxicomanias <span class="text-danger">*</span> </label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options"
+                      formControlName="addictions" placeholder="SELECCIONE" bindLabel="label" bindValue="value"
+                      [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'smoke_user'" class="control-label">Fuma <span class="text-danger">*</span>
+                    </label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options"
+                      formControlName="smoke_user" placeholder="SELECCIONE" bindLabel="label" bindValue="value"
+                      [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'smoke_quantity'" class="control-label">Cantidad <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'smoke_quantity'" formControlName="smoke_quantity">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'smoke_time'" class="control-label">Tiempo <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'smoke_time'" formControlName="smoke_time">
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'alcohol_user'" class="control-label">Toma <span class="text-danger">*</span> </label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options"
+                      formControlName="alcohol_user" placeholder="SELECCIONE" bindLabel="label" bindValue="value"
+                      [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'alcohol_quantity'" class="control-label">Cantidad <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'alcohol_quantity'"
+                      formControlName="alcohol_quantity">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'alcohol_time'" class="control-label">Tiempo <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'alcohol_time'" formControlName="alcohol_time">
+                  </div>
+                </div>
+              </div>
+              <!-- FATHER -->
+              <div class="row">
+                <h1>PADRE</h1>
+              </div>
+
+              <div class="row" formGroupName="father">
+                <div class="col-10">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'name'" class="control-label">Nombre <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'name'" formControlName="name">
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'age'" class="control-label">Edad <span class="text-danger">*</span></label>
+                    <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'age'" formControlName="age">
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'education'" class="control-label">Escolaridad <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'education'" formControlName="education">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'ocupation'" class="control-label">Ocupación <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'ocupation'" formControlName="ocupation">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'addictions'" class="control-label">Toxicomanias <span class="text-danger">*</span> </label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options"
+                      formControlName="addictions" placeholder="SELECCIONE" bindLabel="label" bindValue="value"
+                      [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'smoke_user'" class="control-label">Fuma <span class="text-danger">*</span>
+                    </label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options"
+                      formControlName="smoke_user" placeholder="SELECCIONE" bindLabel="label" bindValue="value"
+                      [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'smoke_quantity'" class="control-label">Cantidad <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'smoke_quantity'" formControlName="smoke_quantity">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'smoke_time'" class="control-label">Tiempo <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'smoke_time'" formControlName="smoke_time">
+                  </div>
+                </div>
+
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'alcohol_user'" class="control-label">Toma <span class="text-danger">*</span> </label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options"
+                      formControlName="alcohol_user" placeholder="SELECCIONE" bindLabel="label" bindValue="value"
+                      [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'alcohol_quantity'" class="control-label">Cantidad <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'alcohol_quantity'" formControlName="alcohol_quantity">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'alcohol_time'" class="control-label">Tiempo <span class="text-danger">*</span></label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'alcohol_time'" formControlName="alcohol_time">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-3">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'parents_live_together'" class="control-label">Viven Los padres juntos? <span class="text-danger">*</span> </label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="parents_live_together"
+                      placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'married'" class="control-label">Casados <span class="text-danger">*</span></label>
+                    <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="married"
+                      placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                      <!-- (change)="setPatient($event)" -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label [attr.for]="nameForm+'direct_family'" class="control-label">Familia directa <span class="text-danger">*</span> </label>
+                    <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'direct_family'" formControlName="direct_family">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button mat-button matStepperNext>Next</button>
+        </ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>CONCEPCION, EMBARAZO Y NACIMIENTO</ng-template>
+        <ng-template matStepContent>
+          <div class="row" formGroupName="prenatal_history">
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'planned_pregnancy'" class="control-label">Embarazo planeado <span class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="planned_pregnancy"
+                  placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'desired_pregnancy'" class="control-label">Embarazo deseado <span
+                    class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="desired_pregnancy"
+                  placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'reason_pregnancy'" class="control-label">Situación <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'reason_pregnancy'" formControlName="reason_pregnancy">
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'gestation_time'" class="control-label">Tiempo de gestación <span class="text-danger">*</span> </label>
+                <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'gestation_time'" formControlName="gestation_time">
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'prenatal_control'" class="control-label">Control Prenatal <span class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="prenatal_control"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'pregnancy_complications'" class="control-label">Complicaciones durante el embarazo <span class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="pregnancy_complications"
+                  placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'pregnancy_complications_type'" class="control-label">Tipo <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'pregnancy_complications_type'" formControlName="pregnancy_complications_type">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'pregnancy_complications_cause'" class="control-label">Causas <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'pregnancy_complications_cause'" formControlName="pregnancy_complications_cause">
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'medications'" class="control-label">Medicamentos durante el embarazo <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'medications'" formControlName="medications">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'childbirth_type'" class="control-label">Tipo de parto <span
+                    class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="childbirth_type_options" formControlName="childbirth_type"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'childbirth_location'" class="control-label">Lugar de parto <span
+                    class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="childbirth_location_options" formControlName="childbirth_location"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'childbirth_support'" class="control-label">Atendido por <span
+                    class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="childbirth_support_options" formControlName="childbirth_support"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'forceps'" class="control-label">Forceps <span class="text-danger">*</span>
+                </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="forceps"
+                  placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'childbirth_duration'" class="control-label">Duración del trabajo de parto <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'childbirth_duration'" formControlName="childbirth_duration">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'anesthesia_type'" class="control-label">Anestesia utilizada <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'anesthesia_type'" formControlName="anesthesia_type">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'childbirth_complications'" class="control-label">Complicaciones durante el parto <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'childbirth_complications'" formControlName="childbirth_complications">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'baby_weight'" class="control-label">Peso del bebé <span class="text-danger">*</span> </label>
+                <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'baby_weight'" formControlName="baby_weight">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'baby_size'" class="control-label">Medida del bebé <span class="text-danger">*</span> </label>
+                <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'baby_size'" formControlName="baby_size">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'premature'" class="control-label">Prematuro <span class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="premature"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'corrected_age'" class="control-label">Edad corregida <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'corrected_age'" formControlName="corrected_age">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'incubation_time'" class="control-label">Tiempo de encubación <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'incubation_time'" formControlName="incubation_time">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'apgar'" class="control-label">Apgar <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'apgar'" formControlName="apgar">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'cry'" class="control-label">LLanto inmediato al nacer <span class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="cry"
+                  placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'anomalies'" class="control-label">Características anormales (cianosis, ictericia, malformaciones, etc.) <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'anomalies'" formControlName="anomalies">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'notes'" class="control-label">Otros datos <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'notes'" formControlName="notes">
+              </div>
+            </div>
+          </div>
+          <button mat-button matStepperNext>Next</button>
+        </ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>HISTORIA DE SALUD</ng-template>
+        <ng-template matStepContent>
+          <div class="row">
+            <h1>ANTECENDES HEREDO-FAMILIARES</h1>
+          </div>
+          <div class="row" formGroupName="hereditaryFamily_history">
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'diabetes'" class="control-label">Diabetes <span class="text-danger">*</span>
+                </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="diabetes"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'diabetes_who'" class="control-label">Quién <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'diabetes_who'" formControlName="diabetes_who">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'hypertension'" class="control-label">Hipertensión <span
+                    class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="hypertension"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'hypertension_who'" class="control-label">Quién <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'hypertension_who'" formControlName="hypertension_who">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'cancer'" class="control-label">Cáncer <span class="text-danger">*</span>
+                </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="cancer"
+                  placeholder="SELECCIONE" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'cancer_who'" class="control-label">Quién <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'cancer_who'" formControlName="cancer_who">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'alcoholism'" class="control-label">Alcoholismo <span class="text-danger">*</span> </label>
+                <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="yes_no_options" formControlName="alcoholism"
+                  placeholder="SELECCIONE UNA OPCIÓN" bindLabel="label" bindValue="value" [clearable]="false">
+                  <!-- (change)="setPatient($event)" -->
+                </ng-select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'alcoholism_who'" class="control-label">Quién <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'alcoholism_who'" formControlName="alcoholism_who">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'mental_illnesses'" class="control-label">Enfermedades mentales <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'mental_illnesses'" formControlName="mental_illnesses">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'mental_illnesses_who'" class="control-label">Quién <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'mental_illnesses_who'" formControlName="mental_illnesses_who">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'mental_illnesses_other'" class="control-label">Otros <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'mental_illnesses_other'" formControlName="mental_illnesses_other">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'mental_illnesses_another_family'" class="control-label">Algún miembro de la familia que haya presentado un padecimiento similar <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'mental_illnesses_another_family'" formControlName="mental_illnesses_another_family">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <h1>ANTECENDES PERSONALES PATOLÓGICOS</h1>
+          </div>
+          <div class="row" formGroupName="personal_pathologic_antecedents">
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'allergies'" class="control-label">Alergias <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'allergies'" formControlName="allergies">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'child_physical_problems'" class="control-label">Actualmente el niño (a) presenta algún problema físico<span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'child_physical_problems'" formControlName="child_physical_problems">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'TCE'" class="control-label">Ha sufrido TCE <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'TCE'" formControlName="TCE">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'PC'" class="control-label">Hubo PC <span class="text-danger">*</span></label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'PC'" formControlName="PC">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'hospitalizations'" class="control-label">Hospitalizaciones previas <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'hospitalizations'" formControlName="hospitalizations">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label [attr.for]="nameForm+'current_medications'" class="control-label">Medicamentos que toma actualmente <span class="text-danger">*</span> </label>
+                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'current_medications'" formControlName="current_medications">
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>FACTORES DE RIESGO NEUROLÓGICO</ng-template>
+        <ng-template matStepContent>
+          <div class="col-12" formGroupName="personal_pathologic_antecedents">
+            <div class="form-group">
+              <label [attr.for]="nameForm+'neurological_risk_factors'" class="control-label">Factores <span class="text-danger">*</span></label>
+              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'neurological_risk_factors'" formControlName="neurological_risk_factors">
+            </div>
+          </div>
+          <button mat-button matStepperNext (click)="showData()">Next</button>
+        </ng-template>
+      </mat-step>
+    </mat-stepper>
+    <!-- <div class="row">
+        <div class="col">
+            <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-info pull-left"
+            (click)="save()" [disabled]="!mainFormGroup.valid">Guardar</button> 
+        </div>
+        <div class="col">
+            <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+            (click)="onClose()">Cancelar</button>
+        </div>
+    </div> -->
+  </mat-card>
+
+
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+    </div>
+  </div>
+</form>

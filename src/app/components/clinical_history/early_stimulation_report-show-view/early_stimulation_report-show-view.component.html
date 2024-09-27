@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-12">
+    <p class="title-info">Antecedentes Clínicos</p>
+    <div [innerHTML]="data.background | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Evaluación de Inteligencia</p>
+    <div [innerHTML]="data.intelligence_assessment | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Atención</p>
+    <div [innerHTML]="data.attention | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Memoria</p>
+    <div [innerHTML]="data.memory | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Lenguaje</p>
+    <div [innerHTML]="data.language | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Praxias</p>
+    <div [innerHTML]="data.praxias | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Gnosias</p>
+    <div [innerHTML]="data.gnosias | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Funcionamiento Ejecutivo</p>
+    <div [innerHTML]="data.executive_functioning | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Estado Anímico</p>
+    <div [innerHTML]="data.mind_state | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Personalidad</p>
+    <div [innerHTML]="data.personality | safeHtml"></div>
+  </div>
+  <div class="col-12">
+    <p class="title-info">Tratamiento</p>
+    <div [innerHTML]="data.treatment | safeHtml"></div>
+  </div>
+</div>

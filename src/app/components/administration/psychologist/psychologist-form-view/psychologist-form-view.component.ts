@@ -11,6 +11,9 @@ import { UtilService } from 'src/app/services/util.service';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
+import { HttpClient } from  '@angular/common/http';
+import { DemoFilePickerAdapter } from  './demo-file-picker.adapter';
+
 @Component({
   selector: 'app-psychologist-form-view',
   templateUrl: './psychologist-form-view.component.html',
@@ -29,7 +32,11 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   formData: FormData = new FormData();
 
   $headerAction!: Subscription;
+ 
+  adapter = new  DemoFilePickerAdapter(this.http);
 
+  fileName = ""
+  
   constructor(
     private backendService: BackendService,
     private headerService : HeaderService,
@@ -37,7 +44,8 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
     private route: ActivatedRoute,
     private router : Router,
     private _formBuilder: UntypedFormBuilder,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    private http: HttpClient
   ) {
     this.setFocus();
     this.formGroup = this.fb.group({
@@ -104,7 +112,7 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   }
 
   save(){
-    this.formData.append('psychologist_files', this.formGroup.value.psychologist_files.photo[0].file);
+    
     this.formData.append('psychologist_data', JSON.stringify(this.formGroup.value.psychologist_data));
     this.backendService.createWithFile(ADMINISTRATION.PSYCHOLOGIST_CREATE ,this.formData).subscribe({
       next: (v) => { 
@@ -131,5 +139,24 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   cancel(){
     this.router.navigate(['main','administration','psychologist','table']);
   }
+
+  onFileSelected(event: any ) {
+
+    const file:File = event.target.files[0];
+    console.log("file");
+    this.formData.append('psychologist_files', file);
+      // if (file) {
+
+      //     this.fileName = file.name;
+
+      //     const formData = new FormData();
+
+      //     formData.append("thumbnail", file);
+
+      //     const upload$ = this.http.post("/api/thumbnail-upload", formData);
+
+      //     upload$.subscribe();
+      // }
+ }
 
 }

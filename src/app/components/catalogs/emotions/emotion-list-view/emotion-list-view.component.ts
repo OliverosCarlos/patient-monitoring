@@ -54,6 +54,8 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngOnInit(): void {
+    console.log("EMOTIONS");
+    
     this.getAllEmotions({});
     this.headerService.setHeader({name:'emotion',type:'list'});
     this.utilService.set({name:'emotion', type:'list'});

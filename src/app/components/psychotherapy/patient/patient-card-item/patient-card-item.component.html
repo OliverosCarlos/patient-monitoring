@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-8">
+    <div class="row">
+      <div class="col-12">
+        <div class="cntr-data-info">
+          <span class="data-info">{{patientData.first_name}} {{patientData.last_name1}} {{patientData.last_name2}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="cntr-data-info">
+          <span class="data-info">{{patientData.age}}</span>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="cntr-data-info">
+          <span class="data-info">{{patientData.phone_number}}</span>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="cntr-data-info">
+          <span class="data-info">{{patientData.email}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <img [src]="'./assets/media/'+patientData.image" alt="" class="img-thumbnail imagePreview">
+  </div>
+</div>

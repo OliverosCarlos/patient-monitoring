@@ -23,10 +23,10 @@ import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
 const routes: Routes = [
   { path: 'emotions', data: { breadcrumb: 'Emociones' },
     children:[
-      { path: '', component: EmotionListViewComponent, data: { breadcrumb: 'Lista' }, canActivate: [CanActivateLogged] },
-      { path: 'form', component: EmotionFormViewComponent, data: { breadcrumb: 'Creación' }, canActivate: [CanActivateLogged]},
-      { path: 'form/:emotion_id', component: EmotionShowViewComponent, data: { breadcrumb: "Visualizar" } },
-      { path: 'update/:emotion_id', component: EmotionUpdateViewComponent, data: { breadcrumb: 'Actualizar' }  }
+      { path: '', component: EmotionListViewComponent, data: { breadcrumb: 'Lista',  animation: true }, canActivate: [CanActivateLogged] },
+      { path: 'form', component: EmotionFormViewComponent, data: { breadcrumb: 'Creación',  animation: true }, canActivate: [CanActivateLogged]},
+      { path: 'form/:emotion_id', component: EmotionShowViewComponent, data: { breadcrumb: "Visualizar",  animation: true } },
+      { path: 'update/:emotion_id', component: EmotionUpdateViewComponent, data: { breadcrumb: 'Actualizar',  animation: true }  }
     ],
   },
   { path: 'symptom', data: { breadcrumb: 'Síntomas' },

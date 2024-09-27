@@ -43,7 +43,7 @@ display: inline-block;
 
 .side-nave-header{
   // padding: 5px;
-  background-color: white;
+  background-color: dodgerblue;
 }
 
 .sidenav-container{
@@ -51,17 +51,24 @@ display: inline-block;
   height: 100%;
   
   .sidenav{
+    
+    button {
+      color: white;
+      margin-left: 10px;
+    }
+
     float: left;
     width: 4%;
     height: 100%;
-    background-color: #B799BF;
+    background-color: #19375095;
   }
 
   .sidenav-content{
-    background-color: rgba(240, 238, 238, 0.938);
+    background-color: #F7F7F7;
     float: left;
     width: 96%;
     height: 100%;
+    overflow-y: auto;
   }
 
 }

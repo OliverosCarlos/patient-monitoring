@@ -4,17 +4,17 @@
 }
 
 .mat-expansion-panel{
-  background-color: #B799BF;
+  background-color: #00a8e8;
 }
 
-.mat-expansion-panel-header-title{
-  color: white;
-}
+// .mat-expansion-panel-header-title{
+//   color: white;
+// }
 
-.mat-expansion-panel-header-description{
-  color: white;
+// .mat-expansion-panel-header-description{
+//   color: white;
   
-}
+// }
 
 .mat-icon{
   color: white;
@@ -22,15 +22,20 @@
 
 .mat-list{
   padding: 0px;
+  
 }
 
 .mat-list-item{
+  color: white;
   span{
     padding: 0px;
   }
 }
 
+.mat-list-item:hover{
+  background-color: #1976D2;
+}
+
 .mat-list-item-content{
   padding: 0px;
-  
 }

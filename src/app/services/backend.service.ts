@@ -21,6 +21,16 @@ export class BackendService {
         })
   };
 
+  tokenHttpOptionsFile = {
+    params: {},
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json' ,
+        'Authorization': 'Token ' + localStorage.getItem('token'),
+        }),
+    responseType: "blob" as const,
+    observe: 'response' as const
+  };
+
   tokenHttpMultipart = {
     headers: new HttpHeaders({
         'Authorization': 'Token ' + localStorage.getItem('token')
@@ -31,12 +41,7 @@ export class BackendService {
 
 
   getAll(path: string, data_search: any):Observable<any>{
-    console.log('back serv DATA SEARCH');
-    
-    
-    
     this.tokenHttpOptions.params = data_search;
-    console.log(this.tokenHttpOptions);
     return this.http.get(`${this.APIUrl}${path}`,  this.tokenHttpOptions);
   }
   
@@ -76,4 +81,8 @@ export class BackendService {
     return this.http.post(this.APIUrl + '/knox/login/',null, basicAuthHttpOptions);
   }
 
+  getFile(path:string, id:string):Observable<any>{
+    return this.http.get(`${this.APIUrl}${path}${id}`,  this.tokenHttpOptionsFile);
+  }
+  
 }

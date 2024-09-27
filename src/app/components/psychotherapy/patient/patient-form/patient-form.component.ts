@@ -29,6 +29,8 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
 
   $headerAction!: Subscription;
 
+  fileName = ""
+  
   constructor(
     private backendService: BackendService,
     private route: ActivatedRoute,
@@ -145,7 +147,6 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
   }
 
   save(){
-    this.formData.append('patient_files', this.patientForm.value.patient_files.photo[0].file);
     this.formData.append('patient_data', JSON.stringify(this.patientForm.value.patient_data));
     this.backendService.createWithFile(PSYCHOTHERAPY.PATIENT_CREATE ,this.formData).subscribe({
       next: (v) => { this.router.navigate(['main','psychotherapy','patients','table']); },
@@ -166,4 +167,22 @@ export class PatientFormComponent implements OnInit, AfterViewInit {
   cancel(){
     this.router.navigate(['main','psychotherapy','patients','table']);
   }
+
+  onFileSelected(event: any ) {
+
+    const file:File = event.target.files[0];
+    this.formData.append('patient_files', file);
+      // if (file) {
+
+      //     this.fileName = file.name;
+
+      //     const formData = new FormData();
+
+      //     formData.append("thumbnail", file);
+
+      //     const upload$ = this.http.post("/api/thumbnail-upload", formData);
+
+      //     upload$.subscribe();
+      // }
+ }
 }

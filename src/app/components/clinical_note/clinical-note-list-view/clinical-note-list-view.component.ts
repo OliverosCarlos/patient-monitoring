@@ -11,7 +11,8 @@ import { UtilService } from 'src/app/services/util.service';
 
 //MODELS
 import { CL_brief_list } from 'src/app/models/clinical_note.model';
-
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
 
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
@@ -22,6 +23,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./clinical-note-list-view.component.scss']
 })
 export class Clinical_NoteListViewComponent implements OnInit {
+
+  model : Model;
 
   displayedColumns = ['select' , 'patient', 'email', 'therapy_objectives', 'personal_characteristics' ];
   dataSource = new MatTableDataSource<CL_brief_list>([]);
@@ -35,40 +38,15 @@ export class Clinical_NoteListViewComponent implements OnInit {
     private hobbiesInterestService : HobbiesInterestService,
     private utilService: UtilService,
     private backendService : BackendService
-    ) {}
+    ) {
+      this.model = MODELS.find(model => model.name == 'clinical_notes')!;
+    }
 
   ngOnInit(): void {
     this.getAll();
-    this.headerService.setHeader({name:'clinical_notes',type:'list'});
+    this.headerService.setHeader({model: this.model, type: 'list'});
     this.utilService.set({name:'clinical_notes', type:'list'});
   }
-
-  // getValue(){
-  //   let elements = document.getElementsByClassName('show-box-event');
-    
-  //   Array.prototype.forEach.call(elements, function(el){
-  //     el!.addEventListener("mouseover", ($event:any) => {
-  //       // console.log(el.);
-  //       console.log($event);
-  //       console.log($event.screenX);
-  //       console.log($event.screenY);
-
-  //       let box = document.getElementById('floating_box');
-  //       box!.innerHTML = 'holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-  //       box!.style.left = $event.clientX+'px';
-  //       box!.style.top = $event.clientY+'px';
-  //     });
-  //   });
-    
-    
-    
-  // }
-
-  // setValue(){
-  //   let el = document.getElementsByClassName('show-box-event');
-  //   console.log(el);
-  //   //el!.innerHTML = 'holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-  // }
 
   getAll(){
    this.backendService.getAll(PSYCHOTHERAPY.CLINICAL_NOTES,{}).subscribe({

@@ -3,6 +3,13 @@ export const MENUS: any[] = [
         name: 'Psicoterapia', icon: 'spa',
         sections: [
             {
+                name: 'Historia Clinica',
+                submenus: [
+                    { name: 'Historia Clinica', description: 'Formularios', route:'clinical-history', icon: 'library_books', model: 'evaluation', groups:['psychologist'] },
+                    { name: 'Evaluación', description: 'Formularios', route:'evaluations', icon: 'spa', model: 'evaluation', groups:['psychologist'] }
+                ]
+            },
+            {
                 name: 'Registro',
                 submenus: [
                     { name: 'Pacientes', description: 'Administración de pacientes', route:'psychotherapy/patients', icon: 'contacts', model:'patient', groups: ['psychologist'] },

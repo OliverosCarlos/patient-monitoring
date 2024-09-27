@@ -29,4 +29,19 @@
         border-radius: 0px 8px 8px 0px;
         margin-right: 5px;
     }
+
+    //button-model-child => bmc
+    .bmc-available{
+        background-color: #4BFF1F;
+        color: white;
+
+        &:hover{
+            background-color: #4be923cb;
+        }
+    }
+
+    .bmc-unavailable{
+        color: #4BFF1F;
+    }
+    
 }

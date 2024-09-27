@@ -4,12 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
+
 import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
 import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-emotion-form-view',
@@ -36,6 +39,7 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
     private headerService : HeaderService,
     private utilService : UtilService, 
     private fb: UntypedFormBuilder,
+    private _snackBar: MatSnackBar,
     // private stepperFisherProducerForm: StepperFisherProducerFormService
   ) {
     this.setFocus();
@@ -122,17 +126,30 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
     this.backendService.create(CATALOGS.EMOTIONS, this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['../','main','catalogs','emotions','table'])
+      complete: () => {
+        this.router.navigate(['../','main','catalogs','emotions']);
+        this.showSuccess();
+      }
     })
   }
 
   cancel(){
-    this.router.navigate(['../','main','catalogs','emotions','table']);
+    this.router.navigate(['../','main','catalogs','emotions']);
   }
 
   handleChangeComplete($event:any){
     this.chip.color = $event.color.hex;
     this.formGroup.get('color')!.setValue($event.color.hex);
+  }
+
+  showSuccess(){
+    this._snackBar.openFromComponent(GenericSnackbarComponent, {
+      data: {
+        message: "Elemento creado correctamente",
+        icon: "done"
+      },
+      duration: 5000
+    });
   }
 
 }

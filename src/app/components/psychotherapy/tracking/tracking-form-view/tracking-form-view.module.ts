@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ColorCircleModule } from 'ngx-color/circle';
 
+import { NgSelectModule } from '@ng-select/ng-select';
+
 import { TrackingFormViewComponent } from './tracking-form-view.component';
 
 @NgModule({
@@ -21,6 +23,7 @@ import { TrackingFormViewComponent } from './tracking-form-view.component';
   imports: [
     ReactiveFormsModule,
     FormsModule,
+    NgSelectModule,
     CommonModule
   ],
 

@@ -1,5 +1,5 @@
-import { ViewChild, OnInit, TemplateRef, AfterViewInit, Input} from '@angular/core';
-import { Component } from '@angular/core';
+import { ViewChild, OnInit, TemplateRef, AfterViewInit, Input, AfterViewChecked} from '@angular/core';
+import { Component, ChangeDetectorRef  } from '@angular/core';
 import {MatAccordion} from '@angular/material/expansion';
 import { Subscription } from 'rxjs';
 import { ChildrenOutletContexts, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { UtilService } from 'src/app/services/util.service';
 import { SecurityService } from 'src/app/services/security.service';
 
 import { slideInAnimation } from 'src/app/utils/animations/routeAnimation';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -25,7 +26,8 @@ import { slideInAnimation } from 'src/app/utils/animations/routeAnimation';
       state('contract', style({width:"96%"})),
       transition('expand=>contract', [animate('0.3s ease-in')]),
       transition('contract=>expand', [animate('0.3s ease-in')])
-    ])
+    ]),
+    slideInAnimation
   ]
 })
 export class MainComponent implements OnInit, AfterViewInit {
@@ -45,31 +47,39 @@ export class MainComponent implements OnInit, AfterViewInit {
   @ViewChild('card_content') card_content!: TemplateRef<any>;
   @Input() currentState: String = "";
 
+  sideNavHeaderMenuItems: string[] = []
   content_type : TemplateRef<any> | undefined;
+
+  isDashboard = false;
 
   constructor(
     private utilService : UtilService,
     private securityService : SecurityService,
     private router : Router,
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private changeDetectorRef : ChangeDetectorRef
     ) {}
 
   ngOnInit(): void {
     this.$platformService = this.utilService.get().subscribe(data => {
       switch (data.content_type) {
-        case 'dashboard_content':
+        case 'dashboard_content': 
           this.content_type = this.dashboard_content;
+          this.isDashboard = true;
           break;
         case 'card_content':
           this.content_type = this.card_content;
+          this.isDashboard = false;
           break;
         default:
           this.content_type = this.dashboard_content;
+          this.isDashboard = false;
           break;
       }
       
       this.platformTitle = data.title;
       this.platformSubtitle = data.subtitle;
+      this.sideNavHeaderMenuItems = data.menus;
     });
     this.$perfilService = this.utilService.getPerfil().subscribe(username => {
       this.username = username;
@@ -77,6 +87,10 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {}
+
+  ngAfterViewChecked(): void{
+    this.changeDetectorRef.detectChanges()
+  }
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];

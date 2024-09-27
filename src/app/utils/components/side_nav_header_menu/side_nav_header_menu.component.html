@@ -1,0 +1,7 @@
+<div class="menu-box">
+  <ul >
+    <li *ngFor="let menu of menuItems;">
+      <span [routerLink]="['clinical-history', 'early-stimulation', 'list']">{{menu.menuTitle}}</span>
+    </li>
+  </ul>
+</div>

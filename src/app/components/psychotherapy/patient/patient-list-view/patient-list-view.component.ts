@@ -6,6 +6,10 @@ import { Subscription } from 'rxjs';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 //SERVICES
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
@@ -18,7 +22,9 @@ import { BackendService } from 'src/app/services/backend.service';
 })
 export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  displayedColumns = ['select', 'first_name', 'last_name1', 'last_name2' , 'age', 'email', 'phone_number'];
+  model : Model;
+
+  displayedColumns = ['select', 'first_name', 'last_name1', 'last_name2' , 'age', 'email', 'phone_number', 'option'];
   dataSource = new MatTableDataSource<Patient>([]);
   selection = new SelectionModel<Patient>(true, []);
 
@@ -30,11 +36,13 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
     private router : Router,
     private headerService : HeaderService,
     private utilService : UtilService
-    ) { }
+    ) {
+      this.model = MODELS.find(model => model.name == 'patient')!;
+     }
 
   ngOnInit(): void {
     this.getAll({});
-    this.headerService.setHeader({name:'patient', type:'list'});
+    this.headerService.setHeader({model: this.model, type:'list'});
     this.utilService.set({name:'patient', type:'list'});
     this.headerService.setSetupSearch({name:'patient'});
   }
@@ -82,6 +90,10 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
     this.router.navigate(['main','psychotherapy','patients','form',patient.id]);
   }
 
+  CreateClinicalNote(patient:Patient){
+    this.router.navigate(['main','psychotherapy','tracking','form','dashboard',patient.id]);
+  }
+
     /** Whether the number of selected elements matches the total number of rows. */
     isAllSelected() {
       const numSelected = this.selection.selected.length;
@@ -105,6 +117,10 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
         return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
       }
       return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id}`;
+    }
+
+    menuTrigger(event: { stopPropagation: () => void; }){
+      event.stopPropagation();
     }
 }
 

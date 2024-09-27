@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialAllModule } from 'src/material.module'
-import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+import { FilePickerModule } from  '@sleiss/ngx-awesome-uploader';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './administration.component';
@@ -13,10 +13,10 @@ import { PsychologistCardViewComponent } from 'src/app/components/administration
 import { PsychologistListViewComponent } from 'src/app/components/administration/psychologist/psychologist-list-view/psychologist-list-view.component';
 import { PsychologistShowViewComponent } from 'src/app/components/administration/psychologist/psychologist-show-view/psychologist-show-view.component';
 
-const config: InputFileConfig = {
-  fileAccept: '*',
-  fileLimit: 1
-};
+//const config: InputFileConfig = {
+//  fileAccept: '*',
+//  fileLimit: 1
+//};
 
 @NgModule({
   declarations: [
@@ -32,8 +32,7 @@ const config: InputFileConfig = {
     MaterialAllModule,
     FormsModule,
     ReactiveFormsModule,
-    InputFileModule.forRoot(config),
-    // PsychologistListViewModule
+    FilePickerModule
   ],
   providers: []
 })

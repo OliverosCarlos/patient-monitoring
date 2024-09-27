@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialAllModule } from 'src/material.module'
-import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/advance_search.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,6 +17,8 @@ import { PatientListViewComponent } from 'src/app/components/psychotherapy/patie
 import { PatientCardViewComponent } from 'src/app/components/psychotherapy/patient/patient-card-view/patient-card-view.component';
 import { PatientFormComponent } from 'src/app/components/psychotherapy/patient/patient-form/patient-form.component';
 import { PatientShowViewComponent } from 'src/app/components/psychotherapy/patient/patient-show-view/patient-show-view.component';
+import { PatientCardItemModule } from 'src/app/components/psychotherapy/patient/patient-card-item/patient-card-item.module';
+
 
 import { ClinicalNoteFormComponent } from 'src/app/components/clinical_note/clinical-note-form/clinical-note-form.component';
 import { Clinical_NoteListViewComponent } from 'src/app/components/clinical_note/clinical-note-list-view/clinical-note-list-view.component';
@@ -26,6 +28,8 @@ import { TrackingFormViewComponent } from 'src/app/components/psychotherapy/trac
 import { TrackingListViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-list-view/tracking-list-view.component';
 import { TrackingShowFormViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-show-form-view/tracking-show-form-view.component';
 import { TrackingUpdateFormViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-update-form-view/tracking-update-form-view.component';
+import { TrackingFormDashboardViewComponent } from 'src/app/components/psychotherapy/tracking/tracking-form-dashboard-view/tracking-form-dashboard-view.component';
+import { TrackingFormViewModule } from "src/app/components/psychotherapy/tracking/tracking-form-view/tracking-form-view.module";
 
 import { TaskDashboardViewComponent } from 'src/app/components/psychotherapy/tasks/task-dashboard-view/task-dashboard-view.component';
 import { TaskAssignedListViewComponent } from 'src/app/components/psychotherapy/tasks/task_assigned-list-view/task_assigned-list-view.component';
@@ -64,10 +68,10 @@ import { AssignTaskModalViewModule } from 'src/app/components/psychotherapy/task
 
 import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
-const config: InputFileConfig = {
-  fileAccept: '*',
-  fileLimit: 1
-};
+//const config: InputFileConfig = {
+//  fileAccept: '*',
+//  fileLimit: 1
+//};
 
 @NgModule({
   declarations: [
@@ -79,7 +83,6 @@ const config: InputFileConfig = {
     Clinical_NoteListViewComponent,
     ClinicalNoteFormComponent,
     ClinicalNoteShowFormViewComponent,
-    TrackingFormViewComponent,
     TrackingListViewComponent,
     TrackingShowFormViewComponent,
     TrackingUpdateFormViewComponent,
@@ -90,7 +93,8 @@ const config: InputFileConfig = {
     TaskAssignedListViewComponent,
     TaskAssignedApplicationFormViewComponent,
     TaskAssignedApplicationShowViewComponent,
-    GenericSnackbarComponent
+    GenericSnackbarComponent,
+    TrackingFormDashboardViewComponent
   ],
   imports: [
     CommonModule,
@@ -99,7 +103,7 @@ const config: InputFileConfig = {
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    InputFileModule.forRoot(config),
+    AdvanceSearchModule,
     NgSelectModule,
     NgbModule,
     AngularEditorModule,
@@ -126,7 +130,9 @@ const config: InputFileConfig = {
     TaskTemplateListViewModule,
     AssignTaskModalViewModule,
     
-    GenericModalModule
+    GenericModalModule,
+    TrackingFormViewModule,
+    PatientCardItemModule
   ],
   providers: []
 })

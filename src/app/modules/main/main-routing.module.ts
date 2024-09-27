@@ -5,7 +5,15 @@ import { MainComponent } from './main.component';
 const routes: Routes = [
   { path: '', component: MainComponent, data: { breadcrumb: 'Home' }, 
     children: [
-      { 
+      {
+        path: 'evaluations',
+        loadChildren: () => import('./evaluations/evaluations.module').then(m => m.EvaluationsModule),
+      },
+      {
+        path: 'clinical-history',
+        loadChildren: () => import('./clinical_history/clinical_history.module').then(m => m.ClinicalHistoryModule),
+      },
+      {
         path: 'tasks', 
         loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule),
         data: { breadcrumb: 'Tareas' } 

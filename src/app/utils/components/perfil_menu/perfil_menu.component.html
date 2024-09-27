@@ -4,23 +4,23 @@
       <div class="row" (click)="display()">
         <div class="col-2">
           <div class="img-s">
-            <img src="./assets/media/1648319362250.jpeg" alt="">
+            <img [src]="'./assets/media/'+profile.psychologist.image" alt="">
           </div>
         </div>
         <div class="col-10 my-auto">
-          <span>Carlos Moisés</span>
+          <span style="color: white;">{{profile.user.first_name}}</span>
         </div>
       </div>
     </div>
     <div class="perfil-menu mat-elevation-z5 p-0" [@perfilMenu]="currentState" *ngIf="showPerfilMenu">
       <div class="perfil-image col-12 p-2">
         <div class="img-m mx-auto">
-          <img src="./assets/media/1648319362250.jpeg" alt="" class="mat-elevation-z3">
+          <img [src]="'./assets/media/'+profile.psychologist.image" alt="" class="mat-elevation-z3">
         </div>
       </div>
       <div class="perfil-content p-2">
-        <p>Carlos Moisés Ruvalcaba Oliveros</p>
-        <p>carlosoliveros@gmail.com</p>
+        <p>{{profile.user.first_name+" "+profile.user.last_name}}</p>
+        <p>{{profile.user.email}}</p>
       </div>
       <div class="perfil-options col-12">
         <div class="perfil-item row m-0">

@@ -65,10 +65,7 @@ export class SecurityService {
                     .pipe(
                         mergeMap(
                          (info: any) => {
-                            console.log(info);
-                            
-                            localStorage.setItem('usr',JSON.stringify(info.user));
-                            localStorage.setItem('patient',JSON.stringify(info.patient));
+                            localStorage.setItem('profile',JSON.stringify(info));
                              return of({status:200, data:{}})
                          }
                         )
@@ -81,11 +78,21 @@ export class SecurityService {
     logout(){
         const httpOptions = {
             headers: new HttpHeaders({
-                 'Content-Type': 'application/json' ,
-                 'Authorization': 'Token ' + localStorage.getItem('token')
-                })
-          };
-        return this.http.post(this.APIUrl + '/knox/logout/',null,httpOptions);
+                  'Content-Type': 'application/json' ,
+                  'Authorization': 'Token ' + localStorage.getItem('token')
+            })
+        };
+        return this.http.post(this.APIUrl + '/knox/logout/',null,httpOptions)
+        .pipe(
+            mergeMap(
+                (data: any, status: any) => {
+                    console.log("LOGOUT ===================>");
+                    console.log(data);
+                    console.log(status);
+                    return of({status:200, data:{}})
+                }
+            )
+        )
     }
 
     isLogged(){
