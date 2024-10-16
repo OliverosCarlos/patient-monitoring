@@ -8,6 +8,10 @@ import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snack
 
 import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 //SERVICES
 import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
@@ -26,6 +30,8 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
+  model : Model;
+
   suscribeHeaderService!: Subscription;
 
   chip = {'name':'',color:'white'};
@@ -40,8 +46,8 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
     private utilService : UtilService, 
     private fb: UntypedFormBuilder,
     private _snackBar: MatSnackBar,
-    // private stepperFisherProducerForm: StepperFisherProducerFormService
   ) {
+    this.model = MODELS.find(model => model.name == 'emotion')!;
     this.setFocus();
     this.formGroup = this.fb.group({
       code: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -72,7 +78,7 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'emotion', type:'form'});
+    this.headerService.setHeader({model: this.model, type: 'form'});
     this.utilService.set({name:'emotion', type:'form'});
     this.formGroup.statusChanges
       .pipe(
@@ -127,7 +133,7 @@ export class EmotionFormViewComponent implements OnInit, OnDestroy, AfterViewIni
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => {
-        this.router.navigate(['../','main','catalogs','emotions']);
+        this.router.navigate(['../','main','catalogs','emotions', 'list']);
         this.showSuccess();
       }
     })

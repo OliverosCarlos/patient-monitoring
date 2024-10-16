@@ -7,6 +7,9 @@ import { PsychologistListViewComponent } from 'src/app/components/administration
 import { PsychologistCardViewComponent } from 'src/app/components/administration/psychologist/psychologist-card-view/psychologist-card-view.component';
 import { PsychologistShowViewComponent } from 'src/app/components/administration/psychologist/psychologist-show-view/psychologist-show-view.component';
 
+import { BayleyItemFormViewComponent } from 'src/app/components/administration/tests/bayley/bayley_item-form-view/bayley_item-form-view.component'
+import { BayleyItemListViewComponent } from 'src/app/components/administration/tests/bayley/bayley_item-list-view/bayley_item-list-view.component'
+
 const routes: Routes = [
   { path: '', component: AdministrationComponent, data: { breadcrumb: 'Dashboard' },
     children : [
@@ -14,6 +17,8 @@ const routes: Routes = [
       { path: 'psychologist/table', component: PsychologistListViewComponent, data: { breadcrumb: 'Listado' }  },
       { path: 'psychologist/card', component: PsychologistCardViewComponent, data: { breadcrumb: 'Listado' }  },
       { path: 'psychologist/form/:psychologist_id', component: PsychologistShowViewComponent, data: { breadcrumb: 'Nuevo' }  },
+      { path: 'bayley-item/form', component: BayleyItemFormViewComponent, data: { breadcrumb: 'item' }  },
+      { path: 'bayley-item/table', component: BayleyItemListViewComponent, data: { breadcrumb: 'item' }  },
     ]
   },
 ];

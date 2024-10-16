@@ -3,47 +3,185 @@
         <div class="title-section row mx-1">
             <h2>Historial Clinico</h2>
         </div>
-        <div class="body-section m-0">
-            <div class="dashboard-item-container">
-                <div class="dashboard-item" style="background-color: #FF1FCE;">
-                    <div class="dashboard-item-head">
-                        <span>Header</span>
+        <div class="d-row">
+            <div class="zw-4">
+                <div class="dashboard-item-container zh-s zw-12">
+                    <div class="dashboard-item" style="background-color: white;">
+                        <div class="dashboard-item-head">
+                            <div class="head-left">
+                                <span>Ver más</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-item-body text-content">
+                            <p>Próximo paciente</p>
+                            <p style="color: dodgerblue;">Carlos Moisés Ruvalcaba Oliveros</p>
+                        </div>
+                        <div class="dashboard-item-footer">
+                            <span>Footer</span>
+                        </div>
                     </div>
-                    <div class="dashboard-item-body">
-                        <span>Body</span>
-                    </div>
-                    <div class="dashboard-item-footer">
-                        <span>Footer</span>
+                </div>
+                <div class="dashboard-item-container zh-s zw-12">
+                    <div class="dashboard-item" style="background-color: white;">
+                        <div class="dashboard-item-head">
+                            <div class="head-left">
+                                <span>Ver más</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-item-body text-content">
+                            <p>Próximo paciente</p>
+                            <p style="color: dodgerblue;">Carlos Moisés Ruvalcaba Oliveros</p>
+                        </div>
+                        <div class="dashboard-item-footer">
+                            <span>Footer</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="dashboard-item-container">
-                <div class="dashboard-item" style="background-color: #FFAB1F;">
-                    <div class="dashboard-item-head">
-                        <div class="head-left">
-                            <span>Ver más</span>
-                        </div>
-                        <div class="head-right">
-                            <mat-icon>note_add</mat-icon>
-                        </div>
-                    </div>
-                    <div class="dashboard-item-body">
 
+            <div class="zw-4">
+                <div class="d-row">
+                    <div class="dashboard-item-container zh-s zw-6">
+                        <div class="dashboard-item" style="background-color: white;">
+                            <div class="dashboard-item-head">
+                                <div class="head-left">
+                                    <span>Ver más</span>
+                                </div>
+                                <div class="head-right">
+                                    <span style="vertical-align: middle;">Crear </span>
+                                    <mat-icon style="color: green;">note_add</mat-icon>
+                                </div>
+                            </div>
+                            <div class="dashboard-item-body text-content">
+                                <p>Historiales Medicos</p>
+                                <span class="big-text">{{medical_history_count}}</span>
+                            </div>
+                            <div class="dashboard-item-footer"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-item-container zh-s zw-6">
+                        <div class="dashboard-item" style="background-color: white;">
+                            <div class="dashboard-item-head">
+                                <div class="head-left">
+                                    <span>Ver más</span>
+                                </div>
+                                <div class="head-right">
+                                    <span style="vertical-align: middle;">Crear </span>
+                                    <mat-icon style="color: green;">note_add</mat-icon>
+                                </div>
+                            </div>
+                            <div class="dashboard-item-body text-content">
+                                <p>Historiales Medicos</p>
+                                <span class="big-text">{{medical_history_count}}</span>
+                            </div>
+                            <div class="dashboard-item-footer"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-row">
+                    <div class="dashboard-item-container zh-s zw-6">
+                        <div class="dashboard-item" style="background-color: white;">
+                            <div class="dashboard-item-head">
+                                <div class="head-left">
+                                    <span>Ver más</span>
+                                </div>
+                                <div class="head-right">
+                                    <span style="vertical-align: middle;">Crear </span>
+                                    <mat-icon style="color: green;">note_add</mat-icon>
+                                </div>
+                            </div>
+                            <div class="dashboard-item-body text-content">
+                                <p>Historiales Medicos</p>
+                                <span class="big-text2">{{medical_history_count}}</span>
+                            </div>
+                            <div class="dashboard-item-footer"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-item-container zh-s zw-6">
+                        <div class="dashboard-item" style="background-color: white;">
+                            <div class="dashboard-item-head">
+                                <div class="head-left">
+                                    <span>Ver más</span>
+                                </div>
+                                <div class="head-right">
+                                    <span style="vertical-align: middle;">Crear </span>
+                                    <mat-icon style="color: green;">note_add</mat-icon>
+                                </div>
+                            </div>
+                            <div class="dashboard-item-body text-content">
+                                <p>Historiales Medicos</p>
+                                <span class="big-text2">{{medical_history_count}}</span>
+                            </div>
+                            <div class="dashboard-item-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="dashboard-item-container zh-m zw-4">
+                <div class="dashboard-item">
+                    <div class="dashboard-item-head"></div>
+                    <div class="dashboard-item-body">
+                        <div>
+                            <apx-chart
+                              [series]="chartOptions.series!"
+                              [chart]="chartOptions.chart!"
+                              [xaxis]="chartOptions.xaxis!"
+                              [title]="chartOptions.title!"
+                            ></apx-chart>
+                          </div>
                     </div>
                     <div class="dashboard-item-footer"></div>
                 </div>
             </div>
-            <div class="dashboard-item-container">
+            <div class="dashboard-item-container zh-m zw-4">
                 <div class="dashboard-item">
                     <div class="dashboard-item-head"></div>
-                    <div class="dashboard-item-body"></div>
+                    <div class="dashboard-item-body">
+                        <div>
+                            <apx-chart
+                              [series]="chartOptionsPIE.series!"
+                              [chart]="chartOptionsPIE.chart!"
+                              [labels]="chartOptionsPIE.labels!"
+                              [responsive]="chartOptionsPIE.responsive!"
+                            ></apx-chart>
+                          </div>
+                    </div>
                     <div class="dashboard-item-footer"></div>
                 </div>
             </div>
-            <div class="dashboard-item-container">
+        </div>
+        <div class="d-row">
+            <div class="dashboard-item-container zh-m zw-6">
                 <div class="dashboard-item">
                     <div class="dashboard-item-head"></div>
-                    <div class="dashboard-item-body"></div>
+                    <div class="dashboard-item-body">
+                        <div>
+                            <apx-chart
+                              [series]="chartOptionsPIE.series!"
+                              [chart]="chartOptionsPIE.chart!"
+                              [labels]="chartOptionsPIE.labels!"
+                              [responsive]="chartOptionsPIE.responsive!"
+                            ></apx-chart>
+                          </div>
+                    </div>
+                    <div class="dashboard-item-footer"></div>
+                </div>
+            </div>
+            <div class="dashboard-item-container zh-m zw-6">
+                <div class="dashboard-item">
+                    <div class="dashboard-item-head"></div>
+                    <div class="dashboard-item-body">
+                        <div>
+                            <apx-chart
+                              [series]="chartOptions.series!"
+                              [chart]="chartOptions.chart!"
+                              [xaxis]="chartOptions.xaxis!"
+                              [title]="chartOptions.title!"
+                            ></apx-chart>
+                          </div>
+                    </div>
                     <div class="dashboard-item-footer"></div>
                 </div>
             </div>

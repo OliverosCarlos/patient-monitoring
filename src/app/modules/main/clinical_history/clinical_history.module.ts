@@ -11,12 +11,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxEditorModule } from 'ngx-editor';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { safehtmlModule } from 'src/app/utils/components/custom_pipes/safehtml.module'
 
 import { ClinicalHistoryRoutingModule } from './clinical_history-routing.module';
 import { ClinicalHistoryComponent } from './clinical_history.component';
 
 import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
-import { SafeHtmlPipe } from "src/app/utils/setup/safehtml.pipe";
 
 import { ClinicalHistoryDashboardViewComponent } from 'src/app/components/clinical_history/clinical_history-dashboard/clinical_history-dashboard-view.component';
 import { EarlyStimulationFormViewComponent } from 'src/app/components/clinical_history/early_stimulation-form-view/early_stimulation-form-view.component';
@@ -39,7 +40,6 @@ import { EarlyStimulationReportShowViewComponent } from "src/app/components/clin
     EarlyStimulationShowViewComponent,
     EarlyStimulationReportFormViewComponent,
     EarlyStimulationReportShowViewComponent,
-    SafeHtmlPipe
   ],
   imports: [
     CommonModule,
@@ -54,7 +54,9 @@ import { EarlyStimulationReportShowViewComponent } from "src/app/components/clin
     MatTabsModule,
     AngularEditorModule,
     NgxEditorModule,
-    CKEditorModule
+    CKEditorModule,
+    NgApexchartsModule,
+    safehtmlModule
   ],
   providers: [
     CanActivateLogged

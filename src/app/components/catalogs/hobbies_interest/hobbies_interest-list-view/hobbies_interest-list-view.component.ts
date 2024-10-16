@@ -13,6 +13,9 @@ import { UtilService } from 'src/app/services/util.service';
 import { Hobbies_Interest } from 'src/app/models/hobbies_interest.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 
 @Component({
   selector: 'app-hobbies_interest-list-view',
@@ -25,6 +28,8 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   dataSource = new MatTableDataSource<Hobbies_Interest>([]);
   selection = new SelectionModel<Hobbies_Interest>(true, []);
 
+  model : Model;
+
   $headerAction!: Subscription;
   $advanceSearch!: Subscription;
 
@@ -33,7 +38,9 @@ export class Hobbies_InterestListViewComponent implements OnInit {
     private headerService : HeaderService,
     private backendService : BackendService,
     private utilService: UtilService
-    ) {}
+    ) {
+      this.model = MODELS.find(model => model.name == 'hobbies_interest')!;
+    }
 
   ngAfterViewInit(): void {
     this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
@@ -53,7 +60,7 @@ export class Hobbies_InterestListViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll({});
-    this.headerService.setHeader({name:'hobbies_interest',type:'list'});
+    this.headerService.setHeader({model: this.model, type:'list'});
     this.utilService.set({name:'hobbies_interest', type:'list'});
     this.headerService.setSetupSearch({name:'hobbies_interest'})
   }

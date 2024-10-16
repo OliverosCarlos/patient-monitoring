@@ -81,3 +81,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 }
 
 @include sororas-sidenav();
+
+.d-row{ //Display row
+  display: flex;
+  justify-content: space-around;
+}
+
+.zw-2{ width: 12.5%; }
+
+.zw-3{ width: 33%; }
+
+.zw-4{ width: 25%; }
+
+.zw-6{ width: 50%; }
+
+.zw-12{ width: 100%; }
+
+.zh-s{ height: 150px; }
+
+.zh-m{ height: 300px; }
+
+.zh-l{ height: 600px; }
+
+@import 'ckeditor5/ckeditor5';

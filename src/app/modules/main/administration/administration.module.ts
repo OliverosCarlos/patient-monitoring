@@ -4,6 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialAllModule } from 'src/material.module'
 import { FilePickerModule } from  '@sleiss/ngx-awesome-uploader';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { safehtmlModule } from 'src/app/utils/components/custom_pipes/safehtml.module'
+
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './administration.component';
@@ -13,8 +17,11 @@ import { PsychologistCardViewComponent } from 'src/app/components/administration
 import { PsychologistListViewComponent } from 'src/app/components/administration/psychologist/psychologist-list-view/psychologist-list-view.component';
 import { PsychologistShowViewComponent } from 'src/app/components/administration/psychologist/psychologist-show-view/psychologist-show-view.component';
 
+import { BayleyItemFormViewComponent } from 'src/app/components/administration/tests/bayley/bayley_item-form-view/bayley_item-form-view.component';
+import { BayleyItemListViewComponent } from 'src/app/components/administration/tests/bayley/bayley_item-list-view/bayley_item-list-view.component';
+
 //const config: InputFileConfig = {
-//  fileAccept: '*',
+//  fileAccept: '*',k
 //  fileLimit: 1
 //};
 
@@ -24,7 +31,9 @@ import { PsychologistShowViewComponent } from 'src/app/components/administration
     PsychologistFormViewComponent,
     PsychologistCardViewComponent,
     PsychologistListViewComponent,
-    PsychologistShowViewComponent
+    PsychologistShowViewComponent,
+    BayleyItemFormViewComponent,
+    BayleyItemListViewComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +41,10 @@ import { PsychologistShowViewComponent } from 'src/app/components/administration
     MaterialAllModule,
     FormsModule,
     ReactiveFormsModule,
-    FilePickerModule
+    FilePickerModule,
+    NgSelectModule,
+    CKEditorModule,
+    safehtmlModule
   ],
   providers: []
 })

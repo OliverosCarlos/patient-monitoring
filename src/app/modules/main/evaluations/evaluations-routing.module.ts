@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EvaluationsComponent } from './evaluations.component';
 
 import { EvaluationsDashboardViewComponent } from 'src/app/components/evaluations/evaluations-dashboard/evaluations-dashboard-view.component';
-
+import { BayleyItemListViewComponent } from 'src/app/components/evaluations/bayley/bayley_apply-tool-view/bayley_apply-tool-view.component'
 
 import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
 
@@ -17,6 +17,8 @@ const routes: Routes = [
       // { path: 'update/:emotion_id', component: EmotionUpdateViewComponent, data: { breadcrumb: 'Actualizar',  animation: true }  }
     ],
   },
+  { path: 'bayley-apply', component: BayleyItemListViewComponent, data: { breadcrumb: 'bayley',  animation: true }, canActivate: [CanActivateLogged] },
+
 ];
 
 @NgModule({

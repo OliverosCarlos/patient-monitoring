@@ -1,0 +1,78 @@
+<!-- <div *ngFor="let area of current_data">
+  <h1 class="area-title">{{area.aux}}</h1>
+
+  <div *ngFor="let stage of area.children">
+    <div class="stage-container">
+      <p style="text-align: center;">{{stage.aux}}</p>
+      <div class="d-row my-3" *ngFor="let item of stage.children">
+        <div class="option-container">
+          <p>{{item.item}}</p>
+        </div>
+        <div class="option-container">
+          <p>{{item.materials}}</p>
+        </div>
+        <div class="option-container">
+          <div style="width: 100%;" [innerHTML]="item.notes | safeHtml"></div>
+        </div>
+        <div class="option-response">
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">SI</mat-radio-button>
+            <mat-radio-button value="0">NO</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> -->
+
+<div class="d-row">
+
+  <div class="panel-container">
+    <div>
+      <h1 class="area-title">Cognitiva</h1>
+    </div>
+    <hr>
+    <br>
+    <div>
+      <span class="big-text">A</span>
+      <span class="big-text">21</span>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="d-row">
+      <button mat-raised-button color="accent">Anterior</button>
+      <button (click)="handleNext()" mat-raised-button color="accent">Siguiente</button>
+    </div>
+  </div>
+
+    <div class="item-view" #main_card >
+      <ng-container *ngFor="let obj of current_data; let  i = index" >
+        <div class="item-card" [@openClose]=" dummy[i].active ? 'open' : 'closed'">
+          <div class="card-title">
+            <h1>{{obj.item}}</h1>
+          </div>
+        
+          <div class="d-row">
+            <div class="card-option">
+              <h1>{{obj.materials}}</h1>
+            </div>
+            <div class="card-option">
+              <h1>{{obj.notes}}</h1>
+            </div>
+          </div>
+        
+          <div class="d-row mt-3">
+            <div class="big-button yes-option">
+              <span>SI</span>
+            </div>
+            <div class="big-button no-option">
+              <span>NO</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+</div>

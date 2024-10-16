@@ -9,6 +9,10 @@ import { HeaderService } from 'src/app/services/header.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -24,6 +28,8 @@ export class Hobbies_InterestUpdateFormViewComponent implements OnInit, OnDestro
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
+  model : Model;
+
   $headerAction!: Subscription;
 
   constructor(
@@ -34,6 +40,7 @@ export class Hobbies_InterestUpdateFormViewComponent implements OnInit, OnDestro
     private route: ActivatedRoute,
     private fb: UntypedFormBuilder,
   ) {
+    this.model = MODELS.find(model => model.name == 'hobbies_interest')!;
     this.setFocus();
     this.formGroup = this.fb.group({
       id: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -61,7 +68,7 @@ export class Hobbies_InterestUpdateFormViewComponent implements OnInit, OnDestro
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'hobbies_interest',type:'edit'});
+    this.headerService.setHeader({model: this.model, type:'edit'});
     this.formGroup.statusChanges
       .pipe(
         filter(() => this.formGroup.valid))
@@ -108,7 +115,7 @@ export class Hobbies_InterestUpdateFormViewComponent implements OnInit, OnDestro
     this.backendService.update(CATALOGS.HOBBIES_INTEREST , this.route.snapshot.paramMap.get('hobbies-interest_id'),this.formGroup.value).subscribe({
      next: (v) => { console.log(v); },
      error: (e) => console.error(e),
-     complete: () => this.router.navigate(['main' ,'catalogs' ,'hobbies-interest' ,'table'])
+     complete: () => this.router.navigate(['main' ,'catalogs' ,'hobbies-interest' ,'list'])
     })
   }
 

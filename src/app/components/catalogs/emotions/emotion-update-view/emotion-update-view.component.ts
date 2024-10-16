@@ -9,6 +9,8 @@ import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
 //models
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -25,6 +27,8 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
+  model : Model;
+
   chip = {'name':'',color:'white'};
 
   $headerAction!: Subscription;
@@ -37,6 +41,7 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
     private headerService : HeaderService,
     private fb: UntypedFormBuilder
   ) {
+    this.model = MODELS.find(model => model.name == 'emotion')!;
     this.setFocus();
     this.formGroup = this.fb.group({
       id: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -49,7 +54,6 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   }
   ngAfterViewInit(): void {
     this.$headerAction = this.headerService.getOutAction().subscribe(data => {
-      console.log(data)
       switch (data.action) {
         case 'update':
           this.update();
@@ -64,8 +68,8 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'symptom',type:'edit'});
-    this.utilService.set({name:'symptom', type:'update'});
+    this.headerService.setHeader({model: this.model, type:'edit'});
+    this.utilService.set({name:'emotion', type:'update'});
     this.formGroup.statusChanges
       .pipe(
         filter(() => this.formGroup.valid))
@@ -114,7 +118,7 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
     this.backendService.update(CATALOGS.EMOTIONS, this.route.snapshot.paramMap.get('emotion_id'), this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['main', 'catalogs', 'emotions', 'table'])
+      complete: () => this.router.navigate(['main', 'catalogs', 'emotions', 'list'])
     });
   }
 
@@ -139,7 +143,7 @@ export class EmotionUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   cancel(){
-    this.router.navigate(['catalogs','emotions','form',this.route.snapshot.paramMap.get('emotion_id')]);
+    this.router.navigate(['main','catalogs','emotions', 'form', this.route.snapshot.paramMap.get('emotion_id')]);
   }
 
   handleChangeComplete($event:any){

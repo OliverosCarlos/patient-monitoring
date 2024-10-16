@@ -8,6 +8,10 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -20,6 +24,8 @@ import { DemoFilePickerAdapter } from  './demo-file-picker.adapter';
   styleUrls: ['./psychologist-form-view.component.scss']
 })
 export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  model : Model;
 
   @ViewChild('firstInput', { static: false }) firstInput!: ElementRef;
   formGroup: UntypedFormGroup;
@@ -47,6 +53,7 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
     private fb: UntypedFormBuilder,
     private http: HttpClient
   ) {
+    this.model = MODELS.find(model => model.name == 'psychologist')!;
     this.setFocus();
     this.formGroup = this.fb.group({
       psychologist_files: this._formBuilder.group({
@@ -84,7 +91,7 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'psychologist', type:'form'});
+    this.headerService.setHeader({model: this.model, type: 'form'});
     this.utilService.set({name:'psychologist', type:'form'});
     this.formGroup.statusChanges
       .pipe(

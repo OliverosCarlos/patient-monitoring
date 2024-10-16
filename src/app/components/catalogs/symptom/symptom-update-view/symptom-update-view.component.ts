@@ -8,6 +8,10 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -23,6 +27,8 @@ export class SymptomUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
+  model : Model;
+
   chip = {'name':'',color:'white'};
 
   $headerAction!: Subscription;
@@ -35,6 +41,7 @@ export class SymptomUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
     private route: ActivatedRoute,
     private fb: UntypedFormBuilder
   ) {
+    this.model = MODELS.find(model => model.name == 'symptom')!;
     this.setFocus();
     this.formGroup = this.fb.group({
       id: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -111,7 +118,7 @@ export class SymptomUpdateViewComponent implements OnInit, OnDestroy, AfterViewI
     this.backendService.update(CATALOGS.SYMPTOMS, this.route.snapshot.paramMap.get('symptom_id'), this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['main','catalogs','symptom','table'])
+      complete: () => this.router.navigate(['main','catalogs','symptom','list'])
     })
   }
 

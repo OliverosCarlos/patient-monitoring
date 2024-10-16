@@ -13,6 +13,8 @@ import { UtilService } from 'src/app/services/util.service';
 //models
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
 
 @Component({
   selector: 'app-emotion-list-view',
@@ -20,6 +22,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./emotion-list-view.component.scss']
 })
 export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  model : Model;
 
   displayedColumns = ['select','code','name','description','color'];
   dataSource = new MatTableDataSource<Emotion>([]);
@@ -35,7 +39,9 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
     private spinner: NgxSpinnerService,
     private headerService : HeaderService,
     private utilService: UtilService
-    ) { }
+    ) { 
+      this.model = MODELS.find(model => model.name == 'emotion')!;
+    }
 
   ngAfterViewInit(): void {
     this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
@@ -54,10 +60,8 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   ngOnInit(): void {
-    console.log("EMOTIONS");
-    
     this.getAllEmotions({});
-    this.headerService.setHeader({name:'emotion',type:'list'});
+    this.headerService.setHeader({model: this.model, type:'list'});
     this.utilService.set({name:'emotion', type:'list'});
     this.headerService.setSetupSearch({name:'emotion'})
   }

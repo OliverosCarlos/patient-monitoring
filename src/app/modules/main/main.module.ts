@@ -20,7 +20,7 @@ import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_heade
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
   ],
   imports: [
     CommonModule,

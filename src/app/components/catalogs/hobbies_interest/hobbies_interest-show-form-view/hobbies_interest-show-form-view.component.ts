@@ -9,6 +9,10 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -18,6 +22,8 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./hobbies_interest-show-form-view.component.scss']
 })
 export class Hobbies_InterestShowFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  model : Model;
 
   record = {
     id: '', 
@@ -32,7 +38,9 @@ export class Hobbies_InterestShowFormViewComponent implements OnInit, OnDestroy,
     private utilService: UtilService,
     private route: ActivatedRoute,
     private router : Router
-  ) {}
+  ) {
+    this.model = MODELS.find(model => model.name == 'hobbies_interest')!;
+  }
 
   ngOnDestroy(): void {
     this.$headerAction.unsubscribe();
@@ -54,7 +62,7 @@ export class Hobbies_InterestShowFormViewComponent implements OnInit, OnDestroy,
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'hobbies_interest',type:'show'});
+    this.headerService.setHeader({model: this.model, type:'show'});
     if(this.route.snapshot.paramMap.get('hobbies-interest_id')){
       this.getHobbies_InterestById(this.route.snapshot.paramMap.get('hobbies-interest_id'));
     }

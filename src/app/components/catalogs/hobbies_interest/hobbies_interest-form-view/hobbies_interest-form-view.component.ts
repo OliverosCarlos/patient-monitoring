@@ -5,11 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { CATALOGS } from 'src/app/utils/setup/routes.enum';
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
 //SERVICES
 import { HeaderService } from 'src/app/services/header.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
 
 @Component({
   selector: 'app-hobbies_interest-form-view',
@@ -23,6 +29,8 @@ export class Hobbies_InterestFormViewComponent implements OnInit, OnDestroy, Aft
   @Input() modalConfigParent: any;
   @Input() nameForm: String = '';
 
+  model : Model;
+
   $headerAction!: Subscription;
 
   constructor(
@@ -31,8 +39,10 @@ export class Hobbies_InterestFormViewComponent implements OnInit, OnDestroy, Aft
     private route: ActivatedRoute,
     private headerService : HeaderService,
     private fb: UntypedFormBuilder,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private _snackBar: MatSnackBar,
   ) {
+    this.model = MODELS.find(model => model.name == 'hobbies_interest')!;
     this.setFocus();
     this.formGroup = this.fb.group({
       code: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -58,7 +68,7 @@ export class Hobbies_InterestFormViewComponent implements OnInit, OnDestroy, Aft
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'hobbies_interest',type:'form'});
+    this.headerService.setHeader({model: this.model, type:'form'});
     this.utilService.set({name:'hobbies_interest', type:'form'});
     this.formGroup.statusChanges
       .pipe(
@@ -100,13 +110,25 @@ export class Hobbies_InterestFormViewComponent implements OnInit, OnDestroy, Aft
     this.backendService.create(CATALOGS.HOBBIES_INTEREST ,this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => this.router.navigate(['../','main','catalogs','hobbies-interest'])
+      complete: () => {
+        this.showSuccess();
+        this.router.navigate(['../','main','catalogs','hobbies-interest', 'list'])
+      }
     })
   }
 
   cancel(){
-    this.router.navigate(['../','main','catalogs','hobbies-interest']);
+    this.router.navigate(['../','main','catalogs','hobbies-interest', 'list']);
+  }
+
+  showSuccess(){
+    this._snackBar.openFromComponent(GenericSnackbarComponent, {
+      data: {
+        message: "Elemento creado correctamente",
+        icon: "done"
+      },
+      duration: 5000
+    });
   }
 
 }
-    

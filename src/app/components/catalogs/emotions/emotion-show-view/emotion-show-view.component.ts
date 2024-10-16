@@ -12,6 +12,8 @@ import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
 //models
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
 
 @Component({
   selector: 'app-emotion-show-view',
@@ -19,6 +21,8 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./emotion-show-view.component.scss']
 })
 export class EmotionShowViewComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  model : Model;
 
   emotion = { 
     id: '', 
@@ -36,10 +40,12 @@ export class EmotionShowViewComponent implements OnInit, OnDestroy, AfterViewIni
     private router : Router,
     private headerService : HeaderService,
     private utilService: UtilService
-  ) {}
+  ) {
+    this.model = MODELS.find(model => model.name == 'emotion')!;
+  }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'emotion',type:'show'});
+    this.headerService.setHeader({model: this.model, type:'show'});
     this.utilService.set({name:'emotion', type:'show'});
     if(this.route.snapshot.paramMap.get('emotion_id')){
       this.getEmotionById(this.route.snapshot.paramMap.get('emotion_id'));

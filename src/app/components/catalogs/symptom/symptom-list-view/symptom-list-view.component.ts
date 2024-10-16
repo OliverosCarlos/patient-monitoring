@@ -7,6 +7,10 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import { Subscription } from 'rxjs';
 
 import {SelectionModel} from '@angular/cdk/collections';
@@ -18,6 +22,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./symptom-list-view.component.scss']
 })
 export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  model : Model;
 
   displayedColumns = ['select','code','name', 'color'];
   dataSource = new MatTableDataSource<Symptom>([]);
@@ -31,11 +37,13 @@ export class SymptomListViewComponent implements OnInit, AfterViewInit, OnDestro
     private router : Router,
     private headerService: HeaderService,
     private utilService: UtilService
-    ) { }
+    ) {
+      this.model = MODELS.find(model => model.name == 'symptom')!;
+     }
 
   ngOnInit(): void {
     this.getAll({});
-    this.headerService.setHeader({name:'symptom',type:'list'});
+    this.headerService.setHeader({model: this.model, type:'list'});
     this.utilService.set({name:'symptom', type:'list'});
     this.headerService.setSetupSearch({name:'symptom'});
   }

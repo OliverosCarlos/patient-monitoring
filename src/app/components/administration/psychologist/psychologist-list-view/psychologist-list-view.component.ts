@@ -8,6 +8,10 @@ import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 import { BackendService } from 'src/app/services/backend.service';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -17,6 +21,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./psychologist-list-view.component.scss']
 })
 export class PsychologistListViewComponent implements OnInit, AfterViewInit {
+
+  model : Model;
 
   displayedColumns = ['select','first_name','last_name1','last_name2','age','email','phone_number','university','studies','profile'];
   dataSource = new MatTableDataSource<Psychologist>([]);
@@ -29,11 +35,13 @@ export class PsychologistListViewComponent implements OnInit, AfterViewInit {
     private utilService : UtilService,
     private backendService : BackendService,
     private router : Router
-    ) { }
+    ) { 
+      this.model = MODELS.find(model => model.name == 'psychologist')!;
+    }
 
   ngOnInit(): void {
     this.getAllPsychologist();
-    this.headerService.setHeader({name:'psychologist', type:'list'});
+    this.headerService.setHeader({model: this.model, type: 'list'});
     this.utilService.set({name:'psychologist', type:'list'});
   }
 

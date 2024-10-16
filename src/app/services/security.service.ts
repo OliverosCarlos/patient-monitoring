@@ -100,6 +100,6 @@ export class SecurityService {
     }
 
     getGroups(){
-        return JSON.parse(localStorage.getItem('usr')!).groups;
+        return JSON.parse(localStorage.getItem('profile')!).user.groups;
     }
 }

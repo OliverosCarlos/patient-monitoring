@@ -13,40 +13,43 @@
 
 }
 
-.body-section{
-    display: flex;
-    justify-content: space-around;
-    border: solid 1px black;
-
     .dashboard-item-container{
-        width: 25%;
         padding: 5px;
-        border: solid 1px black;
-
         
         .dashboard-item{
-            background-color: white;
-            border-radius: 8px;
-            border: solid 1px black;
+          width: 100%;
+          height: 100%;
+          padding: 10px 0px;
+          background-color: white;
+          border-radius: 5px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
             .dashboard-item-head{
-                display: flex;
-                border: solid 1px blue;
+              display: flex;
+              margin-bottom: 10px;
 
                 .head-left{
-                    width: 70%;
-                    border: solid 1px black;
-                    align-items: center;
+                    width: 50%;
+                    padding-inline: 10px;
                 }
 
                 .head-right{
-                    width: 30%;
-                    border: solid 1px black;
+                    width: 50%;
+                    padding-inline: 10px;
+                    border-left: solid 3px lightgrey;
+                    // border-radius: 0px 5px 0px 0px;
+                    display: flex;
+                    justify-content: space-between;
                 }
+            }
+
+            .dashboard-item-body{
+              padding-inline: 10px;
+              margin-bottom: 10px;
+
             }
         }
     }
-}
   
 .title-section{
   h2{
@@ -54,40 +57,28 @@
   }
 }
 
-.patient-list-body{
-  :hover{
-    background-color: whitesmoke;
-    cursor: pointer;
-  }
-  
+.general-content{
+
 }
 
-.mat-row:hover .mat-cell {
-  background-color: whitesmoke;
-  cursor: pointer;
+.text-content{
+  text-align: center;
 }
 
-.patient-list-card-c{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-bottom: solid 1px gainsboro;
+.big-text{
+  font-size: x-large;
+  font-weight: bold;
+  padding: 5px 20px;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: white;
+}
 
-  .user-info-c{
-    display: flexbox;
-
-    .user-info-text{
-      width: 100%;
-      display: inline-block;
-    }
-
-  }
-
-  .img-container {
-    img {
-      width: 48px;
-      height: 48px;
-      border-radius: 100%;
-    }
-  }
-
+.big-text2{
+  font-size: x-large;
+  font-weight: bold;
+  padding: 5px 20px;
+  border-radius: 5px;
+  background-color: rgb(158, 235, 43);
+  color: white;
 }

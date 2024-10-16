@@ -27,7 +27,8 @@ export enum PSYCHOTHERAPY {
 
 export enum ADMINISTRATION {
     PSYCHOLOGIST = '/administration/psychologist/',
-    PSYCHOLOGIST_CREATE = '/administration/psychologist/create/', 
+    PSYCHOLOGIST_CREATE = '/administration/psychologist/create/',
+    BAYLEY_ITEM = '/administration/bayley_item/',
 }
 
 export enum SEC {

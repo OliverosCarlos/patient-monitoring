@@ -1,0 +1,147 @@
+.area-title{
+    color: dodgerblue;
+    text-transform: uppercase;
+    margin-block: 20px;
+}
+
+.stage-container{
+    border-radius: 8px;
+    background-color: rgb(239, 239, 239);
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    .option-container{
+        width: 30%;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: white;
+    }
+
+    .option-response{
+        width: 9%;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: white;
+    }
+}
+
+.panel-container{
+    width: 20%;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: rgb(231, 231, 231);
+    z-index: 100;
+
+    .area-title{
+        font-weight: bold;
+    }
+
+    .big-text{
+        padding: 10px;
+        margin-right: 10px;
+        background-color: white;
+        color: dodgerblue;
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: 30px;
+        border: solid 1px dodgerblue;
+    }
+}
+
+.item-view{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    // overflow:hidden;
+    
+    position: relative;
+    width: 80%;
+}
+
+
+.item-card{
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    margin-inline: 10px;
+    position: absolute;
+
+
+    .card-title{
+        padding: 20px;
+        margin-bottom: 5px;
+        border-radius: 8px;
+        background-color: white;
+        h1{ font-weight: bolder; }
+    }
+
+    .card-option{
+        width: 50%;
+        margin-top: 5px;
+        margin-right: 5px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+    }
+}
+
+.big-button{
+    width: 40%;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.yes-option{
+    background-color: white;
+    border: solid 3px dodgerblue;
+
+    span{
+        color: dodgerblue;
+        font-size: 24px;
+    }
+    
+    &:hover{
+        background-color: dodgerblue;
+        span{
+            color: white;
+        }
+    }
+
+    &:active{
+        background-color: rgb(30, 132, 234);
+        span{
+            color: white;
+        }
+    }
+}
+
+.no-option{
+    background-color: white;
+    border: solid 3px red;
+
+    span{
+        color: red;
+        font-size: 24px;
+    }
+    
+    &:hover{
+        background-color: red;
+        span{
+            color: white;
+        }
+    }
+
+    &:active{
+        background-color: rgb(234, 3, 3);
+        span{
+            color: white;
+        }
+    }
+}
+
+
+.item-container{
+    position: relative;
+}

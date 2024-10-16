@@ -122,7 +122,9 @@ export const MODELS: Model[] = [
       plural_name:'Sintomas',
       components:[
         new VWComponent('catalogs/symptom/form','form','card_content',{}),
-        new VWComponent('catalogs/symptom/table','list','card_content',{})
+        new VWComponent('catalogs/symptom/table','list','card_content',{}),
+        new VWComponent('catalogs/symptom/form/:symptom_id','show','card_content',{}),
+        new VWComponent('catalogs/symptom/update/:symptom_id','update','card_content',{})
       ],
       multipleView: false,
       searchAttributes:['name','code']
@@ -133,7 +135,7 @@ export const MODELS: Model[] = [
       plural_name:'Hobbies e interéses',
       components:[
         new VWComponent('catalogs/hobbies-interest/form','form','card_content',{}),
-        new VWComponent('catalogs/hobbies-interest/table','list','card_content',{}),
+        new VWComponent('catalogs/hobbies-interest/list','list','card_content',{}),
         new VWComponent('catalogs/hobbies-interest/form/:hobbies-interest_id','show','card_content',{}),
         new VWComponent('catalogs/hobbies-interest/update/:hobbies-interest_id','update','card_content',{})
       ],
@@ -146,12 +148,12 @@ export const MODELS: Model[] = [
       plural_name:'Psicólogas',
       components:[
         new VWComponent('administration/psychologist/form','form','card_content',{}),
-        new VWComponent('administration/psychologist/table','list','card_content',{}),
+        new VWComponent('administration/psychologist/list','list','card_content',{}),
         new VWComponent('administration/psychologist/form/:psychologist_id','show','card_content',{}),
         new VWComponent('administration/psychologist/update/:psychologist_id','update','card_content',{})
       ],
       multipleView: true,
-      searchAttributes:[]
+      searchAttributes:['name','code']
     },
     {
       name: 'early-stimulation',
@@ -191,5 +193,20 @@ export const MODELS: Model[] = [
       multipleView: false,
       searchAttributes:['name','patient'],
       options: ['Eliminar', 'Exportar PDF']
+    },
+    {
+      name: 'bayley-item',
+      singular_name: 'Bayley Item',
+      plural_name:'Bayley Items',
+      menus: [
+        { menuTitle: "Estimulación Temprana", path: "form" },
+        { menuTitle: "Adulto", path: "list" }
+      ],
+      components:[
+        new VWComponent('administration/bayley-item/form','form','card_content',{}),
+        new VWComponent('administration/bayley-item/table','list','card_content',{}),
+      ],
+      multipleView: false,
+      searchAttributes:['paciente']
     },
   ];

@@ -8,6 +8,10 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
+//MODELS
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -17,6 +21,8 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./symptom-show-view.component.scss']
 })
 export class SymptomShowViewComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  model : Model;
 
   symptom = { 
     id: '', 
@@ -34,7 +40,9 @@ export class SymptomShowViewComponent implements OnInit, OnDestroy, AfterViewIni
     private utilService: UtilService,
     private route: ActivatedRoute,
     private router : Router
-  ) {}
+  ) {
+    this.model = MODELS.find(model => model.name == 'symptom')!;
+  }
 
   ngAfterViewInit(): void {
     this.$headerAction = this.headerService.getOutAction().subscribe(data => {
@@ -52,7 +60,7 @@ export class SymptomShowViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'symptom',type:'show'});
+    this.headerService.setHeader({model: this.model, type:'show'});
     if(this.route.snapshot.paramMap.get('symptom_id')){
       this.getSymptomById(this.route.snapshot.paramMap.get('symptom_id'));
     }
@@ -77,7 +85,7 @@ export class SymptomShowViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   updateEmotion(){
-    this.router.navigate(['main','catalogs','symptom','update',this.route.snapshot.paramMap.get('emotion_id')]);
+    this.router.navigate(['main','catalogs','symptom','update',this.route.snapshot.paramMap.get('symptom_id')]);
   }
 
   edit(){
