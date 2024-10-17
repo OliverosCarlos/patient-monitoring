@@ -63,7 +63,8 @@ export class PsychologistListViewComponent implements OnInit, AfterViewInit {
 
   getAllPsychologist(){
     this.backendService.getAll(ADMINISTRATION.PSYCHOLOGIST,{}).subscribe({
-      next: (v) => { this.dataSource.data = v },
+      next: (v) => { this.dataSource.data = v; console.log(v);
+      },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
     });

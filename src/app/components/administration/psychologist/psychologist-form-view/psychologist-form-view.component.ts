@@ -119,6 +119,7 @@ export class PsychologistFormViewComponent implements OnInit, OnDestroy, AfterVi
   }
 
   save(){
+    console.log(this.formGroup.value);
     
     this.formData.append('psychologist_data', JSON.stringify(this.formGroup.value.psychologist_data));
     this.backendService.createWithFile(ADMINISTRATION.PSYCHOLOGIST_CREATE ,this.formData).subscribe({

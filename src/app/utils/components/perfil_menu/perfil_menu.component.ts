@@ -88,7 +88,7 @@ export class PerfilMenuComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getProfileImage(data: any){
     if(data.psychologist){
-      return './assets/media/'+data.psychologist.image
+      return data.psychologist.image
     }
     else{
       return './assets/media/admin_user.png'

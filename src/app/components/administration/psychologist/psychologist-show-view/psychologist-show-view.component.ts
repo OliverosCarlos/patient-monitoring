@@ -26,7 +26,7 @@ export class PsychologistShowViewComponent implements OnInit, OnDestroy, AfterVi
     university: '',
     studies: '',
     profile: '',
-    image: 'female-placeholder.jpg'
+    image: 'https://django-static-pm.s3.amazonaws.com/media/general/female-placeholder.jpg'
   };
 
 
@@ -55,7 +55,8 @@ export class PsychologistShowViewComponent implements OnInit, OnDestroy, AfterVi
   getPsychologistById(id:any){
     if(id){
       this.backendService.getOneById(ADMINISTRATION.PSYCHOLOGIST,id).subscribe({
-        next: (v) => { this.psychologist = v[0] },
+        next: (v) => { this.psychologist = v, console.log(v);
+        },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });
