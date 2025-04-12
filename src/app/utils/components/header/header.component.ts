@@ -18,6 +18,7 @@ import { HeaderService } from 'src/app/services/header.service';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { UtilService } from 'src/app/services/util.service';
 
 
 @Component({
@@ -27,10 +28,16 @@ import { filter } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @Input() sideNavHeaderMenuItems: any[] = [];
+
   suscribeHeaderService!: Subscription;
   suscribeHeaderAction!: Subscription;
+  $platformService!: Subscription;
 
   titulo = 'carlos'
+  platformTitle = '';
+  platformSubtitle = '';
+  isDashboard = false;
 
   //labels
   labelMainButton = 'Crear';
@@ -60,26 +67,42 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   optionFunctions: any[] = [];
   menuOptionsList: any[] = [''];
   activities: any[] = [];
+  // sideNavHeaderMenuItems : any[]= [];
+
+  searchAttributes : any[] = []
 
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
   constructor(
+    private router : Router,
+    private route: ActivatedRoute,
     private headerService : HeaderService,
-    private adService: AdService
-    ) {}
+    private adService: AdService,
+    private utilService : UtilService,
+    ) {
+      this.suscribeHeaderAction = this.headerService.getInAction().subscribe(data => {
+        this.startAction(data);
+      });
+  
+      this.suscribeHeaderService = this.headerService.getHeader().subscribe(data => {
+        this.resetHeaderSetup();
+        this.startSetup(data.model, data.type);
+      });
+    }
 
   ngOnInit() {
-    this.suscribeHeaderService = this.headerService.getHeader().subscribe(data => {
-      this.startSetup(data.model, data.type);
-    });
-    this.suscribeHeaderAction = this.headerService.getInAction().subscribe(data => {
-      this.startAction(data);
-    });
+    console.log("HEADER");
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
 
-  ngOnDestroy() {}
+  }
+
+  ngOnDestroy() {
+    this.suscribeHeaderAction.unsubscribe()
+    this.suscribeHeaderService.unsubscribe()
+    // this.$platformService.unsubscribe()
+  }
 
   startAction(event:EventComponent){
     switch (event.action) {
@@ -105,6 +128,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  create(){ this.router.navigate([this.mainRoute], { relativeTo: this.route });}
   save(){ this.headerService.sendOutAction({action:'save'}); }
   edit(){ this.headerService.sendOutAction({action:'edit'}); }
   update(){ this.headerService.sendOutAction({action:'update'}); }
@@ -153,6 +177,8 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showSingleOptions = false;
         break;
       case 'list':
+        console.log("LIST LKJASLF");
+        
         this.showCreate = true;
         this.showSave = false; this.disabledSave = false;
         this.showEdit = false;
@@ -162,6 +188,7 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.mainRoute = model.components.filter(x=>x.view_type=='form')[0].route;
         this.showMultipleViewOption = model.multipleView;
         this.showSingleOptions = false;
+        this.searchAttributes = model.searchAttributes!
         break;
       case 'show':
         this.searchFlag = false;
@@ -212,4 +239,11 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  setSearchAttributes(attributes: any){
+    this.headerService.setDataSearch(attributes);
+  }
+
+  resetHeaderSetup(){
+    this.headerService.setSetupSearch({action:"hardReset"})
+  }
 }

@@ -30,6 +30,7 @@ export class PatientsToAssignListViewComponent implements OnInit {
 
   displayedColumns = ['image', 'first_name', 'phone_number', 'email', 'option'];
   dataSource = new MatTableDataSource<Patient>([]);
+  searchAttributes : any[] = ['first_name', 'email']
 
   $headerAction!: Subscription;
   $advanceSearch!: Subscription;
@@ -60,10 +61,6 @@ export class PatientsToAssignListViewComponent implements OnInit {
    });
   }
 
-  // show(hobbies_interest_data:Hobbies_Interest){
-  //   this.router.navigate(['main','catalogs','hobbies-interest','form',hobbies_interest_data.id]);
-  // }
-
   openDialog(patient: any) {
     const dialogRef = this.dialog.open(
       AssignTaskModalViewComponent,{
@@ -81,6 +78,11 @@ export class PatientsToAssignListViewComponent implements OnInit {
       this.utilService.setPatientTaskAssigned({status: 200});
     });
 
+  }
+
+  setSearchAttributes(attributes: any){
+    console.log(attributes);
+    
   }
 
 }

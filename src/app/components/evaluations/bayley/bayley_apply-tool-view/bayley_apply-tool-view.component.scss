@@ -53,38 +53,40 @@
 
 .item-view{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    // overflow:hidden;
+    overflow:hidden;
     
-    position: relative;
     width: 80%;
+
+    .item-card{
+        width: 100%;
+        padding: 20px;
+        background-color: whitesmoke;
+        border-radius: 8px;
+        // margin-inline: 10px;
+        // position: absolute;
+    
+    
+        .card-title{
+            padding: 20px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            background-color: white;
+            h1{ font-weight: bolder; }
+        }
+    
+        .card-option{
+            width: 50%;
+            margin-top: 5px;
+            margin-right: 5px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    }
 }
 
 
-.item-card{
-    padding: 20px;
-    background-color: whitesmoke;
-    border-radius: 8px;
-    margin-inline: 10px;
-    position: absolute;
 
-
-    .card-title{
-        padding: 20px;
-        margin-bottom: 5px;
-        border-radius: 8px;
-        background-color: white;
-        h1{ font-weight: bolder; }
-    }
-
-    .card-option{
-        width: 50%;
-        margin-top: 5px;
-        margin-right: 5px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-    }
-}
 
 .big-button{
     width: 40%;
@@ -144,4 +146,33 @@
 
 .item-container{
     position: relative;
+}
+
+.area-menu{
+    margin-bottom: 20px;
+}
+
+.area-button{
+    width: 33%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid dodgerblue;
+    text-align: center;
+    background-color: whitesmoke;
+    color: dodgerblue;
+
+    &:hover{
+        cursor: pointer;
+        background-color: dodgerblue;
+        color: white;
+    }
+
+    &:active{
+        background-color: rgb(30, 132, 234);
+    }
+}
+
+.area-button-active{
+    background-color: dodgerblue;
+    color: white;
 }

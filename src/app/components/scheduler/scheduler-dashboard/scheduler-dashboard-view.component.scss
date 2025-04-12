@@ -1,0 +1,185 @@
+#calendar-container{ grid-area: c1; }
+#calendar-day-container{ grid-area: c2; }
+#track-form-container{ grid-area: c3;}
+
+.main-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr; 
+  grid-template-areas: 
+      "c1 c1 c1 c1 c1 c2"
+      "c1 c1 c1 c1 c1 c2"
+      "c1 c1 c1 c1 c1 c2";
+  gap: 10px;
+}
+
+.body-section{
+  border-radius: 8px;
+  background-color: white;
+  padding: 5px;
+}
+
+.title-section{
+  h2{
+    color: gray;
+  }
+}
+
+.calendar-container {
+  padding: 5px;
+
+  .calendar-body{
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto auto;
+      grid-gap: 0px;
+      max-width: 100%;
+      overflow-x: hidden;
+  }
+
+}
+
+.day, .date {
+  border: 1px solid #ccc;
+}
+
+.day {
+  background-color: #ccc;
+  font-weight: bold;
+  font-size: small;
+  text-align: center;
+}
+
+.date {
+  background-color: #fff;
+  user-select: none; /* Standard syntax */
+  border-radius: 5px;
+
+  &:hover{
+      border: solid 1px dodgerblue;
+      // color: dodgerblue;
+  }
+
+  &:active{
+      background-color: dodgerblue;
+      color: white;
+  }
+
+  .date-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px 5px 0px 0px;
+
+    .appo-types{
+      display: flex;
+      gap: 0.5em;
+
+      .psychoterapy{
+        border: solid 2px #9B7EBD;
+        color: #9B7EBD;
+        padding: 3px;
+        border-radius: 5px;
+      }
+      .early-stimulation{
+        border: solid 2px #F8ED8C;
+        color: #F8ED8C;
+        padding: 3px;
+        border-radius: 5px;
+      }
+      .neuro-psychology{
+        border: solid 2px #3674B5;
+        color: #3674B5;
+        padding: 3px;
+        border-radius: 5px;
+      }
+
+    }
+  }
+
+  .date-content{
+    padding: 5px;
+  }
+}
+
+.current-date{
+  border: solid 1px green;
+}
+
+.empty-date{
+  font-weight: bold;
+  font-size: small;
+  text-align: center;
+  padding: 15px 0px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: gray;
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.month-control{
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 5px;
+}
+
+.month{
+  display: flex;
+  background-color: dodgerblue;
+  color: white;
+  flex-grow: 6;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  span{
+      text-transform: uppercase;
+      font-size: 16px;
+  }
+}
+
+.appointment-item-psycho{
+  border-left: solid 3px #9B7EBD;
+  border-bottom: solid 1px #9B7EBD;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  &:hover{
+    background-color: #9B7EBD;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.appointment-item-early-stimulation{
+  border-left: solid 3px #F8ED8C;
+  border-bottom: solid 1px #F8ED8C;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  &:hover{
+    background-color: #F8ED8C;
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.appointment-neuro-psycho{
+  border-left: solid 3px #3674B5;
+  border-bottom: solid 1px #3674B5;
+  padding-left: 5px;
+  margin-bottom: 5px;
+  &:hover{
+    background-color: #3674B5;
+    color: white;
+    cursor: pointer;
+  }
+}

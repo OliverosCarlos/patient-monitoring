@@ -11,12 +11,17 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 @Component({
   selector: 'app-patient-show-view',
   templateUrl: './patient-show-view.component.html',
   styleUrls: ['./patient-show-view.component.scss']
 })
 export class PatientShowViewComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  model : Model;
 
   patient = { 
     id: '', 
@@ -26,7 +31,7 @@ export class PatientShowViewComponent implements OnInit, OnDestroy, AfterViewIni
     age: '',
     email: '',
     phone_number: '',
-    image: 'female-placeholder.jpg'
+    image: './assets/media/female-placeholder.jpg'
   };
 
 
@@ -38,7 +43,9 @@ export class PatientShowViewComponent implements OnInit, OnDestroy, AfterViewIni
     private route: ActivatedRoute,
     private headerService : HeaderService,
     private utilService: UtilService
-  ) {}
+  ) {
+    this.model = MODELS.find(model => model.name == 'patient')!;
+  }
 
   ngAfterViewInit(): void {
     this.$headerAction = this.headerService.getOutAction().subscribe(data => {
@@ -58,7 +65,7 @@ export class PatientShowViewComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngOnInit() {
-    this.headerService.setHeader({name:'patient',type:'show'});
+    this.headerService.setHeader({model: this.model, type:'show'});
     this.utilService.set({name:'patient', type:'show'});
     if(this.route.snapshot.paramMap.get('patient_id')){
       this.getPatientById(this.route.snapshot.paramMap.get('patient_id'));

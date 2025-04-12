@@ -12,10 +12,11 @@ export const MENUS: any[] = [
             {
                 name: 'Registro',
                 submenus: [
-                    { name: 'Pacientes', description: 'Administración de pacientes', route:'psychotherapy/patients', icon: 'contacts', model:'patient', groups: ['psychologist'] },
+                    { name: 'Pacientes', description: 'Administración de pacientes', route:'patients', icon: 'contacts', model:'patient', groups: ['psychologist'] },
                     { name: 'Notas clinicas', description: 'Notas', route:'psychotherapy/clinical-notes/table', icon: 'local_hospital', model: 'clinical-note', groups: ['psychologist'] },
                     { name: 'Seguimiento', description: 'Seguimiento de pacientes', route:'psychotherapy/tracking/table', icon: 'track_changes', model: 'track', groups:['psychologist'] },
-                    { name: 'Tareas', description: 'Descripción', route:'psychotherapy/task/dashboard', icon: 'note', model: 'task', groups:['psychologist'] }
+                    { name: 'Tareas', description: 'Descripción', route:'psychotherapy/task/dashboard', icon: 'note', model: 'task', groups:['psychologist'] },
+                    { name: 'Agenda', description: 'Agenda', route:'scheduler', icon: 'calendar_today', model: 'scheduler', groups:['psychologist'] }
                 ]
             },
             {
@@ -50,9 +51,11 @@ export const MENUS: any[] = [
             {
                 name: 'General',
                 submenus: [
-                    { name: 'Emociones', description: 'Posibles emociones que presenta el paciente', route:'catalogs/emotions/list', icon: 'favorite', model: 'emotion', groups: ['psychologist'] },
-                    { name: 'Síntomas', description: 'Posibles síntomas que presenta el paciente', route:'catalogs/symptom/list', icon: 'sentiment_very_satisfied', model:'symptom', groups: ['psychologist'] },
-                    { name: 'Hobbies e Intereses', description: 'Hobbies e intereses del paciente', route:'catalogs/hobbies-interest/list', icon: 'weekend', model:'hobbies_interest', groups: ['psychologist'] },
+                    { name: 'Catálogos', description: 'Formularios generales', route:'catalogs', icon: 'library_books', model: 'emotion', groups: ['psychologist'] },
+
+                    // { name: 'Emociones', description: 'Posibles emociones que presenta el paciente', route:'catalogs/emotions/list', icon: 'favorite', model: 'emotion', groups: ['psychologist'] },
+                    // { name: 'Síntomas', description: 'Posibles síntomas que presenta el paciente', route:'catalogs/symptom/list', icon: 'sentiment_very_satisfied', model:'symptom', groups: ['psychologist'] },
+                    // { name: 'Hobbies e Intereses', description: 'Hobbies e intereses del paciente', route:'catalogs/hobbies-interest/list', icon: 'weekend', model:'hobbies_interest', groups: ['psychologist'] },
                 ]
             }
         ]

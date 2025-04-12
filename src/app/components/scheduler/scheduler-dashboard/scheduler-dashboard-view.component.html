@@ -1,0 +1,79 @@
+<div class="main-container">
+    
+    <div class="calendar-container" id="calendar-container">
+        <div class="title-section">
+            <h2>Agenda</h2>
+        </div>
+        <div class="body-section">
+            <div class="month-control">
+                <div class="month-control">
+                    <button 
+                        mat-mini-fab aria-label="Example icon button with a delete icon" 
+                        (click)="handlePreviousMonth()"
+                        >
+                        <mat-icon>arrow_left</mat-icon>
+                    </button>
+                    <div class="month">
+                        <span>{{months[currentMonth-1]}}</span>
+                    </div>
+                    <button mat-mini-fab aria-label="Example icon button with a delete icon" (click)="handleNextMonth()">
+                        <mat-icon>arrow_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="calendar-body">
+
+                <!-- Days of the week -->
+                <div class="day">D</div>
+                <div class="day">L</div>
+                <div class="day">M</div>
+                <div class="day">M</div>
+                <div class="day">J</div>
+                <div class="day">V</div>
+                <div class="day">S</div>
+    
+                <ng-container *ngFor="let day of daysInMonth;">
+                    
+    
+                    <div *ngIf="day.date > 0" [ngClass]="{'current-date': day.date == currentDay, 'date': day.date > 0}" 
+                        (click)="getDay(day)">
+                        <div class="date-header">
+                            <div class="date-number">
+                                {{day.date}}
+                            </div>
+                            <div class="appo-types">
+                                <span class="psychoterapy" *ngIf="getTypeCount(day.data, 'psychoterapy')>0">{{getTypeCount(day.data, 'psychoterapy') }}</span>
+                                <span class="early-stimulation" *ngIf="getTypeCount(day.data, 'early-stimulation')>0">{{getTypeCount(day.data, 'early-stimulation') }}</span>
+                                <span class="neuro-psychology" *ngIf="getTypeCount(day.data, 'neuro-psychology')>0">{{getTypeCount(day.data, 'neuro-psychology') }}</span>
+                            </div>
+                        </div>
+                        <div class="date-content">
+                            <div *ngFor="let data of day.data;" [ngClass]='data.patient.type.class'>
+                                <span>{{data.hour | timeFormat}} {{data.patient.full_name | slice:0:20 }}...</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+    
+                    <div class="empty-date" *ngIf="day.date <= 0"></div>
+    
+                </ng-container>
+    
+                
+            </div>
+        </div>
+
+
+    </div>
+    <div id="calendar-day-container">
+        <div class="title-section">
+            <h2>Día</h2>
+        </div>
+        <div class="body-section">
+            <div class="appointment-item" *ngFor="let item of daySelected.data;" [ngClass]='item.patient.type.class'>
+                <span>{{item.hour | timeFormat}} {{item.patient.full_name | slice:0:20 }}...</span>
+            </div>
+        </div>
+       
+    </div>
+</div>

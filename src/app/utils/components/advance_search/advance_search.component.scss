@@ -153,12 +153,13 @@
 }
 
 .button-row{
-    
+    width: 20%;
     mat-icon{
         font-size: 12;
     }
 
     button{
+        width: 50%;
         background-color: white;
         border: none;
         padding: 3px 0px 1px 0px;

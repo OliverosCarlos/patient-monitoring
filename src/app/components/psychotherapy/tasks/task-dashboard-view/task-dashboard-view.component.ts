@@ -1,8 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { PSYCHOTHERAPY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
 import { TaskService } from 'src/app/services/psychotherapy/task.service';
 import { UtilService } from 'src/app/services/util.service';
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-task-dashboard-view',
@@ -15,8 +17,8 @@ export class TaskDashboardViewComponent implements OnInit, AfterViewInit {
 
   constructor(
     private taskService: TaskService,
-    private utilService: UtilService
-
+    private utilService: UtilService,
+    private backendService : BackendService,
   ) { 
 
   }
@@ -37,7 +39,7 @@ export class TaskDashboardViewComponent implements OnInit, AfterViewInit {
   }
 
   getAllTaskTemplates(){
-    this.taskService.getTaskTemplateList().subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.TASK_TEMPLATE,{}).subscribe({
       next: (v) => { this.task_template_list = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

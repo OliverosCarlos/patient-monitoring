@@ -20,11 +20,14 @@ import { Patient, Track } from 'src/app/models/psychotherapy.model'
 })
 export class PsychotherapyComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  mainPatientList : Patient[] = []
   patientList : Patient[] = []
+
   trackList = new MatTableDataSource<Track>([]);
   displayedColumns = ['session_objective', 'session_approach', 'created_at'];
 
   $advanceSearch!: Subscription;
+  searchAttributes : any[] = ["first_name", "last_name1", "last_name2", "email"]
 
   constructor(
     private backendService : BackendService,
@@ -58,7 +61,9 @@ export class PsychotherapyComponent implements OnInit, AfterViewInit, OnDestroy 
 
   getAll(data_search:any){
     this.backendService.getAll(PSYCHOTHERAPY.PATIENT,data_search).subscribe({
-      next: (v) => { this.patientList = v; console.log(this.patientList);
+      next: (v) => { 
+        this.mainPatientList = v;
+        this.patientList = v;
        },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -80,6 +85,18 @@ export class PsychotherapyComponent implements OnInit, AfterViewInit, OnDestroy 
 
   createTrack(){
     this.router.navigate(['main','psychotherapy','tracking','form']);
+  }
+
+  setSearchAttributes(filters: any){
+    this.patientList = this.mainPatientList.filter(
+      (item: any) => {
+        return Object.keys(filters).every(
+          (key : string) => {
+            return item[key.split("__")[0]].includes(filters[key]);
+          }
+        ); 
+      }
+    );
   }
 
 

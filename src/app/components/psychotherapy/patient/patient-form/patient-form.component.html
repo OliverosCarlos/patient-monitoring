@@ -16,7 +16,7 @@
             <div class="row">
               <div class="col-6">
                 <div class="form-group" formGroupName="patient_data">
-                  <label [attr.for]="nameForm+'last_name1'" class="control-label">Apellido Paterno<span
+                  <label [attr.for]="nameForm+'last_name1'" class="control-label">Apellido Paterno <span
                       class="text-danger">*</span> </label>
                   <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name1'"
                     formControlName="last_name1" style="text-transform: capitalize;" (keyup)="changeToUppercase('last_name1')">
@@ -25,7 +25,7 @@
       
               <div class="col-6">
                 <div class="form-group" formGroupName="patient_data">
-                  <label [attr.for]="nameForm+'last_name2'" class="control-label">Apellido Materno<span
+                  <label [attr.for]="nameForm+'last_name2'" class="control-label">Apellido Materno <span
                       class="text-danger">*</span> </label>
                   <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name2'"
                     formControlName="last_name2" style="text-transform: capitalize;" (keyup)="changeToUppercase('last_name2')">
@@ -41,7 +41,7 @@
   
               <div class="col-8">
                 <div class="form-group" formGroupName="patient_data">
-                  <label [attr.for]="nameForm+'phone_number'" class="control-label">Número de telefono<span
+                  <label [attr.for]="nameForm+'phone_number'" class="control-label">Número de telefono <span
                       class="text-danger">*</span> </label>
                   <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'phone_number'"
                     formControlName="phone_number" style="text-transform: uppercase;"
@@ -51,7 +51,7 @@
   
               <div class="col-12">
                 <div class="form-group" formGroupName="patient_data">
-                  <label [attr.for]="nameForm+'email'" class="control-label">Correo<span class="text-danger">*</span> </label>
+                  <label [attr.for]="nameForm+'email'" class="control-label">Correo <span class="text-danger">*</span> </label>
                   <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'email'" formControlName="email">
                 </div>
               </div>
@@ -60,17 +60,17 @@
           </div>
           <div class="col-4">
             <div class="form-group" formGroupName="patient_files">
-              <div class="uploader-wrapper">
-                <input type="file" class="file-input" fileAccept="*" (change)="onFileSelected($event)" #fileUpload
-                  formControlName="photo">
-              
-                <div class="file-upload">
-              
-                  {{fileName || "No file uploaded yet."}}
-              
-                  <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
-                    <mat-icon>attach_file</mat-icon>
-                  </button>
+              <label [attr.for]="nameForm+'photo'" class="control-label">Foto de perfil <span class="text-danger">*</span> </label>
+              <div class="file-upload" *ngIf="!previewImage">
+                <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden formControlName="photo" fileAccept="*">
+                <label for="fileInput" (mouseenter)="handleMouseEnter()" (mouseleave)="handleMouseLeave()">
+                  <img [src]="'./assets/media/'+profile_image_upload" alt="" srcset="">
+                </label>
+              </div>
+              <div *ngIf="previewImage" class="preview-container">
+                <img [src]="previewImage" alt="Image preview" class="image-preview">
+                <div class="preview-options-container">
+                  <mat-icon (click)="removeProfileImage()">delete</mat-icon>
                 </div>
               </div>
             </div>

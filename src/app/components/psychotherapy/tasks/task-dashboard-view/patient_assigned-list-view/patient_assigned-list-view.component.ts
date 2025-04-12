@@ -24,6 +24,7 @@ export class PatientAssignedListViewComponent implements OnInit {
   $utilService!: Subscription;
 
   patients_assigned : any[] = [];
+  searchAttributes : any[] = ['first_name', 'email', 'tarea']
 
   constructor(
     private router : Router,
@@ -39,7 +40,7 @@ export class PatientAssignedListViewComponent implements OnInit {
         this.getAll();
       }
     });
-    this.headerService.setSetupSearch({name:'patient'});
+    // this.headerService.setSetupSearch({name:'patient'});
   }
 
   ngOnInit(): void {
@@ -50,6 +51,8 @@ export class PatientAssignedListViewComponent implements OnInit {
     this.spinner.show('loading-patients-assigned')
     this.backendService.getAll(PSYCHOTHERAPY.PATIENTS_TASKS_ASSIGNED, {}).subscribe({
       next: (v) => {
+        console.log(v);
+        
         this.patients_assigned = v.filter((patient: { tasks: any[]; }) => patient.tasks.length > 0);
       },
       error: (e) => console.error(e),
@@ -59,6 +62,11 @@ export class PatientAssignedListViewComponent implements OnInit {
 
   reviewTask(patient: any){
     this.router.navigate(['main','psychotherapy','task','application','show',patient.tasks[0].id]);
+  }
+
+  setSearchAttributes(attributes: any){
+    console.log(attributes);
+    
   }
 
 }

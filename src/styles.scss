@@ -104,3 +104,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 .zh-l{ height: 600px; }
 
 @import 'ckeditor5/ckeditor5';
+
+.vw-field{
+  .name-field{
+      font-weight: bold;
+      text-transform: uppercase;
+  }
+  .readable{
+    color: grey;
+  }
+}
+
+.vw-field-content{
+  padding: 10px;
+}

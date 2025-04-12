@@ -6,7 +6,7 @@
         <div class="body-section row mx-1 mat-elevation-z5">
             <div class="col-12">
                 <div class="row header-section pt-2">
-                    <app-advance-search></app-advance-search>
+                    <app-advance-search [searchAttributes]="searchAttributes" (eventDataSearch)="setSearchAttributes($event)" ></app-advance-search>
                 </div>
 
                 <div class="row p-2">
@@ -14,7 +14,7 @@
                         <div class="patient-list-card-c row" *ngFor="let patient of patientList"
                             (click)="getTrackingByPatient(patient.id)">
                             <div class="img-container col-2 m-0 p-1">
-                                <img [src]="'./assets/media/'+patient.image" alt="">
+                                <img [src]="patient.image" alt="">
                             </div>
                             <div class="user-info-c col-8">
                                 <span class="user-info-text">{{patient.first_name+" "+patient.last_name1+"

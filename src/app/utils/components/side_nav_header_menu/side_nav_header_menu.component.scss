@@ -10,7 +10,6 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: dodgerblue;
   height: 100%;
 }
 
@@ -25,22 +24,23 @@ li {
 
   span {
     display: block;
-    color: white;
+    color: dodgerblue;
     text-align: center;
     padding: 5px 16px;
     text-decoration: none;
-    background-color: rgb(38, 135, 233);
-    border-radius: 5px;
+    background-color: whitesmoke;
+    font-weight: bold;
+    border-radius: 3px;
 
     &:hover {
       cursor: pointer;
-      background-color: rgb(75, 164, 254);
+      background-color: rgb(233, 233, 233);
       
     }
 
     &:active {
       cursor: pointer;
-      background-color: rgb(30, 133, 235);
+      background-color: rgb(228, 228, 228);
     }
   }
 }

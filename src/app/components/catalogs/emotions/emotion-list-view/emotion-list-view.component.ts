@@ -43,6 +43,14 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
       this.model = MODELS.find(model => model.name == 'emotion')!;
     }
 
+  ngOnInit(): void {
+    this.getAllEmotions({});
+    this.headerService.setHeader({model: this.model, type:'list'});
+    this.utilService.set({name:'emotion', type:'list'});
+    // this.utilService.set({name:'catalogs', type:'dashboard'});
+    // this.headerService.setSetupSearch({name:'emotion'})
+  }  
+
   ngAfterViewInit(): void {
     this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
       switch (data.action) {
@@ -59,12 +67,7 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
-  ngOnInit(): void {
-    this.getAllEmotions({});
-    this.headerService.setHeader({model: this.model, type:'list'});
-    this.utilService.set({name:'emotion', type:'list'});
-    this.headerService.setSetupSearch({name:'emotion'})
-  }
+
 
   ngOnDestroy():void{
     this.$headerAction!.unsubscribe();

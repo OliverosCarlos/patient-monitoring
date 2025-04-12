@@ -1,0 +1,10 @@
+<app-header [sideNavHeaderMenuItems]="data_menu"></app-header>
+<div [ngClass]="isDashboard ? 'dashboard-container' : 'card-container'" >
+  <div class="card-title">{{platformTitle}}</div>
+  <div class="card-subtitle">{{platformSubtitle}}</div>
+  <div class="card-content">
+    <div [@routeAnimations]="getRouteAnimationData()">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

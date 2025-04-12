@@ -25,54 +25,60 @@
   </div>
 
 </div> -->
-
-<div class="d-row">
-
-  <div class="panel-container">
-    <div>
-      <h1 class="area-title">Cognitiva</h1>
-    </div>
-    <hr>
-    <br>
-    <div>
-      <span class="big-text">A</span>
-      <span class="big-text">21</span>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <div class="d-row">
-      <button mat-raised-button color="accent">Anterior</button>
-      <button (click)="handleNext()" mat-raised-button color="accent">Siguiente</button>
-    </div>
-  </div>
-
-    <div class="item-view" #main_card >
-      <ng-container *ngFor="let obj of current_data; let  i = index" >
-        <div class="item-card" [@openClose]=" dummy[i].active ? 'open' : 'closed'">
-          <div class="card-title">
-            <h1>{{obj.item}}</h1>
-          </div>
-        
-          <div class="d-row">
-            <div class="card-option">
-              <h1>{{obj.materials}}</h1>
-            </div>
-            <div class="card-option">
-              <h1>{{obj.notes}}</h1>
-            </div>
-          </div>
-        
-          <div class="d-row mt-3">
-            <div class="big-button yes-option">
-              <span>SI</span>
-            </div>
-            <div class="big-button no-option">
-              <span>NO</span>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-
+<div class="d-row area-menu">
+  <ng-container *ngFor="let area of area_menu;" >
+    <div 
+      (click)="handleAreaSelect(area.name)" 
+      class="area-button"
+      [ngClass]="area.active ? 'area-button area-button-active' : 'area-button'" >{{area.name}}</div>
+  </ng-container>
 </div>
+
+  <div class="d-row mb-3" *ngFor="let obj of current_area.children" >
+    <div class="panel-container">
+      <div>
+        <h1 class="area-title">Bloque {{obj.stage}}</h1>
+      </div>
+      <hr>
+      <br>
+      <div>
+        <span class="big-text">20</span>
+        <span class="big-text">21</span>
+      </div>
+      <br>
+      <hr>
+      <br>
+      <div class="d-row">
+        <button (click)="handlePrevious(obj)" [disabled]="obj.current_item<=0" mat-raised-button color="accent">Anterior</button>
+        <button (click)="handleNext(obj)" [disabled]="obj.current_item>=obj.children.length-1" mat-raised-button color="accent">Siguiente</button>
+      </div>
+    </div>
+  
+      <div class="item-view" #main_card >
+        <ng-container *ngFor="let block of obj.children; let  i = index" >
+          <div class="item-card" [hidden]="!block.active" [@slideInOut]="block.animationState">
+            <div class="card-title">
+              <h1>{{block.item}}</h1>
+            </div>
+          
+            <div class="d-row">
+              <div class="card-option">
+                <h1>{{block.materials}}</h1>
+              </div>
+              <div class="card-option">
+                <h1>{{block.notes}}</h1>
+              </div>
+            </div>
+          
+            <div class="d-row mt-3">
+              <div class="big-button yes-option">
+                <span>SI</span>
+              </div>
+              <div class="big-button no-option">
+                <span>NO</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>

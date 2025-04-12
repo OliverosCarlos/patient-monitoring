@@ -1,4 +1,4 @@
-import { Model, VWComponent } from 'src/app/models/vw-model.model'
+import { Model, VWComponent, ModuleModel } from 'src/app/models/vw-model.model'
 
 import { EmotionFormViewComponent } from 'src/app/components/catalogs/emotions/emotion-form-view/emotion-form-view.component';
 import { EmotionListViewComponent } from 'src/app/components/catalogs/emotions/emotion-list-view/emotion-list-view.component';
@@ -108,10 +108,10 @@ export const MODELS: Model[] = [
       singular_name: 'Emoción',
       plural_name:'Emociones',
       components:[
-        new VWComponent('catalogs/emotions/form','form','card_content',{}),
-        new VWComponent('catalogs/emotions/table','list','card_content',{}),
-        new VWComponent('catalogs/emotions/form/:emotion_id','show','card_content',{}),
-        new VWComponent('catalogs/emotions/update/:emotion_id','update','card_content',{})
+        new VWComponent('emotions/form','form','card_content',{}),
+        new VWComponent('emotions/list','list','card_content',{}),
+        new VWComponent('emotions/form/:emotion_id','show','card_content',{}),
+        new VWComponent('emotions/update/:emotion_id','update','card_content',{})
       ],
       multipleView: false,
       searchAttributes:['name','code','description']
@@ -121,10 +121,10 @@ export const MODELS: Model[] = [
       singular_name: 'Sintoma',
       plural_name:'Sintomas',
       components:[
-        new VWComponent('catalogs/symptom/form','form','card_content',{}),
-        new VWComponent('catalogs/symptom/table','list','card_content',{}),
-        new VWComponent('catalogs/symptom/form/:symptom_id','show','card_content',{}),
-        new VWComponent('catalogs/symptom/update/:symptom_id','update','card_content',{})
+        new VWComponent('symptom/form','form','card_content',{}),
+        new VWComponent('symptom/list','list','card_content',{}),
+        new VWComponent('symptom/form/:symptom_id','show','card_content',{}),
+        new VWComponent('symptom/update/:symptom_id','update','card_content',{})
       ],
       multipleView: false,
       searchAttributes:['name','code']
@@ -134,10 +134,10 @@ export const MODELS: Model[] = [
       singular_name: 'Hobbies e interéses',
       plural_name:'Hobbies e interéses',
       components:[
-        new VWComponent('catalogs/hobbies-interest/form','form','card_content',{}),
-        new VWComponent('catalogs/hobbies-interest/list','list','card_content',{}),
-        new VWComponent('catalogs/hobbies-interest/form/:hobbies-interest_id','show','card_content',{}),
-        new VWComponent('catalogs/hobbies-interest/update/:hobbies-interest_id','update','card_content',{})
+        new VWComponent('hobbies-interest/form','form','card_content',{}),
+        new VWComponent('hobbies-interest/list','list','card_content',{}),
+        new VWComponent('hobbies-interest/form/:hobbies-interest_id','show','card_content',{}),
+        new VWComponent('hobbies-interest/update/:hobbies-interest_id','update','card_content',{})
       ],
       multipleView: false,
       searchAttributes:['name','code']
@@ -209,4 +209,69 @@ export const MODELS: Model[] = [
       multipleView: false,
       searchAttributes:['paciente']
     },
+    {
+      name: 'appointment',
+      singular_name: 'Cita',
+      plural_name:'Cita',
+      menus: [
+        { menuTitle: "Vista 2", path: "form" },
+        { menuTitle: "Historial", path: "list" }
+      ],
+      components:[
+        new VWComponent('appointment','dashboard','dashboard_content',{}),
+        new VWComponent('appointment/form','form','card_content',{}),
+        new VWComponent('appointment/table','list','card_content',{}),
+      ],
+      multipleView: false,
+      searchAttributes:['dia, mes, paciente']
+    },
+    {
+      name: 'neuro-psychology',
+      singular_name: 'Neuro Psicología',
+      plural_name:'Neuro Psicología',
+      menus: [
+        { menuTitle: "Vista 2", path: "form" },
+        { menuTitle: "Historial", path: "list" }
+      ],
+      components:[
+        new VWComponent('appointment','dashboard','dashboard_content',{}),
+        new VWComponent('appointment/form','form','card_content',{}),
+        new VWComponent('appointment/table','list','card_content',{}),
+      ],
+      multipleView: false,
+      searchAttributes:['first_name', 'last_name1', 'last_name2', 'email']
+    },
+    
   ];
+
+  export const MODULE_MODELS: ModuleModel[] = [
+    {
+      name: 'catalogs',
+      singular_name: 'Catalogo',
+      plural_name:'Catalogos',
+      menus: [
+        { menuTitle: "Emociones", path: "emotions/list" },
+        { menuTitle: "Sintomas", path: "symptom/list" },
+        { menuTitle: "Hobbies e interéses", path: "hobbies-interest/list" }
+      ]
+    },
+    {
+      name: 'scheduler',
+      singular_name: 'Agenda',
+      plural_name:'Agendas',
+      menus: [
+        { menuTitle: "Menu 1", path: "emotions/list" },
+        { menuTitle: "Menu 2", path: "symptom/list" },
+      ]
+    },
+    {
+      name: 'patient',
+      singular_name: 'Paciente',
+      plural_name:'Pacientes',
+      menus: [
+        { menuTitle: "Psicoterapia", path: "psychoterapy/form" },
+        { menuTitle: "Estimulación Temprana", path: "early-stimulation/form" },
+        { menuTitle: "Neuro Psicología", path: "neuro-psychology/form" },
+      ]
+    },
+  ]

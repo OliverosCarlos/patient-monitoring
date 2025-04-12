@@ -29,3 +29,10 @@ export interface AbstractButton{
     icon: string;
     disabled?: boolean;
 }
+
+export interface ModuleModel{
+    name:string;
+    singular_name: string;
+    plural_name: string;
+    menus?: any[];
+}

@@ -16,30 +16,21 @@ import { Model } from 'src/app/models/vw-model.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource} from '@angular/material/table';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { right } from '@popperjs/core';
+import { left, right } from '@popperjs/core';
 
 @Component({
   selector: 'app-bayley_apply-tool-view',
   templateUrl: './bayley_apply-tool-view.component.html',
   styleUrls: ['./bayley_apply-tool-view.component.scss'],
   animations: [
-    trigger('openClose', [
-      // ...
-      state('open', style({
-        right : '1000px',
-        opacity: 1,
-      })),
-      state('closed', style({
-        
-        opacity: 1,
-      })),
-      transition('open => closed', [
-        animate('0.3s')
-      ]),
-      transition('closed => open', [
-        animate('0.3s')
-      ]),
-    ]),
+    trigger('slideInOut', [
+      state('in', style({ transform: 'translateX(0)' })), 
+      state('left', style({ transform: 'translateX(-100%)' })), 
+      state('right', style({ transform: 'translateX(100%)' })), 
+      // transition('void => in, left => in, right => in', [ animate('500ms ease-in') ]), 
+      transition('left => in', [ animate('200ms ease-in') ]), 
+      transition('right => in', [ animate('200ms ease-in') ]) 
+    ])
   ],
 })
 
@@ -49,20 +40,23 @@ export class BayleyItemListViewComponent implements OnInit {
 
   $headerAction!: Subscription;
 
-  current_data:any[] = []
+  all_data : any = []
+  current_area : any= {children:[{stage:"", children:[]}]}
 
-  list = [
-    {name:'carlos',active: true},
-    {name:'carlos',active: true},
-    {name:'carlos',active: true}
-    
+  current_item = 0
+  animationState = 'in';
+
+  area_menu = [
+    {name:'Cognitiva', active: true, id:"cognitivo"},
+    {name:'Lenguaje Expresivo', active: false, id:"lenguaje_expresivo"},
+    {name:'Lenguaje Receptivo', active: false, id:"lenguaje_receptivo"}
   ]
 
   dummy = [
     {name:'carlos',active: false},
     {name:'carlos',active: false},
     {name:'carlos',active: false}
-    
+
   ]
 
   isOpen = false
@@ -78,9 +72,10 @@ export class BayleyItemListViewComponent implements OnInit {
     private utilService: UtilService
     ) {
       this.model = MODELS.find(model => model.name == 'bayley-item')!;
+      this.getAll()
     }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit(): void { 
     this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
       switch (data.action) {
         case 'delete':
@@ -94,19 +89,33 @@ export class BayleyItemListViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll()  
     this.headerService.setHeader({model: this.model, type: 'list'});
-    this.utilService.set({name:'bailey-item', type:'list'});
+    this.utilService.set({name:'bailey-item', type:'dashboard'});
   }
 
   getAll(){
     this.backendService.getAll(ADMINISTRATION.BAYLEY_ITEM,{}).subscribe({
      next: (v) => {
       let list = this.split_col_grouped(this.group_by(this.merge_cols(v), 'aux'));
-      this.current_data = this.group_by(list, 'area')[0].children[0].children;
-      console.log('GROUP 2', this.current_data);
       
-      // this.currentData = this.split_col_grouped(list);
+      this.all_data = this.group_by(list, 'area')
+
+      this.all_data = this.all_data.map(
+        (area:any) => (
+        {...area, children: area.children.map(
+            (block:any) => (
+              {...block,
+                current_item: 0,
+                children: block.children.map( (obj:any, index:number) => ({...obj, active: index==0?true:false, animationState: "in"}) )}
+            )
+          )
+        }
+      ) )
+
+      this.current_area = this.all_data[0]
+      console.log(this.all_data);
+      
+      
       },
      error: (e) => console.error(e),
      complete: () => console.info('complete')
@@ -163,15 +172,32 @@ export class BayleyItemListViewComponent implements OnInit {
   //   this.dataSource.data = this.currentData.filter( (obj:any) => obj.area == event.value)
   // }
 
-  handleNext(){
-    this.isOpen = !this.isOpen
-    // const {left, top} = this.main_card_element.nativeElement.getBoundingClientRect();
-    // console.log(left, top);
-    // // "translate("+x+","+y+")";
+  handleNext(data:any){
+    data.children[data.current_item].active = false
+    data.current_item = data.current_item+1
+    data.children[data.current_item].active = true
 
-    // this.secondary_card_element.nativeElement.style.transform = "translate("+(left)+"px, "+(top)+"px)";
-    this.dummy[2].active = !this.dummy[2].active
+    data.children[data.current_item].active = true
+    data.children[data.current_item].animationState = 'right'; setTimeout(() => { data.children[data.current_item].animationState = 'in'; }, 100);
   }
+
+  handlePrevious(data:any){
+    data.children[data.current_item].active = false
+    data.current_item = data.current_item-1
+    data.children[data.current_item].active = true
+
+    data.children[data.current_item].active = true
+    data.children[data.current_item].animationState = 'left'; setTimeout(() => { data.children[data.current_item].animationState = 'in'; }, 100);
+  }
+
+  handleAreaSelect(name:string){
+    this.area_menu = this.area_menu.map(x => {
+      return x.name == name ? {...x, active: true} : { ...x, active: false };
+    });
+    
+    this.current_area = this.all_data.find((element: any) => element.aux.trim() == name.trim());
+  }
+
 
 }
     

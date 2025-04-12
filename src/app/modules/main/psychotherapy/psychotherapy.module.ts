@@ -79,7 +79,6 @@ import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snack
     PatientListViewComponent,
     PatientFormComponent,
     PatientCardViewComponent,
-    PatientShowViewComponent,
     Clinical_NoteListViewComponent,
     ClinicalNoteFormComponent,
     ClinicalNoteShowFormViewComponent,

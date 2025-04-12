@@ -84,5 +84,18 @@ export class BackendService {
   getFile(path:string, id:string):Observable<any>{
     return this.http.get(`${this.APIUrl}${path}${id}`,  this.tokenHttpOptionsFile);
   }
+
+  getManyByParams(path:string, params: any):Observable<any>{
+    return this.http.get(this.construirRuta(`${this.APIUrl}${path}`, params),  this.tokenHttpOptions);
+  }
+
+  
+  construirRuta(baseUrl: string, params: Record<string, any>): string {
+    // Convertir los parámetros a una cadena de consulta
+    const queryString = new URLSearchParams(params).toString();
+    // Construir la URL completa con los parámetros dinámicos
+    const fullUrl = `${baseUrl}?${queryString}`;
+    return fullUrl;
+  }
   
 }

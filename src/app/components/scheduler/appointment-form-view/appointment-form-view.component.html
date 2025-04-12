@@ -1,0 +1,79 @@
+
+<div class="d-row">
+  <div class="zw-12" style="padding: 5px;">
+    <patient-select (eventSetData)="setPatient($event)"></patient-select>
+  </div>
+</div>
+<div class="d-row">
+  <div class="zw-6">
+    <div class="vw-field">
+      <span class="name-field">Día <span class="text-danger">*</span></span>
+    </div>
+    <div class="vw-field-content">
+      <div class="month-control">
+        <ng-container *ngIf="currentMonth != currentDate.getMonth()+1">
+          <button 
+              mat-fab aria-label="Example icon button with a delete icon" 
+              (click)="handlePreviousMonth()">
+              <mat-icon>arrow_left</mat-icon>
+          </button>
+        </ng-container>
+          <div class="month">
+              <span>{{months[currentMonth-1]}}</span>
+          </div>
+          <button mat-fab aria-label="Example icon button with a delete icon" (click)="handleNextMonth()">
+              <mat-icon>arrow_right</mat-icon>
+          </button>
+      </div>
+      <div class="calendar-body">
+          <!-- Days of the week -->
+          <div class="day">D</div>
+          <div class="day">L</div>
+          <div class="day">M</div>
+          <div class="day">M</div>
+          <div class="day">J</div>
+          <div class="day">V</div>
+          <div class="day">S</div>
+      
+          <!-- Dates  -->
+           <ng-container *ngFor="let day of daysInMonth">
+            <ng-container *ngIf="day.date > 0">
+              <ng-container *ngIf="day.date < currentDay">
+                <div class="empty-date">
+                  {{day.date}}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="day.date >= currentDay">
+                <div [ngClass]="{'current-date': day.date == currentDay, 'date': day.date >= currentDay}" 
+                  (click)="getDay(day)">
+                  {{day.date}}
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="day.date <= 0">
+              <div class="empty-date"></div>
+            </ng-container>
+           </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="hours-container zw-6">
+    <div class="vw-field">
+      <span class="name-field">Hora <span class="text-danger">*</span></span>
+    </div>
+    <div class="vw-field-content">
+      <div class="hours-body">
+        <ng-container *ngFor="let hour of availableHours">
+          <div class="hour-label" (click)="getHour(hour)" >
+            {{ hour | timeFormat}}
+          </div>
+        </ng-container>
+      </div>
+      <div class="datetime-schedule-container">
+        <p>{{ weekDaySelected | weekDayTranslate}} {{selectedDay}} de {{months[currentMonth-1]}} <span *ngIf="hourSelected > 0">, {{ hourSelected | timeFormat}}</span> </p>
+      </div>
+    </div>
+  </div>
+
+</div>

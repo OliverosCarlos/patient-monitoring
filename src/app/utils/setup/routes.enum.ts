@@ -22,6 +22,7 @@ export enum PSYCHOTHERAPY {
     TRACKING = '/psychotherapy/tracking/',
     TRACKING_BY_ID = '/psychotherapy/tracking/by_id/',
     TRACKING_BY_PATIENT = '/psychotherapy/tracking/by_patient/',
+    TASK_TEMPLATE = '/psychotherapy/task_templates/',
     TASK_APPLICATION = '/psychotherapy/task_application/'
 }
 
@@ -33,4 +34,20 @@ export enum ADMINISTRATION {
 
 export enum SEC {
     USER_BY_USERNAME = "/user/by_username/"
+}
+
+export enum SCHEDULER {
+    APPOINTMENTS = '/scheduler/appointments/',
+    AVAILABILITY = '/scheduler/availability/',
+}
+
+export enum GENERAL {
+    PATIENT = '/patient/general/',
+}
+
+export enum PATIENT {
+    GENERAL = '/patient/general/',
+    PSYCHOTHERAPY = '/patient/psychoterapy/',
+    EARLY_STIMULATION = '/patient/early-stimulation/',
+    NEURO_PSYCHOLOGY = '/patient/neuro-psychology/'
 }

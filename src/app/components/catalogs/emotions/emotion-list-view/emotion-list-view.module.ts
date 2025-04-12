@@ -15,7 +15,7 @@ import { EmotionListViewComponent } from './emotion-list-view.component';
 @NgModule({
 
   declarations: [
-    EmotionListViewComponent,
+    // EmotionListViewComponent,
   ],
 
   entryComponents: [

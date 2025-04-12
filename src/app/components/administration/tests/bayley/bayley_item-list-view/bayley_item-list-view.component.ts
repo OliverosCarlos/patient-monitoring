@@ -44,7 +44,7 @@ export class BayleyItemListViewComponent implements OnInit {
   areas = [
     {value:"Cognitiva", label:"Cognitiva"},
     {value:"Lenguaje Expresivo", label:"Lenguaje Expresivo"},
-    {value:"Lenguaje Reseptivo", label:"Lenguaje Reseptivo"},
+    {value:"Lenguaje Receptivo", label:"Lenguaje Receptivo"},
     {value:"Motor Fino", label:"Motor Fino"},
     {value:"Motor Grueso", label:"Motor Grueso"}
   ]

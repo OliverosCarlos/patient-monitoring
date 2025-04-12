@@ -7,7 +7,7 @@
                 <h2>Asignados</h2>
             </div>
             <div class="col-8">
-                <app-advance-search></app-advance-search>
+                <app-advance-search [searchAttributes]="searchAttributes" (eventDataSearch)="setSearchAttributes($event)" ></app-advance-search>
             </div>
         </div>
         <div class="row px-3">

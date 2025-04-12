@@ -8,6 +8,8 @@ import { HeaderComponent } from './header.component';
 
 import { MaterialAllModule } from 'src/material.module'
 import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/advance_search.module';
+import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_header_menu/side_nav_header_menu.module';
+
 
 @NgModule({
     declarations: [
@@ -21,7 +23,8 @@ import { AdvanceSearchModule } from 'src/app/utils/components/advance_search/adv
         MaterialAllModule,
         ColorCircleModule,
         RouterModule,
-        AdvanceSearchModule
+        AdvanceSearchModule,
+        SideNavHeaderMenuModule
     ],
     exports: [
         HeaderComponent

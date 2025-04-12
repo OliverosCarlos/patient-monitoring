@@ -8,7 +8,7 @@ import { EmotionFormViewComponent } from './emotion-form-view.component';
 @NgModule({
 
   declarations: [
-    EmotionFormViewComponent,
+    // EmotionFormViewComponent,
   ],
 
   entryComponents: [
@@ -25,7 +25,7 @@ import { EmotionFormViewComponent } from './emotion-form-view.component';
   ],
 
   exports: [
-    EmotionFormViewComponent
+    // EmotionFormViewComponent
   ]
 })
 

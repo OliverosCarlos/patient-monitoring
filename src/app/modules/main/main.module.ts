@@ -13,7 +13,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 
 import { SideMenuModule } from 'src/app/utils/components/side_menu/side_menu.module';
-import { HeaderModule } from 'src/app/utils/components/header/header.module';
 import { BreadcrumModule } from 'src/app/utils/components/breadcrumb/breadcrumb.module';
 import { PerfilMenuModule } from 'src/app/utils/components/perfil_menu/perfil_menu.module';
 import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_header_menu/side_nav_header_menu.module';
@@ -34,7 +33,6 @@ import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_heade
     HttpClientModule,
     NgbModule,
     SideMenuModule,
-    HeaderModule,
     BreadcrumModule,
     PerfilMenuModule,
     SideNavHeaderMenuModule

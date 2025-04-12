@@ -5,7 +5,7 @@ import { Observable, Subscription, Subject } from 'rxjs';
 //models
 import { Platform } from 'src/app/models/platform.model'; 
 //SETUPS
-import { MODELS } from 'src/app/utils/setup/model.setup';
+import { MODELS, MODULE_MODELS } from 'src/app/utils/setup/model.setup';
 
 @Injectable({
     providedIn: 'root'

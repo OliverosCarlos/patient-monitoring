@@ -59,7 +59,7 @@ export class TaskTemplateListViewComponent implements OnInit {
   }
 
   getAllTaskTemplates(){
-    this.taskService.getTaskTemplateList().subscribe({
+    this.backendService.getAll(PSYCHOTHERAPY.TASK_TEMPLATE,{}).subscribe({
       next: (v) => { this.dataSource.data = v },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

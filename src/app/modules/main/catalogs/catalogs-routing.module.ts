@@ -21,30 +21,38 @@ import { Hobbies_InterestUpdateFormViewComponent } from 'src/app/components/cata
 import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
 
 const routes: Routes = [
-  { path: 'emotions', data: { breadcrumb: 'Emociones' },
-    children:[
-      { path: 'list', component: EmotionListViewComponent, data: { breadcrumb: 'Lista',  animation: true }, canActivate: [CanActivateLogged] },
-      { path: 'form', component: EmotionFormViewComponent, data: { breadcrumb: 'Creación',  animation: true }, canActivate: [CanActivateLogged]},
-      { path: 'form/:emotion_id', component: EmotionShowViewComponent, data: { breadcrumb: "Visualizar",  animation: true } },
-      { path: 'update/:emotion_id', component: EmotionUpdateViewComponent, data: { breadcrumb: 'Actualizar',  animation: true }  }
-    ],
-  },
-  { path: 'symptom', data: { breadcrumb: 'Síntomas' },
+  { path: '', component: CatalogsComponent, data: { breadcrumb: 'Dashboard',  animation: true }, canActivate: [CanActivateLogged],
     children: [
-      { path: 'list', component: SymptomListViewComponent, data: { breadcrumb: 'Lista' }  },
-      { path: 'form', component: SymptomFormViewComponent, data: { breadcrumb: 'Creación' }  },
-      { path: 'form/:symptom_id', component: SymptomShowViewComponent, data: { breadcrumb: 'Visualizar' }  },
-      { path: 'update/:symptom_id', component: SymptomUpdateViewComponent, data: { breadcrumb: 'Actualizar' }  }
+      {
+        path: 'emotions', data: { breadcrumb: 'Emociones' },
+        children: [
+          { path: '', component: EmotionListViewComponent, data: { breadcrumb: 'Lista', animation: true }, canActivate: [CanActivateLogged] },
+          { path: 'list', component: EmotionListViewComponent, data: { breadcrumb: 'Lista', animation: true }, canActivate: [CanActivateLogged] },
+          { path: 'form', component: EmotionFormViewComponent, data: { breadcrumb: 'Creación', animation: true }, canActivate: [CanActivateLogged] },
+          { path: 'form/:emotion_id', component: EmotionShowViewComponent, data: { breadcrumb: "Visualizar", animation: true } },
+          { path: 'update/:emotion_id', component: EmotionUpdateViewComponent, data: { breadcrumb: 'Actualizar', animation: true } }
+        ],
+      },
+      {
+        path: 'symptom', data: { breadcrumb: 'Síntomas' },
+        children: [
+          { path: 'list', component: SymptomListViewComponent, data: { breadcrumb: 'Lista' } },
+          { path: 'form', component: SymptomFormViewComponent, data: { breadcrumb: 'Creación' } },
+          { path: 'form/:symptom_id', component: SymptomShowViewComponent, data: { breadcrumb: 'Visualizar' } },
+          { path: 'update/:symptom_id', component: SymptomUpdateViewComponent, data: { breadcrumb: 'Actualizar' } }
+        ]
+      },
+      {
+        path: 'hobbies-interest', data: { breadcrumb: 'Hobbies e Intereses' },
+        children: [
+          { path: 'list', component: Hobbies_InterestListViewComponent, data: { breadcrumb: 'Lista' } },
+          { path: 'form', component: Hobbies_InterestFormViewComponent, data: { breadcrumb: 'Creación' } },
+          { path: 'form/:hobbies-interest_id', component: Hobbies_InterestShowFormViewComponent, data: { breadcrumb: 'Visualizar' } },
+          { path: 'update/:hobbies-interest_id', component: Hobbies_InterestUpdateFormViewComponent, data: { breadcrumb: 'Actualizar' } },
+        ]
+      }
     ]
   },
-  { path: 'hobbies-interest', data: { breadcrumb: 'Hobbies e Intereses' },
-    children: [
-      { path: 'list', component: Hobbies_InterestListViewComponent, data: { breadcrumb: 'Lista' }  },
-      { path: 'form', component: Hobbies_InterestFormViewComponent, data: { breadcrumb: 'Creación' }  },
-      { path: 'form/:hobbies-interest_id', component: Hobbies_InterestShowFormViewComponent, data: { breadcrumb: 'Visualizar' }  },
-      { path: 'update/:hobbies-interest_id', component: Hobbies_InterestUpdateFormViewComponent, data: { breadcrumb: 'Actualizar' }  },
-    ]
-  }
 ];
 
 @NgModule({

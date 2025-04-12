@@ -1,0 +1,56 @@
+<div class="col-md-12">
+    <div class="row">
+
+      <div class="col-6">
+        <div class="vw-field">
+          <span class="name-field">Paciente <span class="text-danger">*</span></span>
+        </div>
+        <div class="vw-field-content">
+          <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="patientList"
+            placeholder="SELECCIONE UNA OPCIÓN" bindLabel="full_name" bindValue="id" [clearable]="false" (change)="setPatient($event)">
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="vw-field">
+          <span class="name-field readable">Tipo :</span>
+        </div>
+        <div class="vw-field-content">
+          <mat-chip-list aria-label="Fish selection" *ngIf="current_patient.type">
+            <mat-chip [ngStyle]="{'background-color': type_color[0], 'color': type_color[1]}" class="mat-elevation-z3">
+              {{current_patient.type}}</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div> 
+
+      <div class="col-12">
+        <div class="vw-field">
+          <span class="name-field readable">Nombre :</span>
+        </div>
+        <div class="vw-field-content">
+          <span class="data-info">{{current_patient.first_name}} {{current_patient.last_name1}}
+            {{current_patient.last_name2}}</span>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="vw-field">
+          <span class="name-field readable">Edad :</span>
+        </div>
+        <div class="vw-field-content">
+          <span class="data-info">{{current_patient.age}}</span>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="vw-field">
+          <span class="name-field readable">Telefono :</span>
+        </div>
+        <div class="vw-field-content">
+          <span class="data-info">{{current_patient.phone_number}}</span>
+        </div>
+      </div>
+    
+    </div>
+</div>

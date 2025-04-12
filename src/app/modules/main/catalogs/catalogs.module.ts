@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialAllModule } from 'src/material.module'
+import { HeaderModule } from 'src/app/utils/components/header/header.module';
+import { MainViewerModule } from 'src/app/utils/components/main_viewer/main_viewer.module';
 //import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 import { ColorCircleModule } from 'ngx-color/circle';
 
@@ -57,6 +59,8 @@ import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
     NgxSpinnerModule,
     //InputFileModule.forRoot(config),
     ColorCircleModule,
+    HeaderModule,
+    MainViewerModule
   ],
   providers: [
     CanActivateLogged

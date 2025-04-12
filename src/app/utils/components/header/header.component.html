@@ -1,13 +1,13 @@
 <div class="header-options mat-elevation-z2 mt-2">
   <div class="row m-0">
     <div class="col-2 my-auto">
-      <button mat-raised-button color="accent" [routerLink]="[mainRoute]" *ngIf="showCreate" [disabled]="disabledCreate">Crear</button>
+      <button mat-raised-button color="accent" (click)="create()" *ngIf="showCreate" [disabled]="disabledCreate">Crear</button>
       <button mat-raised-button color="primary" (click)="save()" *ngIf="showSave" [disabled]="disabledSave">Guardar</button>
       <button mat-raised-button color="primary" (click)="update()" *ngIf="showUpdate" [disabled]="disabledUpdate">Actualizar</button>
       <button mat-raised-button color="primary" (click)="edit()" *ngIf="showEdit" [disabled]="disabledEdit">Editar</button>
       <button mat-raised-button color="warn" (click)="cancel()" *ngIf="showCancel">Cancelar</button>
     </div>
-    <div class="col-3 my-auto">
+    <div class="col-2 my-auto">
       <!-- MENU OPTIONS -->
       <button mat-button [matMenuTriggerFor]="options">Opciones</button>
       <mat-menu #options="matMenu" yPosition="above" >
@@ -20,11 +20,12 @@
         <button mat-menu-item>Item 2</button>
       </mat-menu>
     </div>
-    <div class="col-7" *ngIf="searchFlag">
+    <app-side_nav_header_menu class="col-4" [menuItems]="sideNavHeaderMenuItems"></app-side_nav_header_menu>
+    <div class="col-4" *ngIf="searchFlag">
       <div class="row">
         <div class="col-8 m-0 p-0">
           <div class="advance_Search">
-            <app-advance-search></app-advance-search>
+            <app-advance-search [searchAttributes]="searchAttributes" (eventDataSearch)="setSearchAttributes($event)" ></app-advance-search>
           </div>
         </div>
         <div class="col-4 m-0 p-0">
@@ -39,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="col-7">
+    <div class="col-4">
       <div class="button-row">
         <button (click)="execute(activity.action)" [title]="activity.tooltip" *ngFor="let activity of activities" [ngClass]="activity.disabled ? 'bmc-unavailable' : 'bmc-available'">
           <mat-icon>{{activity.icon}}</mat-icon>

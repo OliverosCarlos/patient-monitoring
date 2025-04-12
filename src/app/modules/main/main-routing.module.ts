@@ -21,7 +21,7 @@ const routes: Routes = [
       { 
         path: 'patients', 
         loadChildren: () => import('./patients/patients.module').then(m => m.PatientsModule),
-        data: { breadcrumb: 'Pacientes',  animation: 'HomePage' }  
+        data: { animation: 'HomePage' }  
       },
       { 
         path: 'psychotherapy',
@@ -42,6 +42,11 @@ const routes: Routes = [
         path: 'catalogs',
         loadChildren: () => import('./catalogs/catalogs.module').then(m => m.CatalogsModule),
         data: { breadcrumb: 'Catálogos' }  
+      },
+      { 
+        path: 'scheduler',
+        loadChildren: () => import('./scheduler/scheduler.module').then(m => m.SchedulerModule),
+        data: { breadcrumb: 'Agenda' }  
       }
     ]
   }

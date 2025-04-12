@@ -1,27 +1,36 @@
-<div class="advance_Search">
-  <div id="main_container" class="as_c" #searchContainer>
-    <div id="advance_input" (click)="displaySearchAttributes($event)" [ngClass]="edit_mode ? 'ai_active' : 'ai_inactive'">
-      <div class="i_i" *ngFor="let attribute of data_searchAttributes">
-        <span class="i_i_name">{{attribute.key}}: </span>
-        <div class="container_value">
-          <a class="boxclose" id="boxclose" (click)="deleteOption($event,attribute.key)"></a>
-          <span class="i_i_val" [id]="attribute.key" (click)="attributeActivated($event,attribute.key)"
-            *ngIf="attribute.show">{{attribute.value}}</span>
-        </div>
-        <input type="text" autofocus name="" [id]="'input-'+attribute.key" [value]="attribute.value"
-          [size]="attribute.value.length == 0? 10 : attribute.value.length" (keyup.enter)="inputSetVal($event)"
-          *ngIf="!attribute.show" (focus)="onFocus()" (click)="stopProp($event)">
-      </div>
-    </div>
+<div class="advance_Search" (focusout)="handleLostfocus($event)">
 
-    <div class="so_c" *ngIf="show_searchAttributes" (mouseleave)="mouseLeave()">
-      <ul class="opt_list">
-        <li *ngFor="let attributes of searchAttributes" (click)="setAttributes(attributes)" (mouseenter)="mouseEnter(attributes)">
-          <p>{{attributes}}</p>
-        </li>
-      </ul>
+  <ng-container #searchContainer>
+    <div id="main_container" class="as_c">
+
+      <div id="advance_input" (click)="displaySearchAttributes($event)" [ngClass]="edit_mode ? 'ai_active' : 'ai_inactive'">
+        <div class="i_i" *ngFor="let attribute of data_searchAttributes$ | async">
+          <span class="i_i_name">{{attribute.key}}: </span>
+          <div class="container_value">
+            <a class="boxclose" id="boxclose" (click)="deleteOption($event,attribute.key)"></a>
+            <span class="i_i_val" [id]="attribute.key" (click)="attributeActivated($event,attribute.key)"
+              *ngIf="attribute.show">{{attribute.value}}</span>
+          </div>
+          <input type="text" autofocus name="" [id]="'input-'+attribute.key" [value]="attribute.value"
+            [size]="attribute.value.length == 0? 10 : attribute.value.length" (keyup.enter)="inputSetVal($event)"
+            *ngIf="!attribute.show" (focus)="onFocus()" (click)="stopProp($event)">
+        </div>
+      </div>
+  
+      <ng-container #searchAttributesPanel>
+        <div class="so_c" *ngIf="show_searchAttributes$ | async" (mouseleave)="mouseLeave()" >
+          <ul class="opt_list">
+            <li *ngFor="let attributes of searchAttributes" (click)="setAttributes(attributes)" (mouseenter)="mouseEnter(attributes)">
+              <p>{{attributes}}</p>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+
+      
     </div>
-  </div>
+  </ng-container>
+
   <div class="button-row">
     <button class="btn_search">
       <mat-icon>search</mat-icon>

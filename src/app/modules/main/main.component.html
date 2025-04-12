@@ -8,20 +8,24 @@
   <div class="sidenav-content" [@navContentAnimation]="currentState">
     <div class="row side-nave-header m-0 p-0 mat-elevation-z2">
       <app-breadcrumb class="col-5"></app-breadcrumb>
-      <app-side_nav_header_menu class="col-5" [menuItems]="sideNavHeaderMenuItems"></app-side_nav_header_menu>
+      <!-- <app-side_nav_header_menu class="col-5" [menuItems]="sideNavHeaderMenuItems"></app-side_nav_header_menu> -->
       <div class="col-2">
         <app-perfil_menu></app-perfil_menu>
       </div>
     </div>
 
-    <ng-template [ngIf]="isDashboard">
+    <div [@routeAnimations]="getRouteAnimationData()">
+      <router-outlet></router-outlet>
+    </div>
+    
+    <!-- <ng-template [ngIf]="isDashboard">
       <app-header></app-header>
       <div [@routeAnimations]="getRouteAnimationData()">
         <router-outlet></router-outlet>
       </div>
-    </ng-template>
+    </ng-template> -->
 
-    <ng-template [ngIf]="!isDashboard">
+    <!-- <ng-template [ngIf]="!isDashboard">
       <app-header></app-header>
       <mat-card class="example-card m-2">
         <mat-card-title>{{platformTitle}}</mat-card-title>
@@ -32,7 +36,7 @@
           </div>
         </mat-card-content>
       </mat-card>
-    </ng-template>
+    </ng-template> -->
 
   </div>
 </div>
