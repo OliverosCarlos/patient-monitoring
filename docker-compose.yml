@@ -1,0 +1,7 @@
+services:
+  web:
+    image: frontend_patient_monitoring:0.0.1
+    ports:
+      - 80:80
+    environment:
+      - BACKEND_HOST=192.168.68.200
