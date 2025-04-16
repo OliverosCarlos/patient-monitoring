@@ -147,10 +147,10 @@ export const MODELS: Model[] = [
       singular_name: 'Psicóloga',
       plural_name:'Psicólogas',
       components:[
-        new VWComponent('administration/psychologist/form','form','card_content',{}),
-        new VWComponent('administration/psychologist/list','list','card_content',{}),
-        new VWComponent('administration/psychologist/form/:psychologist_id','show','card_content',{}),
-        new VWComponent('administration/psychologist/update/:psychologist_id','update','card_content',{})
+        new VWComponent('psychologist/form','form','card_content',{}),
+        new VWComponent('psychologist/list','list','card_content',{}),
+        new VWComponent('psychologist/form/:psychologist_id','show','card_content',{}),
+        new VWComponent('psychologist/update/:psychologist_id','update','card_content',{})
       ],
       multipleView: true,
       searchAttributes:['name','code']

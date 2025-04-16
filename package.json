@@ -35,7 +35,7 @@
     "firebase": "^10.13.2",
     "jquery": "^3.6.0",
     "jspdf": "^2.5.1",
-    "ng-apexcharts": "^1.7.2",
+    "ng-apexcharts": "1.7.2",
     "ngx-color": "^7.3.3",
     "ngx-editor": "^13.0.0",
     "ngx-filesaver": "^14.0.0",

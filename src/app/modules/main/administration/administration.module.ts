@@ -7,7 +7,7 @@ import { FilePickerModule } from  '@sleiss/ngx-awesome-uploader';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { safehtmlModule } from 'src/app/utils/components/custom_pipes/safehtml.module'
-
+import { MainViewerModule } from 'src/app/utils/components/main_viewer/main_viewer.module';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './administration.component';
@@ -44,7 +44,8 @@ import { BayleyItemListViewComponent } from 'src/app/components/administration/t
     FilePickerModule,
     NgSelectModule,
     CKEditorModule,
-    safehtmlModule
+    safehtmlModule,
+    MainViewerModule
   ],
   providers: []
 })
