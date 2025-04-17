@@ -7,6 +7,8 @@ import { PatientFormComponent } from './patient-form/patient-form.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
 
 import { PsychoterapyPatientFormComponent } from 'src/app/components/patient/psychoterapy/psychoterapy_patient-form/psychoterapy_patient-form.component';
+import { PsychoterapyPatientShowViewComponent } from 'src/app/components/patient/psychoterapy/psychoterapy_patient-show-view/psychoterapy_patient-show-view.component';
+
 import { EarlyStimulationPatientFormComponent } from 'src/app/components/patient/early_stimulation/early_stimulation_patient-form/early_stimulation_patient-form.component';
 import { NeuroPsychologyPatientFormComponent } from 'src/app/components/patient/neuro_psychology/neuro_psychology_patient-form/neuro_psychology_patient-form.component';
 
@@ -16,6 +18,9 @@ const routes: Routes = [
     children:[
       { path: '', component: PatientDashboardViewComponent, data: { breadcrumb: 'Dashboard' } },
       { path: 'psychoterapy/form', component: PsychoterapyPatientFormComponent, data: { breadcrumb: 'Psicoterapia' } },
+      { path: 'psychoterapy/show/:patient_id', component: PsychoterapyPatientShowViewComponent, data: { breadcrumb: 'Mostrar' } },
+
+      
       { path: 'early-stimulation/form', component: EarlyStimulationPatientFormComponent, data: { breadcrumb: 'Estimulación Temprana' } },
       { path: 'neuro-psychology/form', component: NeuroPsychologyPatientFormComponent, data: { breadcrumb: 'Neuro Psicología' } },
     ]

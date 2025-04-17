@@ -91,8 +91,18 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
     // });
   }
 
-  viewEmotion(emotion:Emotion){
-    this.router.navigate(['main','catalogs','emotions','form',emotion.id]);
+  viewPatient(patient:any){
+    console.log("PATIENT 2 SHOW -> ", patient);
+    if(patient.psychoterapy_patient != null){
+      this.router.navigate(['main','patients','psychoterapy','show',patient.id]);
+    }
+    if(patient.early_stimulation_patient != null){
+      this.router.navigate(['main','patients','early-stimulation','show',patient.id]);
+    }
+    if(patient.neuro_psychology_patient != null){
+      this.router.navigate(['main','patients','neuro-psychology','show',patient.id]);
+    }
+    
   }
 
     /** Whether the number of selected elements matches the total number of rows. */

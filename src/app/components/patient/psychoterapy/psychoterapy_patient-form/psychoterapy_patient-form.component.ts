@@ -69,8 +69,6 @@ export class PsychoterapyPatientFormComponent implements OnInit, AfterViewInit, 
 
   ngAfterViewInit(): void {
     this.$headerAction = this.headerService.getOutAction().subscribe(data => {
-      console.log("HEADER ", data);
-      
       switch (data.action) {
         case 'save':
           this.save();
