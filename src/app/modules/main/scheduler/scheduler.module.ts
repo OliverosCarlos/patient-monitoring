@@ -11,7 +11,7 @@ import { TimeFormatPipe } from 'src/app/utils/components/custom_pipes/time-forma
 import { MainViewerModule } from 'src/app/utils/components/main_viewer/main_viewer.module'
 
 import { WeekDayTranslatePipe } from 'src/app/utils/components/custom_pipes/week-day-translate.pipe';
-import { PatientFormViewModule } from 'src/app/components/psychotherapy/patient/patient-select/patient-select.module';
+import { PatientSelectModule } from 'src/app/components/psychotherapy/patient/patient-select/patient-select.module';
 
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { SchedulerComponent } from './scheduler.component';
@@ -38,7 +38,7 @@ import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
     ReactiveFormsModule,
     NgxSpinnerModule,
     ColorCircleModule,
-    PatientFormViewModule,
+    PatientSelectModule,
     NgSelectModule,
     MainViewerModule
   ],

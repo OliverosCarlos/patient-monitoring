@@ -38,4 +38,4 @@ import { PatientSelectComponent } from './patient-select.component';
   ]
 })
 
-export class PatientFormViewModule { }
+export class PatientSelectModule { }

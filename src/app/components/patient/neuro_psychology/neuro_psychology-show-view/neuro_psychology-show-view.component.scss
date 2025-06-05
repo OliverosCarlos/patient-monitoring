@@ -1,0 +1,41 @@
+.section-title{
+    color: dodgerblue;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.cntr-title-info{
+    .title-info{
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
+.cntr-data-info{
+    padding: 10px;
+    .data-info{
+
+    }
+}
+
+.section{
+    padding-bottom: 20px;
+    border-bottom: solid 3px gainsboro;
+}
+
+.cntr-form{
+    display: flex;
+    justify-content: space-between;
+    .form-title{
+        width: 45%;
+        padding-block: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-right: solid 3px gainsboro;
+    }
+
+    .form-value{
+        width: 50%;
+        padding-block: 5px;
+    }
+}

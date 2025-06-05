@@ -2,7 +2,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { NEUROPSYCHO, CATALOGS } from 'src/app/utils/setup/routes.enum';
+import { CLINICAL_HISTORY, CATALOGS } from 'src/app/utils/setup/routes.enum';
 
 //SERVICE
 import { HeaderService } from 'src/app/services/header.service';
@@ -70,7 +70,7 @@ export class EarlyStimulationListViewComponent implements OnInit, AfterViewInit,
   }
 
   getAll(data_search:any){
-   this.backendService.getAll(NEUROPSYCHO.MEDICAL_HISTORY,data_search).subscribe({
+   this.backendService.getAll(CLINICAL_HISTORY.EARLY_STIMULATION,data_search).subscribe({
      next: (v) => { this.dataSource.data = v; console.log(v);},
      error: (e) => console.error(e),
      complete: () => console.info('complete')

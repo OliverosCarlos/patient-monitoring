@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class="section-title">{{data.patient?.first_name+' '+data.patient?.last_name1+' '+data.patient?.last_name2}}</h2>
+  </div>
+</div>
+<div class="row m-0 pl-2">
+  <div class="col-6">
+    <div class="cntr-form">
+      <div class="form-title"><span>Nombre :</span></div>
+      <div class="form-value"><span>{{data.patient?.first_name}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Apellido Paterno :</span></div>
+      <div class="form-value"><span>{{data.patient?.last_name1}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Apellido Materno :</span></div>
+      <div class="form-value"><span>{{data.patient?.last_name2}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Edad :</span></div>
+      <div class="form-value"><span>{{data.patient?.age}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Sexo :</span></div>
+      <div class="form-value"><span>{{data.patient?.gender}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Domicilio :</span></div>
+      <div class="form-value"><span>{{data.patient?.address}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Fecha de Nacimiento :</span></div>
+      <div class="form-value"><span>{{data.patient?.date_of_birth}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Lugar de Nacimiento :</span></div>
+      <div class="form-value"><span>{{data.patient?.birthplace}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Lugar de Residencia :</span></div>
+      <div class="form-value"><span>{{data.patient?.residence_location}}</span></div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="cntr-form">
+      <div class="form-title"><span>Educación :</span></div>
+      <div class="form-value"><span>{{data.education}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Ocupación :</span></div>
+      <div class="form-value"><span>{{data.occupation}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Telefono :</span></div>
+      <div class="form-value"><span>{{data.phone}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Correo :</span></div>
+      <div class="form-value"><span>{{data.email}}</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h2 class="section-title">Representante Legal</h2>
+  </div>
+</div>
+<div class="row section">
+  <div class="col-6">
+    <div class="cntr-form">
+      <div class="form-title"><span>Nombre :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.first_name}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Apellido Paterno :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.last_name1}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Apellido Materno :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.last_name2}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Edad :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.age}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Fecha de nacimiento :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.date_of_birth}}</span></div>
+    </div>
+    <br>
+    <div class="cntr-form">
+      <div class="form-title"><span>Dirección :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.address}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Lugar de nacimiento :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.birthplace}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Lugar de recidencia :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.residence_location}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Genero :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.gender}}</span></div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="cntr-form">
+      <div class="form-title"><span>Correo :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.email}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Telefono :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.phone}}</span></div>
+    </div>
+    <br>
+    <div class="cntr-form">
+      <div class="form-title"><span>Grado de estudios :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.education}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Ocupación :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.occupation}}</span></div>
+    </div>
+    <div class="cntr-form">
+      <div class="form-title"><span>Relacion con el paciente :</span></div>
+      <div class="form-value"><span>{{data.legal_guardian?.relationship}}</span></div>
+    </div>
+  </div>
+</div>

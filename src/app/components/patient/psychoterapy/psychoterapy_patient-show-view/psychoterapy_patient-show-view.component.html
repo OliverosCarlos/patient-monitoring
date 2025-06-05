@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-12">
-    <h2 class="section-title">PACIENTE</h2>
+    <h2 class="section-title">{{data.patient?.first_name+' '+data.patient?.last_name1+' '+data.patient?.last_name2}}</h2>
   </div>
 </div>
 <div class="row m-0 pl-2">
-  <!-- <div class="col-6">
+  <div class="col-6">
     <div class="cntr-form">
       <div class="form-title"><span>Nombre :</span></div>
       <div class="form-value"><span>{{data.patient?.first_name}}</span></div>
@@ -45,16 +45,33 @@
 
   <div class="col-6">
     <div class="cntr-form">
-      <div class="form-title"><span>Diagnóstico Médico :</span></div>
-      <div class="form-value"><span>{{data.medical_diagnosis}}</span></div>
+      <div class="form-title"><span>Educación :</span></div>
+      <div class="form-value"><span>{{data.education}}</span></div>
     </div>
     <div class="cntr-form">
-      <div class="form-title"><span>Fuente de Información :</span></div>
-      <div class="form-value"><span>{{data.source_information}}</span></div>
+      <div class="form-title"><span>Ocupación :</span></div>
+      <div class="form-value"><span>{{data.occupation}}</span></div>
     </div>
     <div class="cntr-form">
-      <div class="form-title"><span>Motivo de Consulta :</span></div>
-      <div class="form-value"><span>{{data.reason_consultation}}</span></div>
+      <div class="form-title"><span>Telefono :</span></div>
+      <div class="form-value"><span>{{data.phone}}</span></div>
     </div>
-  </div> -->
+    <div class="cntr-form">
+      <div class="form-title"><span>Correo :</span></div>
+      <div class="form-value"><span>{{data.email}}</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="row m-0 p-0">
+  <div class="col-12 mt-3">
+    <mat-tab-group color="primary">
+      <mat-tab label="Historial Clinico">
+        <app-clinical_history-show-view [clinical_history_data]="clinical_history_data" ></app-clinical_history-show-view>
+      </mat-tab>
+      <mat-tab label="Nota Clinica">
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>

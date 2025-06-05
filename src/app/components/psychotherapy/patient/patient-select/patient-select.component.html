@@ -7,7 +7,10 @@
         </div>
         <div class="vw-field-content">
           <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" [items]="patientList"
-            placeholder="SELECCIONE UNA OPCIÓN" bindLabel="full_name" bindValue="id" [clearable]="false" (change)="setPatient($event)">
+            placeholder="SELECCIONE UNA OPCIÓN" bindLabel="type" bindValue="id" [clearable]="false" (change)="setPatient($event)">
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              <span>{{item.full_name}}<span style="color: dodgerblue;"> ({{item.type}})</span></span>
+            </ng-template>
           </ng-select>
         </div>
       </div>

@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
 
 //SERVICES
 import { SetupService } from 'src/app/utils/services/setup.service';
-import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-catalogs',
@@ -21,7 +20,6 @@ export class CatalogsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private setupService : SetupService,
-    private utilService: UtilService
   ) { 
 
   }
@@ -32,7 +30,6 @@ export class CatalogsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.setupService.setModule("catalogs")
-    
   }
 
 }

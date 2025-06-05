@@ -16,6 +16,7 @@ import { SideMenuModule } from 'src/app/utils/components/side_menu/side_menu.mod
 import { BreadcrumModule } from 'src/app/utils/components/breadcrumb/breadcrumb.module';
 import { PerfilMenuModule } from 'src/app/utils/components/perfil_menu/perfil_menu.module';
 import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_header_menu/side_nav_header_menu.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_heade
     SideMenuModule,
     BreadcrumModule,
     PerfilMenuModule,
-    SideNavHeaderMenuModule
+    SideNavHeaderMenuModule,
+    NgSelectModule
   ],
   providers: []
 })

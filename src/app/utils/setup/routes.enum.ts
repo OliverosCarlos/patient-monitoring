@@ -43,6 +43,7 @@ export enum SCHEDULER {
 
 export enum GENERAL {
     PATIENT = '/patient/general/',
+    CLINICAL_HISTORY_PSYCHOTHERAPY = '/clinical_history/psychotherapy/'
 }
 
 export enum PATIENT {
@@ -50,4 +51,11 @@ export enum PATIENT {
     PSYCHOTHERAPY = '/patient/psychoterapy/',
     EARLY_STIMULATION = '/patient/early-stimulation/',
     NEURO_PSYCHOLOGY = '/patient/neuro-psychology/'
+}
+
+export enum CLINICAL_HISTORY {
+    CLINICAL_NOTE = '/clinical_history/clinical_note/',
+    CLINICAL_NOTE_BY_PATIENT = '/clinical_history/clinical_note/by_patient/',
+    EARLY_STIMULATION = '/clinical_history/early_stimulation_clinical_history/',
+    EARLY_STIMULATION_BY_PATIENT = '/clinical_history/early_stimulation_clinical_history_by_patient/'
 }

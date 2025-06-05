@@ -15,8 +15,12 @@ import { PatientListViewModule } from 'src/app/components/patient/patient-list-v
 import { PatientService } from 'src/app/services/patient.service';
 
 import { PsychoterapyPatientFormComponent } from 'src/app/components/patient/psychoterapy/psychoterapy_patient-form/psychoterapy_patient-form.component';
+import { PsychoterapyPatientShowViewComponent } from 'src/app/components/patient/psychoterapy/psychoterapy_patient-show-view/psychoterapy_patient-show-view.component';
 import { EarlyStimulationPatientFormComponent } from 'src/app/components/patient/early_stimulation/early_stimulation_patient-form/early_stimulation_patient-form.component';
+import { EarlyStimulationShowViewComponent } from 'src/app/components/patient/early_stimulation/early_stimulation_patient-show-view/early_stimulation_patient-show-view.component';
 import { NeuroPsychologyPatientFormComponent } from 'src/app/components/patient/neuro_psychology/neuro_psychology_patient-form/neuro_psychology_patient-form.component';
+
+import { ClinicalHistoryShowViewModule } from 'src/app/components/clinical_history/basic_clinical_history/clinical_history-show-view/clinical_history-show-view.module'
 
 @NgModule({
   declarations: [
@@ -25,8 +29,10 @@ import { NeuroPsychologyPatientFormComponent } from 'src/app/components/patient/
     PatientListComponent,
     PsychoterapyPatientFormComponent,
     EarlyStimulationPatientFormComponent,
+    EarlyStimulationShowViewComponent,
     NeuroPsychologyPatientFormComponent,
-    PatientDashboardViewComponent
+    PatientDashboardViewComponent,
+    PsychoterapyPatientShowViewComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +41,8 @@ import { NeuroPsychologyPatientFormComponent } from 'src/app/components/patient/
     FormsModule,
     ReactiveFormsModule,
     MainViewerModule,
-    PatientListViewModule
+    PatientListViewModule,
+    ClinicalHistoryShowViewModule
   ],
   providers: [PatientService]
 })

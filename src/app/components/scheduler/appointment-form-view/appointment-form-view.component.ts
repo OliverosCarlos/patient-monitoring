@@ -231,8 +231,6 @@ export class AppointmentFormViewComponent implements OnInit, AfterViewInit {
   }
 
   setPatient($ev:any){
-    console.log($ev.id);
-    
     this.formGroup.get('patient_id')!.setValue($ev.id);
   }
 

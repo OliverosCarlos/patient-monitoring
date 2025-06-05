@@ -4,81 +4,12 @@
       <mat-step>
         <ng-template matStepLabel>PACIENTE</ng-template>
         <ng-template matStepContent>
-          <div class="row" formGroupName="patient">
-            <div class="col-4">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'first_name'" class="control-label">Nombre <span
-                    class="text-danger">*</span></label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'first_name'"
-                  formControlName="first_name">
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'last_name1'" class="control-label">Apellido Paterno <span
-                    class="text-danger">*</span> </label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name1'"
-                  formControlName="last_name1">
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'last_name2'" class="control-label">Apellido Materno <span
-                    class="text-danger">*</span> </label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name2'"
-                  formControlName="last_name2">
-              </div>
-            </div>
-
-            <div class="col-8">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'address'" class="control-label">Domicilio <span
-                    class="text-danger">*</span>
-                </label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'address'"
-                  formControlName="address">
-              </div>
-            </div>
-            <div class="col-2">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'age'" class="control-label">Edad <span class="text-danger">*</span>
-                </label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="age">
-              </div>
-            </div>
-            <div class="col-2">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'gender'" class="control-label">Sexo <span class="text-danger">*</span>
-                </label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'gender'"
-                  formControlName="gender">
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'birthplace'" class="control-label">Lugar de Nacimiento <span
-                    class="text-danger">*</span> </label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'birthplace'"
-                  formControlName="birthplace">
-              </div>
-            </div>
-            <div class="col-4">
-              <label [attr.for]="nameForm+'birthplace'" class="control-label">Fecha de Nacimiento <span
-                  class="text-danger">*</span> </label>
-              <div class="input-group">
-                <input formControlName="date_of_birth" class="form-control" placeholder="yyyy-mm-dd" name="dp"
-                  ngbDatepicker #d="ngbDatepicker" />
-                <button class="btn btn-outline-secondary bi bi-calendar" (click)="d.toggle()" type="button"></button>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label [attr.for]="nameForm+'residence_location'" class="control-label">Lugar de Residencia <span class="text-danger">*</span> </label>
-                <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'residence_location'" formControlName="residence_location">
-              </div>
+          <div class="row">
+            <div class="col-12">
+              <patient_early_stimulation-select (eventSetData)="setPatient($event)"></patient_early_stimulation-select>
             </div>
           </div>
-          <div class="row" formGroupName="medical_history">
+          <div class="row">
             <div class="col-8">
               <div class="form-group">
                 <label [attr.for]="nameForm+'medical_diagnosis'" class="control-label">Diagnóstico médico <span class="text-danger">*</span> </label>
@@ -523,7 +454,7 @@
           <div class="row">
             <h1>ANTECENDES HEREDO-FAMILIARES</h1>
           </div>
-          <div class="row" formGroupName="hereditaryFamily_history">
+          <div class="row" formGroupName="hereditary_family_history">
             <div class="col-6">
               <div class="form-group">
                 <label [attr.for]="nameForm+'diabetes'" class="control-label">Diabetes <span class="text-danger">*</span>

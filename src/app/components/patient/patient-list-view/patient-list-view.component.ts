@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -33,6 +33,7 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
   $headerAction!: Subscription;
   $advanceSearch!: Subscription;
 
+  @Output() eventGetAllPatients = new EventEmitter<any>();
 
   constructor(
     private backendService : BackendService,
@@ -76,7 +77,9 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
   getAllGeneralPatients(data_search:any){
     this.spinner.show('loading')
     this.backendService.getAll(PATIENT.GENERAL, data_search).subscribe({
-      next: (v) => { this.dataSource.data = v; console.log(v);
+      next: (v) => { 
+        this.dataSource.data = v;
+        this.eventGetAllPatients.emit(v);
        },
       error: (e) => console.error(e),
       complete: () => this.spinner.hide('loading')
@@ -92,15 +95,14 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   viewPatient(patient:any){
-    console.log("PATIENT 2 SHOW -> ", patient);
     if(patient.psychoterapy_patient != null){
-      this.router.navigate(['main','patients','psychoterapy','show',patient.id]);
+      this.router.navigate(['main','patients','psychoterapy','show',patient.psychoterapy_patient[0].id]);
     }
     if(patient.early_stimulation_patient != null){
-      this.router.navigate(['main','patients','early-stimulation','show',patient.id]);
+      this.router.navigate(['main','patients','early-stimulation','show',patient.early_stimulation_patient[0].id]);
     }
     if(patient.neuro_psychology_patient != null){
-      this.router.navigate(['main','patients','neuro-psychology','show',patient.id]);
+      this.router.navigate(['main','patients','neuro-psychology','show',patient.neuro_psychology_patient[0].id]);
     }
     
   }

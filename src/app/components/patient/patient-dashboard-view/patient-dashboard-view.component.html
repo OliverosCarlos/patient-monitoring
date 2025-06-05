@@ -2,27 +2,12 @@
     <h2>Historial Clinico</h2>
 </div> -->
 <div class="dashboard-container m-2">
+    <!-- PATIENT LIST -->
     <div class="dashboard-item" id="panel-1">
-        <app-patient-list-view></app-patient-list-view>
+        <app-patient-list-view (eventGetAllPatients)="getAllPatients($event)"></app-patient-list-view>
     </div>
-
 
     <div class="dashboard-item" id="panel-2" style="background-color: white;">
-        <div class="dashboard-item-head">
-            <div class="head-left">
-                <span>Ver más</span>
-            </div>
-        </div>
-        <div class="dashboard-item-body text-content">
-            <p>Próximo paciente</p>
-            <p style="color: dodgerblue;">Carlos Moisés Ruvalcaba Oliveros</p>
-        </div>
-        <div class="dashboard-item-footer">
-            <span>Footer</span>
-        </div>
-    </div>
-
-    <div class="dashboard-item" id="panel-3" style="background-color: white;">
         <div class="dashboard-item-head">
             <div class="head-left">
                 <span>Ver más</span>
@@ -33,8 +18,25 @@
             </div>
         </div>
         <div class="dashboard-item-body text-content">
-            <p>Historiales Medicos</p>
-            <span class="big-text">4</span>
+            <p>Neuro Psicología</p>
+            <span class="big-text">{{patient_neuro_psychology}}</span>
+        </div>
+        <div class="dashboard-item-footer"></div>
+    </div>
+
+    <div class="dashboard-item" id="panel-3" style="background-color: white;">
+        <div class="dashboard-item-head">
+            <div class="head-left">
+                <a href="main/clinical-history/early-stimulation/list">Ver más</a>
+            </div>
+            <div class="head-right">
+                <span style="vertical-align: middle;">Crear </span>
+                <mat-icon style="color: green;">note_add</mat-icon>
+            </div>
+        </div>
+        <div class="dashboard-item-body text-content">
+            <p>Estimulación Temprana</p>
+            <span class="big-text2">{{patient_early_stimulation_count}}</span>
         </div>
         <div class="dashboard-item-footer"></div>
     </div>
@@ -42,7 +44,7 @@
     <div class="dashboard-item" id="panel-4" style="background-color: white;">
         <div class="dashboard-item-head">
             <div class="head-left">
-                <span>Ver más</span>
+                <a href="/main/clinical-history/basic-clinical-history/list">Ver más</a>
             </div>
             <div class="head-right">
                 <span style="vertical-align: middle;">Crear </span>
@@ -50,8 +52,8 @@
             </div>
         </div>
         <div class="dashboard-item-body text-content">
-            <p>Historiales Medicos</p>
-            <span class="big-text">4</span>
+            <p>Psicoterapia</p>
+            <span class="big-text3">{{patient_psychoterapy_count}}</span>
         </div>
         <div class="dashboard-item-footer"></div>
     </div>

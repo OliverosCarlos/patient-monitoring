@@ -13,8 +13,6 @@ export const MENUS: any[] = [
                 name: 'Registro',
                 submenus: [
                     { name: 'Pacientes', description: 'Administración de pacientes', route:'patients', icon: 'contacts', model:'patient', groups: ['psychologist'] },
-                    { name: 'Notas clinicas', description: 'Notas', route:'psychotherapy/clinical-notes/table', icon: 'local_hospital', model: 'clinical-note', groups: ['psychologist'] },
-                    { name: 'Seguimiento', description: 'Seguimiento de pacientes', route:'psychotherapy/tracking/table', icon: 'track_changes', model: 'track', groups:['psychologist'] },
                     { name: 'Tareas', description: 'Descripción', route:'psychotherapy/task/dashboard', icon: 'note', model: 'task', groups:['psychologist'] },
                     { name: 'Agenda', description: 'Agenda', route:'scheduler', icon: 'calendar_today', model: 'scheduler', groups:['psychologist'] }
                 ]

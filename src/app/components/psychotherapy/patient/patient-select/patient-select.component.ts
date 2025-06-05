@@ -55,7 +55,8 @@ export class PatientSelectComponent implements OnInit, OnDestroy, AfterViewInit 
 
   getAllPatients(){
     this.backendService.getAll(GENERAL.PATIENT,{}).subscribe({
-      next: (v) => { this.patientList = this.buildPatientList(v); 
+      next: (v) => { this.patientList = this.buildPatientList(v);console.log(this.buildPatientList(v));
+      
       },
       error: (e) => console.error(e),
       complete: () => console.info('complete')

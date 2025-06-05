@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { CATALOGS} from 'src/app/utils/setup/routes.enum';
@@ -23,9 +23,13 @@ import { Model } from 'src/app/models/vw-model.model';
 })
 export class PatientDashboardViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  patient_psychoterapy_count = 0;
+  patient_early_stimulation_count = 0;
+  patient_neuro_psychology = 0;
+
   constructor(
-    ) { 
-    }
+  ) {
+  }
 
   ngOnInit(): void {
   }  
@@ -39,8 +43,11 @@ export class PatientDashboardViewComponent implements OnInit, AfterViewInit, OnD
 
   }
 
-  getAllEmotions(data_search:any){
-
+  getAllPatients(data: any){
+    console.log("ALL", data);
+    this.patient_psychoterapy_count = data.filter((patient: any) => patient.type.id == "psychoterapy").length;
+    this.patient_early_stimulation_count = data.filter((patient: any) => patient.type.id == "early-stimulation").length;
+    this.patient_neuro_psychology = data.filter((patient: any) => patient.type.id == "neuro-psychology").length;
   }
 
   deletePsychologists(){

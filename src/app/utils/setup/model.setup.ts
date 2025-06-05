@@ -24,7 +24,9 @@ export const MODELS: Model[] = [
         { menuTitle: "Adulto", path: "list" }
       ],
       components:[
-        new VWComponent('clinical-history/','dashboard','dashboard_content',{})
+        new VWComponent('clinical-history/','dashboard','dashboard_content',{}),
+        new VWComponent('clinical-history/basic-clinical-history/form/:id','show','card_content',{}),
+
       ],
       multipleView: false,
       searchAttributes:['paciente']
@@ -63,32 +65,32 @@ export const MODELS: Model[] = [
       searchAttributes:[ 'first_name', 'last_name1', 'last_name2', 'email' ]
     },
     {
-      name: 'clinical_notes',
+      name: 'clinical_note',
       singular_name: 'Nota clínica',
       plural_name:'Notas clínicas',
       components:[
-        new VWComponent('psychotherapy/clinical-notes/form','form','card_content',{}),
-        new VWComponent('psychotherapy/clinical-notes/table','list','card_content',{}),
-        new VWComponent('psychotherapy/clinical-notes/form/:clinical-note_id','show','card_content',{}),
-        new VWComponent('psychotherapy/clinical-notes/update/:clinical-note_id','update','card_content',{})
+        new VWComponent('clinical_note/form','form','card_content',{}),
+        new VWComponent('clinical_note/list','list','card_content',{}),
+        new VWComponent('clinical_note/form/:clinical_note_id','show','card_content',{}),
+        new VWComponent('clinical_note/update/:clinical_note_id','update','card_content',{})
       ],
       multipleView: false,
       searchAttributes:[]
     },
-    {
-      name: 'tracking',
-      singular_name: 'Seguimiento',
-      plural_name:'Seguimientos',
-      components:[
-        new VWComponent('psychotherapy/','dashboard','dashboard_content',{}),
-        new VWComponent('psychotherapy/tracking/form','form','card_content',{}),
-        new VWComponent('psychotherapy/tracking/table','list','card_content',{}),
-        new VWComponent('psychotherapy/tracking/form/:track_id','show','card_content',{}),
-        new VWComponent('psychotherapy/tracking/update/:track_id','update','card_content',{})
-      ],
-      multipleView: false,
-      searchAttributes:[]
-    },
+    // {
+    //   name: 'tracking',
+    //   singular_name: 'Seguimiento',
+    //   plural_name:'Seguimientos',
+    //   components:[
+    //     new VWComponent('psychotherapy/','dashboard','dashboard_content',{}),
+    //     new VWComponent('psychotherapy/tracking/form','form','card_content',{}),
+    //     new VWComponent('psychotherapy/tracking/table','list','card_content',{}),
+    //     new VWComponent('psychotherapy/tracking/form/:track_id','show','card_content',{}),
+    //     new VWComponent('psychotherapy/tracking/update/:track_id','update','card_content',{})
+    //   ],
+    //   multipleView: false,
+    //   searchAttributes:[]
+    // },
     {
       name: 'task',
       singular_name: 'Tarea',
@@ -164,7 +166,7 @@ export const MODELS: Model[] = [
         { menuTitle: "Adulto", path: "list" }
       ],
       components:[
-        new VWComponent('clinical-history/early-stimulation/form','form','card_content',{}),
+        new VWComponent('early-stimulation/form','form','card_content',{}),
         new VWComponent('clinical-history/early-stimulation/table','list','card_content',{}),
         new VWComponent('clinical-history/early-stimulation/form/:early-stimulation_id','show','card_content',{}),
         new VWComponent('clinical-history/early-stimulation/update/:early-stimulation_id','update','card_content',{})
@@ -241,6 +243,22 @@ export const MODELS: Model[] = [
       multipleView: false,
       searchAttributes:['first_name', 'last_name1', 'last_name2', 'email']
     },
+    {
+      name: 'basic-clinical-history',
+      singular_name: 'Historia Clinica General',
+      plural_name:'Historias Clinicas Generales',
+      menus: [
+        { menuTitle: "menu 1", path: "form" },
+        { menuTitle: "menu 2", path: "list" }
+      ],
+      components:[
+        new VWComponent('basic-clinical-history/list','list','card_content',{}),
+        new VWComponent('basic-clinical-history/form','form','card_content',{}),
+
+      ],
+      multipleView: false,
+      searchAttributes:['paciente']
+    },
     
   ];
 
@@ -272,6 +290,18 @@ export const MODELS: Model[] = [
         { menuTitle: "Psicoterapia", path: "psychoterapy/form" },
         { menuTitle: "Estimulación Temprana", path: "early-stimulation/form" },
         { menuTitle: "Neuro Psicología", path: "neuro-psychology/form" },
+      ]
+    },
+    {
+      name: 'clinical-history',
+      singular_name: 'Historia Clinica',
+      plural_name:'Historias Clinicas',
+      menus: [
+        { menuTitle: "Psicoterapia", path: "basic-clinical-history/list" },
+        { menuTitle: "Estimulación Temprana", path: "early-stimulation/list" },
+        // { menuTitle: "Neuro Psicología", path: "neuro-psychology/form" },
+        { menuTitle: "Nota Clinica", path: "clinical_note/list" }
+
       ]
     },
   ]
