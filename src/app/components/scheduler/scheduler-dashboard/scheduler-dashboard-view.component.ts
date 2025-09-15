@@ -2,11 +2,12 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostLis
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { filter, forkJoin } from 'rxjs';
 import { NEUROPSYCHO, CATALOGS, SCHEDULER } from 'src/app/utils/setup/routes.enum';
+import { Router } from '@angular/router';
 
 //SERVICES
 import { UtilService } from 'src/app/services/util.service';
 import { BackendService } from 'src/app/services/backend.service';
-import { HeaderService } from 'src/app/services/header.service';
+import { SetupService } from 'src/app/utils/services/setup.service';
 
 //MODELS
 import { MODELS } from 'src/app/utils/setup/model.setup';
@@ -33,7 +34,6 @@ interface Appointment {
   styleUrls: ['./scheduler-dashboard-view.component.scss']
 })
 export class SchedulerDashboardViewComponent implements OnInit, OnDestroy, AfterViewInit {
-  model : Model;
 
   daysInMonth: Day[] = [];
   availableHours: number[] = [];
@@ -49,27 +49,25 @@ export class SchedulerDashboardViewComponent implements OnInit, OnDestroy, After
   hourSelected = 0
 
   constructor(
-    private utilService : UtilService,
     private backendService : BackendService,
-    private headerService : HeaderService,
+    private router : Router,
+    private setupService : SetupService,
   ) {
-    this.model = MODELS.find(model => model.name == 'appointment')!;
+    this.setupService.setViewType("dashboard_content");
   }
 
   ngOnInit() {
-    this.headerService.setHeader({model: this.model, type: 'list'});
-    this.utilService.set({name:'appointment', type:'list'});
 
     const year = 2025;
     const month = this.currentMonth;
     this.daysInMonth = this.getDaysInMonthWithWeekdays(year, month);
-    
+
     this.getAvailabilityByDay(this.currentDay);
     this.weekDaySelected = this.daysInMonth.find((element) => element.date == this.currentDay)?.dayOfWeek;
 
     this.getAppointmentsByMonth()
   }
-  
+
   ngAfterViewInit(): void {
   }
 
@@ -94,11 +92,11 @@ export class SchedulerDashboardViewComponent implements OnInit, OnDestroy, After
   getAppointmentsByMonth(){
     // this.spinner.show('loading')
     this.backendService.getManyByParams(SCHEDULER.AVAILABILITY+'by_month/', {month: this.currentMonth}).subscribe({
-      next: (v) => { 
+      next: (v) => {
         this.daysInMonth = this.buildMonthCalendar(this.daysInMonth, v);
         console.log(this.daysInMonth);
-        
-         },
+
+        },
       error: (e) => console.error(e),
       complete: () => console.log("completed")
     });
@@ -200,6 +198,18 @@ export class SchedulerDashboardViewComponent implements OnInit, OnDestroy, After
 
   getTypeCount(data: any[], type: string){
     return data ? data.filter(item => item.patient.type.id == type).length : 0;
+  }
+
+  viewPatient(patient:any){
+    if(patient.psychoterapy_patient != null){
+      this.router.navigate(['main','patients','psychoterapy','show',patient.psychoterapy_patient[0].id]);
+    }
+    if(patient.early_stimulation_patient != null){
+      this.router.navigate(['main','patients','early-stimulation','show',patient.early_stimulation_patient[0].id]);
+    }
+    if(patient.neuro_psychology_patient != null){
+      this.router.navigate(['main','patients','neuro-psychology','show',patient.neuro_psychology_patient[0].id]);
+    }
   }
 
 }

@@ -9,6 +9,10 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
+//models
+import { MODELS } from 'src/app/utils/setup/model.setup';
+import { Model } from 'src/app/models/vw-model.model';
+
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -19,7 +23,7 @@ import { filter } from 'rxjs/operators';
 })
 export class ClinicalNoteShowFormViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() note: any;
+  model : Model;
 
   record = {
     id: 0,
@@ -41,7 +45,9 @@ export class ClinicalNoteShowFormViewComponent implements OnInit, OnDestroy, Aft
     private utilService: UtilService,
     private route: ActivatedRoute,
     private router : Router
-  ) {}
+  ) {
+    this.model = MODELS.find(model => model.name == 'clinical_note')!;
+  }
 
   ngOnDestroy(): void {
     if(!this.isModal){
@@ -61,25 +67,24 @@ export class ClinicalNoteShowFormViewComponent implements OnInit, OnDestroy, Aft
             break;
         }
       });
-  
-      this.utilService.set({name:'tracking', type:'show'});
     }
 
   }
 
   ngOnInit() {
-    if(this.route.snapshot.paramMap.get('tracking_id')){
-      this.trackingById(this.route.snapshot.paramMap.get('tracking_id'));
-      this.headerService.setHeader({name:'tracking',type:'show'});
+    this.headerService.setHeader({model: this.model, type:'show'});
+    this.utilService.set({name:'clinical_note', type:'show'});
+    if(this.route.snapshot.paramMap.get('clinical_note_id')){
+      this.clinicalNoteById(this.route.snapshot.paramMap.get('clinical_note_id'));
     }else{
       this.isModal = true
     }
   }
 
-  trackingById(id:any){
+  clinicalNoteById(id:any){
     if(id){
-     this.backendService.getOneById(CLINICAL_HISTORY.CLINICAL_NOTE_BY_PATIENT,id).subscribe({
-       next: (v) => { this.note = v; console.log(v);
+     this.backendService.getOneById(CLINICAL_HISTORY.CLINICAL_NOTE,id).subscribe({
+       next: (v) => { this.record = v; console.log(v);
        },
        error: (e) => console.error(e),
        complete: () => console.info('complete')
@@ -88,8 +93,8 @@ export class ClinicalNoteShowFormViewComponent implements OnInit, OnDestroy, Aft
   }
 
   edit(){
-    this.router.navigate(['catalogs','hobbies-interest','update',this.route.snapshot.paramMap.get('hobbies-interest_id')]);
+    this.router.navigate(['main','clinical-history','clinical_note','update',this.route.snapshot.paramMap.get('clinical_note_id')]);
   }
 
 }
-    
+

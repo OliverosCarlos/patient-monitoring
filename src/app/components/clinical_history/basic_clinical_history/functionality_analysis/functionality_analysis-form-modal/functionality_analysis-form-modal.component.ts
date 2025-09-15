@@ -8,6 +8,8 @@ import { Functionality_analysisService } from 'src/app/services/clinical_note/fu
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import {MatTableDataSource} from '@angular/material/table';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-functionality_analysis-form-modal',
@@ -23,40 +25,27 @@ export class FunctionalityAnalysisFormModalComponent implements OnInit, OnDestro
   loading = false;
 
   emotions_list = [];
-  // suscribeAddressService: Subscription;
 
-  // @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-  //   if (event.keyCode === 27) {
-  //     event.stopImmediatePropagation();
-  //     this.onClose();
-  //   }
-  // }
+  displayedColumns = ['emotion_name','conduct','functionality'];
+  dataSource = new MatTableDataSource<any>([]);
 
   constructor(
     private route: ActivatedRoute,
     private backendService: BackendService,
     private functionality_analysisService: Functionality_analysisService,
     private fb: UntypedFormBuilder,
+    private utilService : UtilService,
   ) {
     this.formGroup = this.fb.group({
       emotion: new UntypedFormControl(null, [Validators.required]),
+      emotion_name: new UntypedFormControl(null, []),
       conduct: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)]),
       functionality: new UntypedFormControl(null, [Validators.required, Validators.maxLength(250)])
     });
   }
+
   ngAfterViewInit(): void {
-    // this.suscribeAddressService = this.stepperFisherProducerForm.getAddressUpdate().subscribe(address => {
-    //   this.formGroup.reset();
-    //   this.paForm.street.setValue(address.data.street);
-    //   this.paForm.int_number.setValue(address.data.int_number);
-    //   this.paForm.ext_number.setValue(address.data.ext_number);
-    //   this.paForm.between1.setValue(address.data.between1);
-    //   this.paForm.between2.setValue(address.data.between2);
-    //   this.paForm.references.setValue(address.data.references);
-    //   this.paForm.zipcode.setValue(address.data.zipcode);
-    //   this.paForm.neighborhood.setValue(address.data.neighborhood);
-    //   if (address.data.zipcode) { this.searchByZipCode(); }
-    // });
+
   }
 
   ngOnInit() {
@@ -70,15 +59,11 @@ export class FunctionalityAnalysisFormModalComponent implements OnInit, OnDestro
         filter(() => this.formGroup.invalid))
       .subscribe(() => this.onFormInvalid());
 
-    // if(this.route.snapshot.paramMap.get('patient_id')){
-    //   this.isUpdating = true;
-    //   this.getPatientById(this.route.snapshot.paramMap.get('patient_id'));
-    // }
     this.getAllEmotions();
   }
 
   get paForm() { return this.formGroup.controls }
-  
+
   ngOnDestroy() {
     // this.suscribeAddressService.unsubscribe();
   }
@@ -115,32 +100,22 @@ export class FunctionalityAnalysisFormModalComponent implements OnInit, OnDestro
       complete: () => console.info('complete')
     });
   }
-  // cleanFormGroup() {
-  //   this.formGroup.get('neighborhood').reset();
-  //   this.formGroup.get('locality').reset();
-  //   this.formGroup.get('municipality').reset();
-  //   this.formGroup.get('state').reset();
-  //   this.neighborhoods = [];
-  // }
-
-  // digitOnly(ev: any) {
-  //   // wont allow e + -  .
-  //   return (
-  //     ev.keyCode !== 69 &&
-  //     ev.keyCode !== 187 &&
-  //     ev.keyCode !== 189 &&
-  //     ev.keyCode !== 190
-  //   );
-  // }
 
   onClose(){}
 
+  add(){
+    this.dataSource.data = [...this.dataSource.data, this.formGroup.value]
+  }
+
   save(){
-    this.functionality_analysisService.addFunctionality_analysis(this.formGroup.value).subscribe({
-      next: (v) => { console.log(v); },
-      error: (e) => console.error(e),
-      complete: () => console.log('completed')
-    })
+    this.functionality_analysisService.set(this.dataSource.data);
+    this.utilService.setFunctionalityAnalysisClinicalNote(this.dataSource.data);
+  }
+
+  onChange(item:any){
+    this.paForm['emotion'].setValue(item.id);
+    this.paForm['emotion_name'].setValue(item.name);
+    console.log(item)
   }
 
 }

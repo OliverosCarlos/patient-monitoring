@@ -1,10 +1,26 @@
-<app-header [sideNavHeaderMenuItems]="data_menu"></app-header>
-<div [ngClass]="isDashboard ? 'dashboard-container' : 'card-container'" >
-  <div class="card-title">{{platformTitle}}</div>
-  <div class="card-subtitle">{{platformSubtitle}}</div>
-  <div class="card-content">
-    <div [@routeAnimations]="getRouteAnimationData()">
-      <ng-content></ng-content>
+<div class="main-container">
+  <app-header [sideNavHeaderMenuItems]="data_menu" class="header-toolbar"></app-header>
+  <div [ngClass]="isDashboard ? 'main-layout dashboard-container' : 'main-layout card-container'" >
+    <div class="card-header">
+      <div class="card-title-group">
+        <div class="card-title">{{platformTitle}}</div>
+        <div class="card-subtitle">{{platformSubtitle}}</div>
+      </div>
+      <div class="card-header-actions">
+<!-- (click)="execute(menuOption.action)" -->
+        <a  *ngFor="let activity of activities" target="_blank" class="btn-action"
+          [matTooltip]="activity.subtitle"
+          (click)="execute(activity.action)"
+          >
+          <mat-icon>{{activity.icon}}</mat-icon>
+        </a>
+      </div>
+    </div>
+
+    <div class="card-content">
+      <div [@routeAnimations]="getRouteAnimationData()" class="main-content">
+        <ng-content></ng-content>
+      </div>
     </div>
   </div>
 </div>

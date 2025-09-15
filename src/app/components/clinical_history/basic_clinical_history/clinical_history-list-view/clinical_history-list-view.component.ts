@@ -2,6 +2,7 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GENERAL } from 'src/app/utils/setup/routes.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 //SERVICE
 import { BackendService } from 'src/app/services/backend.service';
@@ -26,18 +27,22 @@ export class ClinicalhistoryListViewComponent implements OnInit {
 
   model : Model;
 
-  displayedColumns = ['select' , 'patient', 'email', 'therapy_objectives', 'personal_characteristics' ];
+  displayedColumns = ['select' , 'patient', 'email', 'therapy_objectives', 'personal_characteristics', 'report' ];
   dataSource = new MatTableDataSource<CL_brief_list>([]);
   selection = new SelectionModel<CL_brief_list>(true, []);
   
   clinical_note_list: any = []
+
+  //Control vars
+  isEmpty = false;
 
   constructor(
     private router : Router,
     private headerService : HeaderService,
     private hobbiesInterestService : HobbiesInterestService,
     private utilService: UtilService,
-    private backendService : BackendService
+    private backendService : BackendService,
+    private spinner: NgxSpinnerService,
     ) {
       this.model = MODELS.find(model => model.name == 'basic-clinical-history')!;
     }
@@ -49,11 +54,12 @@ export class ClinicalhistoryListViewComponent implements OnInit {
   }
 
   getAll(){
-   this.backendService.getAll(GENERAL.CLINICAL_HISTORY_PSYCHOTHERAPY,{}).subscribe({
-     next: (v) => { this.dataSource.data = v },
-     error: (e) => console.error(e),
-     complete: () => console.info('complete')
-   });
+    this.spinner.show('loading')
+    this.backendService.getAll(GENERAL.CLINICAL_HISTORY_PSYCHOTHERAPY,{}).subscribe({
+      next: (v) => { this.dataSource.data = v;},
+      error: (e) => console.error(e),
+      complete: () => this.spinner.hide('loading')
+    });
   }
 
   deleteHobbies_Interest(){
@@ -76,17 +82,17 @@ export class ClinicalhistoryListViewComponent implements OnInit {
       const numRows = this.dataSource.data.length;
       return numSelected === numRows;
     }
-  
+
     /** Selects all rows if they are not all selected; otherwise clear selection. */
     masterToggle() {
       if (this.isAllSelected()) {
         this.selection.clear();
         return;
       }
-  
+
       this.selection.select(...this.dataSource.data);
     }
-  
+
     /** The label for the checkbox on the passed row */
     checkboxLabel(row?: CL_brief_list): string {
       if (!row) {
@@ -107,5 +113,11 @@ export class ClinicalhistoryListViewComponent implements OnInit {
   //   })
   //   this.dataSource.data = this.clinical_note_list;
   // }
+
+  showMedicalHistoryReport(event: any, element: any){
+    event.stopPropagation();
+    if(element.medical_history_report){
+      this.router.navigate(['main','clinical-history','early-stimulation','report-show',element.medical_history_report[0].id]);
+    }
+  }
 }
-    

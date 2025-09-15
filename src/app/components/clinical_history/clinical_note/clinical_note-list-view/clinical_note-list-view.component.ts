@@ -95,8 +95,8 @@ export class ClinicalNoteListViewComponent implements OnInit {
     });
   }
 
-  show(track:any){
-    this.router.navigate(['main','clinical-history','clinical_note','form',track.id]);
+  show(clinicalNote:any){
+    this.router.navigate(['main','clinical-history','clinical_note','show',clinicalNote.id]);
   }
 
   delete(){
@@ -133,7 +133,6 @@ export class ClinicalNoteListViewComponent implements OnInit {
     console.log(grouped_list);
     
     this.dataSource.data = grouped_list;
-
   }
 
 }

@@ -120,23 +120,7 @@ export class FunctionalityAnalysisFormViewComponent implements OnInit, OnDestroy
       complete: () => console.info('complete')
     });
   }
-  // cleanFormGroup() {
-  //   this.formGroup.get('neighborhood').reset();
-  //   this.formGroup.get('locality').reset();
-  //   this.formGroup.get('municipality').reset();
-  //   this.formGroup.get('state').reset();
-  //   this.neighborhoods = [];
-  // }
 
-  // digitOnly(ev: any) {
-  //   // wont allow e + -  .
-  //   return (
-  //     ev.keyCode !== 69 &&
-  //     ev.keyCode !== 187 &&
-  //     ev.keyCode !== 189 &&
-  //     ev.keyCode !== 190
-  //   );
-  // }
 
   onClose(){}
 

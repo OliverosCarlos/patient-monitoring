@@ -9,6 +9,9 @@ import { SecurityService } from 'src/app/services/security.service';
 import { slideInAnimation } from 'src/app/utils/animations/routeAnimation';
 import { UtilService } from 'src/app/services/util.service';
 import { SetupService } from 'src/app/utils/services/setup.service';
+import { HeaderService } from 'src/app/services/header.service';
+import { AbstractButton } from 'src/app/models/vw-model.model';
+
 
 @Component({
   selector: 'app-main_viewer',
@@ -48,6 +51,7 @@ export class MainViewerComponent implements OnInit, OnDestroy, AfterViewInit {
   isDashboard = false;
   content_type : TemplateRef<any> | undefined;
   data_menu: any[] = []
+  activities: any[] = []
 
   constructor(
     private securityService: SecurityService,
@@ -55,13 +59,15 @@ export class MainViewerComponent implements OnInit, OnDestroy, AfterViewInit {
     private contexts: ChildrenOutletContexts,
     private utilService : UtilService,
     private setupService : SetupService,
+    private headerService : HeaderService,
   ) {
     this.$setup = this.setupService.getModule().subscribe(data => {
-      console.log("MAIN VIEWER", data);
-      
       this.data_menu = data.menus!;
     });
     this.$viewType = this.setupService.getViewType().subscribe(view_type => {
+      console.log("GETTING view");
+      console.log(view_type);
+      
       switch (view_type) {
            case 'dashboard_content': 
              this.isDashboard = true;
@@ -78,7 +84,7 @@ export class MainViewerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.$platformService = this.utilService.get().subscribe(data => {
+    this.$platformService = this.utilService.get().subscribe(data => {      
       switch (data.content_type) {
         case 'dashboard_content': 
           this.isDashboard = true;
@@ -93,6 +99,7 @@ export class MainViewerComponent implements OnInit, OnDestroy, AfterViewInit {
       
       this.platformTitle = data.title;
       this.platformSubtitle = data.subtitle;
+      this.setupActivities(data.activities);
       // this.data_menu = data.menus;
     });
 
@@ -103,7 +110,7 @@ export class MainViewerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    // this.$platformService.unsubscribe()
+    this.$platformService.unsubscribe()
     this.$setup.unsubscribe()
     this.$viewType.unsubscribe()    
   }
@@ -114,5 +121,27 @@ export class MainViewerComponent implements OnInit, OnDestroy, AfterViewInit {
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
+
+    setupActivities(activities: AbstractButton[] | undefined){
+      if(activities){
+        this.activities = []
+        activities.forEach((activity:AbstractButton) => {
+          this.activities.push(
+            {
+              name: activity.display_name,
+              action: 'handle_'+activity.name,
+              icon: activity.icon,
+              tooltip: activity.tooltip,
+              disabled: activity.disabled
+            }
+          )
+        })
+      }
+    }
+    
+  execute(action: string){
+    this.headerService.sendOutAction({action});
+  }
+
 
 }

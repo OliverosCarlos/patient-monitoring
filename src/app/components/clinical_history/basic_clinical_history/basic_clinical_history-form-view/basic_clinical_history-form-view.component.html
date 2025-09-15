@@ -1,87 +1,135 @@
 <div class="p-2">
     <form [formGroup]="mainFormGroup">
         <mat-card>
-            <mat-stepper orientation="vertical">
-                <mat-step>
+            <mat-stepper orientation="vertical" linear >
+                <mat-step [stepControl]="mainFormGroup.get('patient_id')!">
                     <ng-template matStepLabel>Asignación de paciente</ng-template>
                     <ng-template matStepContent>
-                        <patient-select (eventSetData)="setPatient($event)"></patient-select>
-                        <button mat-button matStepperNext (click)="tst()">Next</button>
+                        <div class="step-content">
+                            <patient-select (eventSetData)="setPatient($event)" [avoidType]="'Estimulación Temprana'"></patient-select>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="mainFormGroup.get('patient_id')?.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="reasonConsultationForm">
                     <ng-template matStepLabel>Motivo de consulta</ng-template>
                     <ng-template matStepContent>
-                        <app-reason_consultation-form-view></app-reason_consultation-form-view>
-                        <button mat-button matStepperNext>Next</button>
+                        <div class="step-content">
+                            <app-reason_consultation-form-view></app-reason_consultation-form-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="reasonConsultationForm.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="functionalityAnalysisArray">
                     <ng-template matStepLabel>Análisis de funcionalidad</ng-template>
                     <ng-template matStepContent>
-                        <app-functionality_analysis-list-view></app-functionality_analysis-list-view>
+                        <div class="step-content">
+                            <button mat-flat-button color="accent" (click)="open()">Agregar</button>
+                            <app-functionality_analysis-list-view></app-functionality_analysis-list-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="functionalityAnalysisArray.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                         <!-- <app-functionality_analysis-form-view></app-functionality_analysis-form-view> -->
-                        <button (click)="open()">show</button>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="nonverbalLanguageForm">
                     <ng-template matStepLabel>Lenguaje no verbal</ng-template>
                     <ng-template matStepContent>
-                        <app-nonverbal_language-form-view></app-nonverbal_language-form-view>
-                        <button mat-button matStepperNext>Next</button>
+                        <div class="step-content">
+                            <app-nonverbal_language-form-view></app-nonverbal_language-form-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="nonverbalLanguageForm.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="hobbiesInterestForm">
                     <ng-template matStepLabel>Hobbies e intereses</ng-template>
                     <ng-template matStepContent>
-                        <app-hobbies_interests-form-view></app-hobbies_interests-form-view>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                        <div class="step-content">
+                            <app-hobbies_interests-form-view></app-hobbies_interests-form-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="hobbiesInterestForm.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="supportNetworkForm">
                     <ng-template matStepLabel>Área escolar</ng-template>
                     <ng-template matStepContent>
-                        <app-support_network-list-view></app-support_network-list-view>
-                        <button mat-button matStepperPrevious>Back</button>
+                        <div class="step-content">
+                            <app-support_network-list-view></app-support_network-list-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="supportNetworkForm.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="personalCharacteristicsForm">
                     <ng-template matStepLabel>Características personales</ng-template>
                     <ng-template matStepContent>
-                        <app-personal_characteristics-form-view></app-personal_characteristics-form-view>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                        <div class="step-content">
+                            <app-personal_characteristics-form-view></app-personal_characteristics-form-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="personalCharacteristicsForm.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="therapyObjectivesForm">
                     <ng-template matStepLabel>Objetivos de la terapia</ng-template>
                     <ng-template matStepContent>
-                        <app-therapy_objectives-form-view></app-therapy_objectives-form-view>
-                        <button mat-button matStepperNext>Next</button>
+                        <div class="step-content">
+                            <app-therapy_objectives-form-view></app-therapy_objectives-form-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="therapyObjectivesForm.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
-                <mat-step>
+                <mat-step [stepControl]="approachForm">
                     <ng-template matStepLabel>Abordaje</ng-template>
                     <ng-template matStepContent>
-                        <app-approach-form-view></app-approach-form-view>
-                        <button mat-button matStepperNext>Next</button>
+                        <div class="step-content">
+                            <app-approach-form-view></app-approach-form-view>
+                            <div class="step-actions">
+                                <button mat-stroked-button matStepperPrevious color="primary">Anterior</button>
+                                <button mat-stroked-button matStepperNext (click)="tst()" color="primary"
+                                    [disabled]="approachForm.invalid"
+                                >Siguiente</button>
+                            </div>
+                        </div>
                     </ng-template>
                 </mat-step>
             </mat-stepper>
-            <div class="row">
-                <div class="col">
-                    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-info pull-left"
-                    (click)="save()" >Guardar</button> 
-                    
-                </div>
-                <div class="col">
-                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger"
-                    (click)="onClose()">Cancelar</button>
-                </div>
-            </div>
         </mat-card>
     </form>
 </div>

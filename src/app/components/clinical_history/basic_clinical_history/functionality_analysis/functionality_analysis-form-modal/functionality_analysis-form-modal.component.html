@@ -1,17 +1,99 @@
 <div class="modal-header">
-  <!-- *ngIf="modalConfig" -->
-  <!-- <h3 class="modal-title">{{modalConfig.title}}</h3> -->
   <h3 class="modal-title">Titulo</h3>
   <button type="button" class="close" style="cursor:pointer;" (click)="onClose()" aria-hidden="true">×</button>
 </div>
-<!-- *ngIf="modalConfig" -->
+
 <div class="modal-body">
   <div class="row">
     <div class="col-6">
-      <app-functionality_analysis-list-view></app-functionality_analysis-list-view>
+      <table mat-table [dataSource]="dataSource" style="width: 100%;" >
+
+        <!-- Emotion Column -->
+        <ng-container matColumnDef="emotion_name">
+          <th mat-header-cell *matHeaderCellDef> Emoción </th>
+          <td mat-cell *matCellDef="let element"> {{element.emotion_name}} </td>
+        </ng-container>
+
+        <!-- Conduct Column -->
+        <ng-container matColumnDef="conduct">
+          <th mat-header-cell *matHeaderCellDef> Conducta</th>
+          <td mat-cell *matCellDef="let element"> {{element.conduct}} </td>
+        </ng-container>
+
+        <!-- Functionality Column -->
+        <ng-container matColumnDef="functionality">
+          <th mat-header-cell *matHeaderCellDef> Funcionalidad</th>
+          <td mat-cell *matCellDef="let element"> {{element.functionality}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
     <div class="col-6">
-      <app-functionality_analysis-form-view></app-functionality_analysis-form-view>
+      <form [formGroup]="formGroup">
+        <div class="row">
+          <div class="col-12">
+            <button mat-stroked-button color="accent"
+              (click)="add()" 
+              [disabled]="formGroup.invalid">
+              Agregar
+            </button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label [attr.for]="nameForm+'emotion'" class="control-label">Emoción <span class="text-danger">*</span>
+              </label>
+              <ng-select notFoundText="NO HAY DATOS PARA MOSTRAR" 
+                [items]="emotions_list" 
+                placeholder="SELECCIONE UNA OPCIÓN"
+                bindLabel="name" 
+                bindValue="id" 
+                [clearable]="false" 
+                (change)="onChange($event)">
+              </ng-select>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label [attr.for]="nameForm+'conduct'" class="control-label">Conducta<span class="text-danger">*</span>
+              </label>
+              <textarea #firstInput type="text" class="form-control" id="conduct" formControlName="conduct"
+                style="text-transform: uppercase;" (keyup)="changeToUppercase('conduct')"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label [attr.for]="nameForm+'functionality'" class="control-label">Funcionalidad <span
+                  class="text-danger">*</span> </label>
+              <textarea #firstInput type="text" class="form-control" id="functionality" formControlName="functionality"
+                style="text-transform: uppercase;" (keyup)="changeToUppercase('functionality')"></textarea>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
+</div>
+
+<div class="modal-footer">
+  <button mat-stroked-button color="primary"
+    (click)="save()" 
+    [disabled]="formGroup.invalid">
+    Guardar
+  </button>
+  <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+      (click)="onClose()">Cancelar</button>
 </div>

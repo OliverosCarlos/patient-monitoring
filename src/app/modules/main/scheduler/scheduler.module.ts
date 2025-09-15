@@ -7,7 +7,7 @@ import { MaterialAllModule } from 'src/material.module'
 //import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 import { ColorCircleModule } from 'ngx-color/circle';
 
-import { TimeFormatPipe } from 'src/app/utils/components/custom_pipes/time-format.pipe';
+import { CustomPipesModule } from 'src/app/utils/components/custom_pipes/custom_pipes.module';
 import { MainViewerModule } from 'src/app/utils/components/main_viewer/main_viewer.module'
 
 import { WeekDayTranslatePipe } from 'src/app/utils/components/custom_pipes/week-day-translate.pipe';
@@ -27,7 +27,6 @@ import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
     SchedulerComponent,
     SchedulerDashboardViewComponent,
     AppointmentFormViewComponent,
-    TimeFormatPipe,
     WeekDayTranslatePipe
   ],
   imports: [
@@ -40,7 +39,8 @@ import { CanActivateLogged } from 'src/app/utils/guards/mainGuard';
     ColorCircleModule,
     PatientSelectModule,
     NgSelectModule,
-    MainViewerModule
+    MainViewerModule,
+    CustomPipesModule
   ],
   providers: [
     CanActivateLogged

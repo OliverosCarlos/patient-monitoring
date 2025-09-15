@@ -14,6 +14,8 @@ import { EarlyStimulationShowViewComponent } from 'src/app/components/clinical_h
 import { EarlyStimulationReportFormViewComponent } from 'src/app/components/clinical_history/early_stimulation_report-form-view/early_stimulation_report-form-view.component'
 import { EarlyStimulationReportShowViewComponent } from "src/app/components/clinical_history/early_stimulation_report-show-view/early_stimulation_report-show-view.component";
 
+import { NeuroPsychologyReportFormViewComponent } from 'src/app/components/clinical_history/neuro-psychology/neuro_psychology_report-form-view/neuro_psychology_report-form-view.component';
+
 import { ClinicalNoteFormViewComponent } from 'src/app/components/clinical_history/clinical_note/clinical_note-form-view/clinical_note-form-view.component';
 import { ClinicalNoteListViewComponent } from 'src/app/components/clinical_history/clinical_note/clinical_note-list-view/clinical_note-list-view.component';
 import { ClinicalNoteShowFormViewComponent } from 'src/app/components/clinical_history/clinical_note/clinical_note-show-form-view/clinical_note-show-form-view.component';
@@ -30,6 +32,10 @@ const routes: Routes = [
       { path: 'basic-clinical-history/form', component: BasicClinicalHistoryFormViewComponent, data: { breadcrumb: 'Psicoterapia' }},
       { path: 'basic-clinical-history/show/:id', component: ClinicalHistoryShowViewComponent, data: { breadcrumb: 'Psicoterapia' }},
       { path: 'neuro-psychology/form', component: BasicClinicalHistoryFormViewComponent, data: { breadcrumb: 'Neuro Psicología' } },
+      { path: 'neuro-psychology/report-form/:medical_history_id', component: NeuroPsychologyReportFormViewComponent, data: { breadcrumb: "Reporte",  animation: true } },
+      { path: 'neuro-psychology/report-show/:medical_history_report_id', component: EarlyStimulationReportShowViewComponent, data: { breadcrumb: "Reporte",  animation: true } },
+      { path: 'neuro-psychology/report-update/:medical_history_report_id', component: EarlyStimulationReportFormViewComponent, data: { breadcrumb: "Reporte",  animation: true } },
+
       // { path: 'early-stimulation/form', component: EarlyStimulationFormViewComponent, data: { breadcrumb: 'Estimulación Temprana' } },
       // { path: 'early-stimulation/list', component: EarlyStimulationListViewComponent, data: { breadcrumb: 'Lista',  animation: true }, canActivate: [CanActivateLogged] },
       { path: 'early-stimulation/list', component: EarlyStimulationListViewComponent, data: { breadcrumb: 'Lista',  animation: true }, canActivate: [CanActivateLogged] },
@@ -42,8 +48,8 @@ const routes: Routes = [
       { path: 'clinical_note/list', component:  ClinicalNoteListViewComponent, data: { breadcrumb: 'Seguimiento' }  },
       { path: 'clinical_note/list/by_patient/:patient_id', component:  ClinicalNoteListViewComponent, data: { breadcrumb: 'Seguimiento' }  },
       { path: 'clinical_note/form', component: ClinicalNoteFormViewComponent , data: { breadcrumb: 'Nuevo' }  },
-      { path: 'clinical_note/form/:tracking_id', component: ClinicalNoteShowFormViewComponent, data: { breadcrumb: 'Nuevo' }  },
-      { path: 'clinical_note/update/:tracking_id', component: ClinicalNoteUpdateFormViewComponent, data: { breadcrumb: 'Seguimiento' }  },
+      { path: 'clinical_note/show/:clinical_note_id', component: ClinicalNoteShowFormViewComponent, data: { breadcrumb: 'Nuevo' }  },
+      { path: 'clinical_note/update/:clinical_note_id', component: ClinicalNoteUpdateFormViewComponent, data: { breadcrumb: 'Actualizar' }  },
       { path: 'clinical_note/form/dashboard/:patient_id', component: ClinicalNoteFormDashboardViewComponent, data: { breadcrumb: 'Nota Clinica' }  },
     ]
   },

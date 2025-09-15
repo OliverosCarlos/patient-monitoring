@@ -1,21 +1,22 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { UntypedFormGroup, UntypedFormControl, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { PSYCHOTHERAPY, GENERAL } from 'src/app/utils/setup/routes.enum';
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
 //SERVICES
 import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
 import { Clinical_notesService } from 'src/app/services/clinical_note/clinical_note.service';
 import { HeaderService } from 'src/app/services/header.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 //MODELS
 import { MODELS } from 'src/app/utils/setup/model.setup';
 import { Model } from 'src/app/models/vw-model.model';
 
-import { FunctionalityAnalysisFormViewComponent } from 'src/app/components/clinical_history/basic_clinical_history/functionality_analysis/functionality_analysis-form-view/functionality_analysis-form-view.component';
 import { FunctionalityAnalysisFormModalComponent } from 'src/app/components/clinical_history/basic_clinical_history/functionality_analysis/functionality_analysis-form-modal/functionality_analysis-form-modal.component';
 import { Router } from '@angular/router';
 
@@ -28,7 +29,7 @@ export class BasicClinicalHistoryFormViewComponent implements OnInit, AfterViewI
 
   model : Model;
 
-  mainFormGroup!: UntypedFormGroup;
+  mainFormGroup!: FormGroup;
 
   suscribeHeaderService!: Subscription;
   $reason_consultation_cn_form!: Subscription;
@@ -55,10 +56,11 @@ export class BasicClinicalHistoryFormViewComponent implements OnInit, AfterViewI
     private clinical_notesService: Clinical_notesService,
     private headerService : HeaderService,
     private router : Router,
-  ) {
+    private _snackBar: MatSnackBar,
+    ) {
     this.model = MODELS.find(model => model.name == 'basic-clinical-history')!;
     this.mainFormGroup = this.fb.group({
-      patient_id: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+      patient_id: new FormControl(null, [Validators.required, Validators.pattern(/^\d+$/)]),
       reason_consultation: this.fb.group({
         notes: new FormControl(null),
         symptoms: new FormControl([], [Validators.required]),
@@ -122,6 +124,9 @@ export class BasicClinicalHistoryFormViewComponent implements OnInit, AfterViewI
       this.reasonConsultationForm.get('symptoms')?.setValue(reason_consultation.symptoms);
     })
     this.$functionality_analysis_cn_form = this.utilService.getFunctionalityAnalysisClinicalNote().subscribe(functionality_analysis => {
+      console.log("GETTING DATA");
+      console.log(functionality_analysis);
+      
       functionality_analysis.forEach( (value: any) => {
         const newItem = this.fb.group({
           conduct: [value.conduct, Validators.required],
@@ -145,7 +150,7 @@ export class BasicClinicalHistoryFormViewComponent implements OnInit, AfterViewI
     this.$support_network_cn_form = this.utilService.getSupportNetworkClinicalNote().subscribe(support_network_data => {
       this.supportNetworkForm.get('notes')?.setValue('field to add')
       console.log("data", support_network_data);
-      
+      this.supportNetworkListArray.clear()
       support_network_data.forEach((support_network: any) => {
         const newItem = this.fb.group({
           name: [support_network.name, Validators.required],
@@ -167,15 +172,15 @@ export class BasicClinicalHistoryFormViewComponent implements OnInit, AfterViewI
   }
   
 
-  get reasonConsultationForm() { return this.mainFormGroup.get('reason_consultation') as UntypedFormGroup }
+  get reasonConsultationForm() { return this.mainFormGroup.get('reason_consultation') as FormGroup }
   get functionalityAnalysisArray(): FormArray { return this.mainFormGroup.get('functionality_analysis') as FormArray }
-  get nonverbalLanguageForm() { return this.mainFormGroup.get('nonverbal_language') as UntypedFormGroup }
-  get hobbiesInterestForm() { return this.mainFormGroup.get('hobbies_interest_list') as UntypedFormGroup }
-  get supportNetworkForm() { return this.mainFormGroup.get('support_network') as UntypedFormGroup }
+  get nonverbalLanguageForm() { return this.mainFormGroup.get('nonverbal_language') as FormGroup }
+  get hobbiesInterestForm() { return this.mainFormGroup.get('hobbies_interest_list') as FormGroup }
+  get supportNetworkForm() { return this.mainFormGroup.get('support_network') as FormGroup }
   get supportNetworkListArray(): FormArray { return this.supportNetworkForm.get('support_network_list') as FormArray }
-  get personalCharacteristicsForm() { return this.mainFormGroup.get('personal_characteristics') as UntypedFormGroup }
-  get therapyObjectivesForm() { return this.mainFormGroup.get('therapy_objectives') as UntypedFormGroup }
-  get approachForm() { return this.mainFormGroup.get('approach') as UntypedFormGroup }
+  get personalCharacteristicsForm() { return this.mainFormGroup.get('personal_characteristics') as FormGroup }
+  get therapyObjectivesForm() { return this.mainFormGroup.get('therapy_objectives') as FormGroup }
+  get approachForm() { return this.mainFormGroup.get('approach') as FormGroup }
 
   ngOnInit(): void {
     this.headerService.setHeader({model: this.model, type: 'form'});
@@ -237,13 +242,26 @@ export class BasicClinicalHistoryFormViewComponent implements OnInit, AfterViewI
     this.backendService.create(GENERAL.CLINICAL_HISTORY_PSYCHOTHERAPY ,this.mainFormGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
-      complete: () => console.log('clinical note added')
+      complete: () => {
+        this.router.navigate(['../', 'main', 'clinical-history', 'basic-clinical-history', 'list']);
+        this.showSuccess();
+      }
     })
   }
 
   onClose(){}
 
   cancel(){
-    this.router.navigate(['../','main','catalogs','emotions']);
+    this.router.navigate(['../', 'main', 'clinical-history', 'basic-clinical-history', 'list']);
+  }
+
+  showSuccess(){
+    this._snackBar.openFromComponent(GenericSnackbarComponent, {
+      data: {
+        message: "Elemento creado correctamente",
+        icon: "done"
+      },
+      duration: 5000
+    });
   }
 }

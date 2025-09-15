@@ -30,7 +30,6 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
   selection = new SelectionModel<Emotion>(true, []);
   searchAttributes : any[] = ['first_name', 'last_name1', 'last_name2']
 
-  $headerAction!: Subscription;
   $advanceSearch!: Subscription;
 
   @Output() eventGetAllPatients = new EventEmitter<any>();
@@ -40,28 +39,15 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
     private router : Router,
     private spinner: NgxSpinnerService,
     private headerService : HeaderService,
-    private utilService: UtilService
     ) {
       this.model = MODELS.find(model => model.name == 'patient')!;
     }
 
   ngOnInit(): void {
     this.getAllGeneralPatients({});
-    this.headerService.setHeader({model: this.model, type:'dashboard'});
-    this.utilService.set({name:'patient', type:'dashboard'});
   }
 
   ngAfterViewInit(): void {
-    this.$headerAction! = this.headerService.getOutAction().subscribe(data => {
-      switch (data.action) {
-        case 'delete':
-          this.deletePsychologists();
-          break;
-      
-        default:
-          break;
-      }
-    });
     this.$advanceSearch! = this.headerService.getDataSearch().subscribe(data => {
       this.getAllGeneralPatients(data)
     });
@@ -70,28 +56,19 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
 
 
   ngOnDestroy():void{
-    this.$headerAction!.unsubscribe();
     this.$advanceSearch!.unsubscribe();
   }
 
   getAllGeneralPatients(data_search:any){
     this.spinner.show('loading')
     this.backendService.getAll(PATIENT.GENERAL, data_search).subscribe({
-      next: (v) => { 
+      next: (v) => {
         this.dataSource.data = v;
         this.eventGetAllPatients.emit(v);
-       },
+      },
       error: (e) => console.error(e),
       complete: () => this.spinner.hide('loading')
     });
-  }
-
-  deletePsychologists(){
-    // this.backendService.delete(CATALOGS.EMOTIONS,this.selection.selected.map(function(emotion){return emotion.id})).subscribe({
-    //   next: (v) => { console.log(v) },
-    //   error: (e) => console.error(e),
-    //   complete: () => this.getAllEmotions({})
-    // });
   }
 
   viewPatient(patient:any){
@@ -104,7 +81,6 @@ export class PatientListViewComponent implements OnInit, AfterViewInit, OnDestro
     if(patient.neuro_psychology_patient != null){
       this.router.navigate(['main','patients','neuro-psychology','show',patient.neuro_psychology_patient[0].id]);
     }
-    
   }
 
     /** Whether the number of selected elements matches the total number of rows. */

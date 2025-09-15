@@ -1,5 +1,5 @@
 #Primera Etapa
-FROM node:22-alpine as build-step
+FROM node:22-alpine AS build-step
 
 RUN mkdir -p /app
 
@@ -14,5 +14,6 @@ COPY . /app
 RUN npm run build --prod
 
 #Segunda Etapa
-FROM nginx:1.25
+FROM nginx:stable-alpine
 COPY --from=build-step /app/dist/patient-monitoring /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf

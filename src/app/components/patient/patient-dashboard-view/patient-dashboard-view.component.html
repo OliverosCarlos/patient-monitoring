@@ -58,18 +58,52 @@
         <div class="dashboard-item-footer"></div>
     </div>
 
+    <!-- NEXT PATIENT PANEL -->
     <div class="dashboard-item" id="panel-5" style="background-color: white;">
         <div class="dashboard-item-head">
-            <div class="head-left">
-                <span>Ver más</span>
+            <div class="head-title">
+                <h3 class="panel-title">Próximo paciente</h3>
             </div>
         </div>
-        <div class="dashboard-item-body text-content">
-            <p>Próximo paciente</p>
-            <p style="color: dodgerblue;">Carlos Moisés Ruvalcaba Oliveros</p>
+        <div class="dashboard-item-body column-content" *ngIf="next_appointment!=null">
+            <div class="content-left">
+                <p><a [href]="next_appointment.patient.show_patient_route">{{next_appointment.patient.full_name}}</a>
+                </p>
+                <p>
+                <mat-chip-list>
+                    <mat-chip 
+                    [ngStyle]="{'background-color': '#9B7EBD', 'color': 'white'}"
+                    *ngIf="next_appointment.patient.psychoterapy_patient != null">
+                    Psicoterapia
+                    </mat-chip>
+                    <mat-chip
+                    [ngStyle]="{'background-color': '#F8ED8C'}"
+                    *ngIf="next_appointment.patient.early_stimulation_patient != null">
+                    Estimulación Temprana
+                    </mat-chip>
+                    <mat-chip
+                    [ngStyle]="{'background-color': '#3674B5', 'color': 'white'}"
+                    *ngIf="next_appointment.patient.neuro_psychology_patient != null">
+                    Neuro Psicología
+                    </mat-chip>
+                </mat-chip-list>
+                </p>
+            </div>
+            <div class="content-right">
+                <div class="big-information">
+                    <span class="big-number">{{next_appointment.day}}</span>
+                    <span>{{ next_appointment.year+'-'+next_appointment.month+'-'+next_appointment.day | toWeekDay:{ abbreviate: true, capitalize: true } }}</span>
+                    <span>{{next_appointment.hour | timeFormat}}</span>
+                </div>
+            </div>
         </div>
-        <div class="dashboard-item-footer">
-            <span>Footer</span>
+        <div class="dashboard-item-footer" *ngIf="next_appointment!=null">
+            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon fontSet="material-symbols-outlined">clinical_notes</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon fontSet="material-symbols-outlined">edit_calendar</mat-icon>
+            </button>
         </div>
     </div>
 

@@ -8,6 +8,7 @@ import { CATALOGS } from 'src/app/utils/setup/routes.enum';
 import { HeaderService } from 'src/app/services/header.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { UtilService } from 'src/app/services/util.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 //MODELS
 import { Hobbies_Interest } from 'src/app/models/hobbies_interest.model';
@@ -33,11 +34,15 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   $headerAction!: Subscription;
   $advanceSearch!: Subscription;
 
+  //Control vars
+  isEmpty = false;
+
   constructor(
     private router : Router,
     private headerService : HeaderService,
     private backendService : BackendService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private spinner: NgxSpinnerService,
     ) {
       this.model = MODELS.find(model => model.name == 'hobbies_interest')!;
     }
@@ -66,11 +71,19 @@ export class Hobbies_InterestListViewComponent implements OnInit {
   }
 
   getAll(data_search:any){
-   this.backendService.getAll(CATALOGS.HOBBIES_INTEREST,data_search).subscribe({
-     next: (v) => { this.dataSource.data = v },
-     error: (e) => console.error(e),
-     complete: () => console.info('complete')
-   });
+    this.spinner.show('loading')
+    this.backendService.getAll(CATALOGS.HOBBIES_INTEREST,data_search).subscribe({
+      next: (v) => { this.dataSource.data = v },
+      error: (e) => console.error(e),
+      complete: () => {
+        if(this.dataSource.data.length > 0){
+          this.isEmpty = false
+        }else{
+          this.isEmpty = true
+        }
+        this.spinner.hide('loading')
+      }
+    });
   }
 
   deleteHobbies_Interest(){

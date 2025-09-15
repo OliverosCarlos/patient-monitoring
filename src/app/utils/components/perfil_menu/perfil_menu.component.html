@@ -1,16 +1,8 @@
 <div class="perfil_menu">
   <div class="perfil-container">
-    <div class="perfil-option my-auto">
-      <div class="row" (click)="display()">
-        <div class="col-2">
-          <div class="img-s">
-            <img [src]="getProfileImage(profile)" alt="">
-          </div>
-        </div>
-        <div class="col-10 my-auto">
-          <span style="color: white;">{{profile.user.first_name}}</span>
-        </div>
-      </div>
+    <div class="perfil-option my-auto" (click)="display()">
+      <img [src]="getProfileImage(profile)" alt="" class="avatar">
+      <span style="color: white;">{{profile.user.first_name}}</span>
     </div>
     <div class="perfil-menu mat-elevation-z5 p-0" [@perfilMenu]="currentState" *ngIf="showPerfilMenu">
       <div class="perfil-image col-12 p-2">

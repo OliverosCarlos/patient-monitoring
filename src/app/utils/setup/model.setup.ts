@@ -29,7 +29,11 @@ export const MODELS: Model[] = [
 
       ],
       multipleView: false,
-      searchAttributes:['paciente']
+      searchAttributes:['paciente'],
+      activities: [
+        {name:'generate_report', display_name:'Informe', tooltip:'Generar Informe', icon: 'assignment', disabled: true},
+        {name:'generate_report2', display_name:'Informe2', tooltip:'Generar Informe2', icon: 'assignment_turned_in', disabled: true},
+      ]
     },
     {
       name: 'evaluation',
@@ -56,8 +60,8 @@ export const MODELS: Model[] = [
       singular_name: 'Paciente',
       plural_name:'Pacientes',
       components:[
-        new VWComponent('psychotherapy/patients/form','form','card_content',{}),
-        new VWComponent('psychotherapy/patients/table','list','card_content',{}),
+        new VWComponent('psychoterapy/form','form','card_content',{}),
+        new VWComponent('psychotherapy/list','list','card_content',{}),
         new VWComponent('psychotherapy/patients/form/:patient_id','show','card_content',{}),
         new VWComponent('psychotherapy/patients/update/:patient_id','update','card_content',{})
       ],
@@ -176,6 +180,7 @@ export const MODELS: Model[] = [
       options: ['Eliminar'],
       activities: [
         {name:'generate_report', display_name:'Informe', tooltip:'Generar Informe', icon: 'assignment', disabled: true},
+        {name:'generate_report2', display_name:'Informe2', tooltip:'Generar Informe2', icon: 'assignment_turned_in', disabled: true},
       ]
     },
     {
@@ -236,9 +241,7 @@ export const MODELS: Model[] = [
         { menuTitle: "Historial", path: "list" }
       ],
       components:[
-        new VWComponent('appointment','dashboard','dashboard_content',{}),
-        new VWComponent('appointment/form','form','card_content',{}),
-        new VWComponent('appointment/table','list','card_content',{}),
+        new VWComponent('neuro-psychology/form','form','card_content',{}),
       ],
       multipleView: false,
       searchAttributes:['first_name', 'last_name1', 'last_name2', 'email']
@@ -287,9 +290,9 @@ export const MODELS: Model[] = [
       singular_name: 'Paciente',
       plural_name:'Pacientes',
       menus: [
-        { menuTitle: "Psicoterapia", path: "psychoterapy/form" },
-        { menuTitle: "Estimulación Temprana", path: "early-stimulation/form" },
-        { menuTitle: "Neuro Psicología", path: "neuro-psychology/form" },
+        { menuTitle: "Psicoterapia", path: "psychoterapy/list" },
+        { menuTitle: "Estimulación Temprana", path: "early-stimulation/list" },
+        { menuTitle: "Neuro Psicología", path: "neuro-psychology/list" },
       ]
     },
     {
@@ -297,9 +300,8 @@ export const MODELS: Model[] = [
       singular_name: 'Historia Clinica',
       plural_name:'Historias Clinicas',
       menus: [
-        { menuTitle: "Psicoterapia", path: "basic-clinical-history/list" },
+        { menuTitle: "General", path: "basic-clinical-history/list" },
         { menuTitle: "Estimulación Temprana", path: "early-stimulation/list" },
-        // { menuTitle: "Neuro Psicología", path: "neuro-psychology/form" },
         { menuTitle: "Nota Clinica", path: "clinical_note/list" }
 
       ]

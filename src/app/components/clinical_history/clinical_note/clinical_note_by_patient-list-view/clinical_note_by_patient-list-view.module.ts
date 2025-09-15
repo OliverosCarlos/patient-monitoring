@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialAllModule } from 'src/material.module' //we need more accurate imports from this library
 //import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 
-import { ClinicalNoteListViewComponent } from './clinical_note-list-view.component';
+import { ClinicalNoteByPatientListViewComponent } from './clinical_note_by_patient-list-view.component';
 
 //const config: InputFileConfig = {
 //  fileAccept: '*',
@@ -16,7 +16,7 @@ import { ClinicalNoteListViewComponent } from './clinical_note-list-view.compone
 @NgModule({
 
   declarations: [
-    ClinicalNoteListViewComponent,
+    ClinicalNoteByPatientListViewComponent,
   ],
 
   entryComponents: [
@@ -34,9 +34,9 @@ import { ClinicalNoteListViewComponent } from './clinical_note-list-view.compone
   ],
 
   exports: [
-    // ClinicalNoteListViewComponent
+    ClinicalNoteByPatientListViewComponent
   ]
 })
 
-export class ClinicalNoteListViewModule {}       
+export class ClinicalNoteByPatientListViewModule {}       
         

@@ -2,11 +2,13 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostLis
 import { UntypedFormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { PATIENT } from 'src/app/utils/setup/routes.enum';
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
 //SERVICES
 import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MODELS } from 'src/app/utils/setup/model.setup';
 import { Model } from 'src/app/models/vw-model.model';
@@ -44,7 +46,8 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
     private fb: FormBuilder,
     private _formBuilder: FormBuilder,
     private headerService : HeaderService,
-    private utilService : UtilService
+    private utilService : UtilService,
+    private _snackBar: MatSnackBar,
     ) {
       this.model = MODELS.find(model => model.name == 'patient')!;
       this.patientForm = this.fb.group({
@@ -55,7 +58,8 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
           last_name2: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           address: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
-          date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth: new FormControl(null, [Validators.maxLength(250)]),
           gender: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           birthplace: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           residence_location: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
@@ -66,7 +70,8 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
           last_name2: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           address: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
-          date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth: new FormControl(null, [Validators.maxLength(250)]),
           gender: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           birthplace: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           residence_location: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
@@ -82,7 +87,8 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
           last_name2: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           address: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
-          date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth: new FormControl(null, [Validators.maxLength(250)]),
           gender: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           birthplace: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           residence_location: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
@@ -98,7 +104,8 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
           last_name2: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           address: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
-          date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth: new FormControl(null, [Validators.maxLength(250)]),
           gender: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           birthplace: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
           residence_location: new FormControl('test', [Validators.required, Validators.maxLength(250)]),
@@ -109,6 +116,11 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
           relationship: new FormControl('test', [Validators.required, Validators.maxLength(250)])
         }),
       });
+      this.patientForm.get('patient.date_of_birth_aux')?.disable();
+      this.patientForm.get('mother.date_of_birth_aux')?.disable();
+      this.patientForm.get('father.date_of_birth_aux')?.disable();
+      this.patientForm.get('legal_guardian.date_of_birth_aux')?.disable();
+
   }
 
   ngAfterViewInit(): void {
@@ -158,8 +170,6 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
 
 
   onFormValid() {
-    console.log(this.patientForm.value);
-    
     this.headerService.sendInAction({action:'form', type: 'ready'});
   }
 
@@ -169,7 +179,7 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
 
   getPatientById(id:any){
     if(id){
-      this.backendService.getOneById(PATIENT.PSYCHOTHERAPY ,id).subscribe({
+      this.backendService.getOneById(PATIENT.EARLY_STIMULATION ,id).subscribe({
         next: (v) => { this.setPatient(v[0]) },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
@@ -186,16 +196,22 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
   }
 
   save(){
-    console.log("DATA", this.patientForm.value);
+    
+    const date1: Date = this.patientForm.get('patient.date_of_birth_aux')?.value;
+    this.patientForm.get('patient.date_of_birth')?.setValue(date1.toISOString().split('T')[0])
+    const date2: Date = this.patientForm.get('mother.date_of_birth_aux')?.value;
+    this.patientForm.get('mother.date_of_birth')?.setValue(date2.toISOString().split('T')[0])
+    const date3: Date = this.patientForm.get('father.date_of_birth_aux')?.value;
+    this.patientForm.get('father.date_of_birth')?.setValue(date3.toISOString().split('T')[0])
+    const date4: Date = this.patientForm.get('legal_guardian.date_of_birth_aux')?.value;
+    this.patientForm.get('legal_guardian.date_of_birth')?.setValue(date4.toISOString().split('T')[0])
     
     this.backendService.create(PATIENT.EARLY_STIMULATION, this.patientForm.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => {
-        console.log("COMPLETED");
-   
-        // this.router.navigate(['../','main','catalogs','emotions', 'list']);
-        // this.showSuccess();
+        this.router.navigate(['main','patients','early-stimulation','list']);
+        this.showSuccess();
       }
     })
   }
@@ -210,7 +226,17 @@ export class EarlyStimulationPatientFormComponent implements OnInit, AfterViewIn
   }
 
   cancel(){
-    this.router.navigate(['main','psychotherapy','patients','table']);
+    this.router.navigate(['main','patients','early-stimulation','list']);
+  }
+
+  showSuccess(){
+    this._snackBar.openFromComponent(GenericSnackbarComponent, {
+      data: {
+        message: "Elemento creado correctamente",
+        icon: "done"
+      },
+      duration: 5000
+    });
   }
 
 }

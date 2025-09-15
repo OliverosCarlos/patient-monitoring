@@ -65,7 +65,7 @@ export class PsychoterapyPatientShowViewComponent implements OnInit, OnDestroy, 
   ) {
     this.model = MODELS.find(model => model.name == 'patient')!;
     this.data = {}
-    this._id = this.route.snapshot.paramMap.get('patient_id')!
+    // this._id = this.route.snapshot.paramMap.get('patient_id')!
 
   }
 
@@ -97,8 +97,9 @@ export class PsychoterapyPatientShowViewComponent implements OnInit, OnDestroy, 
   getPatientById(id:any){
     if(id){
       this.backendService.getOneById(PATIENT.PSYCHOTHERAPY,id).subscribe({
-        next: (v) => { this.data = v; console.log(v);
-          this.getClinicalHistoryByPatient(v.id);
+        next: (v) => { this.data = v;
+          this.getClinicalHistoryByPatient(v.patient.id);
+          this._id = v.patient.id;
          },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
@@ -108,8 +109,9 @@ export class PsychoterapyPatientShowViewComponent implements OnInit, OnDestroy, 
 
   getClinicalHistoryByPatient(patient_id: any){
     if(patient_id){
-      this.backendService.getOneById(CLINICAL_HISTORY.EARLY_STIMULATION_BY_PATIENT,patient_id).subscribe({
-        next: (v) => { this.clinical_history_data = v; console.log(v);},
+      this.backendService.getOneById(CLINICAL_HISTORY.PSYCHOTHERAPY_BY_PATIENT,patient_id).subscribe({
+        next: (v) => { this.clinical_history_data = v;console.log(v);
+        },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });

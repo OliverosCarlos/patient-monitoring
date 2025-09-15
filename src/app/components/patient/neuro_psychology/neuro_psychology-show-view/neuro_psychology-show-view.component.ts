@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PATIENT } from 'src/app/utils/setup/routes.enum'; 
+import { PATIENT, CLINICAL_HISTORY } from 'src/app/utils/setup/routes.enum'; 
 import { FileSaverService } from 'ngx-filesaver';
 
 //SERVICES
@@ -28,6 +28,7 @@ export class NeuroPsychologyShowViewComponent implements OnInit, OnDestroy, Afte
 
   $headerAction!: Subscription;
 
+  clinical_history_data : any;
   _id = ""
   medical_history_report_id = ""
   report_created = false;
@@ -96,7 +97,9 @@ export class NeuroPsychologyShowViewComponent implements OnInit, OnDestroy, Afte
   getPatientById(id:any){
     if(id){
       this.backendService.getOneById(PATIENT.NEURO_PSYCHOLOGY,id).subscribe({
-        next: (v) => { this.data = v; console.log(v);
+        next: (v) => { 
+          this.data = v;
+          this.getClinicalHistoryByPatient(v.patient.id);
          },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
@@ -104,6 +107,16 @@ export class NeuroPsychologyShowViewComponent implements OnInit, OnDestroy, Afte
     }
   }
   
+  getClinicalHistoryByPatient(patient_id: any){
+    if(patient_id){
+      this.backendService.getOneById(CLINICAL_HISTORY.PSYCHOTHERAPY_BY_PATIENT,patient_id).subscribe({
+        next: (v) => { this.clinical_history_data = v;},
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
+    }
+  }
+
   edit(){
     this.router.navigate(['main','catalogs','emotions','update',this.route.snapshot.paramMap.get('emotion_id')]);
   }

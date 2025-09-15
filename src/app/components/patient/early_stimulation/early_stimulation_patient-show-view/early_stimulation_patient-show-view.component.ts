@@ -29,6 +29,8 @@ export class EarlyStimulationShowViewComponent implements OnInit, OnDestroy, Aft
   $headerAction!: Subscription;
 
   _id = ""
+  _general_patient_id = ""
+
   medical_history_report_id = ""
   report_created = false;
 
@@ -96,8 +98,10 @@ export class EarlyStimulationShowViewComponent implements OnInit, OnDestroy, Aft
   getPatientById(id:any){
     if(id){
       this.backendService.getOneById(PATIENT.EARLY_STIMULATION,id).subscribe({
-        next: (v) => { this.data = v; console.log(v);
-         },
+        next: (v) => { 
+          this.data = v;
+          this._general_patient_id = this.data.patient.id
+        },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });

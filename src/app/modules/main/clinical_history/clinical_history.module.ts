@@ -30,6 +30,8 @@ import { EarlyStimulationShowViewComponent } from 'src/app/components/clinical_h
 import { EarlyStimulationReportFormViewComponent } from 'src/app/components/clinical_history/early_stimulation_report-form-view/early_stimulation_report-form-view.component'; 
 import { EarlyStimulationReportShowViewComponent } from "src/app/components/clinical_history/early_stimulation_report-show-view/early_stimulation_report-show-view.component";
 import { PatientEarlyStimulationSelectModule } from 'src/app/components/patient/early_stimulation/patient_early_stimulation-select/patient_early_stimulation-select.module'
+import { NeuroPsychologyReportFormViewComponent } from 'src/app/components/clinical_history/neuro-psychology/neuro_psychology_report-form-view/neuro_psychology_report-form-view.component';
+
 
 import { PatientFormViewModule } from 'src/app/components/clinical_history/basic_clinical_history/patient-form-view/patient-form-view.module'
 import { ReasonConsultationFormViewModule } from 'src/app/components/clinical_history/basic_clinical_history/reason_consultation-form-view/reason_consultation-form-view.module';
@@ -82,7 +84,8 @@ import { ClinicalNoteFormDashboardViewComponent } from 'src/app/components/clini
     ClinicalNoteListViewComponent,
     ClinicalNoteShowFormViewComponent,
     ClinicalNoteUpdateFormViewComponent,
-    ClinicalNoteFormDashboardViewComponent
+    ClinicalNoteFormDashboardViewComponent,
+    NeuroPsychologyReportFormViewComponent
   ],
   imports: [
     CommonModule,
@@ -122,7 +125,8 @@ import { ClinicalNoteFormDashboardViewComponent } from 'src/app/components/clini
     
   ],
   providers: [
-    CanActivateLogged
+    CanActivateLogged,
+    FormsModule
   ]
 })
 export class ClinicalHistoryModule { }

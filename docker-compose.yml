@@ -1,7 +1,16 @@
 services:
-  web:
-    image: frontend_patient_monitoring:0.0.1
+  angular-app:
+    build: .
     ports:
-      - 80:80
+      - "4200:80"
+    container_name: angular-nginx
+    restart: unless-stopped
     environment:
       - BACKEND_HOST=192.168.68.200
+    networks:
+      - default
+
+networks:
+  default:
+    name: pm-net
+    external: true

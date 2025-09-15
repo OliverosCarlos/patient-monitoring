@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit, ViewEncapsulation  } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NEUROPSYCHO } from 'src/app/utils/setup/routes.enum'; 
+import { NEUROPSYCHO, CLINICAL_HISTORY } from 'src/app/utils/setup/routes.enum'; 
 import { FileSaverService } from 'ngx-filesaver';
 
 //SERVICES
@@ -240,7 +240,7 @@ export class EarlyStimulationReportFormViewComponent implements OnInit, OnDestro
   }
 
   save(){
-    this.backendService.create(NEUROPSYCHO.MEDICAL_HISTORY_REPORT, this.formGroup.value).subscribe({
+    this.backendService.create(CLINICAL_HISTORY.MEDICAL_HISTORY_REPORT, this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => {
@@ -251,7 +251,7 @@ export class EarlyStimulationReportFormViewComponent implements OnInit, OnDestro
   }
 
   update(){
-    this.backendService.update(NEUROPSYCHO.MEDICAL_HISTORY_REPORT, this.route.snapshot.paramMap.get('medical_history_report_id'), this.formGroup.value).subscribe({
+    this.backendService.update(CLINICAL_HISTORY.MEDICAL_HISTORY_REPORT, this.route.snapshot.paramMap.get('medical_history_report_id'), this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => this.router.navigate(['../', 'main', 'clinical-history', 'early-stimulation', 'report-show', this.route.snapshot.paramMap.get('medical_history_report_id')])
@@ -268,7 +268,7 @@ export class EarlyStimulationReportFormViewComponent implements OnInit, OnDestro
 
   getMedicalHistoryById(id:any){
     if(id){
-      this.backendService.getOneById(NEUROPSYCHO.MEDICAL_HISTORY ,id).subscribe({
+      this.backendService.getOneById(CLINICAL_HISTORY.PSYCHOTHERAPY ,id).subscribe({
         next: (v) => { this.data = v; },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
@@ -278,7 +278,7 @@ export class EarlyStimulationReportFormViewComponent implements OnInit, OnDestro
 
   getEarlyStimulationReportById(id:any){
     if(id){
-      this.backendService.getOneById(NEUROPSYCHO.MEDICAL_HISTORY_REPORT, id).subscribe({
+      this.backendService.getOneById(CLINICAL_HISTORY.MEDICAL_HISTORY_REPORT, id).subscribe({
         next: (v) => { this.setMedicalHistoryReport(v)},
         error: (e) => console.error(e),
         complete: () => console.info('complete')

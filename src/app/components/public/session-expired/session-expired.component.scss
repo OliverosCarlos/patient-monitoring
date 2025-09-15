@@ -1,0 +1,28 @@
+.session-expired-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+
+  .illustration {
+    max-width: 300px;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    margin-bottom: 0.5rem;
+    color: #d32f2f;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  button {
+    min-width: 150px;
+  }
+}

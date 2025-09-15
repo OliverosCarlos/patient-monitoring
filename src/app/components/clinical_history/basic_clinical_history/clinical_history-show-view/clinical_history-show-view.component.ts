@@ -27,7 +27,7 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
 
 
   record:any = {
-    patient:{},
+    patient:{full_name:""},
     reason_consultation: {},
     nonverbal_language: {},
     hobbies_interest_list: {},
@@ -35,25 +35,6 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
     therapy_objectives: {},
     approach: {}
   }
-  //   first_name: '',
-  //   last_name1: '',
-  //   last_name2: '',
-  //   age: '',
-  //   phone_number: '',
-  //   email: '',
-  //   image: '',
-  //   clinical_notes:[
-  //     {
-  //       reason_consultations:[{notes:'',reason_consultation_symptoms:[{symptom_name:'', symptom_color:null}]}],
-  //       clinical_note_functionality_analysis: [{notes:'', functionality_analysis:[{emotion_name:'', conduct:'', functionality:'', emotion_color:''}]}],
-  //       clinical_note_hobbies_interest: [{notes:'',hobbies_interest_list:[{hobbies_interests_name:''}]}],
-  //       personal_characteristics: [{notes:''}],
-  //       therapy_objectives: [{notes:''}],
-  //       approachs: [{notes:''}],
-  //       nonverbal_languages: [{notes:'', person:false, space:false, time:false}] 
-  //     }
-  //   ]
-  // };
 
   area1 : any[] = []
   area2 : any[] = []
@@ -76,6 +57,13 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
   }  
   get clinical_history_data(): any { return this._clinical_history_data}
 
+  isEmpty = false;
+
+  //Report
+  _id = ""
+  medical_history_report_id = ""
+  report_created = false;
+
   constructor(
     private backendService: BackendService,
     private headerService: HeaderService,
@@ -85,6 +73,7 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
   ) {
     this.model = MODELS.find(model => model.name == 'clinical-history')!;
     if(this.route.snapshot.paramMap.get('id')){
+      this._id = this.route.snapshot.paramMap.get('id')!;
       this.clinical_noteById(this.route.snapshot.paramMap.get('id'));
     }
   }
@@ -99,7 +88,9 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
         case 'edit':
           this.edit();
           break;
-      
+        case 'handle_generate_report':
+          this.handle_generate_report();
+          break;
         default:
           break;
       }
@@ -110,7 +101,6 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
     this.headerService.setHeader({model: this.model, type:'show'});
     this.utilService.set({name:'clinical-history', type:'show'});
     if(this.clinical_history_data){
-      console.log(this.clinical_history_data);
       this.buildData(this.clinical_history_data);
     }
   }
@@ -122,7 +112,14 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
   clinical_noteById(id:any){
     if(id){
      this.backendService.getOneById(GENERAL.CLINICAL_HISTORY_PSYCHOTHERAPY,id).subscribe({
-       next: (v) => { this.buildData(v)},
+       next: (v) => {
+        console.log("DATA");
+        console.log(v);
+        this.buildData(v);
+        if(v){
+          this.isEmpty = true
+        }
+      },
        error: (e) => console.error(e),
        complete: () => console.info('complete')
      });
@@ -130,11 +127,7 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
   }
 
   setAreas(data:any){
-    console.log("SUPPORT NETWORK", data);
-    
-    data.support_network.support_network_list.forEach((item: any) => {
-      console.log(item);
-      
+    data.support_network?.support_network_list.forEach((item: any) => {      
       switch (item.area) {
         case "1":
           this.area1.push(item)
@@ -160,6 +153,14 @@ export class ClinicalHistoryShowViewComponent implements OnInit, OnDestroy, Afte
 
   viewEmotion(data:any){
     console.log(data)
+  }
+
+  handle_generate_report(){
+    if (this.report_created) {
+      this.router.navigate(['main','clinical-history','neuro-psychology','report-show',this.medical_history_report_id]);
+    }else{
+      this.router.navigate(['main','clinical-history','neuro-psychology','report-form',this._id]);
+    }
   }
 }
     
