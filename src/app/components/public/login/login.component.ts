@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     .subscribe(
       result => {
         if(result.status == 200){
-          this.router.navigate(['main']);
+          this.router.navigate(['main/patients']);
         }else{
           this.router.navigate(['login']);
         }

@@ -29,11 +29,6 @@ const routes: Routes = [
         data: { breadcrumb: 'psicoterapia', animation: 'AboutPage' }  
       },
       { 
-        path: 'clinical-notes',
-        loadChildren: () => import('./clinical_notes/clinical_note.module').then(m => m.ClinicalNoteModule),
-        data: { breadcrumb: 'psicoterapia' }  
-      },
-      { 
         path: 'administration',
         loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule),
         data: { breadcrumb: 'administración' }  

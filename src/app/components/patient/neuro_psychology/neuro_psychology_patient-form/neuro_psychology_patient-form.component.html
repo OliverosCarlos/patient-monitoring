@@ -1,196 +1,244 @@
 <div class="p-2">
-    <mat-card>
-      <form [formGroup]="patientForm">
-        <!--  -->
-        <div class="row">
-          <div class="col-4">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'first_name'" class="control-label">Nombres <span class="text-danger">*</span>
-              </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'first_name'"
-                formControlName="first_name" style="text-transform: capitalize;">
+  <mat-card>
+    <form [formGroup]="patientForm">
+      <!--  -->
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Nombres</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="first_name" required>
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>Hint</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
             </div>
-          </div>
-          <div class="col-4">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'last_name1'" class="control-label">Apellido Paterno <span
-                  class="text-danger">*</span> </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name1'"
-                formControlName="last_name1" style="text-transform: capitalize;">
+            <div class="col-6">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Apellido Paterno</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="last_name1" required>
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>Hint</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
             </div>
-          </div>
-          <div class="col-4">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'last_name2'" class="control-label">Apellido Materno <span
-                  class="text-danger">*</span> </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name2'"
-                formControlName="last_name2" style="text-transform: capitalize;">
+            <div class="col-6">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Apellido Materno</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="last_name2" required>
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>Hint</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
             </div>
-          </div>
-
-          <div class="col-3">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'age'" class="control-label">Edad <span class="text-danger">*</span> </label>
-              <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'age'" formControlName="age">
+            <div class="col-6">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Edad</mat-label>
+                <input matInput type="number" placeholder="Placeholder" formControlName="age" required min="1">
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>Años</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
             </div>
-          </div>
-
-          <div class="col-3">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'age'" class="control-label">Fecha de nacimiento <span class="text-danger">*</span> </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="date_of_birth">
+            <div class="col-6">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input matInput [matDatepicker]="patient_picker" formControlName="date_of_birth_aux" required>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="patient_picker"></mat-datepicker-toggle>
+                <mat-datepicker #patient_picker disabled="false"></mat-datepicker>
+              </mat-form-field>
             </div>
-          </div>
-
-          <div class="col-3">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'age'" class="control-label">Género <span class="text-danger">*</span> </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="gender">
+            <div class="col-6">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Género</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="gender" required>
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>M/F</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
             </div>
-          </div>
-
-          <div class="col-3">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'age'" class="control-label">Lugar de nacimiento <span class="text-danger">*</span> </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="birthplace">
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'age'" class="control-label">Dirección <span class="text-danger">*</span> </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="address">
-            </div>
-          </div>
-
-          <div class="col-4">
-            <div class="form-group" formGroupName="patient">
-              <label [attr.for]="nameForm+'age'" class="control-label">Lugar de recidencia <span class="text-danger">*</span> </label>
-              <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="residence_location">
-            </div>
-          </div>
-
-        </div>
-        <div class="row m-0 p-0">
-                  <div class="col-12 mt-3">
-                    <div class="row">
-                      <div class="col-12">
-                        <h2 class="section-title">REPRESENTANTE LEGAL</h2>
-                      </div>
-                    </div>
-                    <div class="row section">
-                      <div class="col-4">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'first_name'" class="control-label">Nombres <span class="text-danger">*</span>
-                          </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'first_name'"
-                            formControlName="first_name" style="text-transform: capitalize;">
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'last_name1'" class="control-label">Apellido Paterno <span
-                              class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name1'"
-                            formControlName="last_name1" style="text-transform: capitalize;">
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'last_name2'" class="control-label">Apellido Materno <span
-                              class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'last_name2'"
-                            formControlName="last_name2" style="text-transform: capitalize;">
-                        </div>
-                      </div>
-            
-                      <div class="col-3">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Edad <span class="text-danger">*</span> </label>
-                          <input #firstInput type="number" class="form-control" [attr.id]="nameForm+'age'" formControlName="age">
-                        </div>
-                      </div>
-            
-                      <div class="col-3">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Fecha de nacimiento <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="date_of_birth">
-                        </div>
-                      </div>
-            
-                      <div class="col-3">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Género <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="gender">
-                        </div>
-                      </div>
-
-                      <div class="col-3">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'relationship'" class="control-label">Parentesco <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'relationship'" formControlName="relationship">
-                        </div>
-                      </div>
-            
-                      <div class="col-3">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Lugar de nacimiento <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="birthplace">
-                        </div>
-                      </div>
-            
-                      <div class="col-12">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Dirección <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="address">
-                        </div>
-                      </div>
-            
-                      <div class="col-4">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Lugar de recidencia <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="residence_location">
-                        </div>
-                      </div>
-            
-                      <div class="col-4">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Educación <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="education">
-                        </div>
-                      </div>
-            
-                      <div class="col-4">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'age'" class="control-label">Ocupación <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'age'" formControlName="occupation">
-                        </div>
-                      </div>
-            
-                      <div class="col-6">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'phone_number'" class="control-label">Número de telefono <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'phone'"
-                            formControlName="phone" style="text-transform: uppercase;" >
-                        </div>
-                      </div>
-            
-                      <div class="col-6">
-                        <div class="form-group" formGroupName="legal_guardian">
-                          <label [attr.for]="nameForm+'email'" class="control-label">Correo <span class="text-danger">*</span> </label>
-                          <input #firstInput type="text" class="form-control" [attr.id]="nameForm+'email'" formControlName="email">
-                        </div>
-                      </div>
-
-                    </div>
-        
-                  </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
           </div>
         </div>
-      </form>
-    </mat-card>
-  </div>
+
+        <div class="col-sm-12 col-md-6">
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Dirección</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="address" required>
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>Colonia - Calle - #</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Lugar de nacimiento</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="birthplace" required>
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>Colonia - Calle - #</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" formGroupName="patient">
+                <mat-label>Lugar de residencia</mat-label>
+                <input matInput placeholder="Placeholder" formControlName="residence_location" required>
+                <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                <mat-hint>Colonia - Calle - #</mat-hint>
+                <mat-error>error</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row m-0 p-0">
+        <div class="col-12 mt-3">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="section-title">REPRESENTANTE LEGAL</h2>
+            </div>
+          </div>
+          <div class="row section">
+
+            <div class="col-sm-12 col-md-6">
+              <div class="row">
+                <div class="col-12">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Nombres</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="first_name" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="last_name1" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="last_name2" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Edad</mat-label>
+                    <input matInput type="number" placeholder="Placeholder" formControlName="age" required min="1">
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="legal_guardian_picker" formControlName="date_of_birth_aux" required>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="legal_guardian_picker"></mat-datepicker-toggle>
+                    <mat-datepicker #legal_guardian_picker disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Género</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="gender" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>M/F</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+              <div class="row">
+                <div class="col-12">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="address" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Colonia - Calle - #</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Lugar de nacimiento</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="birthplace" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Colonia - Calle - #</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Lugar de residencia</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="residence_location" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Colonia - Calle - #</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Educación</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="education" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Colonia - Calle - #</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Ocupación</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="occupation" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">user_attributes</mat-icon>
+                    <mat-hint>Colonia - Calle - #</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Número de teléfono</mat-label>
+                    <span matPrefix>+52 &nbsp;</span>
+                    <input matInput placeholder="Placeholder" formControlName="phone" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">call</mat-icon>
+                    <mat-hint>+52</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field appearance="outline" formGroupName="legal_guardian">
+                    <mat-label>Correo</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="email" required>
+                    <mat-icon matSuffix fontSet="material-symbols-outlined">alternate_email</mat-icon>
+                    <mat-hint>@dominio.com</mat-hint>
+                    <mat-error>error</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="text-danger">* </span> <label for=""> Campos obligatorios</label>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

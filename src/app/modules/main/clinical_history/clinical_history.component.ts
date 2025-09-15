@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+//SERVICES
+import { SetupService } from 'src/app/utils/services/setup.service';
+
 @Component({
   selector: 'app-clinical_history',
   templateUrl: './clinical_history.component.html',
@@ -7,11 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClinicalHistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private setupService : SetupService,
+  ) { }
 
   ngOnInit(): void {
-    // console.log("LOADED HERRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEEEE");
-    
+    this.setupService.setModule("clinical-history")
   }
 
 }

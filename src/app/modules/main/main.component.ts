@@ -1,5 +1,9 @@
-import { ViewChild, OnInit, TemplateRef, AfterViewInit, Input, AfterViewChecked} from '@angular/core';
+import { ViewChild, OnInit, TemplateRef, AfterViewInit, Input, AfterViewChecked, ElementRef} from '@angular/core';
 import { Component, ChangeDetectorRef  } from '@angular/core';
+import { Overlay, OverlayRef, OverlayPositionBuilder } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+
+
 import {MatAccordion} from '@angular/material/expansion';
 import { Subscription } from 'rxjs';
 import { ChildrenOutletContexts, Router } from '@angular/router';
@@ -9,6 +13,8 @@ import { UtilService } from 'src/app/services/util.service';
 import { SecurityService } from 'src/app/services/security.service';
 
 import { slideInAnimation } from 'src/app/utils/animations/routeAnimation';
+
+import { MonthCalendarComponent } from 'src/app/components/scheduler/month-calendar/month-calendar.component';
 
 @Component({
   selector: 'app-main',
@@ -52,12 +58,19 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   isDashboard = false;
 
+  @ViewChild('calendarBtn') calendarBtn!: ElementRef;
+  private overlayRef!: OverlayRef;
+
+
   constructor(
     private utilService : UtilService,
     private securityService : SecurityService,
     private router : Router,
     private contexts: ChildrenOutletContexts,
-    private changeDetectorRef : ChangeDetectorRef
+    private changeDetectorRef : ChangeDetectorRef,
+    private overlay: Overlay,
+    private positionBuilder: OverlayPositionBuilder
+
     ) {}
 
   ngOnInit(): void {
@@ -117,4 +130,37 @@ export class MainComponent implements OnInit, AfterViewInit {
       this.currentState = "contract";
     }
   }
+
+  togglePanel(): void {
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null!;
+      return;
+    }
+
+    const positionStrategy = this.positionBuilder
+      .flexibleConnectedTo(this.calendarBtn)
+      .withPositions([
+        {
+          originX: 'end',
+          originY: 'bottom',
+          overlayX: 'end',
+          overlayY: 'top',
+          offsetY: 8
+        }
+      ]);
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      hasBackdrop: true,
+      backdropClass: 'transparent-backdrop',
+      scrollStrategy: this.overlay.scrollStrategies.reposition()
+    });
+
+    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.dispose());
+
+    const calendarioPortal = new ComponentPortal(MonthCalendarComponent);
+    this.overlayRef.attach(calendarioPortal);
+  }
+
 }

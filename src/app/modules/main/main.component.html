@@ -6,37 +6,29 @@
     <app-side_menu></app-side_menu>
   </div>
   <div class="sidenav-content" [@navContentAnimation]="currentState">
-    <div class="row side-nave-header m-0 p-0 mat-elevation-z2">
-      <app-breadcrumb class="col-5"></app-breadcrumb>
-      <!-- <app-side_nav_header_menu class="col-5" [menuItems]="sideNavHeaderMenuItems"></app-side_nav_header_menu> -->
-      <div class="col-2">
-        <app-perfil_menu></app-perfil_menu>
+    <div class="side-nave-header mat-elevation-z2">
+      <div class="breadcrumb">
+        <app-breadcrumb></app-breadcrumb>
       </div>
+      <div class="content-right">
+        <div class="action-group">
+            <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon fontSet="material-symbols-outlined" class="icon-primary">notifications</mat-icon>
+            </button>
+            <button mat-icon-button #calendarBtn (click)="togglePanel()" color="accent" aria-label="Example icon button with a home icon">
+                <mat-icon fontSet="material-symbols-outlined" class="icon-primary">calendar_month</mat-icon>
+            </button>
+        </div>
+        <div class="perfil_menu">
+          <app-perfil_menu></app-perfil_menu>
+        </div>
+      </div>
+
     </div>
 
-    <div [@routeAnimations]="getRouteAnimationData()">
+    <div [@routeAnimations]="getRouteAnimationData()" class="viewer-content">
       <router-outlet></router-outlet>
     </div>
     
-    <!-- <ng-template [ngIf]="isDashboard">
-      <app-header></app-header>
-      <div [@routeAnimations]="getRouteAnimationData()">
-        <router-outlet></router-outlet>
-      </div>
-    </ng-template> -->
-
-    <!-- <ng-template [ngIf]="!isDashboard">
-      <app-header></app-header>
-      <mat-card class="example-card m-2">
-        <mat-card-title>{{platformTitle}}</mat-card-title>
-        <mat-card-subtitle>{{platformSubtitle}}</mat-card-subtitle>
-        <mat-card-content>
-          <div [@routeAnimations]="getRouteAnimationData()">
-            <router-outlet></router-outlet>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </ng-template> -->
-
   </div>
 </div>

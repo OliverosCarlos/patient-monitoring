@@ -4,5 +4,6 @@ export interface Platform {
     subtitle: string;
     content_type: any;
     menus: string[];
+    activities?: any;
 }
         

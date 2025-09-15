@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NEUROPSYCHO } from 'src/app/utils/setup/routes.enum'; 
+import { CLINICAL_HISTORY } from 'src/app/utils/setup/routes.enum'; 
 import { FileSaverService } from 'ngx-filesaver';
 
 //SERVICES
@@ -9,7 +9,7 @@ import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
 
-//MODELS 
+//MODELS
 import { Medical_history } from 'src/app/models/early_stimulation.model'
 import { MODELS } from 'src/app/utils/setup/model.setup';
 import { Model } from 'src/app/models/vw-model.model';
@@ -72,7 +72,7 @@ export class EarlyStimulationShowViewComponent implements OnInit, OnDestroy, Aft
       this.headerService.setHeader({model: this.model, type: 'show'});
     }
   }
-  
+
   ngOnDestroy() {
     this.$headerAction!.unsubscribe();
   }
@@ -83,21 +83,24 @@ export class EarlyStimulationShowViewComponent implements OnInit, OnDestroy, Aft
 
   getSymptomById(id:any){
     if(id){
-      this.backendService.getOneById(NEUROPSYCHO.MEDICAL_HISTORY ,id).subscribe({
+      this.backendService.getOneById(CLINICAL_HISTORY.EARLY_STIMULATION ,id).subscribe({
         next: (v) => {
-          this.data = {
-            id: v.id,
-            source_information: v.source_information,
-            reason_consultation: v.reason_consultation,
-            medical_diagnosis: v.medical_diagnosis,
-            patient: v.patient,
-            parental_data: v.parental_data[0],
-            prenatal_history: v.prenatal_history[0],
-            hereditaryFamily_history: v.hereditaryFamily_history[0],
-            personal_pathologic_antecedents: v.personal_pathologic_antecedents[0]
-          }; 
-          this.medical_history_report_id = v.medical_history_report[0].id
-         },
+
+          if(v.success){
+            this.data = {
+              id: v.data.id,
+              source_information: v.data.source_information,
+              reason_consultation: v.data.reason_consultation,
+              medical_diagnosis: v.data.medical_diagnosis,
+              patient: v.data.patient,
+              parental_data: v.data.parental_data,
+              prenatal_history: v.data.prenatal_history,
+              hereditary_family_history: v.data.hereditary_family_history,
+              personal_pathologic_antecedents: v.data.personal_pathologic_antecedents
+            };
+          }
+          // this.medical_history_report_id = v.medical_history_report[0].id
+        },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });
@@ -113,45 +116,45 @@ export class EarlyStimulationShowViewComponent implements OnInit, OnDestroy, Aft
   }
 
   getMedicalHistoryReportByMH(medical_history_id:any){
-    if(medical_history_id){
-      this.backendService.getOneById(NEUROPSYCHO.MEDICAL_HISTORY_REPORT+'by-medical-history-id/', medical_history_id).subscribe({
-        next: (v) => {
-          if(v){
-            if(this.model.activities){
-              this.model.activities[0].disabled=false
-              this.report_created = true
-            }
-          }
-          this.headerService.setHeader({model: this.model, type: 'show'});
-         },
-        error: (e) => console.error(e),
-        complete: () => console.info('complete')
-      });
-    }
+    // if(medical_history_id){
+    //   this.backendService.getOneById(NEUROPSYCHO.MEDICAL_HISTORY_REPORT+'by-medical-history-id/', medical_history_id).subscribe({
+    //     next: (v) => {
+    //       if(v){
+    //         if(this.model.activities){
+    //           this.model.activities[0].disabled=false
+    //           this.report_created = true
+    //         }
+    //       }
+    //       this.headerService.setHeader({model: this.model, type: 'show'});
+    //      },
+    //     error: (e) => console.error(e),
+    //     complete: () => console.info('complete')
+    //   });
+    // }
   }
 
   handle_exportar_pdf(){
-    if(this._id){
-      this.backendService.getFile(NEUROPSYCHO.MEDICAL_HISTORY_EXPORT , this._id).subscribe({
-        next: (v) => {
-          console.log(v);
-          this.data = v;
+    // if(this._id){
+    //   this.backendService.getFile(NEUROPSYCHO.MEDICAL_HISTORY_EXPORT , this._id).subscribe({
+    //     next: (v) => {
+    //       console.log(v);
+    //       this.data = v;
           
           
-          this.fileSaverService.save(v.body, 'reporte.pdf');
-         },
-        error: (e) => console.error(e),
-        complete: () => console.info('complete')
-      })
-    }
+    //       this.fileSaverService.save(v.body, 'reporte.pdf');
+    //      },
+    //     error: (e) => console.error(e),
+    //     complete: () => console.info('complete')
+    //   })
+    // }
   }
 
   handle_generate_report(){
-    if (this.report_created) {
-      this.router.navigate(['main','clinical-history','early-stimulation','report-show',this.medical_history_report_id]);
-    }else{
-      this.router.navigate(['main','clinical-history','early-stimulation','report-form',this._id]);
-    }
+    // if (this.report_created) {
+    //   this.router.navigate(['main','clinical-history','early-stimulation','report-show',this.medical_history_report_id]);
+    // }else{
+    //   this.router.navigate(['main','clinical-history','early-stimulation','report-form',this._id]);
+    // }
   }
 
 }

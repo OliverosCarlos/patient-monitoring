@@ -97,6 +97,6 @@ export interface Medical_history {
     patient?: General_patient;
     parental_data?: Parental_data;
     prenatal_history?: Prenatal_history;
-    hereditaryFamily_history?: HereditaryFamily_history;
+    hereditary_family_history?: HereditaryFamily_history;
     personal_pathologic_antecedents?: Personal_pathologic_antecedents;
 }

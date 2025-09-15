@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
@@ -28,7 +28,7 @@ interface Day {
   templateUrl: './appointment-form-view.component.html',
   styleUrls: ['./appointment-form-view.component.scss']
 })
-export class AppointmentFormViewComponent implements OnInit, AfterViewInit {
+export class AppointmentFormViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   $headerAction!: Subscription;
 
@@ -107,6 +107,11 @@ export class AppointmentFormViewComponent implements OnInit, AfterViewInit {
     });
   }
 
+    
+  ngOnDestroy() {
+    this.$headerAction!.unsubscribe();
+  }
+
   save(){
     this.backendService.create(SCHEDULER.APPOINTMENTS, this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
@@ -168,6 +173,8 @@ export class AppointmentFormViewComponent implements OnInit, AfterViewInit {
     this.selectedDay = day.date;
   
     this.weekDaySelected = this.daysInMonth.find((element) => element.date == day.date)?.dayOfWeek;
+    console.log("DAY",this.weekDaySelected);
+    
     this.hourSelected = 0;
   }
 
@@ -231,8 +238,6 @@ export class AppointmentFormViewComponent implements OnInit, AfterViewInit {
   }
 
   setPatient($ev:any){
-    console.log($ev.id);
-    
     this.formGroup.get('patient_id')!.setValue($ev.id);
   }
 

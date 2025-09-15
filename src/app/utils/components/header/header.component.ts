@@ -91,7 +91,6 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
   ngOnInit() {
-    console.log("HEADER");
   }
 
   ngAfterViewInit(): void {
@@ -177,8 +176,6 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showSingleOptions = false;
         break;
       case 'list':
-        console.log("LIST LKJASLF");
-        
         this.showCreate = true;
         this.showSave = false; this.disabledSave = false;
         this.showEdit = false;

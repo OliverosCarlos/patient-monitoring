@@ -2,11 +2,13 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostLis
 import { UntypedFormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { PATIENT } from 'src/app/utils/setup/routes.enum';
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
 //SERVICES
 import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MODELS } from 'src/app/utils/setup/model.setup';
 import { Model } from 'src/app/models/vw-model.model';
@@ -40,7 +42,8 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
     private fb: FormBuilder,
     private _formBuilder: FormBuilder,
     private headerService : HeaderService,
-    private utilService : UtilService
+    private utilService : UtilService,
+    private _snackBar: MatSnackBar,
     ) {
       this.model = MODELS.find(model => model.name == 'neuro-psychology')!;
       this.patientForm = this.fb.group({
@@ -50,6 +53,7 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
           last_name2: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
           address: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
           age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
           date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
           gender: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
           birthplace: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
@@ -61,6 +65,7 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
           last_name2: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
           address: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
           age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
           date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
           gender: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
           birthplace: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
@@ -72,6 +77,8 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
           relationship: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)])
         }),
       });
+      this.patientForm.get('patient.date_of_birth_aux')?.disable();
+      this.patientForm.get('legal_guardian.date_of_birth_aux')?.disable();
   }
 
   ngAfterViewInit(): void {
@@ -147,14 +154,19 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
   }
 
   save(){
+
+    const date1: Date = this.patientForm.get('patient.date_of_birth_aux')?.value;
+    this.patientForm.get('patient.date_of_birth')?.setValue(date1.toISOString().split('T')[0])
+    const date2: Date = this.patientForm.get('legal_guardian.date_of_birth_aux')?.value;
+    this.patientForm.get('legal_guardian.date_of_birth')?.setValue(date2.toISOString().split('T')[0])
+
     this.backendService.create(PATIENT.NEURO_PSYCHOLOGY, this.patientForm.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => {
         console.log("COMPLETED");
-   
-        // this.router.navigate(['../','main','catalogs','emotions', 'list']);
-        // this.showSuccess();
+          this.router.navigate(['main','patients','neuro-psychology','list']);
+          this.showSuccess();
       }
     })
   }
@@ -169,7 +181,27 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
   }
 
   cancel(){
-    this.router.navigate(['main','psychotherapy','patients','table']);
+    this.router.navigate(['main','patients','neuro-psychology','list']);
+  }
+
+  showSuccess(){
+    this._snackBar.openFromComponent(GenericSnackbarComponent, {
+      data: {
+        message: "Elemento creado correctamente",
+        icon: "done"
+      },
+      duration: 5000
+    });
+  }
+
+  dateFormat(event: any) {
+    const date: Date = event.value;
+    if (date) {
+      // ISO Format: YYYY-MM-DD
+      console.log(date.toISOString().split('T')[0]);
+      
+      this.pForm.get('date_of_birth')?.setValue(date.toISOString().split('T')[0])
+    }
   }
 
 }

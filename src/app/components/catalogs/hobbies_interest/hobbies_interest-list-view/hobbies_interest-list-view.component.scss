@@ -2,4 +2,23 @@
 table {
     width: 100%;
 }
-                
+
+.empty-data-container {
+  display: flex;
+  flex-direction: column;     /* Apila elementos verticalmente */
+  align-items: center;        /* Centra horizontalmente */
+  justify-content: center;    /* Centra verticalmente */
+  text-align: center;
+
+  .text {
+  margin-bottom: 10px;        /* Espacio entre texto e imagen */
+  font-size: 1.2rem;
+  color: gray;
+  font-weight: bolder;
+  }
+
+  img {
+    max-width: 300px;           /* Ajusta según tu diseño */
+    height: auto;
+  }
+}

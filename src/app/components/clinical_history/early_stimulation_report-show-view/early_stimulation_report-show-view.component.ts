@@ -5,7 +5,7 @@ import { FileSaverService } from 'ngx-filesaver';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { NEUROPSYCHO } from 'src/app/utils/setup/routes.enum';
+import { NEUROPSYCHO, CLINICAL_HISTORY } from 'src/app/utils/setup/routes.enum';
 
 //SERVICES
 import { BackendService } from 'src/app/services/backend.service';
@@ -88,7 +88,7 @@ export class EarlyStimulationReportShowViewComponent implements OnInit, OnDestro
 
   getEarlyStimulationReportById(id:any){
     if(id){
-      this.backendService.getOneById(NEUROPSYCHO.MEDICAL_HISTORY_REPORT, id).subscribe({
+      this.backendService.getOneById(CLINICAL_HISTORY.MEDICAL_HISTORY_REPORT, id).subscribe({
         next: (v) => { 
           this.data = v;
          },
@@ -101,7 +101,7 @@ export class EarlyStimulationReportShowViewComponent implements OnInit, OnDestro
   
   handle_exportar_pdf(){
     if(this.data){
-      this.backendService.getFile(NEUROPSYCHO.MEDICAL_HISTORY_EXPORT , this.data.medical_history).subscribe({
+      this.backendService.getFile(CLINICAL_HISTORY.MEDICAL_HISTORY_EXPORT , this.data.medical_history).subscribe({
         next: (v) => {
           this.fileSaverService.save(v.body, 'reporte.pdf');
          },

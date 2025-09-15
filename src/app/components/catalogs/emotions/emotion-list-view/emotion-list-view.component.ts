@@ -67,8 +67,6 @@ export class EmotionListViewComponent implements OnInit, AfterViewInit, OnDestro
     });
   }
 
-
-
   ngOnDestroy():void{
     this.$headerAction!.unsubscribe();
     this.$advanceSearch!.unsubscribe();

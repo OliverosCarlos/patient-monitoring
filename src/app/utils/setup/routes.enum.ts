@@ -39,10 +39,12 @@ export enum SEC {
 export enum SCHEDULER {
     APPOINTMENTS = '/scheduler/appointments/',
     AVAILABILITY = '/scheduler/availability/',
+    NEXT_APPOINTMENT = '/scheduler/next_appointment/'
 }
 
 export enum GENERAL {
     PATIENT = '/patient/general/',
+    CLINICAL_HISTORY_PSYCHOTHERAPY = '/clinical_history/psychotherapy/'
 }
 
 export enum PATIENT {
@@ -50,4 +52,15 @@ export enum PATIENT {
     PSYCHOTHERAPY = '/patient/psychoterapy/',
     EARLY_STIMULATION = '/patient/early-stimulation/',
     NEURO_PSYCHOLOGY = '/patient/neuro-psychology/'
+}
+
+export enum CLINICAL_HISTORY {
+    CLINICAL_NOTE = '/clinical_history/clinical_note/',
+    CLINICAL_NOTE_BY_PATIENT = '/clinical_history/clinical_note/by_patient/',
+    PSYCHOTHERAPY = '/clinical_history/psychotherapy/',
+    PSYCHOTHERAPY_BY_PATIENT = '/clinical_history/psychotherapy/by_patient/',
+    EARLY_STIMULATION = '/clinical_history/early_stimulation_clinical_history/',
+    EARLY_STIMULATION_BY_PATIENT = '/clinical_history/early_stimulation_clinical_history_by_patient/',
+    MEDICAL_HISTORY_EXPORT = '/clinical_history/medical-history/export/',
+    MEDICAL_HISTORY_REPORT = '/clinical_history/medical-history-report/',
 }

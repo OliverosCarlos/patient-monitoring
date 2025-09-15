@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {HttpClient, HttpHeaders } from '@angular/common/http';
+import {catchError, Observable, Subscription, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 //SETUP
 import { environment } from 'src/environments/environment'
+
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +39,10 @@ export class BackendService {
         })
   };
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private router: Router
+  ) { }
 
 
   getAll(path: string, data_search: any):Observable<any>{
@@ -97,5 +102,5 @@ export class BackendService {
     const fullUrl = `${baseUrl}?${queryString}`;
     return fullUrl;
   }
-  
+
 }

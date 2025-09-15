@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PATIENT } from 'src/app/utils/setup/routes.enum'; 
+import { PATIENT, CLINICAL_HISTORY } from 'src/app/utils/setup/routes.enum'; 
 import { FileSaverService } from 'ngx-filesaver';
 
 //SERVICES
@@ -25,15 +25,15 @@ import { filter } from 'rxjs/operators';
 export class PsychoterapyPatientShowViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   model : Model;
-  data!: Medical_history
 
   $headerAction!: Subscription;
 
   _id = ""
   medical_history_report_id = ""
+  clinical_history_data : any;
   report_created = false;
 
-  patient: any = {};
+  data: any = {};
 
 
   // this.patientForm = this.fb.group({
@@ -65,7 +65,7 @@ export class PsychoterapyPatientShowViewComponent implements OnInit, OnDestroy, 
   ) {
     this.model = MODELS.find(model => model.name == 'patient')!;
     this.data = {}
-    this._id = this.route.snapshot.paramMap.get('patient_id')!
+    // this._id = this.route.snapshot.paramMap.get('patient_id')!
 
   }
 
@@ -97,8 +97,21 @@ export class PsychoterapyPatientShowViewComponent implements OnInit, OnDestroy, 
   getPatientById(id:any){
     if(id){
       this.backendService.getOneById(PATIENT.PSYCHOTHERAPY,id).subscribe({
-        next: (v) => { this.patient = v; console.log(v);
+        next: (v) => { this.data = v;
+          this.getClinicalHistoryByPatient(v.patient.id);
+          this._id = v.patient.id;
          },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
+    }
+  }
+
+  getClinicalHistoryByPatient(patient_id: any){
+    if(patient_id){
+      this.backendService.getOneById(CLINICAL_HISTORY.PSYCHOTHERAPY_BY_PATIENT,patient_id).subscribe({
+        next: (v) => { this.clinical_history_data = v;console.log(v);
+        },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       });

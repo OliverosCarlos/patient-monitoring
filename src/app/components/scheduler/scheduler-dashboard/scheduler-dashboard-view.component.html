@@ -7,17 +7,29 @@
         <div class="body-section">
             <div class="month-control">
                 <div class="month-control">
-                    <button 
-                        mat-mini-fab aria-label="Example icon button with a delete icon" 
+                    <button
+                        mat-icon-button aria-label="Example icon button with a delete icon"
                         (click)="handlePreviousMonth()"
                         >
                         <mat-icon>arrow_left</mat-icon>
                     </button>
+                    <button mat-icon-button aria-label="Example icon button" (click)="handleNextMonth()">
+                        <mat-icon>arrow_right</mat-icon>
+                    </button>
                     <div class="month">
                         <span>{{months[currentMonth-1]}}</span>
                     </div>
-                    <button mat-mini-fab aria-label="Example icon button with a delete icon" (click)="handleNextMonth()">
-                        <mat-icon>arrow_right</mat-icon>
+
+                    <button mat-stroked-button class="stroked-button-psycho">
+                        Psicoterapia
+                    </button>
+
+                    <button mat-stroked-button class="stroked-button-early-stimulation">
+                        Estimulación temprana
+                    </button>
+
+                    <button mat-stroked-button class="stroked-button-neuro-psycho">
+                        Neuro Psicología
                     </button>
                 </div>
             </div>
@@ -31,10 +43,8 @@
                 <div class="day">J</div>
                 <div class="day">V</div>
                 <div class="day">S</div>
-    
+
                 <ng-container *ngFor="let day of daysInMonth;">
-                    
-    
                     <div *ngIf="day.date > 0" [ngClass]="{'current-date': day.date == currentDay, 'date': day.date > 0}" 
                         (click)="getDay(day)">
                         <div class="date-header">
@@ -52,17 +62,12 @@
                                 <span>{{data.hour | timeFormat}} {{data.patient.full_name | slice:0:20 }}...</span>
                             </div>
                         </div>
-                        
                     </div>
-    
                     <div class="empty-date" *ngIf="day.date <= 0"></div>
-    
                 </ng-container>
-    
-                
+
             </div>
         </div>
-
 
     </div>
     <div id="calendar-day-container">
@@ -70,10 +75,12 @@
             <h2>Día</h2>
         </div>
         <div class="body-section">
-            <div class="appointment-item" *ngFor="let item of daySelected.data;" [ngClass]='item.patient.type.class'>
+            <div class="appointment-item" *ngFor="let item of daySelected.data;" 
+            [ngClass]='item.patient.type.class'
+            (click)="viewPatient(item.patient)"
+            >
                 <span>{{item.hour | timeFormat}} {{item.patient.full_name | slice:0:20 }}...</span>
             </div>
         </div>
-       
     </div>
 </div>

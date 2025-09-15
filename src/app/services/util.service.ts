@@ -42,7 +42,8 @@ export class UtilService {
                     'title':x.plural_name,
                     'subtitle':x.components.filter(c=>c.view_type==data.type)[0].view_type,
                     'content_type':x.components.filter(c=>c.view_type==data.type)[0].content_type,
-                    'menus': x.menus ? x.menus : []
+                    'menus': x.menus ? x.menus : [],
+                    'activities': x.activities ? x.activities : []
                 }
             ))[0]
         )

@@ -21,6 +21,7 @@ import { Model } from 'src/app/models/vw-model.model';
 })
 export class PatientSelectComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @Input() avoidType = "";
   @Output() eventSetData = new EventEmitter<any>();
 
   model : Model;
@@ -55,7 +56,8 @@ export class PatientSelectComponent implements OnInit, OnDestroy, AfterViewInit 
 
   getAllPatients(){
     this.backendService.getAll(GENERAL.PATIENT,{}).subscribe({
-      next: (v) => { this.patientList = this.buildPatientList(v); 
+      next: (v) => { 
+        this.patientList = this.buildPatientList(v).filter( (obj:any) => obj.type != this.avoidType);
       },
       error: (e) => console.error(e),
       complete: () => console.info('complete')
@@ -64,8 +66,6 @@ export class PatientSelectComponent implements OnInit, OnDestroy, AfterViewInit 
 
   
   setPatient($ev:any){
-    console.log($ev);
-    
     let aux_type = ""
     if ($ev.psychoterapy_patient != null) {
       this.type_color = ['#9B7EBD', 'white']
@@ -85,7 +85,8 @@ export class PatientSelectComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   buildPatientList(patientList: any[]){
-    return patientList.map( (obj:any) => ({
+    return patientList
+    .map( (obj:any) => ({
       ...obj, 
       type:
         obj.psychoterapy_patient != null ?

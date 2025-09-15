@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 
 import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
-import { NEUROPSYCHO } from 'src/app/utils/setup/routes.enum';
+import { CLINICAL_HISTORY } from 'src/app/utils/setup/routes.enum';
 
 //MODELS
 import { MODELS } from 'src/app/utils/setup/model.setup';
@@ -56,23 +56,10 @@ export class EarlyStimulationFormViewComponent implements OnInit, OnDestroy, Aft
     this.model = MODELS.find(model => model.name == 'early-stimulation')!;
     this.setFocus();
     this.formGroup = this.fb.group({
-      medical_history: new FormGroup({
-        medical_diagnosis: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        source_information: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        reason_consultation: new FormControl(null, [Validators.required, Validators.maxLength(250)])
-        
-      }),
-      patient: new FormGroup({
-        first_name: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        last_name1: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        last_name2: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        address: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        age: new FormControl(0, [Validators.required]),
-        date_of_birth: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        gender: new FormControl(null, [Validators.required, Validators.maxLength(10)]),
-        birthplace: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-        residence_location: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-      }),
+      medical_diagnosis: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
+      source_information: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
+      reason_consultation: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+      patient_id: new FormControl(0, [Validators.required, Validators.min(1)]),
       parental_data: new FormGroup({
         mother: new FormGroup({
           name: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
@@ -133,7 +120,7 @@ export class EarlyStimulationFormViewComponent implements OnInit, OnDestroy, Aft
         anomalies : new FormControl(null, [Validators.required, Validators.maxLength(250)]),
         notes : new FormControl(null, [Validators.required, Validators.maxLength(250)]),
       }),
-      hereditaryFamily_history: new FormGroup({
+      hereditary_family_history: new FormGroup({
         diabetes: new FormControl(false, [Validators.required]),
         diabetes_who: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
         hypertension: new FormControl(false, [Validators.required]),
@@ -234,9 +221,8 @@ export class EarlyStimulationFormViewComponent implements OnInit, OnDestroy, Aft
   }
 
   save(){
-    const date = this.patientForm.value.date_of_birth
-    this.patientForm.get('date_of_birth')?.setValue(date.year+'-'+date.month+'-'+date.day)
-    this.backendService.create(NEUROPSYCHO.MEDICAL_HISTORY, this.formGroup.value).subscribe({
+    console.log(this.formGroup.value);
+    this.backendService.create(CLINICAL_HISTORY.EARLY_STIMULATION, this.formGroup.value).subscribe({
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => {
@@ -263,6 +249,11 @@ export class EarlyStimulationFormViewComponent implements OnInit, OnDestroy, Aft
       },
       duration: 5000
     });
+  }
+
+
+  setPatient($ev:any){
+    this.formGroup.get('patient_id')?.setValue($ev.id);
   }
 
 }

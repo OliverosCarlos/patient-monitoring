@@ -5,6 +5,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CustomPipesModule } from 'src/app/utils/components/custom_pipes/custom_pipes.module';
 
 import { MaterialAllModule } from 'src/material.module'
 import { ColorCircleModule } from 'ngx-color/circle';
@@ -16,10 +17,17 @@ import { SideMenuModule } from 'src/app/utils/components/side_menu/side_menu.mod
 import { BreadcrumModule } from 'src/app/utils/components/breadcrumb/breadcrumb.module';
 import { PerfilMenuModule } from 'src/app/utils/components/perfil_menu/perfil_menu.module';
 import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_header_menu/side_nav_header_menu.module';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { HeaderModule } from "src/app/utils/components/header/header.module";
+
+import { MonthCalendarComponent } from 'src/app/components/scheduler/month-calendar/month-calendar.component'
+
+
 
 @NgModule({
   declarations: [
     MainComponent,
+    MonthCalendarComponent
   ],
   imports: [
     CommonModule,
@@ -35,8 +43,11 @@ import { SideNavHeaderMenuModule } from 'src/app/utils/components/side_nav_heade
     SideMenuModule,
     BreadcrumModule,
     PerfilMenuModule,
-    SideNavHeaderMenuModule
-  ],
+    SideNavHeaderMenuModule,
+    NgSelectModule,
+    HeaderModule,
+    CustomPipesModule
+],
   providers: []
 })
 export class MainModule { }

@@ -1,12 +1,14 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnDestroy, Input, AfterViewInit } from '@angular/core';
-import { UntypedFormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { PATIENT } from 'src/app/utils/setup/routes.enum';
+import { GenericSnackbarComponent } from 'src/app/utils/components/generic_snackbar/generic_snackbar.component';
 
 //SERVICES
 import { BackendService } from 'src/app/services/backend.service';
 import { HeaderService } from 'src/app/services/header.service';
 import { UtilService } from 'src/app/services/util.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MODELS } from 'src/app/utils/setup/model.setup';
 import { Model } from 'src/app/models/vw-model.model';
@@ -44,7 +46,8 @@ export class PsychoterapyPatientFormComponent implements OnInit, AfterViewInit, 
     private fb: FormBuilder,
     private _formBuilder: FormBuilder,
     private headerService : HeaderService,
-    private utilService : UtilService
+    private utilService : UtilService,
+    private _snackBar: MatSnackBar,
     ) {
       this.model = MODELS.find(model => model.name == 'patient')!;
       this.patientForm = this.fb.group({
@@ -58,7 +61,8 @@ export class PsychoterapyPatientFormComponent implements OnInit, AfterViewInit, 
           last_name2: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
           address: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
           age: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
-          date_of_birth: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth: new FormControl(null, [Validators.required, Validators.maxLength(250), ]),
+          date_of_birth_aux: new FormControl(null, [Validators.required, Validators.maxLength(250), ]),
           gender: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
           birthplace: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
           residence_location: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -101,14 +105,16 @@ export class PsychoterapyPatientFormComponent implements OnInit, AfterViewInit, 
     .pipe(
       filter(() => this.patientForm.invalid))
     .subscribe(() => this.onFormInvalid());
+
+    this.patientForm.get('patient.date_of_birth_aux')?.disable();
   }
 
   ngOnDestroy() {
     this.$headerAction!.unsubscribe();
   }
 
-  get pForm() { return this.patientForm.get('patient_data') as UntypedFormGroup }
-  get PForm(){ return this.patientForm.controls; }
+  get pForm() { return this.patientForm.get('patient') as FormGroup }
+  // get PForm(){ return this.patientForm.controls; }
 
 
   onFormValid() {
@@ -144,10 +150,8 @@ export class PsychoterapyPatientFormComponent implements OnInit, AfterViewInit, 
       next: (v) => { console.log(v); },
       error: (e) => console.error(e),
       complete: () => {
-        console.log("COMPLETED");
-        
-        // this.router.navigate(['../','main','catalogs','emotions', 'list']);
-        // this.showSuccess();
+        this.router.navigate(['../','main','patients']);
+        this.showSuccess();
       }
     })
   }
@@ -162,7 +166,28 @@ export class PsychoterapyPatientFormComponent implements OnInit, AfterViewInit, 
   }
 
   cancel(){
-    this.router.navigate(['main','psychotherapy','patients','table']);
+    this.router.navigate(['main', 'patients', 'psychoterapy', 'list']);
   }
+
+  showSuccess(){
+    this._snackBar.openFromComponent(GenericSnackbarComponent, {
+      data: {
+        message: "Elemento creado correctamente",
+        icon: "done"
+      },
+      duration: 5000
+    });
+  }
+
+  dateFormat(event: any) {
+    const date: Date = event.value;
+    if (date) {
+      // ISO Format: YYYY-MM-DD
+      console.log(date.toISOString().split('T')[0]);
+      
+      this.pForm.get('date_of_birth')?.setValue(date.toISOString().split('T')[0])
+    }
+  }
+
 
 }
