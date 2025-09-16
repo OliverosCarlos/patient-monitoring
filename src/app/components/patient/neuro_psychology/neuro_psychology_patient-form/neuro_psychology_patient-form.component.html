@@ -44,7 +44,7 @@
             <div class="col-6">
               <mat-form-field appearance="outline" formGroupName="patient">
                 <mat-label>Fecha de nacimiento</mat-label>
-                <input matInput [matDatepicker]="patient_picker" formControlName="date_of_birth_aux" required>
+                <input matInput [matDatepicker]="patient_picker" formControlName="date_of_birth_aux" required >
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="patient_picker"></mat-datepicker-toggle>
                 <mat-datepicker #patient_picker disabled="false"></mat-datepicker>
@@ -145,7 +145,7 @@
                 <div class="col-6">
                   <mat-form-field appearance="outline" formGroupName="legal_guardian">
                     <mat-label>Fecha de nacimiento</mat-label>
-                    <input matInput [matDatepicker]="legal_guardian_picker" formControlName="date_of_birth_aux" required>
+                    <input matInput [matDatepicker]="legal_guardian_picker" formControlName="date_of_birth_aux" required >
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matSuffix [for]="legal_guardian_picker"></mat-datepicker-toggle>
                     <mat-datepicker #legal_guardian_picker disabled="false"></mat-datepicker>

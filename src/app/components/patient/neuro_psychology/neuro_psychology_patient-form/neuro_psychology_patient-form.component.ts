@@ -48,33 +48,33 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
       this.model = MODELS.find(model => model.name == 'neuro-psychology')!;
       this.patientForm = this.fb.group({
         patient: this._formBuilder.group({
-          first_name: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          last_name1: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          last_name2: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          address: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
-          date_of_birth_aux: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
-          date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
-          gender: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          birthplace: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          residence_location: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
+          first_name: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          last_name1: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          last_name2: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          address: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          age: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth: new FormControl(null),
+          gender: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          birthplace: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          residence_location: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
         }),
         legal_guardian: this._formBuilder.group({
-          first_name: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          last_name1: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          last_name2: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          address: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          age: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
-          date_of_birth_aux: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
-          date_of_birth: new FormControl('1996-01-01', [Validators.required, Validators.maxLength(250)]),
-          gender: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          birthplace: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          residence_location: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          education: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          occupation: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
+          first_name: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          last_name1: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          last_name2: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          address: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          age: new FormControl(18, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth_aux: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
+          date_of_birth: new FormControl(null),
+          gender: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          birthplace: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          residence_location: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          education: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          occupation: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
           phone: new FormControl(21, [Validators.required, Validators.maxLength(250)]),
-          email: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)]),
-          relationship: new FormControl('NP - test', [Validators.required, Validators.maxLength(250)])
+          email: new FormControl('NA', [Validators.required, Validators.maxLength(250)]),
+          relationship: new FormControl('NA', [Validators.required, Validators.maxLength(250)])
         }),
       });
       this.patientForm.get('patient.date_of_birth_aux')?.disable();
@@ -126,8 +126,6 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
 
 
   onFormValid() {
-    console.log(this.patientForm.value);
-    
     this.headerService.sendInAction({action:'form', type: 'ready'});
   }
 
@@ -194,14 +192,24 @@ export class NeuroPsychologyPatientFormComponent implements OnInit, AfterViewIni
     });
   }
 
-  dateFormat(event: any) {
-    const date: Date = event.value;
-    if (date) {
-      // ISO Format: YYYY-MM-DD
-      console.log(date.toISOString().split('T')[0]);
+  // dateFormat1(event: any) {
+  //   const date: Date = event.value;
+  //   if (date) {
+  //     // ISO Format: YYYY-MM-DD
+  //     console.log(date.toISOString().split('T')[0]);
       
-      this.pForm.get('date_of_birth')?.setValue(date.toISOString().split('T')[0])
-    }
-  }
+  //     this.pForm.get('date_of_birth')?.setValue(date.toISOString().split('T')[0])
+  //   }
+  // }
+
+  // dateFormat2(event: any) {
+  //   const date: Date = event.value;
+  //   if (date) {
+  //     // ISO Format: YYYY-MM-DD
+  //     console.log(date.toISOString().split('T')[0]);
+      
+  //     this.pForm.get('date_of_birth')?.setValue(date.toISOString().split('T')[0])
+  //   }
+  // }
 
 }
