@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { SetupService } from 'src/app/utils/services/setup.service';
+import { HeaderService } from 'src/app/services/header.service';
 
 //MODELS
 import { MODELS } from 'src/app/utils/setup/model.setup';
@@ -35,6 +36,8 @@ interface Appointment {
 })
 export class SchedulerDashboardViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
+   model : Model;
+
   daysInMonth: Day[] = [];
   availableHours: number[] = [];
   weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -49,14 +52,17 @@ export class SchedulerDashboardViewComponent implements OnInit, OnDestroy, After
   hourSelected = 0
 
   constructor(
+    private headerService : HeaderService,
     private backendService : BackendService,
     private router : Router,
     private setupService : SetupService,
   ) {
+    this.model = MODELS.find(model => model.name == 'appointment')!;
     this.setupService.setViewType("dashboard_content");
   }
 
   ngOnInit() {
+    this.headerService.setHeader({model: this.model, type: 'list'});
 
     const year = 2025;
     const month = this.currentMonth;
